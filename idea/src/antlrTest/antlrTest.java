@@ -1,8 +1,8 @@
-package antlr4;
+package antlrTest;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ANTLRInputStream;
 
-public class Main {
+public class antlrTest {
 
     public static void run(String expr) throws Exception{
 

@@ -1,4 +1,4 @@
-package antlr4;// Generated from D:/Coding/M-compiler/src/antlr4\Demo.g4 by ANTLR 4.7
+package antlrTest;// Generated from D:/Coding/M-compiler/src/antlr4\Demo.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
