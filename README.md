@@ -16,6 +16,7 @@ using altlr4 as recommended.
 
 * https://blog.csdn.net/sherrywong1220/article/details/53697737
 * looking at my implementation
-  * idea/pom.xml
-  * idea/antlrTest
+  * [idea/pom.xml](https://github.com/wanton-wind/M-compiler/tree/master/idea/pom.xml)
+  * [idea/antlrTest](https://github.com/wanton-wind/M-compiler/tree/master/idea)
+
 
