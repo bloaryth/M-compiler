@@ -1,3 +1,9 @@
+# idea management file
+# /.idea/
+# /gen/
+# /antlrTest/
+# *.xml
+
 # Compiled class file
 *.class
 
