@@ -1,16 +1,20 @@
-package antlrTest;
+package Parser;
+
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.ANTLRInputStream;
+//import org.antlr.v4.runtime.ANTLRInputStream;
 
 public class antlrTest {
 
     public static void run(String expr) throws Exception{
 
         //对每一个输入的字符串，构造一个 ANTLRStringStream 流 in
-        ANTLRInputStream in = new ANTLRInputStream(expr);
+//        ANTLRInputStream in = new ANTLRInputStream (expr);
+        CharStream in = CharStreams.fromString (expr);
 
         //用 in 构造词法分析器 lexer，词法分析的作用是产生记号
-        DemoLexer lexer = new DemoLexer(in);
+        DemoLexer lexer = new DemoLexer (in);
 
         //用词法分析器 lexer 构造一个记号流 tokens
         CommonTokenStream tokens = new CommonTokenStream(lexer);

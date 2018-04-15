@@ -1,4 +1,4 @@
-package antlrTest;// Generated from D:/Coding/M-compiler/src/antlr4\Demo.g4 by ANTLR 4.7
+package Parser;// Generated from D:/Coding/M-compiler/src/antlr4\Demo.g4 by ANTLR 4.7
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;

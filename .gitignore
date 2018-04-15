@@ -1,4 +1,7 @@
 # idea management file
+/Documents/
+/idea/target/
+/idea/gen/
 # /.idea/
 # /gen/
 # /antlrTest/
