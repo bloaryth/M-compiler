@@ -64,7 +64,7 @@ classType
     |   nonArrayClass   # NonArrayType
     ;
 
-arrayClass:   nonArrayClass (Brackets)+;    // --> ClassType
+arrayClass:   nonArrayClass (brackets)+;    // --> ClassType
 
 nonArrayClass   // --> ClassType
     :   type='bool'
@@ -107,10 +107,12 @@ callParameter:   (expression ',')* expression;
 
 // AbstractNewObeject
 newObject
-    :   nonArrayClass ('[' expression ']')+ ('[' ']')+ ('[' expression ']')+    # NewError  // throw
-    |   nonArrayClass ('[' expression ']')+ (Brackets)*   # NewArray    // --> NewArray
+    :   nonArrayClass ('[' expression ']')+ (brackets)+ ('[' expression ']')+    # NewError  // throw
+    |   nonArrayClass ('[' expression ']')+ (brackets)*   # NewArray    // --> NewArray
     |   nonArrayClass ('(' callParameter? ')')? # NewNonArray   // --> NewNonArray
     ;
+
+brackets: '[' ']';
 
 // AbstractConst
 constant
@@ -178,8 +180,6 @@ LBracket    : '[';
 RBracket    : ']';
 LBrace  : '{';
 RBrace  : '}';
-
-Brackets:   '['']';     // for count
 
 //------ Constants
 BoolConst: 'true' | 'false';

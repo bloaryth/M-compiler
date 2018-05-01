@@ -1,10 +1,11 @@
-package Compiler2018.Test;
+package Compiler2018;
 
 import Compiler2018.AST.Program;
 import Compiler2018.FrontEnd.*;
 import Compiler2018.Parser.MLexer;
 import Compiler2018.Parser.MParser;
 import Compiler2018.Symbol.TopTable;
+import Compiler2018.Test.Test;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -14,14 +15,14 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Test {
-    public static String getTxt(String filePath){
+public class WantonWind {
+    private static String readTestFile(String filePath) {
         StringBuilder str = new StringBuilder ();
         try{
             InputStreamReader reader = new InputStreamReader(Test.class.getResourceAsStream(filePath));
             BufferedReader buffReader = new BufferedReader(reader);
             String strTmp;
-            while((strTmp = buffReader.readLine ())!=null){
+            while((strTmp = buffReader.readLine ()) != null){
                 str.append (strTmp+'\n');
             }
             buffReader.close();
@@ -29,24 +30,12 @@ public class Test {
         catch (Exception e){
             e.printStackTrace();
         }
-//        System.out.println (str.toString ());
         return str.toString ();
     }
 
-    public static String getFilePath(){
-        return "./TestCase/a+b.Mx";
-//        return "./TestCase/member.Mx";
-    }
-
-    public static void main(String[] args) throws Exception {
+    public static void run(String prog) {
         try {
-//            System.out.println ((ASTBuilder) null);
-
-            String str = getTxt(getFilePath());
-
-            CharStream input = CharStreams.fromString (str);
-//        InputStream is = System.in;
-//        ANTLRInputStream input = new ANTLRInputStream(is);
+            CharStream input = CharStreams.fromString (prog);
             MLexer lexer = new MLexer (input);
             CommonTokenStream tokens = new CommonTokenStream (lexer);
             MParser parser = new MParser (tokens);
@@ -70,19 +59,16 @@ public class Test {
             program.accept (classContentScanner);
             program.accept (semanticChecker);
 
-//        CompilationError ce = new CompilationError();
-//        GlobalSymbolTable sym = new GlobalSymbolTable();
-//        StructSymbolScanner structSymbolScanner = new StructSymbolScanner(sym, ce);
-//        StructFunctionDeclarator structFunctionDeclarator = new StructFunctionDeclarator(sym, ce);
-//        SemanticChecker semanticChecker = new SemanticChecker(sym, ce);
-
-//        program.accept(structSymbolScanner);
-//        program.accept(structFunctionDeclarator);
-//        program.accept(semanticChecker);
-            //program.accept(printer);
         } catch (Exception e) {
             e.printStackTrace(System.err);
             System.exit (1);
         }
+    }
+
+    public static void main(String[] args) {
+        String program;
+        if (args.length == 1) program = readTestFile(args[0]);
+        else program = readTestFile("program.txt");
+        run(program);
     }
 }

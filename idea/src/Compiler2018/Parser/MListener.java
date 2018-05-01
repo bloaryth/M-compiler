@@ -534,6 +534,16 @@ public interface MListener extends ParseTreeListener {
 	 */
 	void exitNewNonArray(MParser.NewNonArrayContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MParser#brackets}.
+	 * @param ctx the parse tree
+	 */
+	void enterBrackets(MParser.BracketsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MParser#brackets}.
+	 * @param ctx the parse tree
+	 */
+	void exitBrackets(MParser.BracketsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MParser#constant}.
 	 * @param ctx the parse tree
 	 */

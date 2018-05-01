@@ -372,7 +372,7 @@ public class ASTBuilder implements MListener {
     @Override
     public void exitArrayClass (MParser.ArrayClassContext ctx) {
         String baseType = ((ClassType) map.get (ctx.nonArrayClass ())).getBaseType ();
-        Integer dim = ctx.Brackets ().size ();
+        Integer dim = ctx.brackets ().size ();
         map.put(ctx, new ClassType (baseType, dim));
     }
 
@@ -613,7 +613,7 @@ public class ASTBuilder implements MListener {
     public void exitNewArray (MParser.NewArrayContext ctx) {
         NewArray.Builder builder = new NewArray.Builder ();
         ClassType type = (ClassType) map.get (ctx.nonArrayClass ());
-        ClassType newType = new ClassType (type.getBaseType (), ctx.Brackets ().size () + ctx.expression ().size ());
+        ClassType newType = new ClassType (type.getBaseType (), ctx.brackets ().size () + ctx.expression ().size ());
         builder.setType (newType);
         ctx.expression ().stream ().map(map::get).map(AbstractExpr.class::cast).forEachOrdered (builder::addLens);
         map.put (ctx, builder.build ());
@@ -657,6 +657,16 @@ public class ASTBuilder implements MListener {
             case MParser.BoolConst: map.put (ctx, new BoolConst (s.equals ("true")));
             default: throw new RuntimeException ("Unknown Constant type");
         }
+    }
+
+    @Override
+    public void enterBrackets (MParser.BracketsContext ctx) {
+
+    }
+
+    @Override
+    public void exitBrackets (MParser.BracketsContext ctx) {
+
     }
 
     @Override
