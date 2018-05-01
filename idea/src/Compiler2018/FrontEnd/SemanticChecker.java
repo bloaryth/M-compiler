@@ -36,6 +36,13 @@ public class SemanticChecker implements IASTVistor {
         currentTable.push (topTable);
         node.getSections ().forEach (x -> x.accept (this));
         currentTable.pop ();
+
+        if(topTable.getFunc ("main") == null){
+            throw new RuntimeException ("main() required.");
+        }
+        if(!topTable.getFunc ("main").getReturnType ().equals (new ClassType ("int", 0))){
+            throw new RuntimeException ("main() should return int.");
+        }
     }
 
     @Override
@@ -140,6 +147,9 @@ public class SemanticChecker implements IASTVistor {
         currentTable.push (new BlockTable (currentTable.peek ()));
         blockScopePushed = true;
         node.getIfStmt ().accept (this);
+        if(!node.getCond ().getType ().equals (new ClassType ("bool",0))){
+            throw new RuntimeException ("bool required in IfStmt.");
+        }
         currentTable.pop ();
         if (node.getElseStmt () != null){
             currentTable.push (new BlockTable (currentTable.peek ()));
@@ -204,6 +214,9 @@ public class SemanticChecker implements IASTVistor {
         }
         if (node.getCond () != null){
             node.getCond ().accept (this);
+            if(!node.getCond ().getType ().equals (new ClassType ("bool", 0))){
+                throw new RuntimeException ("bool required in ForStmt.");
+            }
         }
         if (node.getStep () != null){
             node.getStep ().accept (this);
@@ -219,6 +232,9 @@ public class SemanticChecker implements IASTVistor {
     @Override
     public void visit (WhileStmt node) {
         node.getCond ().accept (this);
+        if(!node.getCond ().getType ().equals (new ClassType ("bool",0))){
+            throw new RuntimeException ("bool required in WhileStmt");
+        }
         loopScope += 1;
         currentTable.push (new BlockTable (currentTable.peek ()));
         blockScopePushed = true;
@@ -246,6 +262,9 @@ public class SemanticChecker implements IASTVistor {
         node.getParameters ().forEach (x -> x.accept (this));
         Map<Integer, VarSymbol> intParameters = node.getName ().getFunc ().getIntParameters ();
         List<AbstractExpr> parameters = node.getParameters ();
+        if (intParameters.size () != parameters.size ()){
+            throw new RuntimeException ("Parameter num mismatch.");
+        }
         for (int i = 0; i < intParameters.size (); i++) {
             if (parameters.get (i).getType ().getBaseType ().equals ("null")){
                 if (intParameters.get (i).getType ().getDim () == 0 && primitiveType.contains (intParameters.get (i).getType ().getBaseType ())){
@@ -577,6 +596,9 @@ public class SemanticChecker implements IASTVistor {
         CstrSymbol cstr = myClass.getInClassTable ().getCstr (myClass.getName ());
         // if class contains constructor
         if (cstr != null){
+            if (cstr.getIntParameters ().size () != node.getParameters ().size ()){
+                throw new RuntimeException ("Parameter num mismatch.");
+            }
             for (int i = 0; i < cstr.getIntParameters ().size (); i++) {
                 if (cstr.getIntParameters ().get (i).getType ().getDim () == 0 && primitiveType.contains (cstr.getIntParameters ().get (i).getType ().getBaseType ())){
                     throw new RuntimeException ("Parameter " + i + " couldn't accept null");

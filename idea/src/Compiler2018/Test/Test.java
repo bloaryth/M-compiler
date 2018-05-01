@@ -34,7 +34,13 @@ public class Test {
     }
 
     public static String getFilePath(){
-        return "./TestCase/Builg.Mx";
+        return "./TestCase/if2.Mx";
+//        return "./TestCase/duplicateVar.Mx";
+//        return "./TestCase/voidMain.Mx";
+//        return "./TestCase/empty.Mx";
+//        return "./TestCase/if.Mx";
+//        return "./TestCase/param.Mx";
+//        return "./TestCase/Builg.Mx";
 //        return "./TestCase/basicRule.Mx";
 //        return "./TestCase/vector.Mx";
 //        return "./TestCase/hashMap.Mx";

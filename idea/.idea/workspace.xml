@@ -15,24 +15,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ASTBuilder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/ASTBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="287" column="20" selection-start-line="287" selection-start-column="20" selection-end-line="287" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="M.g4" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/M.g4">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ASTPrinter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/ASTPrinter.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -48,11 +30,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="if.Mx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/if.Mx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="472">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="SemanticChecker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/SemanticChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="208" column="42" selection-start-line="208" selection-start-column="42" selection-end-line="208" selection-end-column="42" />
+            <state relative-caret-position="381">
+              <caret line="97" column="57" selection-start-line="97" selection-start-column="53" selection-end-line="97" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -60,32 +51,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vector.Mx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/vector.Mx">
+      <file leaf-file-name="ClassContentScanner.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/ClassContentScanner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="46" column="33" lean-forward="true" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
+            <state relative-caret-position="325">
+              <caret line="47" column="73" selection-start-line="47" selection-start-column="73" selection-end-line="47" selection-end-column="73" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="basicRule.Mx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/basicRule.Mx">
+      <file leaf-file-name="voidMain.Mx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/voidMain.Mx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="107" column="10" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BlockTable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Symbol/BlockTable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
-              <folding>
-                <element signature="e#146#147#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="472">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
             </state>
           </provider>
         </entry>
@@ -94,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/Test.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="244">
-              <caret line="36" column="37" lean-forward="true" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+              <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,24 +81,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Builg.Mx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/Builg.Mx">
+      <file leaf-file-name="if2.Mx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/if2.Mx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="397">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="duplicateVar.Mx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/duplicateVar.Mx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="472">
-              <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
+              <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SourcePosition.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/AST/SourcePosition.java">
+      <file leaf-file-name="empty.Mx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/empty.Mx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#693#694#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="450">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="param.Mx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/param.Mx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="472">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
@@ -136,8 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Brackets</find>
-      <find>assign</find>
       <find>vardecl</find>
       <find>set</find>
       <find>function</find>
@@ -146,7 +137,6 @@
       <find>newArray</find>
       <find>newExpr</find>
       <find>getbasetype</find>
-      <find>while</find>
       <find>branch</find>
       <find>system.</find>
       <find>Return</find>
@@ -166,6 +156,9 @@
       <find>DeclStmt</find>
       <find>return</find>
       <find>ForS</find>
+      <find>newNo</find>
+      <find>while</find>
+      <find>prev</find>
     </findStrings>
     <replaceStrings>
       <replace>ClassType</replace>
@@ -178,12 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Compiler2018/AST/ForStmt.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/AST/FuncDecl.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/AST/FunctionCall.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/AST/IASTVistor.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/AST/MemberAcess.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/AST/NewExpr.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/AST/Program.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/AST/ReturnStmt.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/AST/UnaryExpr.java" />
@@ -191,7 +178,6 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/AST/VarDeclStmt.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/AST/WhileStmt.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Symbol/AbstractSymbolTable.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/ClassContentScanner.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/AST/BlockStmt.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCase/menber.Mx" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -224,10 +210,17 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCase/vector.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCase/basicRule.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/M.g4" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/SemanticChecker.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/ASTBuilder.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/ASTPrinter.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCase/Builg.Mx" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCase/param.Mx" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCase/if.Mx" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCase/empty.Mx" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/SemanticChecker.java" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCase/voidMain.Mx" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCase/duplicateVar.Mx" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/ClassContentScanner.java" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCase/if2.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/Test.java" />
       </list>
     </option>
@@ -512,12 +505,12 @@
       <workItem from="1524823157550" duration="7460000" />
       <workItem from="1524842681609" duration="17070000" />
       <workItem from="1524923787664" duration="17774000" />
-      <workItem from="1525004282458" duration="91231000" />
+      <workItem from="1525004282458" duration="92551000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277443000" />
+    <option name="totallyTimeSpent" value="278763000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -614,25 +607,25 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/SemanticChecker.java</url>
-          <line>164</line>
+          <line>174</line>
           <properties />
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/SemanticChecker.java</url>
-          <line>111</line>
+          <line>118</line>
           <properties />
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/SemanticChecker.java</url>
-          <line>439</line>
+          <line>458</line>
           <properties />
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/SemanticChecker.java</url>
-          <line>551</line>
+          <line>570</line>
           <properties />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
@@ -641,53 +634,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/void.Mx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/ClassScanner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="27" column="72" selection-start-line="27" selection-start-column="72" selection-end-line="27" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/FuncScanner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="125" column="93" selection-start-line="125" selection-start-column="93" selection-end-line="125" selection-end-column="93" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/duplicateClass.Mx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/returnVal/Mx.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/AST/AbstractNewObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding>
-            <element signature="e#173#174#0" expanded="true" />
-            <element signature="e#205#206#0" expanded="true" />
-            <element signature="e#240#241#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/AST/NewArray.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -851,13 +797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/ClassContentScanner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300">
-          <caret line="17" column="37" lean-forward="true" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1028,16 +967,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/SemanticChecker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="208" column="42" selection-start-line="208" selection-start-column="42" selection-end-line="208" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/vector.Mx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
@@ -1063,6 +992,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/Builg.Mx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/param.Mx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/ASTPrinter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -1076,17 +1019,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/Builg.Mx">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/if.Mx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="472">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/empty.Mx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/voidMain.Mx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/duplicateVar.Mx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/SemanticChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="97" column="57" selection-start-line="97" selection-start-column="53" selection-end-line="97" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/ClassContentScanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="47" column="73" selection-start-line="47" selection-start-column="73" selection-end-line="47" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCase/if2.Mx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
-          <caret line="36" column="37" lean-forward="true" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+          <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

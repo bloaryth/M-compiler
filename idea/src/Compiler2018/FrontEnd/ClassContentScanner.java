@@ -44,6 +44,9 @@ public class ClassContentScanner implements IASTVistor{
             throw new RuntimeException ("Undefined Class in Variable Declaration.");
         }
         ClassTable classTable = (ClassTable) currentTable.peek ();
+        if (classTable.getVar (node.getDecl ().getName ()) != null){
+            throw new RuntimeException ("classVar previously declared.");
+        }
         classTable.addVar (node.getDecl ().getName (), new VarSymbol (node.getDecl ()));
     }
 
