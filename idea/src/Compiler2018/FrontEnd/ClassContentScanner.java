@@ -71,6 +71,10 @@ public class ClassContentScanner implements IASTVistor{
         if (topTable.getMyClass (node.getDecl ().getReturnType ().getBaseType ()) == null){
             throw new RuntimeException ("Undefined Class in Function Declaration.");
         }
+        if(node.getDecl ().getName ().equals ("this")){
+            throw new RuntimeException ("Reserved keywords");
+        }
+        // TODO
         ClassTable classTable = (ClassTable) currentTable.peek ();
         classTable.addFunc (node.getDecl ().getName (), new FuncSymbol (node.getDecl (), new BlockTable (classTable)));
     }

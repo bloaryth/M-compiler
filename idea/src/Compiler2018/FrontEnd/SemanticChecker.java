@@ -12,6 +12,7 @@ public class SemanticChecker implements IASTVistor {
     private final TopTable topTable;
     private final Stack<AbstractSymbolTable> currentTable = new Stack<> ();
     private Integer loopScope = 0;
+    private CstrSymbol cstrSymbol = null;
     private FuncSymbol funcScope = null;
     private ClassSymbol classScope = null;
     private boolean blockScopePushed = false;
@@ -73,6 +74,10 @@ public class SemanticChecker implements IASTVistor {
     // for both Global and Local
     @Override
     public void visit (VarDecl node) {
+        if(node.getName ().equals ("this")){
+            throw new RuntimeException ("Reserved keyword.");
+        }
+        // TODO
         if (node.getInit () != null) {
             node.getInit ().accept (this);
         }
@@ -107,9 +112,14 @@ public class SemanticChecker implements IASTVistor {
 
     @Override
     public void visit (ClassCstrDecl node) {
+        if(!classScope.getName ().equals (node.getName ())){
+            throw new RuntimeException ("constructor error.");
+        }
         currentTable.push (currentTable.peek ().getCstr (node.getName ()).getBlockTable ());
+        cstrSymbol = classScope.getInClassTable ().getCstr (node.getName ());
         blockScopePushed = true;
         node.getBlock ().accept (this);
+        cstrSymbol = null;
         currentTable.pop ();
     }
 
@@ -171,9 +181,19 @@ public class SemanticChecker implements IASTVistor {
 
     @Override
     public void visit (ReturnStmt node) {   // without returnStmt is always OK
+        // cstr
+        if (cstrSymbol != null){
+            if (node.getExpr () != null){
+                throw new RuntimeException ("Cstr return error.");
+            }
+            return;
+        }
+
+        // func
         if (funcScope == null){
             throw new RuntimeException ("Return should be in FuncScope");
         }
+
         // with returnExpr
         if (node.getExpr () != null){
             node.getExpr ().accept (this);
@@ -449,6 +469,7 @@ public class SemanticChecker implements IASTVistor {
                                 default:
                                     throw new RuntimeException ("bool does not support this operation.");
                             }
+                            break;
                         case "null":
                         case "void":
                         default:

@@ -123,6 +123,10 @@ public class FuncScanner implements IASTVistor {
         if (topTable.getFunc (node.getName ()) != null){
             throw new RuntimeException ("Function is previously declared.");
         }
+        if (node.getName ().equals ("this")){
+            throw new RuntimeException ("Reserved keyword.");
+        }
+        // TODO
         topTable.addFunc (node.getName (), new FuncSymbol (node, new BlockTable (topTable)));
     }
 
