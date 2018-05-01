@@ -37,6 +37,11 @@ public class SemanticChecker implements IASTVistor {
         node.getBlock ().accept (this);
         currentTable.pop ();
         funcScope = null;
+        if (node.getName ().equals ("main")){
+            if (node.getParameters ().size () != 0){
+                throw new RuntimeException ("main() should not contain parameters.");
+            }
+        }
     }
 
     // for both Global and Local
@@ -121,11 +126,27 @@ public class SemanticChecker implements IASTVistor {
     }
 
     @Override
-    public void visit (ReturnStmt node) {
+    public void visit (ReturnStmt node) {   // without returnStmt is always OK
         if (funcScope == null){
             throw new RuntimeException ("Return should be in FuncScope");
         }
-        // TODO
+        // with returnExpr
+        if (node.getExpr () != null){
+            node.getExpr ().accept (this);
+            if (node.getExpr ().getType ().getBaseType ().equals ("null")){
+                if (funcScope.getReturnType ().getDim () == 0){
+                    throw new RuntimeException ("Return Type couldn't accept null");
+                }
+            }
+            if (!funcScope.getReturnType ().equals (node.getExpr ().getType ())){
+                throw new RuntimeException ("Return Type mismatch.");
+            }
+        }
+        else {
+            if (!funcScope.getReturnType ().getBaseType ().equals ("void")){
+                throw new RuntimeException ("returnExpr is required.");
+            }
+        }
     }
 
     @Override
@@ -159,9 +180,11 @@ public class SemanticChecker implements IASTVistor {
     @Override
     public void visit (WhileStmt node) {
         node.getCond ().accept (this);
+        loopScope += 1;
         currentTable.push (new BlockTable (currentTable.peek ()));
         node.getStmt ().accept (this);
         currentTable.pop ();
+        loopScope -= 1;
     }
 
     @Override
@@ -188,15 +211,16 @@ public class SemanticChecker implements IASTVistor {
         }
         ClassType classType = node.getName ().getFunc ().getReturnType ();
         node.setType (classType);
-        switch (classType.getBaseType ()){
-            case "int":
-            case "bool":
-            case "null":
-            case "void":
-                if(classType.getDim () == 0){
-                    node.setLValue (false);
-                }
-        }
+//        switch (classType.getBaseType ()){
+//            case "int":
+//            case "bool":
+//            case "null":
+//            case "void":
+//                if(classType.getDim () == 0){
+//                    node.setLValue (false);
+//                }
+//        }
+        node.setLValue (false);
     }
 
     @Override
@@ -270,16 +294,16 @@ public class SemanticChecker implements IASTVistor {
                 if (!node.getExpr ().getLValue ()){
                     throw new RuntimeException ("LValur required.");
                 }
-                break;
+//                break;    // don't break
             case POS:
             case NEG:
             case BITWISE_NOT:
-                if (!node.getExpr ().getType ().getBaseType ().equals ("int")){
+                if (!node.getExpr ().getType ().equals (new ClassType ("int",0))){
                     throw new RuntimeException ("int required.");
                 }
                 break;
             case LOGICAL_NOT:
-                if (!node.getExpr ().getType ().getBaseType ().equals ("bool")) {
+                if (!node.getExpr ().getType ().equals (new ClassType ("bool",0))) {
                     throw new RuntimeException ("bool required");
                 }
                 break;
@@ -295,6 +319,7 @@ public class SemanticChecker implements IASTVistor {
             case PREFIX_INC:
             case PREFIX_DEC:
         }
+        node.setType (node.getExpr ().getType ());
     }
 
     @Override
@@ -302,14 +327,22 @@ public class SemanticChecker implements IASTVistor {
         node.getLhs ().accept (this);
         node.getRhs ().accept (this);
         switch (node.getOp ()) {
+            case LOGICAL_OR:
+            case LOGICAL_AND:
+                ClassType boolType = new ClassType ("bool", 0);
+                if (node.getLhs ().getType ().equals (boolType) && node.getRhs ().getType ().equals (boolType)){
+                    break;
+                }
+                else{
+                    throw new RuntimeException ("bool required.");
+                }
             case XOR:
             case BITWISE_OR:
             case BITWISE_AND:
-            case LOGICAL_OR:
-            case LOGICAL_AND:
             case LEFT_SHIFT:
             case RIGHT_SHIFT:
-                if (node.getLhs ().getType ().getBaseType ().equals ("int") && node.getRhs ().getType ().getBaseType ().equals ("int")) {
+                ClassType intType = new ClassType ("int", 0);
+                if (node.getLhs ().getType ().equals (intType) && node.getRhs ().getType ().equals (intType)) {
                     break;
                 }
                 else{
@@ -321,7 +354,10 @@ public class SemanticChecker implements IASTVistor {
             case GT:
             case LE:
             case LT:
-                if (node.getLhs ().getType ().getBaseType ().equals (node.getRhs ().getType ().getBaseType ())) {
+                if (node.getLhs ().getType ().equals (node.getRhs ().getType ())) {
+                    if (node.getLhs ().getType ().getDim () != 0) {
+                        throw new RuntimeException ("array does not suppot this operation.");
+                    }
                     switch (node.getLhs ().getType ().getBaseType ()) {
                         case "int":
                         case "string":
@@ -349,7 +385,10 @@ public class SemanticChecker implements IASTVistor {
             case MUL:
             case DIV:
             case MOD:
-                if (node.getLhs ().getType ().getBaseType ().equals (node.getRhs ().getType ().getBaseType ())) {
+                if (node.getLhs ().getType ().equals (node.getRhs ().getType ())) {
+                    if (node.getLhs ().getType ().getDim () != 0){
+                        throw new RuntimeException ("array does not suppot this operation.");
+                    }
                     switch (node.getLhs ().getType ().getBaseType ()) {
                         case "int":
                             break;
@@ -369,7 +408,7 @@ public class SemanticChecker implements IASTVistor {
                 }
                 break;
             case ASSIGN:
-                if (node.getLhs ().getType ().getBaseType ().equals (node.getRhs ().getType ().getBaseType ())) {
+                if (node.getLhs ().getType ().equals (node.getRhs ().getType ())) {
                     if (node.getLhs ().getLValue ()) {
                         break;
                     }
@@ -462,9 +501,12 @@ public class SemanticChecker implements IASTVistor {
             throw new RuntimeException ("Class is not declared.");
         }
         CstrSymbol cstr = myClass.getInClassTable ().getCstr (myClass.getName ());
-        for (int i = 0; i < cstr.getIntParameters ().size (); i++) {
-            if ( ! cstr.getIntParameters ().get (i).getType ().equals (node.getParameters ().get (i).getType ())) {
-                throw new RuntimeException ("Parameter" + i + "Type mismatch.");
+        // if class contains constructor
+        if (cstr != null){
+            for (int i = 0; i < cstr.getIntParameters ().size (); i++) {
+                if ( ! cstr.getIntParameters ().get (i).getType ().equals (node.getParameters ().get (i).getType ())) {
+                    throw new RuntimeException ("Parameter" + i + "Type mismatch.");
+                }
             }
         }
     }

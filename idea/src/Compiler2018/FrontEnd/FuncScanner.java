@@ -119,9 +119,11 @@ public class FuncScanner implements IASTVistor {
         if(topTable.getMyClass (node.getReturnType ().getBaseType ()) == null){
             throw new RuntimeException ("returnType is not declared.");
         }
-        else{
-            topTable.addFunc (node.getName (), new FuncSymbol (node, new BlockTable (topTable)));
+        // function overload is not permitted
+        if (topTable.getFunc (node.getName ()) != null){
+            throw new RuntimeException ("Function is previously declared.");
         }
+        topTable.addFunc (node.getName (), new FuncSymbol (node, new BlockTable (topTable)));
     }
 
     @Override

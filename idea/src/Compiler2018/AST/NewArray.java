@@ -16,7 +16,6 @@ public class NewArray extends AbstractNewObject {
             this.type = type;
         }
 
-
         public void addLens(AbstractExpr len){
             lens.add(len);
         }

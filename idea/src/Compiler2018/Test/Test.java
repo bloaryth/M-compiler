@@ -34,7 +34,12 @@ public class Test {
     }
 
     public static String getFilePath(){
-        return "./TestCase/strShift.Mx";
+//        return "./TestCase/Wall.Mx";
+//        return "./TestCase/returnVal.Mx";
+//        return "./TestCase/main.Mx";
+//        return "./TestCase/duplicateClass.Mx";
+        return "./TestCase/check.Mx";
+//        return "./TestCase/strShift.Mx";
 //        return "./TestCase/void.Mx";
 //        return "./TestCase/declare.Mx";
 //        return "./TestCase/array.Mx";

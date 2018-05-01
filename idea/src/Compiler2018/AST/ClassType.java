@@ -25,6 +25,11 @@ public class ClassType extends AbstractASTNode {
     }
 
     @Override
+    public String toString () {
+        return "baseType: " + baseType + "\t" + "dim: " + dim;
+    }
+
+    @Override
     public void accept (IASTVistor visitor) {
         visitor.visit(this);
     }

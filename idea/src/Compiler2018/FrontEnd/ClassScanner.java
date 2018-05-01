@@ -24,6 +24,9 @@ public class ClassScanner implements IASTVistor {
 
     @Override
     public void visit (ClassDecl node) {
+        if (topTable.getMyClass (node.getName ()) != null) {
+            throw new RuntimeException ("Class is previously declared");
+        }
         topTable.addMyClass (node.getName (), new ClassSymbol (node.getName (), new ClassTable (topTable)));
     }
 
