@@ -5,7 +5,6 @@ import Compiler2018.FrontEnd.*;
 import Compiler2018.Parser.MLexer;
 import Compiler2018.Parser.MParser;
 import Compiler2018.Symbol.TopTable;
-import Compiler2018.Test.Test;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -13,24 +12,38 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class WantonWind {
     private static String readTestFile(String filePath) {
-        StringBuilder str = new StringBuilder ();
-        try{
-            InputStreamReader reader = new InputStreamReader(Test.class.getResourceAsStream(filePath));
-            BufferedReader buffReader = new BufferedReader(reader);
-            String strTmp;
-            while((strTmp = buffReader.readLine ()) != null){
-                str.append (strTmp+'\n');
+//        StringBuilder str = new StringBuilder ();
+//        try{
+//            InputStreamReader reader = new InputStreamReader(Test.class.getResourceAsStream(filePath));
+//            BufferedReader buffReader = new BufferedReader(reader);
+//            String strTmp;
+//            while((strTmp = buffReader.readLine ()) != null){
+//                str.append (strTmp+'\n');
+//            }
+//            buffReader.close();
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return str.toString ();
+
+        StringBuilder ans = new StringBuilder ();
+        File file = new File(filePath);
+        try (BufferedReader reader = new BufferedReader (new FileReader (file))) {
+            String tempString;
+            while ((tempString = reader.readLine ()) != null) {
+                ans.append (tempString).append ('\n');
             }
-            buffReader.close();
+        } catch (IOException e) {
+            e.printStackTrace ();
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return str.toString ();
+        return ans.toString ();
     }
 
     public static void run(String prog) {
