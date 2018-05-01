@@ -283,9 +283,9 @@ public class ASTBuilder implements MListener {
         AbstractExpr step = (AbstractExpr) map.get (ctx.step);
         AbstractStmt stmt = (AbstractStmt) map.get (ctx.statement ());
         map.put (ctx, new ForStmt (init, cond, step, stmt,
-                new SourcePosition (ctx.init),
+                init == null ? null : new SourcePosition (ctx.init),
                 cond == null ? null : new SourcePosition (ctx.cond),
-                new SourcePosition (ctx.step)
+                step == null ? null : new SourcePosition (ctx.step)
         ));
     }
 

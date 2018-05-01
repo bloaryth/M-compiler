@@ -34,7 +34,9 @@ public class Test {
     }
 
     public static String getFilePath(){
-        return "./TestCase/vector.Mx";
+        return "./TestCase/Builg.Mx";
+//        return "./TestCase/basicRule.Mx";
+//        return "./TestCase/vector.Mx";
 //        return "./TestCase/hashMap.Mx";
 //        return "./TestCase/stringTest.Mx";
 //        return "./TestCase/returnCheck.Mx";

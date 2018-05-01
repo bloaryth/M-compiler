@@ -47,7 +47,7 @@ branchStatement: If '(' expression ')' statement (Else statement)? ;    // --> B
 
 // AbstractLoopStmt
 loopStatement
-    : 'for' '(' init=expression ';' cond=expression? ';' step=expression ')' statement    # ForStmt   // --> ForStmt
+    : 'for' '(' init=expression? ';' cond=expression? ';' step=expression? ')' statement    # ForStmt   // --> ForStmt
     | 'while' '(' expression ')' statement  # WhileStmt // --> WhileStmt
     ;
 

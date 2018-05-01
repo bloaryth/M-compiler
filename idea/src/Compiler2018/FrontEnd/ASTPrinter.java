@@ -163,8 +163,13 @@ public class ASTPrinter implements IASTVistor {
     public void visit (ForStmt node) {
         System.out.println (indent.toString () + node.getClass ().getSimpleName ());
         addIndent ();
-        node.getInit ().accept (this);
+        if (node.getInit () != null){
+            node.getInit ().accept (this);
 //        System.out.println (indent.toString () + node.getPosInit ());
+        }
+        else{
+            System.out.println (indent.toString () + "Init is null");
+        }
         if(node.getCond () != null){
             node.getCond ().accept (this);
 //            System.out.println (indent.toString () + node.getPosCond ());
@@ -172,8 +177,13 @@ public class ASTPrinter implements IASTVistor {
         else{
             System.out.println (indent.toString () + "Cond is null");
         }
-        node.getStep ().accept (this);
+        if (node.getStep () != null){
+            node.getStep ().accept (this);
 //        System.out.println (indent.toString () + node.getPosStep ());
+        }
+        else{
+            System.out.println ((indent.toString () + "Step is null"));
+        }
         node.getStmt ().accept (this);
         subIndent ();
     }

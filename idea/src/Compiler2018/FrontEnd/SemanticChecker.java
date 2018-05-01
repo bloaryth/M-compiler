@@ -199,11 +199,15 @@ public class SemanticChecker implements IASTVistor {
 
     @Override
     public void visit (ForStmt node) {
-        node.getInit ().accept (this);
+        if (node.getInit () != null){
+            node.getInit ().accept (this);
+        }
         if (node.getCond () != null){
             node.getCond ().accept (this);
         }
-        node.getStep ().accept (this);
+        if (node.getStep () != null){
+            node.getStep ().accept (this);
+        }
         loopScope += 1;
         currentTable.push (new BlockTable (currentTable.peek ()));
         blockScopePushed = true;
