@@ -34,11 +34,14 @@ public class Test {
     }
 
     public static String getFilePath(){
+        return "./TestCase/stringTest.Mx";
+//        return "./TestCase/returnCheck.Mx";
+//        return "./TestCase/comment.Mx";
 //        return "./TestCase/Wall.Mx";
 //        return "./TestCase/returnVal.Mx";
 //        return "./TestCase/main.Mx";
 //        return "./TestCase/duplicateClass.Mx";
-        return "./TestCase/check.Mx";
+//        return "./TestCase/check.Mx";
 //        return "./TestCase/strShift.Mx";
 //        return "./TestCase/void.Mx";
 //        return "./TestCase/declare.Mx";
@@ -54,8 +57,7 @@ public class Test {
             String str = getTxt(getFilePath());
 
             CharStream input = CharStreams.fromString (str);
-//        InputStream is = System.in;
-//        ANTLRInputStream input = new ANTLRInputStream(is);
+//            ANTLRInputStream input = new ANTLRInputStream (str);
             MLexer lexer = new MLexer (input);
             CommonTokenStream tokens = new CommonTokenStream (lexer);
             MParser parser = new MParser (tokens);

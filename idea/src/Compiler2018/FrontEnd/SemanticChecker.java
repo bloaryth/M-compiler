@@ -10,6 +10,8 @@ public class SemanticChecker implements IASTVistor {
     private final Stack<AbstractSymbolTable> currentTable = new Stack<> ();
     private Integer loopScope = 0;
     private FuncSymbol funcScope = null;
+    private ClassSymbol classScope = null;
+    private boolean blockScopePushed = false;
 
     public SemanticChecker (TopTable topTable) {
         this.topTable = topTable;
@@ -24,9 +26,11 @@ public class SemanticChecker implements IASTVistor {
 
     @Override
     public void visit (ClassDecl node) {
+        classScope = topTable.getMyClass (node.getName ());
         currentTable.push (topTable.getMyClass (node.getName ()).getInClassTable ());
         node.getItems ().forEach (x -> x.accept (this));
         currentTable.pop ();
+        classScope = null;
     }
 
     // for Global
@@ -34,6 +38,7 @@ public class SemanticChecker implements IASTVistor {
     public void visit (FuncDecl node) {
         funcScope = currentTable.peek ().getFunc (node.getName ());
         currentTable.push (currentTable.peek ().getFunc (node.getName ()).getBlockTable ());
+        blockScopePushed = true;
         node.getBlock ().accept (this);
         currentTable.pop ();
         funcScope = null;
@@ -80,20 +85,32 @@ public class SemanticChecker implements IASTVistor {
     @Override
     public void visit (ClassCstrDecl node) {
         currentTable.push (currentTable.peek ().getCstr (node.getName ()).getBlockTable ());
+        blockScopePushed = true;
         node.getBlock ().accept (this);
         currentTable.pop ();
     }
 
     @Override
     public void visit (ClassFuncDecl node) {
-        currentTable.push (currentTable.peek ().getFunc (node.getDecl ().getName ()).getBlockTable ());
-        node.getDecl ().getBlock ().accept (this);
-        currentTable.pop ();
+        // TODO
+//        currentTable.push (currentTable.peek ().getFunc (node.getDecl ().getName ()).getBlockTable ());
+//        node.getDecl ().getBlock ().accept (this);
+//        currentTable.pop ();
+        node.getDecl ().accept (this);
     }
 
     @Override
     public void visit (BlockStmt node) {
+        boolean selfBlock = false;
+        if (!blockScopePushed){
+            currentTable.push (new BlockTable (currentTable.peek ()));
+            selfBlock = true;
+        }
+        blockScopePushed = false;
         node.getStmts ().forEach (x -> x.accept (this));
+        if (selfBlock){
+            currentTable.pop ();
+        }
     }
 
     // Local
@@ -106,11 +123,13 @@ public class SemanticChecker implements IASTVistor {
     public void visit (BranchStmt node) {
         node.getCond ().accept (this);
         currentTable.push (new BlockTable (currentTable.peek ()));
+        blockScopePushed = true;
         node.getIfStmt ().accept (this);
         currentTable.pop ();
         if (node.getElseStmt () != null){
             currentTable.push (new BlockTable (currentTable.peek ()));
-            node.getIfStmt ().accept (this);
+            blockScopePushed = true;
+            node.getElseStmt ().accept (this);
             currentTable.pop ();
         }
     }
@@ -172,6 +191,7 @@ public class SemanticChecker implements IASTVistor {
         node.getStep ().accept (this);
         loopScope += 1;
         currentTable.push (new BlockTable (currentTable.peek ()));
+        blockScopePushed = true;
         node.getStmt ().accept (this);
         currentTable.pop ();
         loopScope -= 1;
@@ -182,6 +202,7 @@ public class SemanticChecker implements IASTVistor {
         node.getCond ().accept (this);
         loopScope += 1;
         currentTable.push (new BlockTable (currentTable.peek ()));
+        blockScopePushed = true;
         node.getStmt ().accept (this);
         currentTable.pop ();
         loopScope -= 1;
@@ -461,6 +482,17 @@ public class SemanticChecker implements IASTVistor {
 
     @Override
     public void visit (Identifier node) {
+        // this
+        if (node.getName ().equals ("this")){
+            if (classScope == null){
+                throw new RuntimeException ("this should be in Class");
+            }
+            else{
+                node.setType (new ClassType (classScope.getName (),0));
+            }
+            return;
+        }
+
         // func
         FuncSymbol func = topTable.getFunc (node.getName ());
         if (func != null){

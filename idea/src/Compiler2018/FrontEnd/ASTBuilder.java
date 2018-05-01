@@ -654,7 +654,7 @@ public class ASTBuilder implements MListener {
             case MParser.NumConst: map.put (ctx, new NumConst (Integer.valueOf (s))); break;
             case MParser.NullConst: map.put (ctx, new NullConst ()); break;
             case MParser.StrConst: map.put (ctx, new StrConst (s)); break;
-            case MParser.BoolConst: map.put (ctx, new BoolConst (s.equals ("true")));
+            case MParser.BoolConst: map.put (ctx, new BoolConst (s.equals ("true"))); break;
             default: throw new RuntimeException ("Unknown Constant type");
         }
     }

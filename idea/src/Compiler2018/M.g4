@@ -138,7 +138,6 @@ Continue: 'continue';
 Return  : 'return';
 New : 'new';
 Class   : 'class';
-This    : 'this';
 
 //------ Symbols
 Add : '+';
