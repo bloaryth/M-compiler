@@ -42,8 +42,27 @@ public class SemanticChecker implements IASTVistor {
     // for both Global and Local
     @Override
     public void visit (VarDecl node) {
+        if (node.getInit () != null) {
+            node.getInit ().accept (this);
+        }
         if (topTable.getMyClass (node.getType ().getBaseType ()) == null){
             throw new RuntimeException ("Undefined Class in Variable Declaration.");
+        }
+        if (node.getType ().getBaseType ().equals ("void")){
+            throw new RuntimeException ("Void type should not be declared.");
+        }
+        if (node.getInit () != null){
+            if (node.getInit ().getType ().getBaseType ().equals ("null")){
+                if (node.getType ().getDim () == 0){
+                    throw new RuntimeException ("null should not be assigned to NonArray.");
+                }
+            }
+            if(!node.getType ().equals (node.getInit ().getType ())){
+                throw new RuntimeException ("Init Type mismatch..");
+            }
+        }
+        if (currentTable.peek ().getVar (node.getName ()) != null){
+            throw new RuntimeException ("Variable is previously declared.");
         }
         currentTable.peek ().addVar (node.getName (), new VarSymbol (node));
     }
@@ -324,6 +343,7 @@ public class SemanticChecker implements IASTVistor {
                 else{
                     throw new RuntimeException ("same type required.");
                 }
+                break;
             case ADD:
             case SUB:
             case MUL:
@@ -347,6 +367,7 @@ public class SemanticChecker implements IASTVistor {
                             throw new RuntimeException ("type does not support basic arithmetic.");
                     }
                 }
+                break;
             case ASSIGN:
                 if (node.getLhs ().getType ().getBaseType ().equals (node.getRhs ().getType ().getBaseType ())) {
                     if (node.getLhs ().getLValue ()) {
@@ -368,6 +389,34 @@ public class SemanticChecker implements IASTVistor {
                     throw new RuntimeException ("same type required.");
                 }
         }
+        switch (node.getOp ()) {
+            case XOR:
+            case BITWISE_OR:
+            case BITWISE_AND:
+            case LOGICAL_OR:
+            case LOGICAL_AND:
+            case LEFT_SHIFT:
+            case RIGHT_SHIFT:
+            case ADD:
+            case SUB:
+            case MUL:
+            case DIV:
+            case MOD:
+                node.setType (node.getRhs ().getType ());
+                break;
+            case EQ:
+            case NE:
+            case GE:
+            case GT:
+            case LE:
+            case LT:
+                node.setType (new ClassType ("bool",0));
+                break;
+            case ASSIGN:
+                node.setType (node.getLhs ().getType ());
+                break;
+        }
+
         node.setLValue (false);     // also for assign
     }
 
