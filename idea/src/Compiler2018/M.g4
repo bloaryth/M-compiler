@@ -53,7 +53,7 @@ loopStatement
 
 // AbstractJumpStmt
 jumpStatement
-    :   'return' expression ';' # ReturnStmt    // --> ReturnStmt
+    :   'return' expression? ';' # ReturnStmt    // --> ReturnStmt
     |   'break' ';' # BreakStmt // --> BreakStmt
     |   'continue' ';'  # ContinueStmt  // --> ContinueStmt
     ;
