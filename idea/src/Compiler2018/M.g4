@@ -1,112 +1,123 @@
 grammar M;
 
-prog:   progSection* EOF;
+program:   programSection* EOF;
 
-progSection
-    :   classDeclaration
-    |   funcDeclaration
-    |   varDeclaration
+// AbstractDecl
+programSection
+    :   classDeclaration    # ClassDecl
+    |   functionDeclaration # FuncDecl
+    |   variableDeclarationStatement # VarDecl
     ;
 
-classDeclaration: 'class' Id '{' classBlockItem* '}';
+classDeclaration: 'class' Identifier classBlock;        // --> ClassDecl
 
+functionDeclaration :   classType Identifier '(' functionParameters? ')' blockStatement;    // --> FuncDecl
+
+variableDeclaration :   classType Identifier ('=' expression)?;     // --> VarDecl
+
+variableDeclarationStatement : variableDeclaration ';'; // -- VarDecl --
+
+functionParameters  :   (variableDeclaration ',')* variableDeclaration;
+
+classBlock: '{' classBlockItem* '}';
+
+// AbstractClassItem
 classBlockItem
-    :   varDeclaration
-    |   funcDeclaration
+    :   variableDeclarationStatement # ClassVarDecl  // --> ClassVarDecl
+    |   constructorDeclaration  # ClassCstrDecl
+    |   functionDeclaration # ClassFuncDecl // --> ClassFuncDecl
     ;
 
-funcDeclaration: classes? Id '(' varDeclaration* ')' statement;
+constructorDeclaration :   Identifier '(' functionParameters? ')' blockStatement;   // --> ClassCstrDecl
 
+// ABstractStmt
 statement
-    :   blockStatement
-    |   branchStatement
-    |   loopStatement
-    |   exprStatement
-    |   jumpStatement
+    :   blockStatement  # BlockStmt
+    |   variableDeclarationStatement # VarDeclStmt
+    |   branchStatement # BranchStmt
+    |   loopStatement   # LoopStmt
+    |   expression ';'  # ExprStmt
+    |   jumpStatement   # JumpStmt
+    |   ';' # EmptyStmt
     ;
 
-blockStatement: '{' blockItem* '}';
+blockStatement: '{' statement* '}'; // --> BlockStmt
 
-blockItem
-    :   varDeclaration
-    |   statement
-    ;
+branchStatement: If '(' expression ')' statement (Else statement)? ;    // --> BranchStmt
 
-branchStatement: If '(' expr ')' statement (Else statement)? ;
-
+// AbstractLoopStmt
 loopStatement
-    : For '(' expr ';' expr ';' expr ')' statement
-    | While '(' expr ')' statement
+    : 'for' '(' init=expression ';' cond=expression? ';' step=expression ')' statement    # ForStmt   // --> ForStmt
+    | 'while' '(' expression ')' statement  # WhileStmt // --> WhileStmt
     ;
 
-exprStatement:  expr ';';
-
+// AbstractJumpStmt
 jumpStatement
-    :   Return expr ';'
-    |   Break ';'
-    |   Continue ';'
+    :   'return' expression ';' # ReturnStmt    // --> ReturnStmt
+    |   'break' ';' # BreakStmt // --> BreakStmt
+    |   'continue' ';'  # ContinueStmt  // --> ContinueStmt
     ;
 
-varDeclaration
-    :   classes Id ';'
-    |   classes Id '=' expr ';'
+// ClassType
+classType
+    :   arrayClass  # ArrayType
+    |   nonArrayClass   # NonArrayType
     ;
 
-classes
-    :   arrayClass
-    |   nonArrayClass
+arrayClass:   nonArrayClass (Brackets)+;    // --> ClassType
+
+nonArrayClass   // --> ClassType
+    :   type='bool'
+    |   type='int'
+    |   type='void'
+    |   type='string'
+    |   type=Identifier
     ;
 
-arrayClass:   nonArrayClass ('['']')+;
+// AbstractExpr
+expression
+    :   expression op=('++'|'--')   # PostfixIncDec // --> UnaryExpr
+    |   expression '(' callParameter? ')'   # FunctionCall  // --> FunctionCall
+    |   expression '[' expression ']'   # ArrayAcess    // --> ArrayAcess
+    |   expression '.' Identifier     # MemberAcess // --> MemberAcess
 
-nonArrayClass
-    :   Bool
-    |   Int
-    |   Void
-    |   String
-    |   Id
+    |   <assoc=right> op=('++'|'--') expression # UnaryExpr // --> UnaryExpr
+    |   <assoc=right> op=('+'|'-') expression   # UnaryExpr // --> UnaryExpr
+    |   <assoc=right> op=('!'|'~') expression   # UnaryExpr // --> UnaryExpr
+    |   <assoc=right> 'new' newObject   # NewExpr   // --> NewExpr
+
+    |   expression op=('*'|'/'|'%') expression # BinaryExpr // --> BinaryExpr
+    |   expression op=('-'|'+') expression  # BinaryExpr    // --> BinaryExpr
+    |   expression op=('<<'|'>>') expression    # BinaryExpr    // --> BinaryExpr
+    |   expression op=('<'|'<='|'>'|'>=') expression    # BinaryExpr    // --> BinaryExpr
+    |   expression op=('=='|'!=') expression    # BinaryExpr    // --> BinaryExpr
+    |   expression op='&' expression    # BinaryExpr    // --> BinaryExpr
+    |   expression op='^' expression    # BinaryExpr    // --> BinaryExpr
+    |   expression op='|' expression    # BinaryExpr    // --> BinaryExpr
+    |   expression op='&&' expression   # BinaryExpr    // --> BinaryExpr
+    |   expression op='||' expression   # BinaryExpr    // --> BinaryExpr
+    |   <assoc=right> expression op='=' expression  # BinaryExpr    // --> BinaryExpr
+
+    |   Identifier  # Identifier        // --> Identifier
+    |   constant    # Const
+    |   '(' expression ')'  # SubExpr
     ;
 
-expr
-    :   expr op=('++'|'--')
-    |   expr '(' paramList? ')'
-    |   expr '[' expr ']'
-    |   expr '.' Id
+callParameter:   (expression ',')* expression;
 
-    |   <assoc=right> op=('++'|'--') expr
-    |   <assoc=right> op=('+'|'-') expr
-    |   <assoc=right> op=('!'|'`') expr
-    |   <assoc=right> 'new' newObject
-
-    |   expr op=('*'|'/'|'%') expr
-    |   expr op=('-'|'+') expr
-    |   expr op=('<<'|'>>') expr
-    |   expr op=('<'|'<='|'>'|'>=') expr
-    |   expr op=('=='|'!=') expr
-    |   expr op='&' expr
-    |   expr op='^' expr
-    |   expr op='|' expr
-    |   expr op='&&' expr
-    |   expr op='||' expr
-    |   <assoc=right> expr op='=' expr
-
-    |   Id
-    |   constant
-    |   '(' expr ')'
-    ;
-
-paramList:   (expr ',')* expr;
-
+// AbstractNewObeject
 newObject
-    :   nonArrayClass '(' paramList ')'
-    |   nonArrayClass ('[' expr ']')+ ('['']')?
+    :   nonArrayClass ('[' expression ']')+ ('[' ']')+ ('[' expression ']')+    # NewError  // throw
+    |   nonArrayClass ('[' expression ']')+ (Brackets)*   # NewArray    // --> NewArray
+    |   nonArrayClass ('(' callParameter? ')')? # NewNonArray   // --> NewNonArray
     ;
 
+// AbstractConst
 constant
-    :   BoolConst
-    |   Num
-    |   Str
-    |   Null
+    :   type=BoolConst  // --> BoolConst
+    |   type=NumConst   // --> NumConst
+    |   type=StrConst   // --> StrConst
+    |   type=NullConst  // --> NullConst
     ;
 
 //------ Reseversed keywords
@@ -135,9 +146,9 @@ Div : '/';
 Mod : '%';
 
 LT  : '<';
-BT  : '>';
+GT  : '>';
 LE  : '<=';
-BE  : '>=';
+GE  : '>=';
 EQ  : '==';
 NE  : '!=';
 
@@ -168,14 +179,16 @@ RBracket    : ']';
 LBrace  : '{';
 RBrace  : '}';
 
+Brackets:   '['']';     // for count
+
 //------ Constants
 BoolConst: 'true' | 'false';
-Num : [0-9]+;
-Str : '"' ('\\'[btnr"\\] | .)*? '"';
-Null    : 'null';
+NumConst : [0-9]+;
+StrConst : '"' ('\\'[btnr"\\] | .)*? '"';
+NullConst    : 'null';
 
 //------ Indentifiers
-Id  : [a-zA-Z][a-zA-Z_0-9]*;
+Identifier  : [a-zA-Z][a-zA-Z_0-9]*;
 
 //------ WhiteSpace
 WhiteSpace  : [ \t\n\r]+ -> channel (HIDDEN);
