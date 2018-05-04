@@ -33,6 +33,7 @@ public class Test{
     }
 
     public static String getFilePath(){
+//        return "./TestCase/InFunc.Mx";
         return "./TestCase/notThatBad.Mx";
 //        return "./TestCase/class.Mx";
 //        return "./TestCase/newVoidArray.Mx";

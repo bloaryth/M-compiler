@@ -531,30 +531,38 @@ public class StmtScanner implements IASTVistor{
             return;
         }
 
-        // func
-        FuncSymbol func;
-        if(classScope != null){    // inclass func
-            func = classScope.getInClassTable().getFunc(node.getName());
-            if(func == null){
-                func = topTable.getFunc(node.getName());
-            }
+        AbstractSymbol symbol = currentTable.peek().findIdentifier(node.getName());
+        if(symbol instanceof FuncSymbol){
+            node.setFunc(((FuncSymbol) symbol));
+        } else if(symbol instanceof VarSymbol){
+            node.setType(((VarSymbol) symbol).getType());
         } else{
-            func = topTable.getFunc(node.getName());
-        }
-        if(func != null){
-            node.setFunc(func);
-            return;
+            throw new RuntimeException("Identifier " + node.getName() + " is not declared.");
         }
 
-        // var
-        VarSymbol var = currentTable.peek().findVar(node.getName());
-        if(var != null){
-            node.setType(var.getType());
-            return;
-        }
-
-        currentTable.peek().findVar(node.getName());
-        throw new RuntimeException("Identifier " + node.getName() + " is not declared.");
+//        // func
+//        FuncSymbol func;
+//        if(classScope != null){    // inclass func
+//            func = classScope.getInClassTable().getFunc(node.getName());
+//            if(func == null){
+//                func = topTable.getFunc(node.getName());
+//            }
+//        } else{
+//            func = topTable.getFunc(node.getName());
+//        }
+//        if(func != null){
+//            node.setFunc(func);
+//            return;
+//        }
+//
+//        // var
+//        VarSymbol var = currentTable.peek().findVar(node.getName());
+//        if(var != null){
+//            node.setType(var.getType());
+//            return;
+//        }
+//
+//        throw new RuntimeException("Identifier " + node.getName() + " is not declared.");
     }
 
     @Override

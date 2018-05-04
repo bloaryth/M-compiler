@@ -50,6 +50,26 @@ public abstract class AbstractSymbolTable {
         return getVars ().get (name);
     }
 
+    public final AbstractSymbol findIdentifier(String name){
+        AbstractSymbolTable symbolTable = this;
+        while(symbolTable != null){
+            // TODO class static
+            //ClassSymbol classSymbol = symbolTable.getMyClass(name);
+            FuncSymbol funcSymbol = symbolTable.getFunc(name);
+            if(funcSymbol != null){
+                return funcSymbol;
+            }
+            VarSymbol varSymbol = symbolTable.getVar (name);
+            if (varSymbol != null){
+                return varSymbol;
+            }
+            else {
+                symbolTable = symbolTable.getOuterSymbolTable ();
+            }
+        }
+        return null;
+    }
+
     public final VarSymbol findVar(String name){
         AbstractSymbolTable symbolTable = this;
         while(symbolTable != null){

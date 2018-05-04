@@ -7,6 +7,7 @@ public abstract class AbstractExpr extends AbstractASTNode{
     private ClassType type = null;
     private Boolean isLValue = true;
     private FuncSymbol func = null;
+    // TODO class static
 
     public ClassType getType(){
         return type;
