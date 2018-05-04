@@ -14,27 +14,34 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Test {
+public class Test{
     public static String getTxt(String filePath){
-        StringBuilder str = new StringBuilder ();
-        try{
+        StringBuilder str = new StringBuilder();
+        try {
             InputStreamReader reader = new InputStreamReader(Test.class.getResourceAsStream(filePath));
             BufferedReader buffReader = new BufferedReader(reader);
             String strTmp;
-            while((strTmp = buffReader.readLine ())!=null){
-                str.append (strTmp+'\n');
+            while ((strTmp = buffReader.readLine()) != null) {
+                str.append(strTmp + '\n');
             }
             buffReader.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 //        System.out.println (str.toString ());
-        return str.toString ();
+        return str.toString();
     }
 
     public static String getFilePath(){
-        return "./TestCase/last.Mx";
+        return "./TestCase/newVoidArray.Mx";
+//        return "./TestCase/newVoid.Mx";
+//        return "./TestCase/Size.Mx";
+//        return "./TestCase/returnTest.Mx";
+//        return "./TestCase/recoverScope.Mx";
+//        return "./TestCase/tbyArrayTest.Mx";
+//        return "./TestCase/myTest.Mx";
+//        return "./TestCase/sepa.Mx";
+//        return "./TestCase/last.Mx";
 //        return "./TestCase/xzjTest.Mx";
 //        return "./TestCase/zlmNew.Mx";
 //        return "./TestCase/testThis2.Mx";
@@ -68,50 +75,37 @@ public class Test {
 //        return "./TestCase/member.Mx";
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception{
         try {
-//            System.out.println ((ASTBuilder) null);
-
             String str = getTxt(getFilePath());
 
-            CharStream input = CharStreams.fromString (str);
-//            ANTLRInputStream input = new ANTLRInputStream (str);
-            MLexer lexer = new MLexer (input);
-            CommonTokenStream tokens = new CommonTokenStream (lexer);
-            MParser parser = new MParser (tokens);
+            CharStream input = CharStreams.fromString(str);
+            MLexer lexer = new MLexer(input);
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            MParser parser = new MParser(tokens);
 
-            ParseTree tree = parser.program ();
-            ParseTreeWalker walker = new ParseTreeWalker ();
-            ASTBuilder astBuilder = new ASTBuilder ();
-            walker.walk (astBuilder, tree);
-            Program program = astBuilder.getProgram ();
+            ParseTree tree = parser.program();
+            ParseTreeWalker walker = new ParseTreeWalker();
+            ASTBuilder astBuilder = new ASTBuilder();
+            walker.walk(astBuilder, tree);
+            Program program = astBuilder.getProgram();
 
-            ASTPrinter astPrinter = new ASTPrinter ();
-            TopTable topTable = new TopTable (null);
-            ClassScanner classScanner = new ClassScanner (topTable);
-            FuncScanner funcScanner = new FuncScanner (topTable);
-            ClassContentScanner classContentScanner = new ClassContentScanner (topTable);
-            SemanticChecker semanticChecker = new SemanticChecker (topTable);
+            ASTPrinter astPrinter = new ASTPrinter();
+            TopTable topTable = new TopTable(null);
+            ClassScanner classScanner = new ClassScanner(topTable);
+            FuncScanner funcScanner = new FuncScanner(topTable);
+            ClassVarScanner classVarScanner = new ClassVarScanner(topTable);
+            StmtScanner stmtScanner = new StmtScanner(topTable);
 
-            program.accept (astPrinter);
-            program.accept (classScanner);
-            program.accept (funcScanner);
-            program.accept (classContentScanner);
-            program.accept (semanticChecker);
+            program.accept(astPrinter);
+            program.accept(classScanner);
+            program.accept(funcScanner);
+            program.accept(classVarScanner);
+            program.accept(stmtScanner);
 
-//        CompilationError ce = new CompilationError();
-//        GlobalSymbolTable sym = new GlobalSymbolTable();
-//        StructSymbolScanner structSymbolScanner = new StructSymbolScanner(sym, ce);
-//        StructFunctionDeclarator structFunctionDeclarator = new StructFunctionDeclarator(sym, ce);
-//        SemanticChecker semanticChecker = new SemanticChecker(sym, ce);
-
-//        program.accept(structSymbolScanner);
-//        program.accept(structFunctionDeclarator);
-//        program.accept(semanticChecker);
-            //program.accept(printer);
         } catch (Exception e) {
             e.printStackTrace(System.err);
-            System.exit (1);
+            System.exit(1);
         }
     }
 }

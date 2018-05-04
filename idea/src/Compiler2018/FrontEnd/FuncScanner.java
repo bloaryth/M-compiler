@@ -3,270 +3,318 @@ package Compiler2018.FrontEnd;
 import Compiler2018.AST.*;
 import Compiler2018.Symbol.*;
 
-public class FuncScanner implements IASTVistor {
-    private TopTable topTable;
+import java.util.Stack;
 
-    public FuncScanner (TopTable topTable) {
+public class FuncScanner implements IASTVistor{
+    private final TopTable topTable;
+    private final Stack<AbstractSymbolTable> currentTable = new Stack<>();
+    private ClassSymbol classSymbol = null;
+
+    public FuncScanner(TopTable topTable){
         this.topTable = topTable;
     }
 
     // built-in function
-    private void addFuncPrint (){
-        FuncSymbol.Builder builder = new FuncSymbol.Builder ();
-        builder.setReturnType (new ClassType ("void", 0));
-        builder.setName ("print");
-        builder.addParameter ("str", new VarSymbol ("string", 0, "str"));
-        builder.setBlockTable (new BlockTable (topTable));
-        topTable.addFunc ("print", builder.build ());
+    private void addFuncPrint(){
+        FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setReturnType(new ClassType("void", 0));
+        builder.setName("print");
+        builder.addParameter("str", new VarSymbol("string", 0, "str"));
+        builder.setBlockTable(new BlockTable(topTable));
+        topTable.addFunc("print", builder.build());
     }
 
-    private void addFuncPrintln () {
-        FuncSymbol.Builder builder = new FuncSymbol.Builder ();
-        builder.setReturnType (new ClassType ("void", 0));
-        builder.setName ("println");
-        builder.addParameter ("str", new VarSymbol ("string", 0, "str"));
-        builder.setBlockTable (new BlockTable (topTable));
-        topTable.addFunc ("println", builder.build ());
+    private void addFuncPrintln(){
+        FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setReturnType(new ClassType("void", 0));
+        builder.setName("println");
+        builder.addParameter("str", new VarSymbol("string", 0, "str"));
+        builder.setBlockTable(new BlockTable(topTable));
+        topTable.addFunc("println", builder.build());
     }
 
-    private void addFuncGetString () {
-        FuncSymbol.Builder builder = new FuncSymbol.Builder ();
-        builder.setReturnType (new ClassType ("string", 0));
-        builder.setName ("getString");
-        builder.setBlockTable (new BlockTable (topTable));
-        topTable.addFunc ("getString", builder.build ());
+    private void addFuncGetString(){
+        FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setReturnType(new ClassType("string", 0));
+        builder.setName("getString");
+        builder.setBlockTable(new BlockTable(topTable));
+        topTable.addFunc("getString", builder.build());
     }
 
-    private void addFuncGetInt () {
-        FuncSymbol.Builder builder = new FuncSymbol.Builder ();
-        builder.setReturnType (new ClassType ("int", 0));
-        builder.setName ("getInt");
-        builder.setBlockTable (new BlockTable (topTable));
-        topTable.addFunc ("getInt", builder.build ());
+    private void addFuncGetInt(){
+        FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setReturnType(new ClassType("int", 0));
+        builder.setName("getInt");
+        builder.setBlockTable(new BlockTable(topTable));
+        topTable.addFunc("getInt", builder.build());
     }
 
-    private void addFuncToString () {
-        FuncSymbol.Builder builder = new FuncSymbol.Builder ();
-        builder.setReturnType (new ClassType ("string", 0));
-        builder.setName ("toString");
-        builder.addParameter ("i", new VarSymbol ("int", 0, "i"));
-        builder.setBlockTable (new BlockTable (topTable));
-        topTable.addFunc ("toString", builder.build ());
+    private void addFuncToString(){
+        FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setReturnType(new ClassType("string", 0));
+        builder.setName("toString");
+        builder.addParameter("i", new VarSymbol("int", 0, "i"));
+        builder.setBlockTable(new BlockTable(topTable));
+        topTable.addFunc("toString", builder.build());
     }
 
     // string built-in function
     private void addFuncLength(AbstractSymbolTable stringInClassTable){
-        FuncSymbol.Builder builder = new FuncSymbol.Builder ();
-        builder.setReturnType (new ClassType ("int", 0));
-        builder.setName ("length");
-        builder.setBlockTable (new BlockTable (topTable));
-        stringInClassTable.addFunc ("length", builder.build ());
+        FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setReturnType(new ClassType("int", 0));
+        builder.setName("length");
+        builder.setBlockTable(new BlockTable(topTable));
+        stringInClassTable.addFunc("length", builder.build());
     }
 
     private void addFuncSubstring(AbstractSymbolTable stringInClassTable){
-        FuncSymbol.Builder builder = new FuncSymbol.Builder ();
-        builder.setReturnType (new ClassType ("string", 0));
-        builder.setName ("substring");
-        builder.addParameter ("left", new VarSymbol ("int", 0, "left"));
-        builder.addParameter ("right", new VarSymbol ("int", 0, "right"));
-        builder.setBlockTable (new BlockTable (topTable));
-        stringInClassTable.addFunc ("substring", builder.build ());
+        FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setReturnType(new ClassType("string", 0));
+        builder.setName("substring");
+        builder.addParameter("left", new VarSymbol("int", 0, "left"));
+        builder.addParameter("right", new VarSymbol("int", 0, "right"));
+        builder.setBlockTable(new BlockTable(topTable));
+        stringInClassTable.addFunc("substring", builder.build());
     }
 
     private void addFuncParseInt(AbstractSymbolTable stringInClassTable){
-        FuncSymbol.Builder builder = new FuncSymbol.Builder ();
-        builder.setReturnType (new ClassType ("int", 0));
-        builder.setName ("parseInt");
-        builder.setBlockTable (new BlockTable (topTable));
-        stringInClassTable.addFunc ("parseInt", builder.build ());
+        FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setReturnType(new ClassType("int", 0));
+        builder.setName("parseInt");
+        builder.setBlockTable(new BlockTable(topTable));
+        stringInClassTable.addFunc("parseInt", builder.build());
     }
 
     private void addFuncOrd(AbstractSymbolTable stringInClassTable){
-        FuncSymbol.Builder builder = new FuncSymbol.Builder ();
-        builder.setReturnType (new ClassType ("int", 0));
-        builder.setName ("ord");
-        builder.addParameter ("pos", new VarSymbol ("int", 0, "pos"));
-        builder.setBlockTable (new BlockTable (topTable));
-        stringInClassTable.addFunc ("ord", builder.build ());
+        FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setReturnType(new ClassType("int", 0));
+        builder.setName("ord");
+        builder.addParameter("pos", new VarSymbol("int", 0, "pos"));
+        builder.setBlockTable(new BlockTable(topTable));
+        stringInClassTable.addFunc("ord", builder.build());
     }
 
     @Override
-    public void visit (Program node) {
+    public void visit(Program node){
         // built-in function
-        addFuncPrint ();
-        addFuncPrintln ();
-        addFuncGetString ();
-        addFuncGetInt ();
-        addFuncToString ();
+        addFuncPrint();
+        addFuncPrintln();
+        addFuncGetString();
+        addFuncGetInt();
+        addFuncToString();
 
         // string built-in function
-        AbstractSymbolTable stringInClassTable = topTable.getMyClass ("string").getInClassTable ();
-        addFuncLength (stringInClassTable);
-        addFuncSubstring (stringInClassTable);
-        addFuncParseInt (stringInClassTable);
-        addFuncOrd (stringInClassTable);
+        AbstractSymbolTable stringInClassTable = topTable.getMyClass("string").getInClassTable();
+        addFuncLength(stringInClassTable);
+        addFuncSubstring(stringInClassTable);
+        addFuncParseInt(stringInClassTable);
+        addFuncOrd(stringInClassTable);
 
-        node.getSections ().forEach (x -> x.accept (this));
-    }
 
-    @Override
-    public void visit (ClassDecl node) {
+        currentTable.push(topTable);
+        node.getSections().forEach(x -> x.accept(this));
+        currentTable.pop();
 
-    }
-
-    @Override
-    public void visit (FuncDecl node) {
-        if(topTable.getMyClass (node.getReturnType ().getBaseType ()) == null){
-            throw new RuntimeException ("returnType is not declared.");
+        if(topTable.getFunc("main") == null){
+            throw new RuntimeException("main() required.");
         }
-        // function overload is not permitted
-        if (topTable.getFunc (node.getName ()) != null){
-            throw new RuntimeException ("Function is previously declared.");
+        if(!topTable.getFunc("main").getReturnType().equals(new ClassType("int", 0))){
+            throw new RuntimeException("main() should return int.");
         }
-        if (node.getName ().equals ("this")){
-            throw new RuntimeException ("Reserved keyword.");
+        if(topTable.getFunc("main").getIntParameters().size() != 0){
+            throw new RuntimeException("main() should contain zero parameter.");
         }
-        // TODO
-        topTable.addFunc (node.getName (), new FuncSymbol (node, new BlockTable (topTable)));
     }
 
     @Override
-    public void visit (VarDecl node) {
-
+    public void visit(ClassDecl node){
+        classSymbol = topTable.getMyClass(node.getName());
+        currentTable.push(classSymbol.getInClassTable());
+        node.getItems().forEach(x -> x.accept(this));
+        currentTable.pop();
+        classSymbol = null;
     }
 
     @Override
-    public void visit (ClassVarDecl node) {
-
+    public void visit(FuncDecl node){
+        // TODO overload
+        // name
+        if(node.getName().equals("this")){
+            throw new RuntimeException("'this' should not be a function name.");
+        }
+        if(classSymbol == null && topTable.getMyClass(node.getName()) != null){
+            throw new RuntimeException("Global function name collides with class.");
+        }
+        if(currentTable.peek().getFunc(node.getName()) != null){
+            throw new RuntimeException("Function is previously declared.");
+        }
+        // parameter
+        node.getParameters().forEach(x -> {
+            if(topTable.getMyClass(x.getType().getBaseType()) == null){
+                throw new RuntimeException("Undeclared class occurred.");
+            }
+        });
+        // returnType
+        if(topTable.getMyClass(node.getReturnType().getBaseType()) == null){
+            throw new RuntimeException("Undeclared class occurred.");
+        }
+        currentTable.peek().addFunc(node.getName(), new FuncSymbol(node, new BlockTable(currentTable.peek())));
     }
 
     @Override
-    public void visit (ClassCstrDecl node) {
-
-    }
-
-    @Override
-    public void visit (ClassFuncDecl node) {
-
-    }
-
-    @Override
-    public void visit (BlockStmt node) {
-
-    }
-
-    @Override
-    public void visit (VarDeclStmt node) {
-
-    }
-
-    @Override
-    public void visit (BranchStmt node) {
-
-    }
-
-    @Override
-    public void visit (ExprStmt node) {
-
-    }
-
-    @Override
-    public void visit (EmptyStmt node) {
+    public void visit(VarDecl node){
 
     }
 
     @Override
-    public void visit (ReturnStmt node) {
+    public void visit(ClassVarDecl node){
 
     }
 
     @Override
-    public void visit (BreakStmt node) {
+    public void visit(ClassCstrDecl node){
+        // TODO overload
+        // name
+        if(node.getName().equals("this")){
+            throw new RuntimeException("'this' should not be a function name.");
+        }
+        if(currentTable.peek().getFunc(node.getName()) != null){
+            throw new RuntimeException("Class constructor previously declared.");
+        }
+        if(!classSymbol.getName().equals(node.getName())){
+            throw new RuntimeException("Class constructor should be the same name with class.");
+        }
+        // parameter
+        node.getParameters().forEach(x -> {
+            if(topTable.getMyClass(x.getType().getBaseType()) == null){
+                throw new RuntimeException("Undeclared class occurred.");
+            }
+        });
+        currentTable.peek().addCstr(node.getName(), new CstrSymbol(node, new BlockTable(currentTable.peek())));
+    }
+
+    @Override
+    public void visit(ClassFuncDecl node){
+        node.getDecl().accept(this);
+    }
+
+    @Override
+    public void visit(BlockStmt node){
 
     }
 
     @Override
-    public void visit (ContinueStmt node) {
+    public void visit(VarDeclStmt node){
 
     }
 
     @Override
-    public void visit (ForStmt node) {
+    public void visit(BranchStmt node){
 
     }
 
     @Override
-    public void visit (WhileStmt node) {
+    public void visit(ExprStmt node){
 
     }
 
     @Override
-    public void visit (ClassType node) {
+    public void visit(EmptyStmt node){
 
     }
 
     @Override
-    public void visit (FunctionCall node) {
+    public void visit(ReturnStmt node){
 
     }
 
     @Override
-    public void visit (ArrayAcess node) {
+    public void visit(BreakStmt node){
 
     }
 
     @Override
-    public void visit (MemberAcess node) {
+    public void visit(ContinueStmt node){
 
     }
 
     @Override
-    public void visit (NewExpr node) {
+    public void visit(ForStmt node){
 
     }
 
     @Override
-    public void visit (UnaryExpr node) {
+    public void visit(WhileStmt node){
 
     }
 
     @Override
-    public void visit (BinaryExpr node) {
+    public void visit(ClassType node){
 
     }
 
     @Override
-    public void visit (Identifier node) {
+    public void visit(FunctionCall node){
 
     }
 
     @Override
-    public void visit (NewArray node) {
+    public void visit(ArrayAcess node){
 
     }
 
     @Override
-    public void visit (NewNonArray node) {
+    public void visit(MemberAcess node){
 
     }
 
     @Override
-    public void visit (BoolConst node) {
+    public void visit(NewExpr node){
 
     }
 
     @Override
-    public void visit (NumConst node) {
+    public void visit(UnaryExpr node){
 
     }
 
     @Override
-    public void visit (StrConst node) {
+    public void visit(BinaryExpr node){
 
     }
 
     @Override
-    public void visit (NullConst node) {
+    public void visit(Identifier node){
+
+    }
+
+    @Override
+    public void visit(NewArray node){
+
+    }
+
+    @Override
+    public void visit(NewNonArray node){
+
+    }
+
+    @Override
+    public void visit(BoolConst node){
+
+    }
+
+    @Override
+    public void visit(NumConst node){
+
+    }
+
+    @Override
+    public void visit(StrConst node){
+
+    }
+
+    @Override
+    public void visit(NullConst node){
 
     }
 }

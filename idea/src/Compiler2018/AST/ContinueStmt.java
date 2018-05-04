@@ -2,19 +2,19 @@ package Compiler2018.AST;
 
 import Compiler2018.FrontEnd.IASTVistor;
 
-public class ContinueStmt extends AbstractJumpStmt {
+public class ContinueStmt extends AbstractJumpStmt{
     private final SourcePosition posContinue;
 
-    public ContinueStmt (SourcePosition posContinue) {
+    public ContinueStmt(SourcePosition posContinue){
         this.posContinue = posContinue;
     }
 
-    public SourcePosition getPosContinue () {
+    public SourcePosition getPosContinue(){
         return posContinue;
     }
 
     @Override
-    public void accept (IASTVistor visitor) {
+    public void accept(IASTVistor visitor){
         visitor.visit(this);
     }
 }

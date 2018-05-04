@@ -10,11 +10,11 @@ public abstract class AbstractSymbolTable {
     private final Map<String, FuncSymbol> funcs = new LinkedHashMap<> ();
     private final Map<String, VarSymbol> vars = new LinkedHashMap<> ();
 
-    public AbstractSymbolTable (AbstractSymbolTable outerSymbolTable) {
+    AbstractSymbolTable (AbstractSymbolTable outerSymbolTable) {
         this.outerSymbolTable = outerSymbolTable;
     }
 
-    public final AbstractSymbolTable getOuterSymbolTable () {
+    private AbstractSymbolTable getOuterSymbolTable () {
         return outerSymbolTable;
     }
 

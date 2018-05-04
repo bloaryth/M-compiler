@@ -1,37 +1,30 @@
 package Compiler2018.FrontEnd;
 
 import Compiler2018.AST.*;
-import Compiler2018.Symbol.ClassSymbol;
-import Compiler2018.Symbol.ClassTable;
-import Compiler2018.Symbol.TopTable;
+import Compiler2018.Symbol.*;
 
-public class ClassScanner implements IASTVistor{
-    private TopTable topTable;
+import java.util.Stack;
 
-    public ClassScanner(TopTable topTable){
+public class ClassVarScanner implements IASTVistor{
+    private final TopTable topTable;
+    private final Stack<AbstractSymbolTable> currentTable = new Stack<>();
+
+    public ClassVarScanner(TopTable topTable){
         this.topTable = topTable;
     }
 
     @Override
     public void visit(Program node){
-        // add primitive type
-        topTable.addMyClass("int", new ClassSymbol("int", new ClassTable(topTable)));
-        topTable.addMyClass("bool", new ClassSymbol("bool", new ClassTable(topTable)));
-        topTable.addMyClass("void", new ClassSymbol("void", new ClassTable(topTable)));
-        topTable.addMyClass("string", new ClassSymbol("string", new ClassTable(topTable)));
-
-        node.getSections().forEach(x -> x.accept(this));
+        currentTable.push(topTable);
+        node.getSections().stream().filter(x -> x instanceof ClassDecl).forEach(x -> x.accept(this));
+        currentTable.pop();
     }
 
     @Override
     public void visit(ClassDecl node){
-        if(node.getName().equals("this")){
-            throw new RuntimeException("'this' should not be a class name");
-        }
-        if(topTable.getMyClass(node.getName()) != null){
-            throw new RuntimeException("Class is previously declared.");
-        }
-        topTable.addMyClass(node.getName(), new ClassSymbol(node.getName(), new ClassTable(topTable)));
+        currentTable.push(currentTable.peek().getMyClass(node.getName()).getInClassTable());
+        node.getItems().forEach(x -> x.accept(this));
+        currentTable.pop();
     }
 
     @Override
@@ -40,13 +33,33 @@ public class ClassScanner implements IASTVistor{
     }
 
     @Override
-    public void visit(VarDecl node){
-
+    public void visit(VarDecl node){        // type
+        if(node.getType().getBaseType().equals("void")){
+            throw new RuntimeException("Void type should not be declared.");
+        }
+        if(topTable.getMyClass(node.getType().getBaseType()) == null){
+            throw new RuntimeException("Undeclared class occurred.");
+        }
+        // name
+        if(node.getName().equals("this")){
+            throw new RuntimeException("'this' should not be a variable name.");
+        }
+        if(currentTable.peek().getFunc(node.getName()) != null){
+            throw new RuntimeException("Variable has the same name of function.");
+        }
+        if(currentTable.peek().getVar(node.getName()) != null){
+            throw new RuntimeException("Variable is previously declared.");
+        }
+        // init TODO
+        if(node.getInit() != null){
+            throw new RuntimeException("Init is prohibited.");
+        }
+        currentTable.peek().addVar(node.getName(), new VarSymbol(node));
     }
 
     @Override
     public void visit(ClassVarDecl node){
-
+        node.getDecl().accept(this);
     }
 
     @Override
@@ -178,4 +191,5 @@ public class ClassScanner implements IASTVistor{
     public void visit(NullConst node){
 
     }
+
 }

@@ -2,330 +2,325 @@ package Compiler2018.FrontEnd;
 
 import Compiler2018.AST.*;
 
-public class ASTPrinter implements IASTVistor {
+public class ASTPrinter implements IASTVistor{
     private final StringBuilder indent = new StringBuilder();
 
     private void addIndent(){
-        indent.append ("    ");
+        indent.append("    ");
     }
 
     private void subIndent(){
-        indent.delete (indent.length ()-4, indent.length ());
+        indent.delete(indent.length() - 4, indent.length());
     }
 
     @Override
-    public void visit (Program node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getSections ().forEach (x -> x.accept (this));
-        subIndent ();
+    public void visit(Program node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getSections().forEach(x -> x.accept(this));
+        subIndent();
     }
 
     @Override
-    public void visit (ClassDecl node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        System.out.println (indent.toString () + node.getName ());
-        node.getItems ().forEach (x -> x.accept (this));
-        subIndent ();
+    public void visit(ClassDecl node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        System.out.println(indent.toString() + node.getName());
+        node.getItems().forEach(x -> x.accept(this));
+        subIndent();
     }
 
     @Override
-    public void visit (FuncDecl node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getReturnType ().accept (this);
+    public void visit(FuncDecl node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getReturnType().accept(this);
 //        System.out.println (indent.toString () + node.getPosType ());
-        System.out.println (indent.toString () + node.getName ());
+        System.out.println(indent.toString() + node.getName());
 //        System.out.println (indent.toString () + node.getPosName ());
-        node.getParameters ().forEach (this::visit);
-        node.getBlock ().accept (this);
-        subIndent ();
+        node.getParameters().forEach(this::visit);
+        node.getBlock().accept(this);
+        subIndent();
     }
 
     @Override
-    public void visit (VarDecl node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getType ().accept (this);
+    public void visit(VarDecl node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getType().accept(this);
 //        System.out.println (indent.toString () + node.getPosType ());
-        System.out.println (indent.toString () + node.getName ());
+        System.out.println(indent.toString() + node.getName());
 //        System.out.println (indent.toString () + node.getPosName ());
-        if (node.getInit () != null){
-            node.getInit ().accept (this);
+        if(node.getInit() != null){
+            node.getInit().accept(this);
 //        System.out.println (indent.toString () + node.getPosInit ());
+        } else{
+            System.out.println(indent.toString() + "Init is null");
         }
-        else{
-            System.out.println (indent.toString () + "Init is null");
-        }
-        subIndent ();
+        subIndent();
     }
 
     @Override
-    public void visit (ClassVarDecl node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getDecl ().accept (this);
-        subIndent ();
+    public void visit(ClassVarDecl node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getDecl().accept(this);
+        subIndent();
     }
 
     @Override
-    public void visit (ClassCstrDecl node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        System.out.println (indent.toString () + node.getName ());
-        node.getParameters ().forEach (x -> x.accept (this));
-        node.getBlock ().accept (this);
-        subIndent ();
+    public void visit(ClassCstrDecl node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        System.out.println(indent.toString() + node.getName());
+        node.getParameters().forEach(x -> x.accept(this));
+        node.getBlock().accept(this);
+        subIndent();
     }
 
     @Override
-    public void visit (ClassFuncDecl node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getDecl ().accept (this);
-        subIndent ();
+    public void visit(ClassFuncDecl node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getDecl().accept(this);
+        subIndent();
     }
 
     @Override
-    public void visit (BlockStmt node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getStmts ().forEach (x -> x.accept (this));
-        subIndent ();
+    public void visit(BlockStmt node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getStmts().forEach(x -> x.accept(this));
+        subIndent();
     }
 
     @Override
-    public void visit (VarDeclStmt node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getDecl ().accept (this);
-        subIndent ();
+    public void visit(VarDeclStmt node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getDecl().accept(this);
+        subIndent();
     }
 
     @Override
-    public void visit (BranchStmt node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getCond ().accept (this);
+    public void visit(BranchStmt node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getCond().accept(this);
 //        System.out.println (indent.toString () + node.getPosBranch ());
-        node.getIfStmt ().accept (this);
-        if(node.getElseStmt () != null){
-            node.getElseStmt ().accept (this);
+        node.getIfStmt().accept(this);
+        if(node.getElseStmt() != null){
+            node.getElseStmt().accept(this);
         }
-        subIndent ();
+        subIndent();
     }
 
     @Override
-    public void visit (ExprStmt node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getExpr ().accept (this);
+    public void visit(ExprStmt node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getExpr().accept(this);
 //        System.out.println (indent.toString () + node.getPosExpr ());
-        subIndent ();
+        subIndent();
     }
 
     @Override
-    public void visit (EmptyStmt node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        subIndent ();
+    public void visit(EmptyStmt node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        subIndent();
     }
 
     @Override
-    public void visit (ReturnStmt node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        if(node.getExpr () != null){
-            node.getExpr ().accept (this);
+    public void visit(ReturnStmt node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        if(node.getExpr() != null){
+            node.getExpr().accept(this);
+        } else{
+            System.out.println(indent.toString() + "Expr is null");
         }
-        else{
-            System.out.println (indent.toString () + "Expr is null");
-        }
-        subIndent ();
+        subIndent();
     }
 
     @Override
-    public void visit (BreakStmt node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        subIndent ();
+    public void visit(BreakStmt node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        subIndent();
     }
 
     @Override
-    public void visit (ContinueStmt node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        subIndent ();
+    public void visit(ContinueStmt node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        subIndent();
     }
 
     @Override
-    public void visit (ForStmt node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        if (node.getInit () != null){
-            node.getInit ().accept (this);
+    public void visit(ForStmt node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        if(node.getInit() != null){
+            node.getInit().accept(this);
 //        System.out.println (indent.toString () + node.getPosInit ());
+        } else{
+            System.out.println(indent.toString() + "Init is null");
         }
-        else{
-            System.out.println (indent.toString () + "Init is null");
-        }
-        if(node.getCond () != null){
-            node.getCond ().accept (this);
+        if(node.getCond() != null){
+            node.getCond().accept(this);
 //            System.out.println (indent.toString () + node.getPosCond ());
+        } else{
+            System.out.println(indent.toString() + "Cond is null");
         }
-        else{
-            System.out.println (indent.toString () + "Cond is null");
-        }
-        if (node.getStep () != null){
-            node.getStep ().accept (this);
+        if(node.getStep() != null){
+            node.getStep().accept(this);
 //        System.out.println (indent.toString () + node.getPosStep ());
+        } else{
+            System.out.println((indent.toString() + "Step is null"));
         }
-        else{
-            System.out.println ((indent.toString () + "Step is null"));
-        }
-        node.getStmt ().accept (this);
-        subIndent ();
+        node.getStmt().accept(this);
+        subIndent();
     }
 
     @Override
-    public void visit (WhileStmt node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getCond ().accept (this);
+    public void visit(WhileStmt node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getCond().accept(this);
 //        System.out.println (indent.toString () + node.getPosCond ());
-        node.getStmt ().accept (this);
-        subIndent ();
+        node.getStmt().accept(this);
+        subIndent();
     }
 
     @Override
-    public void visit (ClassType node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        System.out.println (indent.toString () + node.getBaseType ());
-        System.out.println (indent.toString () + node.getDim ());
-        subIndent ();
+    public void visit(ClassType node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        System.out.println(indent.toString() + node.getBaseType());
+        System.out.println(indent.toString() + node.getDim());
+        subIndent();
     }
 
     @Override
-    public void visit (FunctionCall node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getName ().accept (this);
+    public void visit(FunctionCall node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getName().accept(this);
 //        System.out.println (indent.toString () + node.getPosName ());
-        node.getParameters ().forEach (x -> x.accept (this));
+        node.getParameters().forEach(x -> x.accept(this));
 //        System.out.println (indent.toString () + node.getPosParameters ());
-        subIndent ();
+        subIndent();
     }
 
     @Override
-    public void visit (ArrayAcess node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getArray ().accept (this);
+    public void visit(ArrayAcess node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getArray().accept(this);
 //        System.out.println (indent.toString () + node.getPosArray ());
-        node.getSubscript ().accept (this);
+        node.getSubscript().accept(this);
 //        System.out.println (indent.toString () + node.getPosSubscript ());
-        subIndent ();
+        subIndent();
     }
 
     @Override
-    public void visit (MemberAcess node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getExpr ().accept (this);
+    public void visit(MemberAcess node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getExpr().accept(this);
 //        System.out.println (indent.toString () + node.getPosExpr ());
-        System.out.println (indent.toString () + node.getName ());
+        System.out.println(indent.toString() + node.getName());
 //        System.out.println (indent.toString () + node.getPosName ());
-        subIndent ();
+        subIndent();
     }
 
     @Override
-    public void visit (NewExpr node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getNewObject ().accept (this);
+    public void visit(NewExpr node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getNewObject().accept(this);
 //        System.out.println (indent.toString () + node.getPosNewObject ());
-        subIndent ();
+        subIndent();
     }
 
     @Override
-    public void visit (UnaryExpr node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        System.out.println (indent.toString () + node.getOp ());
-        node.getExpr ().accept (this);
+    public void visit(UnaryExpr node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        System.out.println(indent.toString() + node.getOp());
+        node.getExpr().accept(this);
 //        System.out.println (indent.toString () + node.getPosExpr ());
-        subIndent ();
+        subIndent();
     }
 
     @Override
-    public void visit (BinaryExpr node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        System.out.println (indent.toString () + node.getOp ());
+    public void visit(BinaryExpr node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        System.out.println(indent.toString() + node.getOp());
 //        System.out.println (indent.toString () + node.getPosOp ());
-        node.getLhs ().accept (this);
+        node.getLhs().accept(this);
 //        System.out.println (indent.toString () + node.getPosLhs ());
-        node.getRhs ().accept (this);
+        node.getRhs().accept(this);
 //        System.out.println (indent.toString () + node.getPosRhs ());
-        subIndent ();
+        subIndent();
     }
 
     @Override
-    public void visit (Identifier node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        System.out.println (indent.toString () + node.getName ());
-        subIndent ();
+    public void visit(Identifier node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        System.out.println(indent.toString() + node.getName());
+        subIndent();
     }
 
     @Override
-    public void visit (NewArray node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getType ().accept (this);
-        node.getLens ().forEach (x -> x.accept (this));
-        subIndent ();
+    public void visit(NewArray node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getType().accept(this);
+        node.getLens().forEach(x -> x.accept(this));
+        subIndent();
     }
 
     @Override
-    public void visit (NewNonArray node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        node.getType ().accept (this);
-        node.getParameters ().forEach (x -> x.accept (this));
-        subIndent ();
+    public void visit(NewNonArray node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        node.getType().accept(this);
+        node.getParameters().forEach(x -> x.accept(this));
+        subIndent();
     }
 
     @Override
-    public void visit (BoolConst node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        System.out.println (indent.toString () + node.getValue ());
-        subIndent ();
+    public void visit(BoolConst node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        System.out.println(indent.toString() + node.getValue());
+        subIndent();
     }
 
     @Override
-    public void visit (NumConst node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        System.out.println (indent.toString () + node.getNum ());
-        subIndent ();
+    public void visit(NumConst node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        System.out.println(indent.toString() + node.getNum());
+        subIndent();
     }
 
     @Override
-    public void visit (StrConst node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        System.out.println (indent.toString () + node.getStr ());
-        subIndent ();
+    public void visit(StrConst node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        System.out.println(indent.toString() + node.getStr());
+        subIndent();
     }
 
     @Override
-    public void visit (NullConst node) {
-        System.out.println (indent.toString () + node.getClass ().getSimpleName ());
-        addIndent ();
-        subIndent ();
+    public void visit(NullConst node){
+        System.out.println(indent.toString() + node.getClass().getSimpleName());
+        addIndent();
+        subIndent();
     }
 }

@@ -2,19 +2,19 @@ package Compiler2018.AST;
 
 import Compiler2018.FrontEnd.IASTVistor;
 
-public class ClassVarDecl extends AbstractClassItem {
+public class ClassVarDecl extends AbstractClassItem{
     private final VarDecl decl;
 
-    public ClassVarDecl (VarDecl decl) {
+    public ClassVarDecl(VarDecl decl){
         this.decl = decl;
     }
 
-    public VarDecl getDecl () {
+    public VarDecl getDecl(){
         return decl;
     }
 
     @Override
-    public void accept (IASTVistor visitor) {
+    public void accept(IASTVistor visitor){
         visitor.visit(this);
     }
 }

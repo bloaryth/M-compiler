@@ -4,38 +4,38 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-public class SourcePosition {
+public class SourcePosition{
     private final int line;
     private final int column;
 
-    public int getLine () {
+    public int getLine(){
         return line;
     }
 
-    public int getColumn () {
+    public int getColumn(){
         return column;
     }
 
-    public SourcePosition(int line, int column) {
+    public SourcePosition(int line, int column){
         this.line = line;
         this.column = column;
     }
 
-    public SourcePosition(Token token) {
+    public SourcePosition(Token token){
         this.line = token.getLine();
         this.column = token.getCharPositionInLine();
     }
 
-    public SourcePosition(ParserRuleContext ctx) {
+    public SourcePosition(ParserRuleContext ctx){
         this(ctx.start);
     }
 
-    public SourcePosition(TerminalNode terminal) {
+    public SourcePosition(TerminalNode terminal){
         this(terminal.getSymbol());
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "Line " + line + " Column " + column;
     }
 }

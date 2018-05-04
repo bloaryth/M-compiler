@@ -1,0 +1,31 @@
+class A {
+    A A;
+    A() { }
+    A b() {
+        return A;
+    }
+}
+
+int main() {
+    return 0;
+}
+
+/*!! metadata:
+=== comment ===
+丁尧尧 测试变量名字空间与类名空间分开
+=== is_public ===
+True
+=== assert ===
+success_compile
+=== timeout ===
+0
+=== input ===
+
+=== phase ===
+semantic pretest
+=== output ===
+
+=== exitcode ===
+0
+
+!!*/

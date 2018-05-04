@@ -9,27 +9,27 @@ public class BlockStmt extends AbstractStmt{
     private final List<AbstractStmt> stmts;
 
     public static class Builder{
-        private List<AbstractStmt> stmts = new LinkedList<> ();
+        private List<AbstractStmt> stmts = new LinkedList<>();
 
-        public void addStmt (AbstractStmt stmt){
+        public void addStmt(AbstractStmt stmt){
             stmts.add(stmt);
         }
 
         public BlockStmt build(){
-            return new BlockStmt (stmts);
+            return new BlockStmt(stmts);
         }
     }
 
-    private BlockStmt (List<AbstractStmt> stmts) {
+    private BlockStmt(List<AbstractStmt> stmts){
         this.stmts = stmts;
     }
 
-    public List<AbstractStmt> getStmts () {
+    public List<AbstractStmt> getStmts(){
         return stmts;
     }
 
     @Override
-    public void accept (IASTVistor visitor) {
+    public void accept(IASTVistor visitor){
         visitor.visit(this);
     }
 }
