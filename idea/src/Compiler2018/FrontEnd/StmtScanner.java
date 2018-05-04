@@ -16,7 +16,7 @@ public class StmtScanner implements IASTVistor{
     private FuncSymbol funcScope = null;
     private ClassSymbol classScope = null;
     private boolean blockScopePushed = false;
-    private List<String> primitiveType = new LinkedList<>(){{
+    private List<String> primitiveType = new LinkedList<String>(){{
         add("string");
         add("string");
         add("bool");
