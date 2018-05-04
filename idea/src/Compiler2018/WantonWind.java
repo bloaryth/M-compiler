@@ -63,11 +63,13 @@ public class WantonWind{
             TopTable topTable = new TopTable(null);
             ClassScanner classScanner = new ClassScanner(topTable);
             FuncScanner funcScanner = new FuncScanner(topTable);
+            ClassVarScanner classVarScanner = new ClassVarScanner(topTable);
             StmtScanner stmtScanner = new StmtScanner(topTable);
 
             program.accept(astPrinter);
             program.accept(classScanner);
             program.accept(funcScanner);
+            program.accept(classVarScanner);
             program.accept(stmtScanner);
 
         } catch (Exception e) {
