@@ -16,12 +16,14 @@ public class StmtScanner implements IASTVistor{
     private FuncSymbol funcScope = null;
     private ClassSymbol classScope = null;
     private boolean blockScopePushed = false;
-    private List<String> primitiveType = new LinkedList<String>(){{
-        add("string");
-        add("string");
-        add("bool");
-        add("void");
-    }};
+    private List<String> primitiveType = new LinkedList<>();
+
+    private void addPrimitiveType(){
+        primitiveType.add("int");
+        primitiveType.add("string");
+        primitiveType.add("bool");
+        primitiveType.add("void");
+    }
 
     public StmtScanner(TopTable topTable){
         this.topTable = topTable;
@@ -29,6 +31,8 @@ public class StmtScanner implements IASTVistor{
 
     @Override
     public void visit(Program node){
+        addPrimitiveType();
+
         currentTable.push(topTable);
         node.getSections().forEach(x -> x.accept(this));
         currentTable.pop();
