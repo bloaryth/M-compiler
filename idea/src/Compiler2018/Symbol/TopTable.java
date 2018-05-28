@@ -1,21 +1,21 @@
 package Compiler2018.Symbol;
 
 public class TopTable extends AbstractSymbolTable {
-    public TopTable (AbstractSymbolTable outerSymbolTable) {
-        super (outerSymbolTable);
+    public TopTable(AbstractSymbolTable outerSymbolTable, String namespace) {
+        super(outerSymbolTable, namespace);
     }
 
     @Deprecated
     @Override
-    public CstrSymbol getCstr (String name) {
+    public CstrSymbol getCstr(String name) {
         assert false;
-        return super.getCstr (name);
+        return super.getCstr(name);
     }
 
     @Deprecated
     @Override
-    public void addCstr (String name, CstrSymbol cstr) {
+    public void addCstr(String name, CstrSymbol cstr) {
         assert false;
-        super.addCstr (name, cstr);
+        super.addCstr(name, cstr);
     }
 }

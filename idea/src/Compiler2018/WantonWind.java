@@ -16,22 +16,23 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class WantonWind{
-    private static String readTestFile(String filePath){
-//        StringBuilder str = new StringBuilder ();
-//        try{
-//            InputStreamReader reader = new InputStreamReader(Test.class.getResourceAsStream(filePath));
-//            BufferedReader buffReader = new BufferedReader(reader);
-//            String strTmp;
-//            while((strTmp = buffReader.readLine ()) != null){
-//                str.append (strTmp+'\n');
-//            }
-//            buffReader.close();
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return str.toString ();
+public class WantonWind {
+    private static String readTestFile(String filePath) {
+        //        StringBuilder str = new StringBuilder ();
+        //        try{
+        //            InputStreamReader reader = new
+        // InputStreamReader(Test.class.getResourceAsStream(filePath));
+        //            BufferedReader buffReader = new BufferedReader(reader);
+        //            String strTmp;
+        //            while((strTmp = buffReader.readLine ()) != null){
+        //                str.append (strTmp+'\n');
+        //            }
+        //            buffReader.close();
+        //        }
+        //        catch (Exception e){
+        //            e.printStackTrace();
+        //        }
+        //        return str.toString ();
 
         StringBuilder ans = new StringBuilder();
         File file = new File(filePath);
@@ -46,7 +47,7 @@ public class WantonWind{
         return ans.toString();
     }
 
-    public static void run(String prog){
+    public static void run(String prog) {
         try {
             CharStream input = CharStreams.fromString(prog);
             MLexer lexer = new MLexer(input);
@@ -60,7 +61,7 @@ public class WantonWind{
             Program program = astBuilder.getProgram();
 
             ASTPrinter astPrinter = new ASTPrinter();
-            TopTable topTable = new TopTable(null);
+            TopTable topTable = new TopTable(null, "");
             ClassScanner classScanner = new ClassScanner(topTable);
             FuncScanner funcScanner = new FuncScanner(topTable);
             ClassVarScanner classVarScanner = new ClassVarScanner(topTable);
@@ -78,9 +79,9 @@ public class WantonWind{
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String program;
-        if(args.length == 1) program = readTestFile(args[0]);
+        if (args.length == 1) program = readTestFile(args[0]);
         else program = readTestFile("program.txt");
         run(program);
     }

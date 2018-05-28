@@ -2,7 +2,7 @@ package Compiler2018.FrontEnd;
 
 import Compiler2018.AST.*;
 
-public interface IASTVistor{
+public interface IASTVistor {
     void visit(Program node);
 
     // AbstractDecl
@@ -73,5 +73,4 @@ public interface IASTVistor{
     void visit(StrConst node);
 
     void visit(NullConst node);
-
 }

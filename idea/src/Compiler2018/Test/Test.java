@@ -14,8 +14,8 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Test{
-    public static String getTxt(String filePath){
+public class Test {
+    public static String getTxt(String filePath) {
         StringBuilder str = new StringBuilder();
         try {
             InputStreamReader reader = new InputStreamReader(Test.class.getResourceAsStream(filePath));
@@ -28,57 +28,57 @@ public class Test{
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        System.out.println (str.toString ());
+        //        System.out.println (str.toString ());
         return str.toString();
     }
 
-    public static String getFilePath(){
-//        return "./TestCase/InFunc.Mx";
+    public static String getFilePath() {
+        //        return "./TestCase/InFunc.Mx";
         return "./TestCase/notThatBad.Mx";
-//        return "./TestCase/class.Mx";
-//        return "./TestCase/newVoidArray.Mx";
-//        return "./TestCase/newVoid.Mx";
-//        return "./TestCase/Size.Mx";
-//        return "./TestCase/returnTest.Mx";
-//        return "./TestCase/recoverScope.Mx";
-//        return "./TestCase/tbyArrayTest.Mx";
-//        return "./TestCase/myTest.Mx";
-//        return "./TestCase/sepa.Mx";
-//        return "./TestCase/last.Mx";
-//        return "./TestCase/xzjTest.Mx";
-//        return "./TestCase/zlmNew.Mx";
-//        return "./TestCase/testThis2.Mx";
-//        return "./TestCase/testThis.Mx";
-//        return "./TestCase/ljnCstr.Mx";
-//        return "./TestCase/cstr.Mx";
-//        return "./TestCase/zzkNaive.Mx";
-//        return "./TestCase/if2.Mx";
-//        return "./TestCase/duplicateVar.Mx";
-//        return "./TestCase/voidMain.Mx";
-//        return "./TestCase/empty.Mx";
-//        return "./TestCase/if.Mx";
-//        return "./TestCase/param.Mx";
-//        return "./TestCase/Builg.Mx";
-//        return "./TestCase/basicRule.Mx";
-//        return "./TestCase/vector.Mx";
-//        return "./TestCase/hashMap.Mx";
-//        return "./TestCase/stringTest.Mx";
-//        return "./TestCase/returnCheck.Mx";
-//        return "./TestCase/comment.Mx";
-//        return "./TestCase/Wall.Mx";
-//        return "./TestCase/returnVal.Mx";
-//        return "./TestCase/main.Mx";
-//        return "./TestCase/duplicateClass.Mx";
-//        return "./TestCase/check.Mx";
-//        return "./TestCase/strShift.Mx";
-//        return "./TestCase/void.Mx";
-//        return "./TestCase/declare.Mx";
-//        return "./TestCase/array.Mx";
-//        return "./TestCase/a+b.Mx";
-//        return "./TestCase/member.Mx";
+        //        return "./TestCase/class.Mx";
+        //        return "./TestCase/newVoidArray.Mx";
+        //        return "./TestCase/newVoid.Mx";
+        //        return "./TestCase/Size.Mx";
+        //        return "./TestCase/returnTest.Mx";
+        //        return "./TestCase/recoverScope.Mx";
+        //        return "./TestCase/tbyArrayTest.Mx";
+        //        return "./TestCase/myTest.Mx";
+        //        return "./TestCase/sepa.Mx";
+        //        return "./TestCase/last.Mx";
+        //        return "./TestCase/xzjTest.Mx";
+        //        return "./TestCase/zlmNew.Mx";
+        //        return "./TestCase/testThis2.Mx";
+        //        return "./TestCase/testThis.Mx";
+        //        return "./TestCase/ljnCstr.Mx";
+        //        return "./TestCase/cstr.Mx";
+        //        return "./TestCase/zzkNaive.Mx";
+        //        return "./TestCase/if2.Mx";
+        //        return "./TestCase/duplicateVar.Mx";
+        //        return "./TestCase/voidMain.Mx";
+        //        return "./TestCase/empty.Mx";
+        //        return "./TestCase/if.Mx";
+        //        return "./TestCase/param.Mx";
+        //        return "./TestCase/Builg.Mx";
+        //        return "./TestCase/basicRule.Mx";
+        //        return "./TestCase/vector.Mx";
+        //        return "./TestCase/hashMap.Mx";
+        //        return "./TestCase/stringTest.Mx";
+        //        return "./TestCase/returnCheck.Mx";
+        //        return "./TestCase/comment.Mx";
+        //        return "./TestCase/Wall.Mx";
+        //        return "./TestCase/returnVal.Mx";
+        //        return "./TestCase/main.Mx";
+        //        return "./TestCase/duplicateClass.Mx";
+        //        return "./TestCase/check.Mx";
+        //        return "./TestCase/strShift.Mx";
+        //        return "./TestCase/void.Mx";
+        //        return "./TestCase/declare.Mx";
+        //        return "./TestCase/array.Mx";
+        //        return "./TestCase/a+b.Mx";
+        //        return "./TestCase/member.Mx";
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         try {
             String str = getTxt(getFilePath());
 
@@ -94,7 +94,7 @@ public class Test{
             Program program = astBuilder.getProgram();
 
             ASTPrinter astPrinter = new ASTPrinter();
-            TopTable topTable = new TopTable(null);
+            TopTable topTable = new TopTable(null, "");
             ClassScanner classScanner = new ClassScanner(topTable);
             FuncScanner funcScanner = new FuncScanner(topTable);
             ClassVarScanner classVarScanner = new ClassVarScanner(topTable);

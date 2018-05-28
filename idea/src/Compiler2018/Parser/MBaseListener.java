@@ -6,908 +6,907 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link MListener},
- * which can be extended to create a listener which only needs to handle a subset
- * of the available methods.
+ * This class provides an empty implementation of {@link MListener}, which can be extended to create
+ * a listener which only needs to handle a subset of the available methods.
  */
-public class MBaseListener implements MListener{
+public class MBaseListener implements MListener {
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterProgram(MParser.ProgramContext ctx){
+    public void enterProgram(MParser.ProgramContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitProgram(MParser.ProgramContext ctx){
+    public void exitProgram(MParser.ProgramContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterClassDecl(MParser.ClassDeclContext ctx){
+    public void enterClassDecl(MParser.ClassDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitClassDecl(MParser.ClassDeclContext ctx){
+    public void exitClassDecl(MParser.ClassDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterFuncDecl(MParser.FuncDeclContext ctx){
+    public void enterFuncDecl(MParser.FuncDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitFuncDecl(MParser.FuncDeclContext ctx){
+    public void exitFuncDecl(MParser.FuncDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterVarDecl(MParser.VarDeclContext ctx){
+    public void enterVarDecl(MParser.VarDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitVarDecl(MParser.VarDeclContext ctx){
+    public void exitVarDecl(MParser.VarDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterClassDeclaration(MParser.ClassDeclarationContext ctx){
+    public void enterClassDeclaration(MParser.ClassDeclarationContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitClassDeclaration(MParser.ClassDeclarationContext ctx){
+    public void exitClassDeclaration(MParser.ClassDeclarationContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterFunctionDeclaration(MParser.FunctionDeclarationContext ctx){
+    public void enterFunctionDeclaration(MParser.FunctionDeclarationContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitFunctionDeclaration(MParser.FunctionDeclarationContext ctx){
+    public void exitFunctionDeclaration(MParser.FunctionDeclarationContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterVariableDeclaration(MParser.VariableDeclarationContext ctx){
+    public void enterVariableDeclaration(MParser.VariableDeclarationContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitVariableDeclaration(MParser.VariableDeclarationContext ctx){
+    public void exitVariableDeclaration(MParser.VariableDeclarationContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterVariableDeclarationStatement(MParser.VariableDeclarationStatementContext ctx){
+    public void enterVariableDeclarationStatement(MParser.VariableDeclarationStatementContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitVariableDeclarationStatement(MParser.VariableDeclarationStatementContext ctx){
+    public void exitVariableDeclarationStatement(MParser.VariableDeclarationStatementContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterFunctionParameters(MParser.FunctionParametersContext ctx){
+    public void enterFunctionParameters(MParser.FunctionParametersContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitFunctionParameters(MParser.FunctionParametersContext ctx){
+    public void exitFunctionParameters(MParser.FunctionParametersContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterClassBlock(MParser.ClassBlockContext ctx){
+    public void enterClassBlock(MParser.ClassBlockContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitClassBlock(MParser.ClassBlockContext ctx){
+    public void exitClassBlock(MParser.ClassBlockContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterClassVarDecl(MParser.ClassVarDeclContext ctx){
+    public void enterClassVarDecl(MParser.ClassVarDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitClassVarDecl(MParser.ClassVarDeclContext ctx){
+    public void exitClassVarDecl(MParser.ClassVarDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterClassCstrDecl(MParser.ClassCstrDeclContext ctx){
+    public void enterClassCstrDecl(MParser.ClassCstrDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitClassCstrDecl(MParser.ClassCstrDeclContext ctx){
+    public void exitClassCstrDecl(MParser.ClassCstrDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterClassFuncDecl(MParser.ClassFuncDeclContext ctx){
+    public void enterClassFuncDecl(MParser.ClassFuncDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitClassFuncDecl(MParser.ClassFuncDeclContext ctx){
+    public void exitClassFuncDecl(MParser.ClassFuncDeclContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterConstructorDeclaration(MParser.ConstructorDeclarationContext ctx){
+    public void enterConstructorDeclaration(MParser.ConstructorDeclarationContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitConstructorDeclaration(MParser.ConstructorDeclarationContext ctx){
+    public void exitConstructorDeclaration(MParser.ConstructorDeclarationContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterBlockStmt(MParser.BlockStmtContext ctx){
+    public void enterBlockStmt(MParser.BlockStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitBlockStmt(MParser.BlockStmtContext ctx){
+    public void exitBlockStmt(MParser.BlockStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterVarDeclStmt(MParser.VarDeclStmtContext ctx){
+    public void enterVarDeclStmt(MParser.VarDeclStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitVarDeclStmt(MParser.VarDeclStmtContext ctx){
+    public void exitVarDeclStmt(MParser.VarDeclStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterBranchStmt(MParser.BranchStmtContext ctx){
+    public void enterBranchStmt(MParser.BranchStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitBranchStmt(MParser.BranchStmtContext ctx){
+    public void exitBranchStmt(MParser.BranchStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterLoopStmt(MParser.LoopStmtContext ctx){
+    public void enterLoopStmt(MParser.LoopStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitLoopStmt(MParser.LoopStmtContext ctx){
+    public void exitLoopStmt(MParser.LoopStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterExprStmt(MParser.ExprStmtContext ctx){
+    public void enterExprStmt(MParser.ExprStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitExprStmt(MParser.ExprStmtContext ctx){
+    public void exitExprStmt(MParser.ExprStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterJumpStmt(MParser.JumpStmtContext ctx){
+    public void enterJumpStmt(MParser.JumpStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitJumpStmt(MParser.JumpStmtContext ctx){
+    public void exitJumpStmt(MParser.JumpStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterEmptyStmt(MParser.EmptyStmtContext ctx){
+    public void enterEmptyStmt(MParser.EmptyStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitEmptyStmt(MParser.EmptyStmtContext ctx){
+    public void exitEmptyStmt(MParser.EmptyStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterBlockStatement(MParser.BlockStatementContext ctx){
+    public void enterBlockStatement(MParser.BlockStatementContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitBlockStatement(MParser.BlockStatementContext ctx){
+    public void exitBlockStatement(MParser.BlockStatementContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterBranchStatement(MParser.BranchStatementContext ctx){
+    public void enterBranchStatement(MParser.BranchStatementContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitBranchStatement(MParser.BranchStatementContext ctx){
+    public void exitBranchStatement(MParser.BranchStatementContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterForStmt(MParser.ForStmtContext ctx){
+    public void enterForStmt(MParser.ForStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitForStmt(MParser.ForStmtContext ctx){
+    public void exitForStmt(MParser.ForStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterWhileStmt(MParser.WhileStmtContext ctx){
+    public void enterWhileStmt(MParser.WhileStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitWhileStmt(MParser.WhileStmtContext ctx){
+    public void exitWhileStmt(MParser.WhileStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterReturnStmt(MParser.ReturnStmtContext ctx){
+    public void enterReturnStmt(MParser.ReturnStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitReturnStmt(MParser.ReturnStmtContext ctx){
+    public void exitReturnStmt(MParser.ReturnStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterBreakStmt(MParser.BreakStmtContext ctx){
+    public void enterBreakStmt(MParser.BreakStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitBreakStmt(MParser.BreakStmtContext ctx){
+    public void exitBreakStmt(MParser.BreakStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterContinueStmt(MParser.ContinueStmtContext ctx){
+    public void enterContinueStmt(MParser.ContinueStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitContinueStmt(MParser.ContinueStmtContext ctx){
+    public void exitContinueStmt(MParser.ContinueStmtContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterArrayType(MParser.ArrayTypeContext ctx){
+    public void enterArrayType(MParser.ArrayTypeContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitArrayType(MParser.ArrayTypeContext ctx){
+    public void exitArrayType(MParser.ArrayTypeContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterNonArrayType(MParser.NonArrayTypeContext ctx){
+    public void enterNonArrayType(MParser.NonArrayTypeContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitNonArrayType(MParser.NonArrayTypeContext ctx){
+    public void exitNonArrayType(MParser.NonArrayTypeContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterArrayClass(MParser.ArrayClassContext ctx){
+    public void enterArrayClass(MParser.ArrayClassContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitArrayClass(MParser.ArrayClassContext ctx){
+    public void exitArrayClass(MParser.ArrayClassContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterNonArrayClass(MParser.NonArrayClassContext ctx){
+    public void enterNonArrayClass(MParser.NonArrayClassContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitNonArrayClass(MParser.NonArrayClassContext ctx){
+    public void exitNonArrayClass(MParser.NonArrayClassContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterIdentifier(MParser.IdentifierContext ctx){
+    public void enterIdentifier(MParser.IdentifierContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitIdentifier(MParser.IdentifierContext ctx){
+    public void exitIdentifier(MParser.IdentifierContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterMemberAcess(MParser.MemberAcessContext ctx){
+    public void enterMemberAcess(MParser.MemberAcessContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitMemberAcess(MParser.MemberAcessContext ctx){
+    public void exitMemberAcess(MParser.MemberAcessContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterArrayAcess(MParser.ArrayAcessContext ctx){
+    public void enterArrayAcess(MParser.ArrayAcessContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitArrayAcess(MParser.ArrayAcessContext ctx){
+    public void exitArrayAcess(MParser.ArrayAcessContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterConst(MParser.ConstContext ctx){
+    public void enterConst(MParser.ConstContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitConst(MParser.ConstContext ctx){
+    public void exitConst(MParser.ConstContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterSubExpr(MParser.SubExprContext ctx){
+    public void enterSubExpr(MParser.SubExprContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitSubExpr(MParser.SubExprContext ctx){
+    public void exitSubExpr(MParser.SubExprContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterBinaryExpr(MParser.BinaryExprContext ctx){
+    public void enterBinaryExpr(MParser.BinaryExprContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitBinaryExpr(MParser.BinaryExprContext ctx){
+    public void exitBinaryExpr(MParser.BinaryExprContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterNewExpr(MParser.NewExprContext ctx){
+    public void enterNewExpr(MParser.NewExprContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitNewExpr(MParser.NewExprContext ctx){
+    public void exitNewExpr(MParser.NewExprContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterFunctionCall(MParser.FunctionCallContext ctx){
+    public void enterFunctionCall(MParser.FunctionCallContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitFunctionCall(MParser.FunctionCallContext ctx){
+    public void exitFunctionCall(MParser.FunctionCallContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterPostfixIncDec(MParser.PostfixIncDecContext ctx){
+    public void enterPostfixIncDec(MParser.PostfixIncDecContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitPostfixIncDec(MParser.PostfixIncDecContext ctx){
+    public void exitPostfixIncDec(MParser.PostfixIncDecContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterUnaryExpr(MParser.UnaryExprContext ctx){
+    public void enterUnaryExpr(MParser.UnaryExprContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitUnaryExpr(MParser.UnaryExprContext ctx){
+    public void exitUnaryExpr(MParser.UnaryExprContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterCallParameter(MParser.CallParameterContext ctx){
+    public void enterCallParameter(MParser.CallParameterContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitCallParameter(MParser.CallParameterContext ctx){
+    public void exitCallParameter(MParser.CallParameterContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterNewError(MParser.NewErrorContext ctx){
+    public void enterNewError(MParser.NewErrorContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitNewError(MParser.NewErrorContext ctx){
+    public void exitNewError(MParser.NewErrorContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterNewArray(MParser.NewArrayContext ctx){
+    public void enterNewArray(MParser.NewArrayContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitNewArray(MParser.NewArrayContext ctx){
+    public void exitNewArray(MParser.NewArrayContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterNewNonArray(MParser.NewNonArrayContext ctx){
+    public void enterNewNonArray(MParser.NewNonArrayContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitNewNonArray(MParser.NewNonArrayContext ctx){
+    public void exitNewNonArray(MParser.NewNonArrayContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterBrackets(MParser.BracketsContext ctx){
+    public void enterBrackets(MParser.BracketsContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitBrackets(MParser.BracketsContext ctx){
+    public void exitBrackets(MParser.BracketsContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterConstant(MParser.ConstantContext ctx){
+    public void enterConstant(MParser.ConstantContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitConstant(MParser.ConstantContext ctx){
+    public void exitConstant(MParser.ConstantContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void enterEveryRule(ParserRuleContext ctx){
+    public void enterEveryRule(ParserRuleContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void exitEveryRule(ParserRuleContext ctx){
+    public void exitEveryRule(ParserRuleContext ctx) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void visitTerminal(TerminalNode node){
+    public void visitTerminal(TerminalNode node) {
     }
 
     /**
      * {@inheritDoc}
      *
-     * <p>The default implementation does nothing.</p>
+     * <p>The default implementation does nothing.
      */
     @Override
-    public void visitErrorNode(ErrorNode node){
+    public void visitErrorNode(ErrorNode node) {
     }
 }

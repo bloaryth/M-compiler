@@ -2,49 +2,49 @@ package Compiler2018.Symbol;
 
 public class BlockTable extends AbstractSymbolTable {
 
-    public BlockTable (AbstractSymbolTable outerSymbolTable) {
-        super (outerSymbolTable);
+    public BlockTable(AbstractSymbolTable outerSymbolTable, String namespace) {
+        super(outerSymbolTable, namespace);
     }
 
     @Deprecated
     @Override
-    public ClassSymbol getMyClass (String name) {
+    public ClassSymbol getMyClass(String name) {
         assert false;
-        return super.getMyClass (name);
+        return super.getMyClass(name);
     }
 
     @Deprecated
     @Override
-    public CstrSymbol getCstr (String name) {
+    public CstrSymbol getCstr(String name) {
         assert false;
-        return super.getCstr (name);
+        return super.getCstr(name);
     }
 
     @Deprecated
     @Override
-    public FuncSymbol getFunc (String name) {
+    public FuncSymbol getFunc(String name) {
         assert false;
-        return super.getFunc (name);
+        return super.getFunc(name);
     }
 
     @Deprecated
     @Override
-    public void addMyClass (String name, ClassSymbol myClass) {
+    public void addMyClass(String name, ClassSymbol myClass) {
         assert false;
-        super.addMyClass (name, myClass);
+        super.addMyClass(name, myClass);
     }
 
     @Deprecated
     @Override
-    public void addCstr (String name, CstrSymbol cstr) {
+    public void addCstr(String name, CstrSymbol cstr) {
         assert false;
-        super.addCstr (name, cstr);
+        super.addCstr(name, cstr);
     }
 
     @Deprecated
     @Override
-    public void addFunc (String name, FuncSymbol func) {
+    public void addFunc(String name, FuncSymbol func) {
         assert false;
-        super.addFunc (name, func);
+        super.addFunc(name, func);
     }
 }

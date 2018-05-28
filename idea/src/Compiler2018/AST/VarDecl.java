@@ -2,15 +2,21 @@ package Compiler2018.AST;
 
 import Compiler2018.FrontEnd.IASTVistor;
 
-public class VarDecl extends AbstractDecl{
+public class VarDecl extends AbstractDecl {
     private final ClassType type;
     private final String name;
-    private final AbstractExpr init;  // can be null
+    private final AbstractExpr init; // can be null
     private final SourcePosition posType;
     private final SourcePosition posName;
     private final SourcePosition posInit;
 
-    public VarDecl(ClassType type, String name, AbstractExpr init, SourcePosition posType, SourcePosition posName, SourcePosition posInit){
+    public VarDecl(
+            ClassType type,
+            String name,
+            AbstractExpr init,
+            SourcePosition posType,
+            SourcePosition posName,
+            SourcePosition posInit) {
         this.type = type;
         this.name = name;
         this.init = init;
@@ -19,32 +25,32 @@ public class VarDecl extends AbstractDecl{
         this.posInit = posInit;
     }
 
-    public ClassType getType(){
+    public ClassType getType() {
         return type;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public AbstractExpr getInit(){
+    public AbstractExpr getInit() {
         return init;
     }
 
-    public SourcePosition getPosType(){
+    public SourcePosition getPosType() {
         return posType;
     }
 
-    public SourcePosition getPosName(){
+    public SourcePosition getPosName() {
         return posName;
     }
 
-    public SourcePosition getPosInit(){
+    public SourcePosition getPosInit() {
         return posInit;
     }
 
     @Override
-    public void accept(IASTVistor visitor){
+    public void accept(IASTVistor visitor) {
         visitor.visit(this);
     }
 }
