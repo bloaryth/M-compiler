@@ -1,6 +1,7 @@
-package Compiler2018.FrontEnd;
+package Compiler2018.FrontEnd.Semantic;
 
 import Compiler2018.AST.*;
+import Compiler2018.FrontEnd.IASTVistor;
 import Compiler2018.Symbol.*;
 
 import java.util.Stack;
@@ -14,27 +15,33 @@ public class FuncScanner implements IASTVistor {
         this.topTable = topTable;
     }
 
+    // FIXME built-in function varSymbol setIRInfo | write asm
     // built-in function
     private void addFuncPrint() {
         FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setBelongTable(topTable);
         builder.setReturnType(new ClassType("void", 0));
         builder.setName("print");
-        builder.addParameter("str", new VarSymbol(new ClassType("string", 0), "str"));
-        builder.setBlockTable(new BlockTable(topTable, ""));
+        BlockTable table = new BlockTable(topTable, "");
+        builder.addParameter("str", new VarSymbol(table, new ClassType("string", 0), "str")); // setIRInfo ? FIXME
+        builder.setBlockTable(table);
         topTable.addFunc("print", builder.build());
     }
 
     private void addFuncPrintln() {
         FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setBelongTable(topTable);
         builder.setReturnType(new ClassType("void", 0));
         builder.setName("println");
-        builder.addParameter("str", new VarSymbol(new ClassType("string", 0), "str"));
-        builder.setBlockTable(new BlockTable(topTable, ""));
+        BlockTable table = new BlockTable(topTable, "");
+        builder.addParameter("str", new VarSymbol(table, new ClassType("string", 0), "str")); // setIRInfo ? FIXME
+        builder.setBlockTable(table);
         topTable.addFunc("println", builder.build());
     }
 
     private void addFuncGetString() {
         FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setBelongTable(topTable);
         builder.setReturnType(new ClassType("string", 0));
         builder.setName("getString");
         builder.setBlockTable(new BlockTable(topTable, ""));
@@ -43,6 +50,7 @@ public class FuncScanner implements IASTVistor {
 
     private void addFuncGetInt() {
         FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setBelongTable(topTable);
         builder.setReturnType(new ClassType("int", 0));
         builder.setName("getInt");
         builder.setBlockTable(new BlockTable(topTable, ""));
@@ -51,46 +59,57 @@ public class FuncScanner implements IASTVistor {
 
     private void addFuncToString() {
         FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setBelongTable(topTable);
         builder.setReturnType(new ClassType("string", 0));
         builder.setName("toString");
-        builder.addParameter("i", new VarSymbol(new ClassType("int", 0), "i"));
-        builder.setBlockTable(new BlockTable(topTable, ""));
+        BlockTable table = new BlockTable(topTable, "");
+        builder.addParameter("i", new VarSymbol(table, new ClassType("int", 0), "i")); // setIRInfo ? FIXME
+        builder.setBlockTable(table);
         topTable.addFunc("toString", builder.build());
     }
 
     // string built-in function
     private void addFuncLength(AbstractSymbolTable stringInClassTable) {
         FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setBelongTable(stringInClassTable);
         builder.setReturnType(new ClassType("int", 0));
         builder.setName("length");
-        builder.setBlockTable(new BlockTable(topTable, ""));
+        BlockTable table = new BlockTable(stringInClassTable, "");
+//        builder.addParameter("this", new VarSymbol(table, new ClassType("string", 0), "this"));
+        builder.setBlockTable(table);
         stringInClassTable.addFunc("length", builder.build());
     }
 
     private void addFuncSubstring(AbstractSymbolTable stringInClassTable) {
         FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setBelongTable(stringInClassTable);
         builder.setReturnType(new ClassType("string", 0));
         builder.setName("substring");
-        builder.addParameter("left", new VarSymbol(new ClassType("int", 0), "left"));
-        builder.addParameter("right", new VarSymbol(new ClassType("int", 0), "right"));
-        builder.setBlockTable(new BlockTable(topTable, ""));
+        BlockTable table = new BlockTable(stringInClassTable, "");
+//        builder.addParameter("this", new VarSymbol(table, new ClassType("string", 0), "this"));
+        builder.addParameter("left", new VarSymbol(table, new ClassType("int", 0), "left")); // setIRInfo ? FIXME
+        builder.addParameter("right", new VarSymbol(table, new ClassType("int", 0), "right")); // setIRInfo ? FIXME
+        builder.setBlockTable(table);
         stringInClassTable.addFunc("substring", builder.build());
     }
 
     private void addFuncParseInt(AbstractSymbolTable stringInClassTable) {
         FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setBelongTable(stringInClassTable);
         builder.setReturnType(new ClassType("int", 0));
         builder.setName("parseInt");
-        builder.setBlockTable(new BlockTable(topTable, ""));
+        builder.setBlockTable(new BlockTable(stringInClassTable, ""));
         stringInClassTable.addFunc("parseInt", builder.build());
     }
 
     private void addFuncOrd(AbstractSymbolTable stringInClassTable) {
         FuncSymbol.Builder builder = new FuncSymbol.Builder();
+        builder.setBelongTable(stringInClassTable);
         builder.setReturnType(new ClassType("int", 0));
         builder.setName("ord");
-        builder.addParameter("pos", new VarSymbol(new ClassType("int", 0), "pos"));
-        builder.setBlockTable(new BlockTable(topTable, ""));
+        BlockTable table = new BlockTable(stringInClassTable, "");
+        builder.addParameter("pos", new VarSymbol(table, new ClassType("int", 0), "pos")); // setIRInfo ? FIXME
+        builder.setBlockTable(table);
         stringInClassTable.addFunc("ord", builder.build());
     }
 
@@ -145,7 +164,7 @@ public class FuncScanner implements IASTVistor {
             throw new RuntimeException("Global function name collides with class.");
         }
         if (currentTable.peek().getFunc(node.getName()) != null) {
-            throw new RuntimeException("Function is previously declared.");
+            throw new RuntimeException("IRFunction is previously declared.");
         }
         // parameter
         node.getParameters()
@@ -159,7 +178,10 @@ public class FuncScanner implements IASTVistor {
         if (topTable.getMyClass(node.getReturnType().getBaseType()) == null) {
             throw new RuntimeException("Undeclared class occurred.");
         }
-        currentTable.peek().addFunc(node.getName(), new FuncSymbol(node, new BlockTable(currentTable.peek(), node.getName())));
+
+        FuncSymbol funcSymbol = new FuncSymbol(currentTable.peek(), node, new BlockTable(currentTable.peek(), node.getName()));
+        node.setFuncSymbol(funcSymbol); // prepare for IR Generation
+        currentTable.peek().addFunc(node.getName(), funcSymbol);
     }
 
     @Override
@@ -178,10 +200,10 @@ public class FuncScanner implements IASTVistor {
             throw new RuntimeException("'this' should not be a function name.");
         }
         if (currentTable.peek().getFunc(node.getName()) != null) {
-            throw new RuntimeException("Class constructor previously declared.");
+            throw new RuntimeException("IRClass constructor previously declared.");
         }
         if (!classSymbol.getName().equals(node.getName())) {
-            throw new RuntimeException("Class constructor should be the same name with class.");
+            throw new RuntimeException("IRClass constructor should be the same name with class.");
         }
         // parameter
         node.getParameters()
@@ -191,7 +213,9 @@ public class FuncScanner implements IASTVistor {
                                 throw new RuntimeException("Undeclared class occurred.");
                             }
                         });
-        currentTable.peek().addCstr(node.getName(), new CstrSymbol(node, new BlockTable(currentTable.peek(),node.getName())));
+        CstrSymbol cstrSymbol = new CstrSymbol(currentTable.peek(), node, new BlockTable(currentTable.peek(), node.getName()));
+        node.setCstrSymbol(cstrSymbol);
+        currentTable.peek().addCstr(node.getName(), cstrSymbol);
     }
 
     @Override

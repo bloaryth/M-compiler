@@ -65,6 +65,17 @@ public class FunctionCall extends AbstractExpr {
         return posParameters;
     }
 
+    // prepare for IR Generation
+    private String processedName;
+
+    public String getProcessedName() {
+        return processedName;
+    }   // FIXME
+
+    public void setProcessedName(String processedName) {
+        this.processedName = processedName;
+    }
+
     @Override
     public void accept(IASTVistor visitor) {
         visitor.visit(this);

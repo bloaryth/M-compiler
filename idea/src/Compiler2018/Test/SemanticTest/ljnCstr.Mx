@@ -60,7 +60,7 @@ int main()
 /*!! metadata:
 === comment ===
 class-testcase-515030910592-lijinning.txt
-Test class and construction function. And expression.
+Test class and construction IRFunction. And expression.
 === assert ===
 success_compile
 === phase ===

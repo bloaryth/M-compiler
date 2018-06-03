@@ -1,6 +1,7 @@
 package Compiler2018.AST;
 
 import Compiler2018.FrontEnd.IASTVistor;
+import Compiler2018.Symbol.VarSymbol;
 
 public class VarDecl extends AbstractDecl {
     private final ClassType type;
@@ -47,6 +48,17 @@ public class VarDecl extends AbstractDecl {
 
     public SourcePosition getPosInit() {
         return posInit;
+    }
+
+    // prepare for IR Generation
+    private VarSymbol varSymbol;
+
+    public VarSymbol getVarSymbol() {
+        return varSymbol;
+    }
+
+    public void setVarSymbol(VarSymbol varSymbol) {
+        this.varSymbol = varSymbol;
     }
 
     @Override

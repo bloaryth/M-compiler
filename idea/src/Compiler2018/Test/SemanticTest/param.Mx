@@ -1,18 +1,24 @@
-int main(int main) {
-    main(7);
+int f(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int x;
+    x = f(1, 2, 3);
+    return 0;
 }
 
 
 
 /*!! metadata:
 === comment ===
-Test name references-func-6-5130309059-lijiajun.mx
+Test num of parameters of IRFunction-4-5100379071-puyouer.mx
 === is_public ===
 True
 === assert ===
 failure_compile
 === timeout ===
-0.0
+0
 === input ===
 
 === phase ===

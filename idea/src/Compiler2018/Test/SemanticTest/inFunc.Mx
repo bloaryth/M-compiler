@@ -1,4 +1,4 @@
-// function in function
+// IRFunction in IRFunction
 // null as para
 int too(int young) {
     return young;
@@ -24,7 +24,7 @@ int main() {
 
 /*!! metadata:
 === comment ===
-刘啸远 function in function, null as parameter
+刘啸远 IRFunction in IRFunction, null as parameter
 === is_public ===
 True
 === assert ===

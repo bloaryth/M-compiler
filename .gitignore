@@ -1,4 +1,5 @@
 # idea management file
+/builtin/
 /Documents/
 /idea/target/
 /idea/gen/

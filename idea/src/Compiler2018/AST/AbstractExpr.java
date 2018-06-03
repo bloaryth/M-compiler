@@ -1,13 +1,13 @@
 package Compiler2018.AST;
 
-import Compiler2018.IR.IRValue.AbstractValue;
-import Compiler2018.Symbol.AbstractSymbolTable;
+import Compiler2018.IR.IRStructure.BasicBlock;
+import Compiler2018.IR.IRValue.Register;
 import Compiler2018.Symbol.FuncSymbol;
 
 public abstract class AbstractExpr extends AbstractASTNode {
     // semantic check
     private ClassType type = null;
-    private Boolean isLValue = true;
+    private boolean isLValue = true;
     private FuncSymbol func = null;
 
     public ClassType getType() {
@@ -18,11 +18,11 @@ public abstract class AbstractExpr extends AbstractASTNode {
         this.type = type;
     }
 
-    public Boolean getLValue() {
+    public boolean getLValue() {
         return isLValue;
     }
 
-    public void setLValue(Boolean LValue) {
+    public void setLValue(boolean LValue) {
         isLValue = LValue;
     }
 
@@ -34,23 +34,43 @@ public abstract class AbstractExpr extends AbstractASTNode {
         this.func = func;
     }
 
-    // IR generation
-    private AbstractSymbolTable table = null;
-    private AbstractValue irValue = null;
+    // short-cut
+    private BasicBlock ifTrue = null;
+    private BasicBlock ifFalse = null;
 
-    public AbstractSymbolTable getTable() {
-        return table;
+    public BasicBlock getIfTrue() {
+        return ifTrue;
     }
 
-    public void setTable(AbstractSymbolTable table) {
-        this.table = table;
+    public void setIfTrue(BasicBlock ifTrue) {
+        this.ifTrue = ifTrue;
     }
 
-    public AbstractValue getIrValue() {
-        return irValue;
+    public BasicBlock getIfFalse() {
+        return ifFalse;
     }
 
-    public void setIrValue(AbstractValue irValue) {
-        this.irValue = irValue;
+    public void setIfFalse(BasicBlock ifFalse) {
+        this.ifFalse = ifFalse;
+    }
+
+    // IR generation Info
+    private Register register = null;
+    private boolean dataInMem = false; // where the real data in
+
+    public Register getRegister() {
+        return register;
+    }
+
+    public void setRegister(Register register) {
+        this.register = register;
+    }
+
+    public boolean isDataInMem() {
+        return dataInMem;
+    }
+
+    public void setDataInMem(boolean dataInMem) {
+        this.dataInMem = dataInMem;
     }
 }

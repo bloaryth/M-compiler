@@ -4,7 +4,7 @@ import Compiler2018.FrontEnd.IASTVistor;
 
 public class MemberAcess extends AbstractExpr {
     private final AbstractExpr expr;
-    private final String name;
+    private final String name;      // to avoid trouble in Visitor
     private final SourcePosition posExpr;
     private final SourcePosition posName;
 

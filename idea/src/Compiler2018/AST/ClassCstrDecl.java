@@ -1,6 +1,7 @@
 package Compiler2018.AST;
 
 import Compiler2018.FrontEnd.IASTVistor;
+import Compiler2018.Symbol.CstrSymbol;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -48,6 +49,17 @@ public class ClassCstrDecl extends AbstractClassItem {
 
     public BlockStmt getBlock() {
         return block;
+    }
+
+    // prepare for IR Generation
+    private CstrSymbol cstrSymbol;
+
+    public CstrSymbol getCstrSymbol() {
+        return cstrSymbol;
+    }
+
+    public void setCstrSymbol(CstrSymbol cstrSymbol) {
+        this.cstrSymbol = cstrSymbol;
     }
 
     @Override

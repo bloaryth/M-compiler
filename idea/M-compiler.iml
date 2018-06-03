@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/calc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dev" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/dumped" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

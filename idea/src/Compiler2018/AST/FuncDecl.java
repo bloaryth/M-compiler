@@ -1,6 +1,7 @@
 package Compiler2018.AST;
 
 import Compiler2018.FrontEnd.IASTVistor;
+import Compiler2018.Symbol.FuncSymbol;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public class FuncDecl extends AbstractDecl {
     private final ClassType returnType;
     private final String name;
-    private final List<VarDecl> parameters; // can contain nothing
+    private final List<VarDecl> parameters; // can contain nothing // this will be added if in a class
     private final BlockStmt block;
     private final SourcePosition posType;
     private final SourcePosition posName;
@@ -50,13 +51,7 @@ public class FuncDecl extends AbstractDecl {
         }
     }
 
-    public FuncDecl(
-            ClassType returnType,
-            String name,
-            List<VarDecl> parameters,
-            BlockStmt block,
-            SourcePosition posType,
-            SourcePosition posName) {
+    public FuncDecl(ClassType returnType, String name, List<VarDecl> parameters, BlockStmt block, SourcePosition posType, SourcePosition posName) {
         this.returnType = returnType;
         this.name = name;
         this.parameters = parameters;
@@ -87,6 +82,17 @@ public class FuncDecl extends AbstractDecl {
 
     public SourcePosition getPosName() {
         return posName;
+    }
+
+    // prepare for IR Generation
+    private FuncSymbol funcSymbol = null;
+
+    public FuncSymbol getFuncSymbol() {
+        return funcSymbol;
+    }
+
+    public void setFuncSymbol(FuncSymbol funcSymbol) {
+        this.funcSymbol = funcSymbol;
     }
 
     @Override

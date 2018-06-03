@@ -1,3 +1,5 @@
+
+/*
 void bad_func_0() {
     int i;
     for (i = 0; i <= 10; i = i + 1) {
@@ -18,6 +20,7 @@ void bad_func_1(int x, int s, int t) {
     bad_func_1(x << 1 | 1, m + 1, t);
 }
 
+
 void bad_func_2() {
     int[][][][] arr = new int[2][3][][];
     int n = arr.size();
@@ -33,7 +36,7 @@ void bad_func_2() {
     string Void;
     string String;
 }
-
+*/
 class E {
     int x;
     E() {
@@ -43,6 +46,7 @@ class E {
         return this;
     }
 }
+
 
 void bad_func_3() {
     while (true && false || !true) {
@@ -82,6 +86,7 @@ int main() {
         a.parseInt();
     }
 }
+
 
 /*!! metadata:
 === comment ===

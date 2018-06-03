@@ -19,9 +19,23 @@ public class ClassType extends AbstractASTNode {
         return dim;
     }
 
-    public boolean isPtr(){
-        return dim > 0 | baseType.equals("string");
+    // prepare for IR Generation
+    public Integer isPtrSaved() {
+        if (dim > 0) {
+            return 0;
+        }
+        switch (baseType) {
+            case "int":
+            case "bool":
+                return 0;
+            default:
+                return 1;
+        }
     }
+
+//    public boolean isPtrCopy(){
+//        return dim > 0 | baseType.equals("string");
+//    }
 
     @Override
     public boolean equals(Object obj) {

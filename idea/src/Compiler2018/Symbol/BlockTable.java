@@ -1,7 +1,6 @@
 package Compiler2018.Symbol;
 
 public class BlockTable extends AbstractSymbolTable {
-
     public BlockTable(AbstractSymbolTable outerSymbolTable, String namespace) {
         super(outerSymbolTable, namespace);
     }

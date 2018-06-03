@@ -1,24 +1,18 @@
-int f(int a, int b) {
-    return a + b;
-}
-
-int main() {
-    int x;
-    x = f(1, 2, 3);
-    return 0;
+int main(int main) {
+    main(7);
 }
 
 
 
 /*!! metadata:
 === comment ===
-Test num of parameters of function-4-5100379071-puyouer.mx
+Test processedName references-func-6-5130309059-lijiajun.mx
 === is_public ===
 True
 === assert ===
 failure_compile
 === timeout ===
-0
+0.0
 === input ===
 
 === phase ===

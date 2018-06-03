@@ -1,6 +1,7 @@
-package Compiler2018.FrontEnd;
+package Compiler2018.FrontEnd.Semantic;
 
 import Compiler2018.AST.*;
+import Compiler2018.FrontEnd.IASTVistor;
 import Compiler2018.Symbol.*;
 
 import java.util.LinkedList;
@@ -11,10 +12,10 @@ import java.util.Stack;
 public class StmtScanner implements IASTVistor {
     private final TopTable topTable;
     private final Stack<AbstractSymbolTable> currentTable = new Stack<>();
-    private Integer loopScope = 0;
+    private Integer loopScopeCount = 0;
     private CstrSymbol cstrSymbol = null;
-    private FuncSymbol funcScope = null;
-    private ClassSymbol classScope = null;
+    private FuncSymbol funcSymbol = null;
+    private ClassSymbol classSymbol = null;
     private boolean blockScopePushed = false;
     private List<String> primitiveType = new LinkedList<>();
 
@@ -40,21 +41,21 @@ public class StmtScanner implements IASTVistor {
 
     @Override
     public void visit(ClassDecl node) {
-        classScope = topTable.getMyClass(node.getName());
+        classSymbol = topTable.getMyClass(node.getName());
         currentTable.push(topTable.getMyClass(node.getName()).getInClassTable());
         node.getItems().forEach(x -> x.accept(this));
         currentTable.pop();
-        classScope = null;
+        classSymbol = null;
     }
 
     @Override
     public void visit(FuncDecl node) {
-        funcScope = currentTable.peek().getFunc(node.getName());
+        funcSymbol = currentTable.peek().getFunc(node.getName());
         currentTable.push(currentTable.peek().getFunc(node.getName()).getBlockTable());
         blockScopePushed = true;
         node.getBlock().accept(this);
         currentTable.pop();
-        funcScope = null;
+        funcSymbol = null;
     }
 
     @Override
@@ -90,7 +91,9 @@ public class StmtScanner implements IASTVistor {
                 throw new RuntimeException("Init Type mismatch.");
             }
         }
-        currentTable.peek().addVar(node.getName(), new VarSymbol(node));
+        VarSymbol varSymbol = new VarSymbol(currentTable.peek(), node);
+        node.setVarSymbol(varSymbol);
+        currentTable.peek().addVar(node.getName(), varSymbol);
     }
 
     @Override
@@ -99,11 +102,11 @@ public class StmtScanner implements IASTVistor {
 
     @Override
     public void visit(ClassCstrDecl node) {
-        if (!classScope.getName().equals(node.getName())) {
+        if (!classSymbol.getName().equals(node.getName())) {
             throw new RuntimeException("constructor name error.");
         }
         currentTable.push(currentTable.peek().getCstr(node.getName()).getBlockTable());
-        cstrSymbol = classScope.getInClassTable().getCstr(node.getName());
+        cstrSymbol = classSymbol.getInClassTable().getCstr(node.getName());
         blockScopePushed = true;
         node.getBlock().accept(this);
         cstrSymbol = null;
@@ -170,11 +173,13 @@ public class StmtScanner implements IASTVistor {
             if (node.getExpr() != null) {
                 throw new RuntimeException("Cstr return error.");
             }
+            // prepare for IR Generation
+            node.setClassType(null);
             return;
         }
 
         // func
-        if (funcScope == null) {
+        if (funcSymbol == null) {
             throw new RuntimeException("Return should be in FuncScope");
         }
 
@@ -182,30 +187,37 @@ public class StmtScanner implements IASTVistor {
         if (node.getExpr() != null) {
             node.getExpr().accept(this);
             if (node.getExpr().getType().getBaseType().equals("null")) {
-                if (funcScope.getReturnType().getDim() == 0
-                        && primitiveType.contains(funcScope.getReturnType().getBaseType())) {
+                if (funcSymbol.getReturnType().getDim() == 0
+                        && primitiveType.contains(funcSymbol.getReturnType().getBaseType())) {
                     throw new RuntimeException("Return Type couldn't accept null");
                 }
-            } else if (!funcScope.getReturnType().equals(node.getExpr().getType())) {
+            } else if (!funcSymbol.getReturnType().equals(node.getExpr().getType())) {
                 throw new RuntimeException("Return Type mismatch.");
             }
         } else {
-            if (!funcScope.getReturnType().getBaseType().equals("void")) {
+            if (!funcSymbol.getReturnType().getBaseType().equals("void")) {
                 throw new RuntimeException("returnExpr is required.");
             }
+        }
+
+        // prepare for IR Generation
+        if (node.getExpr() == null) {
+            node.setClassType(null);
+        } else {
+            node.setClassType(node.getExpr().getType());
         }
     }
 
     @Override
     public void visit(BreakStmt node) {
-        if (loopScope == 0) {
+        if (loopScopeCount == 0) {
             throw new RuntimeException("Break should be in LoopScope");
         }
     }
 
     @Override
     public void visit(ContinueStmt node) {
-        if (loopScope == 0) {
+        if (loopScopeCount == 0) {
             throw new RuntimeException("Continue should be in LoopScope");
         }
     }
@@ -224,13 +236,13 @@ public class StmtScanner implements IASTVistor {
         if (node.getStep() != null) {
             node.getStep().accept(this);
         }
-        loopScope += 1;
+        loopScopeCount += 1;
         currentTable.push(new BlockTable(currentTable.peek(), "")); // FIXME
         blockScopePushed = true;
         node.getStmt().accept(this);
         blockScopePushed = false; // for does not always enter a blockStmt, may be other stmt.
         currentTable.pop();
-        loopScope -= 1;
+        loopScopeCount -= 1;
     }
 
     @Override
@@ -239,13 +251,13 @@ public class StmtScanner implements IASTVistor {
         if (!node.getCond().getType().equals(new ClassType("bool", 0))) {
             throw new RuntimeException("bool required in WhileStmt");
         }
-        loopScope += 1;
+        loopScopeCount += 1;
         currentTable.push(new BlockTable(currentTable.peek(), "")); // FIXME
         blockScopePushed = true;
         node.getStmt().accept(this);
         blockScopePushed = false; // while does not always enter a blockStmt, may be other stmt.
         currentTable.pop();
-        loopScope -= 1;
+        loopScopeCount -= 1;
     }
 
     @Override
@@ -254,11 +266,11 @@ public class StmtScanner implements IASTVistor {
 
     @Override
     public void visit(FunctionCall node) {
-        node.setTable(currentTable.peek());
         // for built-in size
         if (node.getFunc() != null && node.getFunc().getName().equals("size")) {
             node.setType(node.getFunc().getReturnType());
             node.setLValue(false);
+            node.setProcessedName("size"); // prepare for IR Generation
             return;
         }
 
@@ -283,11 +295,13 @@ public class StmtScanner implements IASTVistor {
         ClassType classType = node.getName().getFunc().getReturnType();
         node.setType(classType);
         node.setLValue(false);
+
+        // prepare for IR Generation
+        node.setProcessedName(node.getName().getFunc().getProcessedName());
     }
 
     @Override
     public void visit(ArrayAcess node) {
-        node.setTable(currentTable.peek());
         node.getArray().accept(this);
         node.getSubscript().accept(this);
         ClassType lType = node.getArray().getType();
@@ -303,7 +317,6 @@ public class StmtScanner implements IASTVistor {
 
     @Override
     public void visit(MemberAcess node) {
-        node.setTable(currentTable.peek());
         node.getExpr().accept(this);
         ClassType lType = node.getExpr().getType();
         String name = node.getName();
@@ -312,10 +325,11 @@ public class StmtScanner implements IASTVistor {
         if (lType.getDim() != 0) {
             // for built-in size()
             if (name.equals("size")) {
-                if (lType.getDim() == 0) {
-                    throw new RuntimeException("size() is for Array Type.");
-                }
+//                if (lType.getAddrFlag() == 0) {
+//                    throw new RuntimeException("size() is for Array Type.");
+//                } // FIXME no use
                 FuncSymbol.Builder builder = new FuncSymbol.Builder();
+                builder.setBelongTable(topTable); // FIXME size belong to what ?
                 builder.setName("size");
                 builder.setReturnType(new ClassType("int", 0));
                 node.setFunc(builder.build());
@@ -323,10 +337,9 @@ public class StmtScanner implements IASTVistor {
             }
             throw new RuntimeException("Array is not acceptable in MemberAcess.");
         }
-        ClassSymbol symbol =
-                topTable.getMyClass(node.getExpr().getType().getBaseType()); // assert symbol cannot be null
+        ClassSymbol symbol = topTable.getMyClass(node.getExpr().getType().getBaseType()); // assert symbol cannot be null
         if (symbol == null) {
-            throw new RuntimeException("Class is not declared.");
+            throw new RuntimeException("IRClass is not declared.");
         }
 
         // assert Var Func share the same scope.
@@ -341,14 +354,12 @@ public class StmtScanner implements IASTVistor {
 
     @Override
     public void visit(NewExpr node) {
-        node.setTable(currentTable.peek());
         node.getNewObject().accept(this);
         node.setType(node.getNewObject().getType());
     }
 
     @Override
     public void visit(UnaryExpr node) {
-        node.setTable(currentTable.peek());
         node.getExpr().accept(this);
         switch (node.getOp()) {
             case POSTFIX_INC:
@@ -388,7 +399,6 @@ public class StmtScanner implements IASTVistor {
 
     @Override
     public void visit(BinaryExpr node) {
-        node.setTable(currentTable.peek());
         node.getLhs().accept(this);
         node.getRhs().accept(this);
         switch (node.getOp()) {
@@ -528,13 +538,12 @@ public class StmtScanner implements IASTVistor {
 
     @Override
     public void visit(Identifier node) {
-        node.setTable(currentTable.peek());
         // this
         if (node.getName().equals("this")) {
-            if (classScope == null) {
-                throw new RuntimeException("this should be in Class");
+            if (classSymbol == null) {
+                throw new RuntimeException("this should be in IRClass");
             } else {
-                node.setType(new ClassType(classScope.getName(), 0));
+                node.setType(new ClassType(classSymbol.getName(), 0));
             }
             return;
         }
@@ -544,6 +553,9 @@ public class StmtScanner implements IASTVistor {
             node.setFunc(((FuncSymbol) symbol));
         } else if (symbol instanceof VarSymbol) {
             node.setType(((VarSymbol) symbol).getType());
+            // prepare for IR Generation
+            node.setVarSymbol(((VarSymbol) symbol));
+            node.setFuncSymbol(funcSymbol);
         } else {
             throw new RuntimeException("Identifier " + node.getName() + " is not declared.");
         }
@@ -554,7 +566,7 @@ public class StmtScanner implements IASTVistor {
         node.getLens().forEach(x -> x.accept(this));
         ClassSymbol myClass = topTable.getMyClass(node.getType().getBaseType());
         if (myClass == null) {
-            throw new RuntimeException("Class is not declared.");
+            throw new RuntimeException("IRClass is not declared.");
         }
         if (myClass.getName().equals("void")) {
             throw new RuntimeException("Void should not be declared.");
@@ -573,7 +585,7 @@ public class StmtScanner implements IASTVistor {
         node.getParameters().forEach(x -> x.accept(this));
         ClassSymbol myClass = topTable.getMyClass(node.getType().getBaseType());
         if (myClass == null) {
-            throw new RuntimeException("Class is not declared.");
+            throw new RuntimeException("IRClass is not declared.");
         }
         // TODO void
         if (myClass.getName().equals("void")) {
@@ -601,28 +613,24 @@ public class StmtScanner implements IASTVistor {
 
     @Override
     public void visit(BoolConst node) {
-        node.setTable(currentTable.peek());
         node.setType(new ClassType("bool", 0));
         node.setLValue(false);
     }
 
     @Override
     public void visit(NumConst node) {
-        node.setTable(currentTable.peek());
         node.setType(new ClassType("int", 0));
         node.setLValue(false);
     }
 
     @Override
     public void visit(StrConst node) {
-        node.setTable(currentTable.peek());
         node.setType(new ClassType("string", 0));
         node.setLValue(false);
     }
 
     @Override
     public void visit(NullConst node) {
-        node.setTable(currentTable.peek());
         node.setType(new ClassType("null", 0));
         node.setLValue(false);
     }

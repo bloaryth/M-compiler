@@ -20,12 +20,12 @@ class vector{
 		return data.size();
 	}
 
-	int dot(vector rhs){
+	int dot(vector rightOperand){
 		int i = 0;
 		int result = 0;
 		while(i < getDim()){
-			//result = data[i] * rhs[i];
-			result = data[i] * rhs.data[i];
+			//result = data[i] * rightOperand[i];
+			result = data[i] * rightOperand.data[i];
 			++i;
 		}
 		return result;
@@ -40,14 +40,14 @@ class vector{
 		return this;
 	}
 
-	vector add(vector rhs){
-		if (getDim() != rhs.getDim() || getDim() == 0)
+	vector add(vector rightOperand){
+		if (getDim() != rightOperand.getDim() || getDim() == 0)
 			return null;
 		//int[] temp = new int[getDim()];
 		vector temp = new vector;
 		int i;
 		for (i = 0; i < getDim(); ++i){
-			temp.data[i] = data[i] + rhs.data[i];
+			temp.data[i] = data[i] + rightOperand.data[i];
 		}
 		return temp;
 	}
@@ -71,15 +71,15 @@ class vector{
 		return temp;
 	}
 
-	bool copy(vector rhs){
-		if (rhs == null) return false;
-		if (rhs.getDim() == 0) {
+	bool copy(vector rightOperand){
+		if (rightOperand == null) return false;
+		if (rightOperand.getDim() == 0) {
 			data = null;
 		} else {
-			data = new int[rhs.getDim()];
+			data = new int[rightOperand.getDim()];
 			int i;
 			for (i = 0; i < getDim(); ++i) {
-				data[i] = rhs.data[i];
+				data[i] = rightOperand.data[i];
 			}
 		}
 		return true;

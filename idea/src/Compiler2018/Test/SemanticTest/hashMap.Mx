@@ -4,7 +4,7 @@ class node {
     int data;
 	node next;
 }
-node[] table;
+node[] belongTable;
 int getHash(int n) {
 	return (n * 237) % hashsize;
 }
@@ -12,14 +12,14 @@ void put(int key, int data) {
 	int p;
 	node ptr = null;
 	p = getHash(key);
-	if (table[p] == null) {
-		table[p] = new node;
-		table[p].key = key;
-		table[p].data = data;
-		table[p].next = null;
+	if (belongTable[p] == null) {
+		belongTable[p] = new node;
+		belongTable[p].key = key;
+		belongTable[p].data = data;
+		belongTable[p].next = null;
 		return;
 	}
-	ptr = table[p];
+	ptr = belongTable[p];
 	while (ptr.key != key) {
 		if (ptr.next == null) {
 			ptr.next = new node;
@@ -32,7 +32,7 @@ void put(int key, int data) {
 }
 int get(int key) {
 	node ptr = null;
-	ptr = table[getHash(key)];
+	ptr = belongTable[getHash(key)];
 	while (ptr.key != key) {
 		ptr = ptr.next;
 	}
@@ -40,9 +40,9 @@ int get(int key) {
 }
 int main() {
 	int i;
-	table = new node[100];
+	belongTable = new node[100];
 	for (i = 0;i < hashsize;i++)
-		table[i] = null;
+		belongTable[i] = null;
 	for (i = 0;i < 1000;i++)
 		put(i, i);
 	for (i = 0;i < 1000;i++)

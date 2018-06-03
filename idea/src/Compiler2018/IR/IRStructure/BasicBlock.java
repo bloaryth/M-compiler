@@ -1,18 +1,32 @@
 package Compiler2018.IR.IRStructure;
 
+import Compiler2018.BackEnd.IIRVistor;
 import Compiler2018.IR.IRInstruction.AbstractIRInstruction;
+import Compiler2018.IR.IRInstruction.Branch;
+import Compiler2018.IR.IRInstruction.Jump;
+import Compiler2018.IR.IRInstruction.Ret;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class BasicBlock {
-    private final Function function;
+    // basic Info
+    private final IRFunction IRFunction;
     private final String name;
 
-    public BasicBlock(Function function, String name) {
-        this.function = function;
+    public BasicBlock(IRFunction IRFunction, String name) {
+        this.IRFunction = IRFunction;
         this.name = name;
     }
+
+    public Compiler2018.IR.IRStructure.IRFunction getIRFunction() {
+        return IRFunction;
+    }
+
+    public String getName() {
+        return name;
+    }
+
 
     // linked List IR
     private AbstractIRInstruction head = null;
@@ -52,6 +66,8 @@ public class BasicBlock {
         this.tail = tail;
     }
 
+
+    // data flow analysis
     private Set<BasicBlock> pred = new LinkedHashSet<>();
     private Set<BasicBlock> succ = new LinkedHashSet<>();
 
@@ -63,11 +79,57 @@ public class BasicBlock {
         return succ;
     }
 
-    public void addPred(BasicBlock basicBlock){
-        pred.add(basicBlock);
+    public void linkSucc(BasicBlock basicBlock) {
+        if (basicBlock == null) {
+            return;
+        }
+        succ.add(basicBlock);
+        basicBlock.pred.add(this);
     }
 
-    public void addSucc(BasicBlock basicBlock){
-        succ.add(basicBlock);
+    private boolean endWithJump = false;
+
+    public boolean isEndWithJump() {
+        return endWithJump;
+    }
+
+    public void endWith(AbstractIRInstruction jump) {
+        if (endWithJump) {
+//            throw new RuntimeException("end With multiple jump"); // FIXME
+//            System.err.println("hhh");
+        }
+        addTail(jump);
+        endWithJump = true;
+
+        if(jump instanceof Branch){
+            linkSucc(((Branch) jump).getIfTrue());
+            linkSucc(((Branch) jump).getIfFalse());
+        } else if(jump instanceof Jump){
+            linkSucc(((Jump) jump).getJumpBlock());
+        } else if(jump instanceof Ret){
+//            parent.retInstruction.add((Return) jump);
+        } else{
+            assert false;
+        }
+    }
+
+    public String toIRString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(name).append(":\n");
+        if (head != null) {
+            AbstractIRInstruction iter = head;
+            while (iter != tail) {
+                builder.append(iter.toIRString());
+                iter = iter.getNext();
+            }
+            builder.append(iter.toIRString());
+            return builder.toString();
+        } else {
+            return builder.toString() + "Nothing\n";
+        }
+    }
+
+    public void accept(IIRVistor vistor) {
+        vistor.visit(this);
     }
 }

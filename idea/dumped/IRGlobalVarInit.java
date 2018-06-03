@@ -1,152 +1,193 @@
-package Compiler2018.FrontEnd;
+package Compiler2018.FrontEnd.IRBuilder;
 
 import Compiler2018.AST.*;
-import Compiler2018.Symbol.ClassSymbol;
-import Compiler2018.Symbol.ClassTable;
-import Compiler2018.Symbol.TopTable;
+import Compiler2018.FrontEnd.IASTVistor;
+import Compiler2018.IR.IRInstruction.Move;
+import Compiler2018.IR.IRInstruction.MoveU;
+import Compiler2018.IR.IRStructure.BasicBlock;
+import Compiler2018.IR.IRStructure.IRFunction;
+import Compiler2018.IR.IRStructure.IRProgram;
+import Compiler2018.IR.IRStructure.StaticData;
+import Compiler2018.IR.IRValue.Label;
+import Compiler2018.IR.IRValue.Register;
 
-public class ClassScanner implements IASTVistor {
-    private TopTable topTable;
+public class IRGlobalVarInit implements IASTVistor {
+    private final IRProgram irProgram;
+    private IRFunction currentFunction;
+    private BasicBlock currentBB;
 
-    public ClassScanner(TopTable topTable) {
-        this.topTable = topTable;
+    public IRGlobalVarInit(IRProgram irProgram) {
+        this.irProgram = irProgram;
     }
 
     @Override
     public void visit(Program node) {
-        // add primitive type
-        topTable.addMyClass("int", new ClassSymbol("int", new ClassTable(topTable, "int")));
-        topTable.addMyClass("bool", new ClassSymbol("bool", new ClassTable(topTable, "bool")));
-        topTable.addMyClass("void", new ClassSymbol("void", new ClassTable(topTable, "void")));
-        topTable.addMyClass("string", new ClassSymbol("string", new ClassTable(topTable, "string")));
-
-        node.getSections().forEach(x -> x.accept(this));
+        node.getSections().stream().filter(x -> x instanceof VarDecl).forEach(x -> x.accept(this));
     }
 
     @Override
     public void visit(ClassDecl node) {
-        if (node.getName().equals("this")) {
-            throw new RuntimeException("'this' should not be a class name");
-        }
-        if (topTable.getMyClass(node.getName()) != null) {
-            throw new RuntimeException("Class is previously declared.");
-        }
-        topTable.addMyClass(node.getName(), new ClassSymbol(node.getName(), new ClassTable(topTable, node.getName())));
+
     }
 
     @Override
     public void visit(FuncDecl node) {
+
     }
 
     @Override
     public void visit(VarDecl node) {
+        Label label = new Label(node.getName());
+        irProgram.putGlobalVar(node.getName(), new StaticData(label));
+        currentBB.addTail(new MoveU(currentBB, node.getVarSymbol().getRegister(), null, label));    // addr of variabel
+
+        if (node.getInit() != null) {
+            node.getInit().accept(this);    // FIXME
+            Register lhs = node.getVarSymbol().getRegister();
+            Register rhs = node.getInit().getRegister();
+            assert lhs.getAddrFlag();
+            if (rhs.getAddrFlag()) {
+                currentBB.addTail(new Move(currentBB, lhs, new Register(null, false), rhs, true));
+            } else {
+                currentBB.addTail(new Move(currentBB, lhs, new Register(null, false), rhs, false));
+            }
+        } else {
+            // FIXME default constructor
+        }
     }
 
     @Override
     public void visit(ClassVarDecl node) {
+
     }
 
     @Override
     public void visit(ClassCstrDecl node) {
+
     }
 
     @Override
     public void visit(ClassFuncDecl node) {
+
     }
 
     @Override
     public void visit(BlockStmt node) {
+
     }
 
     @Override
     public void visit(VarDeclStmt node) {
+
     }
 
     @Override
     public void visit(BranchStmt node) {
+
     }
 
     @Override
     public void visit(ExprStmt node) {
+
     }
 
     @Override
     public void visit(EmptyStmt node) {
+
     }
 
     @Override
     public void visit(ReturnStmt node) {
+
     }
 
     @Override
     public void visit(BreakStmt node) {
+
     }
 
     @Override
     public void visit(ContinueStmt node) {
+
     }
 
     @Override
     public void visit(ForStmt node) {
+
     }
 
     @Override
     public void visit(WhileStmt node) {
+
     }
 
     @Override
     public void visit(ClassType node) {
+
     }
 
     @Override
     public void visit(FunctionCall node) {
+
     }
 
     @Override
     public void visit(ArrayAcess node) {
+
     }
 
     @Override
     public void visit(MemberAcess node) {
+
     }
 
     @Override
     public void visit(NewExpr node) {
+
     }
 
     @Override
     public void visit(UnaryExpr node) {
+
     }
 
     @Override
     public void visit(BinaryExpr node) {
+
     }
 
     @Override
     public void visit(Identifier node) {
+
     }
 
     @Override
     public void visit(NewArray node) {
+
     }
 
     @Override
     public void visit(NewNonArray node) {
+
     }
 
     @Override
     public void visit(BoolConst node) {
+
     }
 
     @Override
     public void visit(NumConst node) {
+
     }
 
     @Override
     public void visit(StrConst node) {
+
     }
 
     @Override
     public void visit(NullConst node) {
+
     }
 }

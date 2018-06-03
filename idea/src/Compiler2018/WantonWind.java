@@ -2,6 +2,10 @@ package Compiler2018;
 
 import Compiler2018.AST.Program;
 import Compiler2018.FrontEnd.*;
+import Compiler2018.FrontEnd.Semantic.ClassScanner;
+import Compiler2018.FrontEnd.Semantic.ClassVarScanner;
+import Compiler2018.FrontEnd.Semantic.FuncScanner;
+import Compiler2018.FrontEnd.Semantic.StmtScanner;
 import Compiler2018.Parser.MLexer;
 import Compiler2018.Parser.MParser;
 import Compiler2018.Symbol.TopTable;

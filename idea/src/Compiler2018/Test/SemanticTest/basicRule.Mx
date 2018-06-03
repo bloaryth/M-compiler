@@ -14,7 +14,7 @@ int age = 1000000;
 string eng = "Four score and seven years ago";
 
 
-//function delc
+//IRFunction delc
 int travel(){
 	int a = 10000000;
 	return a;

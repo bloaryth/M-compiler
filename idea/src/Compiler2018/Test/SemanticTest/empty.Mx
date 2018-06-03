@@ -1,6 +1,6 @@
 int f()
 {
-	println("No main function.");
+	println("No main IRFunction.");
 	return 0;
 }
 

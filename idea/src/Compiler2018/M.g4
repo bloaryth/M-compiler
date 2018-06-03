@@ -76,27 +76,27 @@ nonArrayClass   // --> ClassType
 
 // AbstractExpr
 expression
-    :   expression op=('++'|'--')   # PostfixIncDec // --> UnaryExpr
+    :   expression oprator=('++'|'--')   # PostfixIncDec // --> UnaryExpr
     |   expression '(' callParameter? ')'   # FunctionCall  // --> FunctionCall
     |   expression '[' expression ']'   # ArrayAcess    // --> ArrayAcess
     |   expression '.' Identifier     # MemberAcess // --> MemberAcess
 
-    |   <assoc=right> op=('++'|'--') expression # UnaryExpr // --> UnaryExpr
-    |   <assoc=right> op=('+'|'-') expression   # UnaryExpr // --> UnaryExpr
-    |   <assoc=right> op=('!'|'~') expression   # UnaryExpr // --> UnaryExpr
+    |   <assoc=right> oprator=('++'|'--') expression # UnaryExpr // --> UnaryExpr
+    |   <assoc=right> oprator=('+'|'-') expression   # UnaryExpr // --> UnaryExpr
+    |   <assoc=right> oprator=('!'|'~') expression   # UnaryExpr // --> UnaryExpr
     |   <assoc=right> 'new' newObject   # NewExpr   // --> NewExpr
 
-    |   expression op=('*'|'/'|'%') expression # BinaryExpr // --> BinaryExpr
-    |   expression op=('-'|'+') expression  # BinaryExpr    // --> BinaryExpr
-    |   expression op=('<<'|'>>') expression    # BinaryExpr    // --> BinaryExpr
-    |   expression op=('<'|'<='|'>'|'>=') expression    # BinaryExpr    // --> BinaryExpr
-    |   expression op=('=='|'!=') expression    # BinaryExpr    // --> BinaryExpr
-    |   expression op='&' expression    # BinaryExpr    // --> BinaryExpr
-    |   expression op='^' expression    # BinaryExpr    // --> BinaryExpr
-    |   expression op='|' expression    # BinaryExpr    // --> BinaryExpr
-    |   expression op='&&' expression   # BinaryExpr    // --> BinaryExpr
-    |   expression op='||' expression   # BinaryExpr    // --> BinaryExpr
-    |   <assoc=right> expression op='=' expression  # BinaryExpr    // --> BinaryExpr
+    |   expression oprator=('*'|'/'|'%') expression # BinaryExpr // --> BinaryExpr
+    |   expression oprator=('-'|'+') expression  # BinaryExpr    // --> BinaryExpr
+    |   expression oprator=('<<'|'>>') expression    # BinaryExpr    // --> BinaryExpr
+    |   expression oprator=('<'|'<='|'>'|'>=') expression    # BinaryExpr    // --> BinaryExpr
+    |   expression oprator=('=='|'!=') expression    # BinaryExpr    // --> BinaryExpr
+    |   expression oprator='&' expression    # BinaryExpr    // --> BinaryExpr
+    |   expression oprator='^' expression    # BinaryExpr    // --> BinaryExpr
+    |   expression oprator='|' expression    # BinaryExpr    // --> BinaryExpr
+    |   expression oprator='&&' expression   # BinaryExpr    // --> BinaryExpr
+    |   expression oprator='||' expression   # BinaryExpr    // --> BinaryExpr
+    |   <assoc=right> expression oprator='=' expression  # BinaryExpr    // --> BinaryExpr
 
     |   Identifier  # Identifier        // --> Identifier
     |   constant    # Const

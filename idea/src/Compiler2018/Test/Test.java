@@ -1,7 +1,16 @@
 package Compiler2018.Test;
 
 import Compiler2018.AST.Program;
+import Compiler2018.BackEnd.IRPrinter;
 import Compiler2018.FrontEnd.*;
+import Compiler2018.FrontEnd.IRBuilder.IRClassBuilder;
+import Compiler2018.FrontEnd.IRBuilder.IRFuncParamBuilder;
+import Compiler2018.FrontEnd.IRBuilder.IRInstructionBuilder;
+import Compiler2018.FrontEnd.Semantic.ClassScanner;
+import Compiler2018.FrontEnd.Semantic.ClassVarScanner;
+import Compiler2018.FrontEnd.Semantic.FuncScanner;
+import Compiler2018.FrontEnd.Semantic.StmtScanner;
+import Compiler2018.IR.IRStructure.IRProgram;
 import Compiler2018.Parser.MLexer;
 import Compiler2018.Parser.MParser;
 import Compiler2018.Symbol.TopTable;
@@ -33,49 +42,56 @@ public class Test {
     }
 
     public static String getFilePath() {
-        //        return "./TestCase/InFunc.Mx";
-        return "./TestCase/notThatBad.Mx";
-        //        return "./TestCase/class.Mx";
-        //        return "./TestCase/newVoidArray.Mx";
-        //        return "./TestCase/newVoid.Mx";
-        //        return "./TestCase/Size.Mx";
-        //        return "./TestCase/returnTest.Mx";
-        //        return "./TestCase/recoverScope.Mx";
-        //        return "./TestCase/tbyArrayTest.Mx";
-        //        return "./TestCase/myTest.Mx";
-        //        return "./TestCase/sepa.Mx";
-        //        return "./TestCase/last.Mx";
-        //        return "./TestCase/xzjTest.Mx";
-        //        return "./TestCase/zlmNew.Mx";
-        //        return "./TestCase/testThis2.Mx";
-        //        return "./TestCase/testThis.Mx";
-        //        return "./TestCase/ljnCstr.Mx";
-        //        return "./TestCase/cstr.Mx";
-        //        return "./TestCase/zzkNaive.Mx";
-        //        return "./TestCase/if2.Mx";
-        //        return "./TestCase/duplicateVar.Mx";
-        //        return "./TestCase/voidMain.Mx";
-        //        return "./TestCase/empty.Mx";
-        //        return "./TestCase/if.Mx";
-        //        return "./TestCase/param.Mx";
-        //        return "./TestCase/Builg.Mx";
-        //        return "./TestCase/basicRule.Mx";
-        //        return "./TestCase/vector.Mx";
-        //        return "./TestCase/hashMap.Mx";
-        //        return "./TestCase/stringTest.Mx";
-        //        return "./TestCase/returnCheck.Mx";
-        //        return "./TestCase/comment.Mx";
-        //        return "./TestCase/Wall.Mx";
-        //        return "./TestCase/returnVal.Mx";
-        //        return "./TestCase/main.Mx";
-        //        return "./TestCase/duplicateClass.Mx";
-        //        return "./TestCase/check.Mx";
-        //        return "./TestCase/strShift.Mx";
-        //        return "./TestCase/void.Mx";
-        //        return "./TestCase/declare.Mx";
-        //        return "./TestCase/array.Mx";
-        //        return "./TestCase/a+b.Mx";
-        //        return "./TestCase/member.Mx";
+        // IR Generation
+//        return "./CodeGenTest/ClassTest.Mx";
+//        return "./CodeGenTest/FunctionTest.Mx";
+//        return "./CodeGenTest/Random.Mx";
+
+        // Semantic
+
+        return "./SemanticTest/notThatBad.Mx";
+        //        return "./SemanticTest/InFunc.Mx";
+        //        return "./SemanticTest/class.Mx";
+        //        return "./SemanticTest/newVoidArray.Mx";
+        //        return "./SemanticTest/newVoid.Mx";
+        //        return "./SemanticTest/Size.Mx";
+        //        return "./SemanticTest/returnTest.Mx";
+        //        return "./SemanticTest/recoverScope.Mx";
+        //        return "./SemanticTest/tbyArrayTest.Mx";
+        //        return "./SemanticTest/myTest.Mx";
+        //        return "./SemanticTest/sepa.Mx";
+        //        return "./SemanticTest/last.Mx";
+        //        return "./SemanticTest/xzjTest.Mx";
+        //        return "./SemanticTest/zlmNew.Mx";
+        //        return "./SemanticTest/testThis2.Mx";
+        //        return "./SemanticTest/testThis.Mx";
+        //        return "./SemanticTest/ljnCstr.Mx";
+        //        return "./SemanticTest/cstr.Mx";
+        //        return "./SemanticTest/zzkNaive.Mx";
+        //        return "./SemanticTest/if2.Mx";
+        //        return "./SemanticTest/duplicateVar.Mx";
+        //        return "./SemanticTest/voidMain.Mx";
+        //        return "./SemanticTest/empty.Mx";
+        //        return "./SemanticTest/if.Mx";
+        //        return "./SemanticTest/param.Mx";
+        //        return "./SemanticTest/Builg.Mx";
+        //        return "./SemanticTest/basicRule.Mx";
+        //        return "./SemanticTest/vector.Mx";
+        //        return "./SemanticTest/hashMap.Mx";
+        //        return "./SemanticTest/stringTest.Mx";
+        //        return "./SemanticTest/returnCheck.Mx";
+        //        return "./SemanticTest/comment.Mx";
+        //        return "./SemanticTest/Wall.Mx";
+        //        return "./SemanticTest/returnVal.Mx";
+        //        return "./SemanticTest/main.Mx";
+        //        return "./SemanticTest/duplicateClass.Mx";
+        //        return "./SemanticTest/check.Mx";
+        //        return "./SemanticTest/strShift.Mx";
+        //        return "./SemanticTest/void.Mx";
+        //        return "./SemanticTest/declare.Mx";
+        //        return "./SemanticTest/array.Mx";
+        //        return "./SemanticTest/a+b.Mx";
+        //        return "./SemanticTest/member.Mx";
     }
 
     public static void main(String[] args) throws Exception {
@@ -93,6 +109,7 @@ public class Test {
             walker.walk(astBuilder, tree);
             Program program = astBuilder.getProgram();
 
+            // Semantic
             ASTPrinter astPrinter = new ASTPrinter();
             TopTable topTable = new TopTable(null, "");
             ClassScanner classScanner = new ClassScanner(topTable);
@@ -100,11 +117,24 @@ public class Test {
             ClassVarScanner classVarScanner = new ClassVarScanner(topTable);
             StmtScanner stmtScanner = new StmtScanner(topTable);
 
-            program.accept(astPrinter);
+//            program.accept(astPrinter);
             program.accept(classScanner);
             program.accept(funcScanner);
             program.accept(classVarScanner);
             program.accept(stmtScanner);
+
+            // IR Generation
+            IRProgram irProgram = new IRProgram();
+            IRClassBuilder irClassBuilder = new IRClassBuilder(irProgram);
+            IRFuncParamBuilder irFuncParamBuilder = new IRFuncParamBuilder(irProgram);
+            IRInstructionBuilder irInstructionBuilder = new IRInstructionBuilder(irProgram);
+
+            program.accept(irClassBuilder);
+            program.accept(irFuncParamBuilder);
+            program.accept(irInstructionBuilder);
+
+            IRPrinter irPrinter = new IRPrinter();
+            irProgram.accept(irPrinter);
 
         } catch (Exception e) {
             e.printStackTrace(System.err);

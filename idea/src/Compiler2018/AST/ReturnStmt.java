@@ -19,6 +19,17 @@ public class ReturnStmt extends AbstractJumpStmt {
         return posReturn;
     }
 
+    // prepare for IR Generation
+    private ClassType classType;
+
+    public ClassType getClassType() {
+        return classType;
+    }
+
+    public void setClassType(ClassType classType) {
+        this.classType = classType;
+    }
+
     @Override
     public void accept(IASTVistor visitor) {
         visitor.visit(this);

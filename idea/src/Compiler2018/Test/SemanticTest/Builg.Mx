@@ -1,5 +1,5 @@
 // Target: Simulate a Bulgarian-solitaire game.
-// Possible opitimization: Dead code elimination, common expression, inline function, loop unrolling, etc.
+// Possible opitimization: Dead code elimination, common expression, inline IRFunction, loop unrolling, etc.
 // REMARKS: A funny game. If you like, you can try to prove that when n=1+2+..+i(i>0), the game will always stop
 //          and converge to the only solution: {1,2,...i}.   :)
 

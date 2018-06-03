@@ -3,13 +3,13 @@ package Compiler2018.AST;
 import Compiler2018.FrontEnd.IASTVistor;
 
 public class BoolConst extends AbstractConst {
-    private final Boolean value;
+    private final boolean value;
 
-    public BoolConst(Boolean value) {
+    public BoolConst(boolean value) {
         this.value = value;
     }
 
-    public Boolean getValue() {
+    public boolean getValue() {
         return value;
     }
 

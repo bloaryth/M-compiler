@@ -1,8 +1,9 @@
 package Compiler2018.IR.IRInstruction;
 
+import Compiler2018.BackEnd.IIRVistor;
 import Compiler2018.IR.IRStructure.BasicBlock;
 
-public class AbstractIRInstruction {
+public abstract class AbstractIRInstruction {
     private final BasicBlock basicBlock;
     private AbstractIRInstruction prev = null;
     private AbstractIRInstruction next = null;
@@ -39,5 +40,23 @@ public class AbstractIRInstruction {
         linkPrev(pre);
     }
 
+    public AbstractIRInstruction getPrev() {
+        return prev;
+    }
 
+    public AbstractIRInstruction getNext() {
+        return next;
+    }
+
+    // comment
+    private String comment = null;
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    // printer
+    abstract public String toIRString();
+
+    abstract void accept(IIRVistor vistor);
 }

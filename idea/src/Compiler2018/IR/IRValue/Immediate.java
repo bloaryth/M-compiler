@@ -10,4 +10,9 @@ public class Immediate extends AbstractValue {
     public int getVal() {
         return val;
     }
+
+    @Override
+    public String toIRString() {
+        return val.toString();
+    }
 }
