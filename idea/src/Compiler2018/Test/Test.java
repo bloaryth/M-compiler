@@ -151,9 +151,6 @@ public class Test {
             irProgram.accept(nasmTranslater);
             System.out.println(nasmTranslater.getBuilder().toString());
 
-            StringBuilder builder = new StringBuilder();
-            builder.append("");
-            System.err.println(builder.toString());
         } catch (Exception e) {
             e.printStackTrace(System.err);
             System.exit(1);

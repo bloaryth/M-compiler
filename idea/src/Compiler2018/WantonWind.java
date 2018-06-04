@@ -1,11 +1,16 @@
 package Compiler2018;
 
 import Compiler2018.AST.Program;
+import Compiler2018.BackEnd.*;
 import Compiler2018.FrontEnd.*;
+import Compiler2018.FrontEnd.IRBuilder.IRClassBuilder;
+import Compiler2018.FrontEnd.IRBuilder.IRFuncParamBuilder;
+import Compiler2018.FrontEnd.IRBuilder.IRInstructionBuilder;
 import Compiler2018.FrontEnd.Semantic.ClassScanner;
 import Compiler2018.FrontEnd.Semantic.ClassVarScanner;
 import Compiler2018.FrontEnd.Semantic.FuncScanner;
 import Compiler2018.FrontEnd.Semantic.StmtScanner;
+import Compiler2018.IR.IRStructure.IRProgram;
 import Compiler2018.Parser.MLexer;
 import Compiler2018.Parser.MParser;
 import Compiler2018.Symbol.TopTable;
@@ -22,22 +27,6 @@ import java.io.IOException;
 
 public class WantonWind {
     private static String readTestFile(String filePath) {
-        //        StringBuilder str = new StringBuilder ();
-        //        try{
-        //            InputStreamReader reader = new
-        // InputStreamReader(Test.class.getResourceAsStream(filePath));
-        //            BufferedReader buffReader = new BufferedReader(reader);
-        //            String strTmp;
-        //            while((strTmp = buffReader.readLine ()) != null){
-        //                str.append (strTmp+'\n');
-        //            }
-        //            buffReader.close();
-        //        }
-        //        catch (Exception e){
-        //            e.printStackTrace();
-        //        }
-        //        return str.toString ();
-
         StringBuilder ans = new StringBuilder();
         File file = new File(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -77,6 +66,32 @@ public class WantonWind {
             program.accept(classVarScanner);
             program.accept(stmtScanner);
 
+            // IR Generation
+            IRProgram irProgram = new IRProgram();
+            IRClassBuilder irClassBuilder = new IRClassBuilder(irProgram);
+            IRFuncParamBuilder irFuncParamBuilder = new IRFuncParamBuilder(irProgram);
+            IRInstructionBuilder irInstructionBuilder = new IRInstructionBuilder(irProgram);
+
+            program.accept(irClassBuilder);
+            program.accept(irFuncParamBuilder);
+            program.accept(irInstructionBuilder);
+
+            // Code Generation
+            IRPrinter irPrinter = new IRPrinter();
+            RegisterOffsetResolver registerOffsetResolver = new RegisterOffsetResolver();
+//            irProgram.accept(irPrinter);
+            irProgram.accept(registerOffsetResolver);
+
+            // Register Allocation
+            PreRegisterAllocator preRegisterAllocator = new PreRegisterAllocator();
+            NaiveRegisterAllocator naiveRegisterAllocator = new NaiveRegisterAllocator();
+            irProgram.accept(preRegisterAllocator);
+            irProgram.accept(naiveRegisterAllocator);
+
+            // NASM generation
+            NASMTranslater nasmTranslater = new NASMTranslater();
+            irProgram.accept(nasmTranslater);
+            System.out.println(nasmTranslater.getBuilder().toString());
         } catch (Exception e) {
             e.printStackTrace(System.err);
             System.exit(1);
