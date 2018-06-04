@@ -2,6 +2,7 @@ package Compiler2018.Test;
 
 import Compiler2018.AST.Program;
 import Compiler2018.BackEnd.IRPrinter;
+import Compiler2018.BackEnd.NASMTranslater;
 import Compiler2018.BackEnd.NaiveRegisterAllocator;
 import Compiler2018.BackEnd.RegisterOffsetResolver;
 import Compiler2018.FrontEnd.*;
@@ -139,14 +140,17 @@ public class Test {
             // Code Generation
             IRPrinter irPrinter = new IRPrinter();
             RegisterOffsetResolver registerOffsetResolver = new RegisterOffsetResolver();
-            irProgram.accept(irPrinter);
+//            irProgram.accept(irPrinter);
             irProgram.accept(registerOffsetResolver);
 
             // Register Allocation
             NaiveRegisterAllocator naiveRegisterAllocator = new NaiveRegisterAllocator();
             irProgram.accept(naiveRegisterAllocator);
 
-            System.out.println("hh");
+            // NASM generation
+            NASMTranslater nasmTranslater = new NASMTranslater();
+            irProgram.accept(nasmTranslater);
+            System.out.println(nasmTranslater.getBuilder().toString());
         } catch (Exception e) {
             e.printStackTrace(System.err);
             System.exit(1);

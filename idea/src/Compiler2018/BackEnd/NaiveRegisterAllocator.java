@@ -110,7 +110,7 @@ public class NaiveRegisterAllocator implements IIRVistor{
 
     @Override
     public void visit(Ret ir) {
-        // Do Nothing
+        ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
     }
 
     @Override

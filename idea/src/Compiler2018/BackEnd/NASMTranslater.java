@@ -16,7 +16,6 @@ public class NASMTranslater implements IIRVistor{
     private Map<Register.PysicalRegister, Register> registerUseMap = new LinkedHashMap<>();
     public StringBuilder builder = new StringBuilder();
     private Integer currentRSP;
-    private Integer alignment;  // sub add rsp
 
     public StringBuilder getBuilder() {
         return builder;
@@ -67,8 +66,11 @@ public class NASMTranslater implements IIRVistor{
     @Override
     public void visit(IRFunction irFunction) {
         currentRSP = 0;
-        builder.append(irFunction.getProcessedName()).append(":");
+        builder.append(irFunction.getProcessedName()).append(":\n");
+        prologue();
+        saveCallee();
         irFunction.getBasicBlockSet().forEach(x -> x.accept(this));
+        builder.append("\n");
     }
 
     @Override
@@ -83,7 +85,7 @@ public class NASMTranslater implements IIRVistor{
 
     @Override
     public void visit(BasicBlock basicBlock) {
-        builder.append(basicBlock.getProcessedName()).append(":");
+        builder.append(basicBlock.getProcessedName()).append(":\n");
         BasicBlock.Iter iter = new BasicBlock.Iter(basicBlock);
         while (iter.hasNext()) {
             iter.next().accept(this);
@@ -206,7 +208,17 @@ public class NASMTranslater implements IIRVistor{
 
     @Override
     public void visit(Call ir) {
-
+        Integer alignment = - currentRSP % 16;  // sub add rsp
+        if (alignment != 0) {
+            builder.append("\tsub ").append(alignment).append("\n");
+        }
+        saveCaller();
+        prepareCallParameter(ir.getArgs());
+        builder.append("\tcall ").append(ir.getProcessedName()).append("\n");
+        leaveCallParameter(ir.getArgs());
+        if (alignment != 0) {
+            builder.append("\tadd ").append(alignment).append("\n");
+        }
     }
 
     @Override
@@ -294,8 +306,9 @@ public class NASMTranslater implements IIRVistor{
 
     @Override
     public void visit(Ret ir) {
-        loadIn(ir.getRet());
-        move(Register.PysicalRegister.RAX, false, ir.getRet(), false);
+        restoreCallee();
+        epilogue();
+        builder.append("\tret\n");
     }
 
     @Override
