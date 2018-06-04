@@ -74,7 +74,7 @@ public class IRInstructionBuilder implements IASTVistor {
 
         if (node.getVarSymbol().getBelongTable() instanceof TopTable) { // Global Init
             Label label = new Label(node.getName());
-            irProgram.putGlobalVar(node.getName(), new StaticData(label));
+            irProgram.putGlobalVar(node.getName(), new StaticData(label, null));
 
             if (node.getInit() != null) {
                 node.getInit().accept(this);
@@ -832,7 +832,7 @@ public class IRInstructionBuilder implements IASTVistor {
     public void visit(StrConst node) {
         StaticData stringData = irProgram.getStaticString(node.getStr());
         if (stringData == null) {
-            stringData = new StaticData(new Label(node.getStr()));
+            stringData = new StaticData(new Label(node.getStr()), node.getStr());
             irProgram.putStaticString(node.getStr(), stringData);
         }
         Register constVar = new Register();

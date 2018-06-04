@@ -35,6 +35,14 @@ public class NaiveRegisterAllocator implements IIRVistor{
 
     @Override
     public void visit(BinaryCalc ir) {
+//        if (ir.getOprator() == BinaryCalc.BinaryOp.DIV) {
+//            ir.getDestination().setAllocatedRegister(Register.PysicalRegister.RAX);
+//            ir.getLeftOperand().setAllocatedRegister(Register.PysicalRegister.RAX); // FIXME immediate != null
+//        } else if (ir.getOprator() == BinaryCalc.BinaryOp.MOD) {
+//            ir.getDestination().setAllocatedRegister(Register.PysicalRegister.RAX);
+//            ir.getLeftOperand().setAllocatedRegister(Register.PysicalRegister.RAX);
+//        } // FIXME allocator
+
         ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
         if (ir.getIntermediate() != null) {
             ir.getIntermediate().setAllocatedRegister(Register.PysicalRegister.R13);

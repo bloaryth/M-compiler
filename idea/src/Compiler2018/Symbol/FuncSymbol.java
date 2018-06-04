@@ -25,7 +25,7 @@ public class FuncSymbol extends AbstractSymbol {
         private Map<String, VarSymbol> stringParameters = new LinkedHashMap<>();
         private Map<Integer, VarSymbol> intParameters = new LinkedHashMap<>();
         private BlockTable blockTable;
-        private List<Register> parameterRegister = new LinkedList<>();  // prepare for IR Generation
+        private List<Register> parameterRegisterList = new LinkedList<>();  // prepare for IR Generation
 
         public void setBelongTable(AbstractSymbolTable belongTable) {
             this.belongTable = belongTable;
@@ -50,8 +50,8 @@ public class FuncSymbol extends AbstractSymbol {
 
         public FuncSymbol build() {
             stringParameters.forEach((x, y) -> blockTable.addVar(x, y));
-            stringParameters.forEach((x, y) -> parameterRegister.add(y.getRegister())); // varSymbol in BlockTable
-            return new FuncSymbol(belongTable, returnType, name, stringParameters, intParameters, blockTable, parameterRegister);
+            stringParameters.forEach((x, y) -> parameterRegisterList.add(y.getRegister())); // varSymbol in BlockTable
+            return new FuncSymbol(belongTable, returnType, name, stringParameters, intParameters, blockTable, parameterRegisterList);
         }
     }
 

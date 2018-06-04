@@ -3,10 +3,7 @@ package Compiler2018.IR.IRStructure;
 import Compiler2018.BackEnd.IIRVistor;
 import Compiler2018.IR.IRValue.Register;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class IRFunction {
     private final String processedName;  // processed processedName
@@ -14,6 +11,7 @@ public class IRFunction {
     private BasicBlock startBlock;
     private BasicBlock endBlock;
     // register used in function
+    private final List<Register> parameterList = new LinkedList<>();
     private final Register thisRegister;
     private Integer totalOffset = 0;
     private final Map<Register, Integer> stackOffsetMap = new LinkedHashMap<>(); // Register "equals" is not overrided.
@@ -56,6 +54,15 @@ public class IRFunction {
 
     public Register getThisRegister() {
         return thisRegister;
+    }
+
+    public List<Register> getParameterList() {
+        return parameterList;
+    }
+
+    public void addParameter(Register register) {
+        parameterList.add(register);
+        addStackOffset(register);
     }
 
     public Integer getStackOffset(Register reg){

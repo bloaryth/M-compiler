@@ -6,7 +6,10 @@ import Compiler2018.IR.IRValue.AbstractValue;
 import Compiler2018.IR.IRValue.Immediate;
 import Compiler2018.IR.IRValue.Label;
 import Compiler2018.IR.IRValue.Register;
+import Compiler2018.Test.Test;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +19,7 @@ public class NASMTranslater implements IIRVistor{
     private Map<Register.PysicalRegister, Register> registerUseMap = new LinkedHashMap<>();
     public StringBuilder builder = new StringBuilder();
     private Integer currentRSP;
+    private boolean globalVar;
 
     public StringBuilder getBuilder() {
         return builder;
@@ -58,9 +62,35 @@ public class NASMTranslater implements IIRVistor{
         registerUseMap.remove(register);
     }
 
+    public static String getTxt(String filePath) {
+        StringBuilder str = new StringBuilder();
+        try {
+            InputStreamReader reader = new InputStreamReader(Test.class.getResourceAsStream(filePath));
+            BufferedReader buffReader = new BufferedReader(reader);
+            String strTmp;
+            while ((strTmp = buffReader.readLine()) != null) {
+                str.append(strTmp + '\n');
+            }
+            buffReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //        System.out.println (str.toString ());
+        return str.toString();
+    }
+
     @Override
     public void visit(IRProgram irProgram) {
+        builder.append(getTxt("../allinOne.asm"));
+
+        builder.append("SECTION .text\n\n");
         irProgram.getIrFunctionMap().forEach((x,y) -> y.accept(this));
+        builder.append("SECTION .data\n\n");
+        globalVar = true;
+        irProgram.getGlobalVarMap().forEach((x, y) -> y.accept(this));
+        globalVar = false;
+        builder.append("SECTION .rodata.str1.1\n\n");
+        irProgram.getStaticStringMap().forEach((x, y) -> y.accept(this));
     }
 
     @Override
@@ -69,6 +99,7 @@ public class NASMTranslater implements IIRVistor{
         builder.append(irFunction.getProcessedName()).append(":\n");
         prologue();
         saveCallee();
+        copyParameter(irFunction.getParameterList());
         irFunction.getBasicBlockSet().forEach(x -> x.accept(this));
         builder.append("\n");
     }
@@ -80,7 +111,23 @@ public class NASMTranslater implements IIRVistor{
 
     @Override
     public void visit(StaticData irStaticData) {
-
+        if (globalVar) {
+            labelTranslate(irStaticData.getLabel());
+            builder.append(":\n");
+            builder.append("\tdq 0000000000000000H\n\n");
+        } else {
+            labelTranslate(irStaticData.getLabel());
+            builder.append(":\n");
+            char[] bytes = ((String) irStaticData.getVal()).toCharArray();
+            builder.append("\tdb");
+            for (int i = 0; i < bytes.length; i++) {
+                builder.append(" ").append((int) bytes[i]).append("H");
+                if (i != bytes.length - 2) {
+                    builder.append(",");
+                }
+            }
+            builder.append("\n\n");
+        }
     }
 
     @Override
@@ -124,12 +171,16 @@ public class NASMTranslater implements IIRVistor{
                 imul(ir.getDestination(), false, rightOperand, star);
                 break;
             case DIV:
+                clear(Register.PysicalRegister.RAX);
+                clear(Register.PysicalRegister.RDX);
                 setZero(Register.PysicalRegister.RDX);
                 move(Register.PysicalRegister.RAX, false, ir.getLeftOperand(), ir.isLeftStar());
                 idiv(rightOperand, star);
-                move(ir.getDestination(), false, Register.PysicalRegister.RAX, false);
+                move(ir.getDestination(), false, Register.PysicalRegister.RAX, false);  // FIXME move lhs == rhs
                 break;
             case MOD:
+                clear(Register.PysicalRegister.RAX);
+                clear(Register.PysicalRegister.RDX);
                 setZero(Register.PysicalRegister.RDX);
                 move(Register.PysicalRegister.RAX, false, ir.getLeftOperand(), ir.isLeftStar());
                 idiv(rightOperand, star);
@@ -137,11 +188,13 @@ public class NASMTranslater implements IIRVistor{
                 break;
             case LSH:
                 move(ir.getDestination(), false, ir.getLeftOperand(), ir.isRightStar());
+                clear(Register.PysicalRegister.RCX);
                 move(Register.PysicalRegister.RCX, false, ir.getRightOperand(), ir.isRightStar());
                 sal(ir.getDestination(), false);
                 break;
             case RSH:
                 move(ir.getDestination(), false, ir.getLeftOperand(), ir.isRightStar());
+                clear(Register.PysicalRegister.RCX);
                 move(Register.PysicalRegister.RCX, false, ir.getRightOperand(), ir.isRightStar());
                 sar(ir.getDestination(), false);
                 break;
@@ -650,6 +703,31 @@ public class NASMTranslater implements IIRVistor{
     private void leaveCallParameter(List<Register> registerList) {
         for (int i = registerList.size()-1; i > 6; i--) {
             pop(registerList.get(i));
+        }
+    }
+
+    private void copyParameter(List<Register> registerList) {
+        if (registerList.size() > 0) {
+            builder.append("\tmov [rbp ").append(registerList.get(0).getStackOffset()).append("] rdi\n");
+        }
+        if (registerList.size() > 1) {
+            builder.append("\tmov [rbp ").append(registerList.get(1).getStackOffset()).append("] rsi\n");
+        }
+        if (registerList.size() > 2) {
+            builder.append("\tmov [rbp ").append(registerList.get(2).getStackOffset()).append("] rdx\n");
+        }
+        if (registerList.size() > 3) {
+            builder.append("\tmov [rbp ").append(registerList.get(3).getStackOffset()).append("] rcx\n");
+        }
+        if (registerList.size() > 4) {
+            builder.append("\tmov [rbp ").append(registerList.get(4).getStackOffset()).append("] r8\n");
+        }
+        if (registerList.size() > 5) {
+            builder.append("\tmov [rbp ").append(registerList.get(5).getStackOffset()).append("] r9\n");
+        }
+        for (int i = registerList.size()-1; i > 6; i--) {
+            builder.append("\tmov rax, [rbp + ").append((8 * (i-6) + 16));
+            builder.append("\tmov [rbp ").append(registerList.get(i).getStackOffset()).append("] rax\n");
         }
     }
 
