@@ -42,14 +42,16 @@ public class Register extends AbstractValue {
         R8, R9, R10, R11, R12, R13, R14, R15;
     }
 
-    private PysicalRegister allocatedRegister;  // Pysical Reg Allocated
+    private PysicalRegister allocatedRegister = null;  // Pysical Reg Allocated
 
     public PysicalRegister getAllocatedRegister() {
         return allocatedRegister;
     }
 
-    public void setAllocatedRegister(PysicalRegister allocatedRegister) {
-        this.allocatedRegister = allocatedRegister;
+    public void tryAllocatedRegister(PysicalRegister allocatedRegister) {
+        if (this.allocatedRegister == null) {
+            this.allocatedRegister = allocatedRegister;
+        }
     }
 
 

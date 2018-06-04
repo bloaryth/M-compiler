@@ -676,7 +676,7 @@ public class ASTBuilder implements MListener {
                 map.put(ctx, new NullConst());
                 break;
             case MParser.StrConst:
-                map.put(ctx, new StrConst(s));
+                map.put(ctx, new StrConst(s.substring(1, s.length()-1)));
                 break;
             case MParser.BoolConst:
                 map.put(ctx, new BoolConst(s.equals("true")));

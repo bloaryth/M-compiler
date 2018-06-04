@@ -280,7 +280,7 @@ public class IRInstructionBuilder implements IASTVistor {
     }
 
     @Override
-    public void visit(FunctionCall node) {
+    public void visit(FunctionCall node) {  // FIXME size
         node.getName().accept(this);
         node.getParameters().forEach(x -> x.accept(this));
         List<Register> parameterList = new LinkedList<>();
@@ -305,7 +305,39 @@ public class IRInstructionBuilder implements IASTVistor {
         }
         Call.Builder builder = new Call.Builder();
         builder.setBasicBlock(currentBB);
-        builder.setProcessedName(node.getProcessedName());
+        // restore builtin name
+        switch (node.getProcessedName()) {
+            case "_print":
+                builder.setProcessedName("print");
+                break;
+            case "_println":
+                builder.setProcessedName("println");
+                break;
+            case "_getString":
+                builder.setProcessedName("getString");
+                break;
+            case "_getInt":
+                builder.setProcessedName("getInt");
+                break;
+            case "_toString":
+                builder.setProcessedName("toString");
+                break;
+            case "_length":
+                builder.setProcessedName("length");
+                break;
+            case "_substring":
+                builder.setProcessedName("substring");
+                break;
+            case "_parseInt":
+                builder.setProcessedName("parseInt");
+                break;
+            case "_ord":
+                builder.setProcessedName("ord");
+                break;
+            default:
+                builder.setProcessedName(node.getProcessedName());
+                break;
+        }
         builder.setRet(ret);
         parameterList.forEach(builder::addArgs);
 

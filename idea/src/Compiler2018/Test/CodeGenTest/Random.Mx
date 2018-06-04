@@ -1,12 +1,5 @@
-void f(){
-    return;
-}
-
-
 int main(){
-    //bool a = true && false || false;
-    //bool a;
-    //a = true && false || true;
-    f();
+    println("hhh");
+
     return 0;
 }

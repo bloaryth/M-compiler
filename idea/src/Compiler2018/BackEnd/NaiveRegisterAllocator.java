@@ -36,19 +36,19 @@ public class NaiveRegisterAllocator implements IIRVistor{
     @Override
     public void visit(BinaryCalc ir) {
 //        if (ir.getOprator() == BinaryCalc.BinaryOp.DIV) {
-//            ir.getDestination().setAllocatedRegister(Register.PysicalRegister.RAX);
-//            ir.getLeftOperand().setAllocatedRegister(Register.PysicalRegister.RAX); // FIXME immediate != null
+//            ir.getDestination().tryAllocatedRegister(Register.PysicalRegister.RAX);
+//            ir.getLeftOperand().tryAllocatedRegister(Register.PysicalRegister.RAX); // FIXME immediate != null
 //        } else if (ir.getOprator() == BinaryCalc.BinaryOp.MOD) {
-//            ir.getDestination().setAllocatedRegister(Register.PysicalRegister.RAX);
-//            ir.getLeftOperand().setAllocatedRegister(Register.PysicalRegister.RAX);
+//            ir.getDestination().tryAllocatedRegister(Register.PysicalRegister.RAX);
+//            ir.getLeftOperand().tryAllocatedRegister(Register.PysicalRegister.RAX);
 //        } // FIXME allocator
 
-        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
+        ir.getDestination().tryAllocatedRegister(Register.PysicalRegister.R12);
         if (ir.getIntermediate() != null) {
-            ir.getIntermediate().setAllocatedRegister(Register.PysicalRegister.R13);
+            ir.getIntermediate().tryAllocatedRegister(Register.PysicalRegister.R13);
         }
-        ir.getLeftOperand().setAllocatedRegister(Register.PysicalRegister.R14);
-        ir.getRightOperand().setAllocatedRegister(Register.PysicalRegister.R15);
+        ir.getLeftOperand().tryAllocatedRegister(Register.PysicalRegister.R14);
+        ir.getRightOperand().tryAllocatedRegister(Register.PysicalRegister.R15);
     }
 
     @Override
@@ -58,34 +58,17 @@ public class NaiveRegisterAllocator implements IIRVistor{
 
     @Override
     public void visit(Call ir) {
-        if (ir.getArgs().size() > 0) {
-            ir.getArgs().get(0).setAllocatedRegister(Register.PysicalRegister.RDI);
-        }
-        if (ir.getArgs().size() > 1) {
-            ir.getArgs().get(1).setAllocatedRegister(Register.PysicalRegister.RSI);
-        }
-        if (ir.getArgs().size() > 2) {
-            ir.getArgs().get(2).setAllocatedRegister(Register.PysicalRegister.RDX);
-        }
-        if (ir.getArgs().size() > 3) {
-            ir.getArgs().get(3).setAllocatedRegister(Register.PysicalRegister.RCX);
-        }
-        if (ir.getArgs().size() > 4) {
-            ir.getArgs().get(4).setAllocatedRegister(Register.PysicalRegister.R8);
-        }
-        if (ir.getArgs().size() > 5) {
-            ir.getArgs().get(5).setAllocatedRegister(Register.PysicalRegister.R9);
-        }
+
     }
 
     @Override
     public void visit(Compare ir) {
-        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
+        ir.getDestination().tryAllocatedRegister(Register.PysicalRegister.R12);
         if (ir.getIntermediate() != null) {
-            ir.getIntermediate().setAllocatedRegister(Register.PysicalRegister.R13);
+            ir.getIntermediate().tryAllocatedRegister(Register.PysicalRegister.R13);
         }
-        ir.getLeftOperand().setAllocatedRegister(Register.PysicalRegister.R14);
-        ir.getRightOperand().setAllocatedRegister(Register.PysicalRegister.R15);
+        ir.getLeftOperand().tryAllocatedRegister(Register.PysicalRegister.R14);
+        ir.getRightOperand().tryAllocatedRegister(Register.PysicalRegister.R15);
     }
 
     @Override
@@ -95,40 +78,40 @@ public class NaiveRegisterAllocator implements IIRVistor{
 
     @Override
     public void visit(Lea ir) {
-        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
-        ir.getBase().setAllocatedRegister(Register.PysicalRegister.R13);
+        ir.getDestination().tryAllocatedRegister(Register.PysicalRegister.R12);
+        ir.getBase().tryAllocatedRegister(Register.PysicalRegister.R13);
         if (ir.getPos() != null) {
-            ir.getPos().setAllocatedRegister(Register.PysicalRegister.R14);
+            ir.getPos().tryAllocatedRegister(Register.PysicalRegister.R14);
         }
     }
 
     @Override
     public void visit(Move ir) {
-        ir.getLhs().setAllocatedRegister(Register.PysicalRegister.R12);
+        ir.getLhs().tryAllocatedRegister(Register.PysicalRegister.R12);
         if (ir.getIntermediate() != null) {
-            ir.getIntermediate().setAllocatedRegister(Register.PysicalRegister.R13);
+            ir.getIntermediate().tryAllocatedRegister(Register.PysicalRegister.R13);
         }
-        ir.getRhs().setAllocatedRegister(Register.PysicalRegister.R14);
+        ir.getRhs().tryAllocatedRegister(Register.PysicalRegister.R14);
     }
 
     @Override
     public void visit(MoveU ir) {
-        ir.getLhs().setAllocatedRegister(Register.PysicalRegister.R12);
+        ir.getLhs().tryAllocatedRegister(Register.PysicalRegister.R12);
     }
 
     @Override
     public void visit(Ret ir) {
-        ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
+
     }
 
     @Override
     public void visit(SelfInc ir) {
-        ir.getDest().setAllocatedRegister(Register.PysicalRegister.R12);
+        ir.getDest().tryAllocatedRegister(Register.PysicalRegister.R12);
     }
 
     @Override
     public void visit(UnaryCalc ir) {
-        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
-        ir.getOperand().setAllocatedRegister(Register.PysicalRegister.R13);
+        ir.getDestination().tryAllocatedRegister(Register.PysicalRegister.R12);
+        ir.getOperand().tryAllocatedRegister(Register.PysicalRegister.R13);
     }
 }

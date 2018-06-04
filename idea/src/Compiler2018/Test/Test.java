@@ -1,10 +1,7 @@
 package Compiler2018.Test;
 
 import Compiler2018.AST.Program;
-import Compiler2018.BackEnd.IRPrinter;
-import Compiler2018.BackEnd.NASMTranslater;
-import Compiler2018.BackEnd.NaiveRegisterAllocator;
-import Compiler2018.BackEnd.RegisterOffsetResolver;
+import Compiler2018.BackEnd.*;
 import Compiler2018.FrontEnd.*;
 import Compiler2018.FrontEnd.IRBuilder.IRClassBuilder;
 import Compiler2018.FrontEnd.IRBuilder.IRFuncParamBuilder;
@@ -48,8 +45,8 @@ public class Test {
         // IR Generation
 //        return "./CodeGenTest/ClassTest.Mx";
 //        return "./CodeGenTest/FunctionTest.Mx";
-//        return "./CodeGenTest/Random.Mx";
-        return "./CodeGenTest/ZZK.Mx";
+        return "./CodeGenTest/Random.Mx";
+//        return "./CodeGenTest/ZZK.Mx";
 
         // Semantic
 
@@ -144,13 +141,19 @@ public class Test {
             irProgram.accept(registerOffsetResolver);
 
             // Register Allocation
+            PreRegisterAllocator preRegisterAllocator = new PreRegisterAllocator();
             NaiveRegisterAllocator naiveRegisterAllocator = new NaiveRegisterAllocator();
+            irProgram.accept(preRegisterAllocator);
             irProgram.accept(naiveRegisterAllocator);
 
             // NASM generation
             NASMTranslater nasmTranslater = new NASMTranslater();
             irProgram.accept(nasmTranslater);
             System.out.println(nasmTranslater.getBuilder().toString());
+
+            StringBuilder builder = new StringBuilder();
+            builder.append("");
+            System.err.println(builder.toString());
         } catch (Exception e) {
             e.printStackTrace(System.err);
             System.exit(1);

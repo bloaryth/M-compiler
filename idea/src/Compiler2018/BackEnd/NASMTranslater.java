@@ -27,7 +27,7 @@ public class NASMTranslater implements IIRVistor{
 
     private void moveToMem(Register register) {
         builder.append("\t");
-        builder.append("mov [rbp - ").append(-register.getStackOffset()).append("], ");
+        builder.append("mov qword [rbp - ").append(-register.getStackOffset()).append("], ");
         registerTranslate(register, false);
         builder.append("\n");
     }
@@ -36,7 +36,7 @@ public class NASMTranslater implements IIRVistor{
         builder.append("\t");
         builder.append("mov ");
         registerTranslate(register, false);
-        builder.append(", [rbp - ").append(-register.getStackOffset()).append("]");
+        builder.append(", qword [rbp - ").append(-register.getStackOffset()).append("]");
         builder.append("\n");
     }
 
@@ -83,6 +83,8 @@ public class NASMTranslater implements IIRVistor{
     public void visit(IRProgram irProgram) {
         builder.append(getTxt("../allinOne.asm"));
 
+        builder.append("global main\n\n");
+
         builder.append("SECTION .text\n\n");
         irProgram.getIrFunctionMap().forEach((x,y) -> y.accept(this));
         builder.append("SECTION .data\n\n");
@@ -96,7 +98,12 @@ public class NASMTranslater implements IIRVistor{
     @Override
     public void visit(IRFunction irFunction) {
         currentRSP = 0;
-        builder.append(irFunction.getProcessedName()).append(":\n");
+        if (irFunction.getProcessedName().equals("_main")) {
+            builder.append("main:\n");
+        } else {
+            builder.append(irFunction.getProcessedName()).append(":\n");
+        }
+
         prologue();
         saveCallee();
         copyParameter(irFunction.getParameterList());
@@ -121,12 +128,9 @@ public class NASMTranslater implements IIRVistor{
             char[] bytes = ((String) irStaticData.getVal()).toCharArray();
             builder.append("\tdb");
             for (int i = 0; i < bytes.length; i++) {
-                builder.append(" ").append((int) bytes[i]).append("H");
-                if (i != bytes.length - 2) {
-                    builder.append(",");
-                }
+                builder.append(" ").append((int) bytes[i]).append(",");
             }
-            builder.append("\n\n");
+            builder.append(" 00\n\n");
         }
     }
 
@@ -267,6 +271,9 @@ public class NASMTranslater implements IIRVistor{
         }
         saveCaller();
         prepareCallParameter(ir.getArgs());
+        if (ir.getRet() != null) {
+            loadIn(ir.getRet());
+        }
         builder.append("\tcall ").append(ir.getProcessedName()).append("\n");
         leaveCallParameter(ir.getArgs());
         if (alignment != 0) {
@@ -392,7 +399,7 @@ public class NASMTranslater implements IIRVistor{
 
     private void registerTranslate(Register.PysicalRegister register, boolean star) {
         if (star) {
-            builder.append("[");
+            builder.append("qword [");
         }
         builder.append(register.toString().toLowerCase());
         if (star) {
