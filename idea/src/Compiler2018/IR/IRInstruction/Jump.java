@@ -17,11 +17,11 @@ public class Jump extends AbstractIRInstruction {
 
     @Override
     public String toIRString() {
-        return "\tJUMP " + jumpBlock.getName() + "\n";
+        return "\tJUMP " + jumpBlock.getProcessedName() + "\n";
     }
 
     @Override
-    void accept(IIRVistor vistor) {
+    public void accept(IIRVistor vistor) {
         vistor.visit(this);
     }
 }

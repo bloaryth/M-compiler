@@ -41,9 +41,10 @@ public class Lea extends AbstractIRInstruction {
         if (pos != null) {
             posStr = pos.toIRString() + " ";
         } else {
-            posStr = "";
+            posStr = "# ";
         }
         String str = "\tLEA " +
+                destination.toIRString() + " " +
                 base.toIRString() + " " +
                 posStr+
                 offset.toString() + "\n";
@@ -51,7 +52,7 @@ public class Lea extends AbstractIRInstruction {
     }
 
     @Override
-    void accept(IIRVistor vistor) {
+    public void accept(IIRVistor vistor) {
         vistor.visit(this);
     }
 }

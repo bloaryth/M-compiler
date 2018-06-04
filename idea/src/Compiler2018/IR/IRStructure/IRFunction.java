@@ -1,19 +1,20 @@
 package Compiler2018.IR.IRStructure;
 
 import Compiler2018.BackEnd.IIRVistor;
-import Compiler2018.IR.IRInstruction.BinaryCalc;
 import Compiler2018.IR.IRValue.Register;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class IRFunction {
     private final String processedName;  // processed processedName
     private final String className; // used to find the IRClass
     private BasicBlock startBlock;
     private BasicBlock endBlock;
+    // register used in function
     private final Register thisRegister;
-    private final List<Register> registerList = new LinkedList<>(); // contains parameter Register
-    // some registers are in VarSymbol, some need to be calc manually.
     private Integer totalOffset = 0;
     private final Map<Register, Integer> stackOffsetMap = new LinkedHashMap<>(); // Register "equals" is not overrided.
 
@@ -57,29 +58,20 @@ public class IRFunction {
         return thisRegister;
     }
 
-    public List<Register> getRegisterList() {
-        return registerList;
-    }
-
-    public void addRegister(Register register){
-        registerList.add(register);
-    }
-
     public Integer getStackOffset(Register reg){
         return stackOffsetMap.get(reg);
     }
 
     public void addStackOffset(Register reg){
-        stackOffsetMap.put(reg, totalOffset);
+        if (reg == null || stackOffsetMap.get(reg) != null) {
+            return;
+        }
         totalOffset -= 8;   // all 8 bytes long
+        stackOffsetMap.put(reg, totalOffset);
+        reg.setStackOffset(totalOffset);
     }
 
-    public void addStackOffset(BinaryCalc binaryCalc) {
-//        addStackOffset(binaryCalc.getDestination());
-//        addStackOffset(binaryCalc, );
-        // FIXME
-    }
-
+    // for IR Printer
     private Set<BasicBlock> basicBlockSet = new LinkedHashSet<>();
 
     public Set<BasicBlock> getBasicBlockSet() {

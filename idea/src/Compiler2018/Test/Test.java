@@ -2,6 +2,8 @@ package Compiler2018.Test;
 
 import Compiler2018.AST.Program;
 import Compiler2018.BackEnd.IRPrinter;
+import Compiler2018.BackEnd.NaiveRegisterAllocator;
+import Compiler2018.BackEnd.RegisterOffsetResolver;
 import Compiler2018.FrontEnd.*;
 import Compiler2018.FrontEnd.IRBuilder.IRClassBuilder;
 import Compiler2018.FrontEnd.IRBuilder.IRFuncParamBuilder;
@@ -46,10 +48,11 @@ public class Test {
 //        return "./CodeGenTest/ClassTest.Mx";
 //        return "./CodeGenTest/FunctionTest.Mx";
 //        return "./CodeGenTest/Random.Mx";
+        return "./CodeGenTest/ZZK.Mx";
 
         // Semantic
 
-        return "./SemanticTest/notThatBad.Mx";
+//        return "./SemanticTest/notThatBad.Mx";
         //        return "./SemanticTest/InFunc.Mx";
         //        return "./SemanticTest/class.Mx";
         //        return "./SemanticTest/newVoidArray.Mx";
@@ -133,9 +136,17 @@ public class Test {
             program.accept(irFuncParamBuilder);
             program.accept(irInstructionBuilder);
 
+            // Code Generation
             IRPrinter irPrinter = new IRPrinter();
+            RegisterOffsetResolver registerOffsetResolver = new RegisterOffsetResolver();
             irProgram.accept(irPrinter);
+            irProgram.accept(registerOffsetResolver);
 
+            // Register Allocation
+            NaiveRegisterAllocator naiveRegisterAllocator = new NaiveRegisterAllocator();
+            irProgram.accept(naiveRegisterAllocator);
+
+            System.out.println("hh");
         } catch (Exception e) {
             e.printStackTrace(System.err);
             System.exit(1);

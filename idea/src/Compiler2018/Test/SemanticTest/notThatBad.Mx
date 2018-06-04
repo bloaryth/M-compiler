@@ -1,5 +1,4 @@
 
-/*
 void bad_func_0() {
     int i;
     for (i = 0; i <= 10; i = i + 1) {
@@ -36,7 +35,7 @@ void bad_func_2() {
     string Void;
     string String;
 }
-*/
+
 class E {
     int x;
     E() {

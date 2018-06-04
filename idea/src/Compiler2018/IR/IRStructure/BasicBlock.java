@@ -6,25 +6,35 @@ import Compiler2018.IR.IRInstruction.Branch;
 import Compiler2018.IR.IRInstruction.Jump;
 import Compiler2018.IR.IRInstruction.Ret;
 
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class BasicBlock {
+    private static Integer Id = 0;
+    private final Integer vId;
+
     // basic Info
     private final IRFunction IRFunction;
     private final String name;
 
     public BasicBlock(IRFunction IRFunction, String name) {
+        vId = Id;
+        Id += 1;
         this.IRFunction = IRFunction;
         this.name = name;
+    }
+
+    public Integer getvId() {
+        return vId;
     }
 
     public Compiler2018.IR.IRStructure.IRFunction getIRFunction() {
         return IRFunction;
     }
 
-    public String getName() {
-        return name;
+    public String getProcessedName() {
+        return name + "." + vId.toString();
     }
 
 
@@ -96,7 +106,6 @@ public class BasicBlock {
     public void endWith(AbstractIRInstruction jump) {
         if (endWithJump) {
 //            throw new RuntimeException("end With multiple jump"); // FIXME
-//            System.err.println("hhh");
         }
         addTail(jump);
         endWithJump = true;
@@ -113,20 +122,43 @@ public class BasicBlock {
         }
     }
 
+    public static class Iter implements Iterator<AbstractIRInstruction> {
+        private AbstractIRInstruction head;
+        private AbstractIRInstruction tail;
+        private AbstractIRInstruction iter;
+
+        private Iter(AbstractIRInstruction head, AbstractIRInstruction tail) {
+            this.head = head;
+            this.tail = tail;
+            this.iter = head;
+        }
+
+        public Iter(BasicBlock basicBlock) {
+            this(basicBlock.getHead(), basicBlock.getTail());
+        }
+
+        @Override
+        public boolean hasNext() {
+            return head != null && iter != null;
+        }
+
+        @Override
+        public AbstractIRInstruction next() {
+            AbstractIRInstruction retIter = iter;
+            iter = iter.getNext();
+            return retIter;
+        }
+    }
+
+
     public String toIRString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(name).append(":\n");
-        if (head != null) {
-            AbstractIRInstruction iter = head;
-            while (iter != tail) {
-                builder.append(iter.toIRString());
-                iter = iter.getNext();
-            }
-            builder.append(iter.toIRString());
-            return builder.toString();
-        } else {
-            return builder.toString() + "Nothing\n";
+        builder.append(getProcessedName()).append(":\n");
+        Iter iter = new Iter(this);
+        while (iter.hasNext()) {
+            builder.append(iter.next().toIRString());
         }
+        return builder.toString();
     }
 
     public void accept(IIRVistor vistor) {

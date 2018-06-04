@@ -54,7 +54,7 @@ public class Move extends AbstractIRInstruction {
     }
 
     @Override
-    void accept(IIRVistor vistor) {
+    public void accept(IIRVistor vistor) {
         vistor.visit(this);
     }
 }

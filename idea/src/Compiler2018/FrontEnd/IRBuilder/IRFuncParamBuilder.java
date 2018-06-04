@@ -34,8 +34,8 @@ public class IRFuncParamBuilder implements IASTVistor {
         if (className != null) {
             irFunction.addStackOffset(irFunction.getThisRegister());
         }
-        // add parameter register
-        node.getFuncSymbol().getParameterRegisterList().forEach(irFunction::addStackOffset);
+        // parameter register already added
+//        node.getFuncSymbol().getParameterRegisterList().forEach(irFunction::addStackOffset);
         irProgram.putIRFunction(funcSymbol.getProcessedName(), irFunction);
     }
 

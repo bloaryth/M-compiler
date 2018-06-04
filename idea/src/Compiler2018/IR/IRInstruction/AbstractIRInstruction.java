@@ -58,5 +58,5 @@ public abstract class AbstractIRInstruction {
     // printer
     abstract public String toIRString();
 
-    abstract void accept(IIRVistor vistor);
+    public abstract void accept(IIRVistor vistor);
 }

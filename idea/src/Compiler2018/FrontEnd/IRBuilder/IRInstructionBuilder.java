@@ -15,11 +15,10 @@ import java.util.Stack;
 
 public class IRInstructionBuilder implements IASTVistor {
     private final IRProgram irProgram;
-    private BasicBlock InitAfter;
+    private BasicBlock globalInitAfter;
     private IRFunction currentFunction;
     private BasicBlock currentBB;
-    private boolean inBranch;
-    private Compare currentCond;   // valid only inBranch is true
+    private Compare currentCond;   // prepare for generate shortcut branch
     private Stack<BasicBlock> loopStepBBStack = new Stack<>();
     private Stack<BasicBlock> loopAfterBBStack = new Stack<>();
 
@@ -34,7 +33,7 @@ public class IRInstructionBuilder implements IASTVistor {
         currentBB = currentFunction.getStartBlock();
         currentFunction.putBasicBlock(currentBB);
         node.getSections().stream().filter(x -> x instanceof VarDecl).forEach(x -> x.accept(this));
-        InitAfter = currentBB;
+        globalInitAfter = currentBB;
         currentBB = null;
         // Function implementation
         node.getSections().stream().filter(x -> !(x instanceof VarDecl)).forEach(x -> x.accept(this));
@@ -49,12 +48,17 @@ public class IRInstructionBuilder implements IASTVistor {
     public void visit(FuncDecl node) {
         currentFunction = irProgram.getIRFunction(node.getFuncSymbol().getProcessedName());
         if (node.getName().equals("main")) {
-            currentBB = InitAfter;
+            currentBB = globalInitAfter;
         } else {
             currentBB = currentFunction.getStartBlock();
         }
         currentFunction.putBasicBlock(currentBB);
         node.getBlock().accept(this);
+        // default ret may be redundant
+        Register ret = new Register();
+        currentBB.addTail(new MoveU(currentBB, ret, new Immediate(0)));
+        currentBB.endWith(new Ret(currentBB, ret));
+
         currentFunction.setEndBlock(currentBB);
         currentBB = null;
         currentFunction = null;
@@ -62,8 +66,8 @@ public class IRInstructionBuilder implements IASTVistor {
 
     @Override
     public void visit(VarDecl node) {
+        BasicBlock block = new BasicBlock(currentFunction, "AfInit");
         if (node.getInit() != null && isLogicalExpr(node.getInit())) {
-            BasicBlock block = new BasicBlock(currentFunction, null);
             node.getInit().setIfTrue(block);
             node.getInit().setIfFalse(block);
         }   // shortcut
@@ -74,6 +78,10 @@ public class IRInstructionBuilder implements IASTVistor {
 
             if (node.getInit() != null) {
                 node.getInit().accept(this);
+                if (node.getInit() != null && isLogicalExpr(node.getInit())) {
+                    currentBB = block;
+                    currentFunction.putBasicBlock(currentBB);
+                }   // shortcut
                 Register init = new Register();
                 currentBB.addTail(new MoveU(currentBB, init, label));
                 currentBB.addTail(new Move(currentBB, init, true, node.getInit().getRegister(), node.getInit().isDataInMem()));
@@ -84,6 +92,10 @@ public class IRInstructionBuilder implements IASTVistor {
         } else { // BlockTabel Variable
             if (node.getInit() != null) {
                 node.getInit().accept(this);
+                if (node.getInit() != null && isLogicalExpr(node.getInit())) {
+                    currentBB = block;
+                    currentFunction.putBasicBlock(currentBB);
+                }   // shortcut
                 currentBB.addTail(new Move(currentBB, node.getVarSymbol().getRegister(), false, node.getInit().getRegister(), node.getInit().isDataInMem()));
             } else {
                 // redundant TODO class default init
@@ -243,7 +255,7 @@ public class IRInstructionBuilder implements IASTVistor {
         loopStepBBStack.push(BBCond);
         loopAfterBBStack.push(BBAfter);
 
-        currentBB.endWith(new Jump(currentBB, BBCond));
+//        currentBB.endWith(new Jump(currentBB, BBCond));
 
         currentBB = BBCond;
         currentFunction.putBasicBlock(currentBB);
@@ -274,8 +286,6 @@ public class IRInstructionBuilder implements IASTVistor {
         List<Register> parameterList = new LinkedList<>();
         if (node.getName() instanceof MemberAcess && node.getName().getFunc() != null) {
             parameterList.add(node.getName().getRegister());
-        } else {
-//            throw new RuntimeException("function call")
         }
         node.getParameters().forEach(x -> {
             if (x.isDataInMem()) {
@@ -295,7 +305,7 @@ public class IRInstructionBuilder implements IASTVistor {
         }
         Call.Builder builder = new Call.Builder();
         builder.setBasicBlock(currentBB);
-        builder.setProcessedName(node.getProcessedName());  // FIXME function call
+        builder.setProcessedName(node.getProcessedName());
         builder.setRet(ret);
         parameterList.forEach(builder::addArgs);
 
@@ -360,9 +370,18 @@ public class IRInstructionBuilder implements IASTVistor {
     }
 
     private void processLogicalNot(UnaryExpr node) {
+        // short cut
         node.getExpr().setIfTrue(node.getIfFalse());
         node.getExpr().setIfFalse(node.getIfTrue());
         node.getExpr().accept(this);
+
+        // calc
+        Register xor = new Register();
+        currentBB.addTail(new MoveU(currentBB, xor, new Immediate(1)));
+        Register register = new Register();
+        currentBB.addTail(new BinaryCalc(currentBB, BinaryCalc.BinaryOp.XOR, register,
+                node.getExpr().getRegister(), node.getExpr().isDataInMem(), xor, false));
+        node.setRegister(register);
     }
 
     private void processPos(UnaryExpr node) {
@@ -440,25 +459,30 @@ public class IRInstructionBuilder implements IASTVistor {
     }
 
     private void processAssign(BinaryExpr node) { // =
+        BasicBlock block = new BasicBlock(currentFunction, "afAssign");
         if (isLogicalExpr(node.getRhs())) {
-            BasicBlock block = new BasicBlock(currentFunction, null);
             node.getRhs().setIfTrue(block);
             node.getRhs().setIfFalse(block);
         }   // shortcut
 
+        node.getRhs().accept(this); // lhs first
         node.getLhs().accept(this);
-        node.getRhs().accept(this);
+
+        if (isLogicalExpr(node.getRhs())) {
+            currentBB = block;
+            currentFunction.putBasicBlock(currentBB);
+        }
 
         currentBB.addTail(new Move(currentBB, node.getLhs().getRegister(), node.getLhs().isDataInMem(), node.getRhs().getRegister(), node.getRhs().isDataInMem()));
         node.setRegister(node.getLhs().getRegister());
         node.setDataInMem(node.getLhs().isDataInMem());
     }
 
-    private void processCompare(BinaryExpr node) {
+    private void processIntCompare(BinaryExpr node) {
         node.getLhs().accept(this);
         node.getRhs().accept(this);
 
-        Compare.CompareOp cond = null;
+        Compare.CompareOp cond;
         switch (node.getOp()) {
             case EQ:
                 cond = Compare.CompareOp.EQ;
@@ -486,23 +510,23 @@ public class IRInstructionBuilder implements IASTVistor {
         Compare compare = new Compare(currentBB, cond, dest, node.getLhs().getRegister(), node.getLhs().isDataInMem(), node.getRhs().getRegister(), node.getLhs().isDataInMem());
         node.setRegister(dest);
 
-        currentBB.addTail(new Branch(currentBB, compare, node.getIfTrue(), node.getIfFalse()));
-        // TODO
-//        if (inBranch) {
-//            currentCond = compare; // prepare for Branch
-//        } else { // in calc
-//            currentBB.addTail(compare);
-//        } // FIXME
+        if (node.getIfTrue() != null) {
+            currentCond = compare;
+        } else {
+            currentBB.addTail(compare);
+        }
     }
 
     private void processLogicalBinary(BinaryExpr node) {
-        // FIXME shortcut
+        // lhs
         if (node.getOp() == BinaryExpr.BinaryOp.LOGICAL_AND) { // LOGICAL_AND
             AbstractExpr lhs = node.getLhs();
             lhs.setIfTrue(new BasicBlock(currentFunction, "lhs_true"));
             lhs.setIfFalse(node.getIfFalse());
             lhs.accept(this);
-//            currentBB.endWith(new Branch(currentBB, currentCond, lhs.getIfTrue(), lhs.getIfFalse()));
+            if (!isLogicalExpr(node.getLhs())) {
+                generateIRBranch(node.getLhs());
+            }
             currentBB = lhs.getIfTrue();
             currentFunction.putBasicBlock(currentBB);
         } else { // LOGICAL_OR
@@ -510,26 +534,42 @@ public class IRInstructionBuilder implements IASTVistor {
             lhs.setIfTrue(node.getIfTrue());
             lhs.setIfFalse(new BasicBlock(currentFunction, "lhs_false"));
             lhs.accept(this);
-//            currentBB.endWith(new Branch(currentBB, currentCond, lhs.getIfTrue(), lhs.getIfFalse()));
-            currentBB = lhs.getIfTrue();
+            if (!isLogicalExpr(node.getRhs())) {
+                generateIRBranch(node.getLhs());
+            }
+            currentBB = lhs.getIfFalse();
             currentFunction.putBasicBlock(currentBB);
         }
 
+        // rhs
         AbstractExpr rhs = node.getRhs();
         rhs.setIfTrue(node.getIfTrue());
         rhs.setIfFalse(node.getIfFalse());
         rhs.accept(this);
+
+        // calc
+        Register dest = new Register();
+        if (node.getOp() == BinaryExpr.BinaryOp.LOGICAL_AND) {
+            currentBB.addTail(new BinaryCalc(currentBB, BinaryCalc.BinaryOp.BAND, dest, node.getLhs().getRegister(), node.getLhs().isDataInMem(),
+                    node.getRhs().getRegister(), node.getRhs().isDataInMem()));
+        } else {
+            currentBB.addTail(new BinaryCalc(currentBB, BinaryCalc.BinaryOp.BOR, dest, node.getLhs().getRegister(), node.getLhs().isDataInMem(),
+                    node.getRhs().getRegister(), node.getRhs().isDataInMem()));
+        }
+        node.setRegister(dest);
+
+        generateIRBranch(node.getRhs());
     }
 
     private void processStringBinary(BinaryExpr node) {
         node.getLhs().accept(this);
         node.getRhs().accept(this);
 
-        Register ret = new Register();
+        Register cmpAns = new Register();
 
         Call.Builder builder = new Call.Builder();
         builder.setBasicBlock(currentBB);
-        builder.setRet(ret);
+        builder.setRet(cmpAns);
 
         if (node.getLhs().isDataInMem()) {
             Register lhs = new Register();
@@ -572,7 +612,21 @@ public class IRInstructionBuilder implements IASTVistor {
 
         currentBB.addTail(builder.build());
 
-        node.setRegister(ret);
+        node.setRegister(cmpAns);
+
+        if (node.getIfTrue() != null && node.getOp() != BinaryExpr.BinaryOp.ADD) { // shortcut
+            Register boolConst = new Register();
+            currentBB.addTail(new MoveU(currentBB, boolConst, new Immediate(1)));
+            Register ret = new Register();
+            Compare compare = new Compare(currentBB, Compare.CompareOp.EQ, ret, cmpAns, false, boolConst, false);
+//            currentBB.addTail(new Branch(currentBB, compare, node.getIfTrue(), node.getIfFalse()));
+            if (node.getIfTrue() != null) {
+                currentCond = compare;  // prepare for generate branch
+            } else {
+                currentBB.addTail(compare);
+            }
+        }
+
     }
 
     private void processIntBinary(BinaryExpr node) {
@@ -601,6 +655,9 @@ public class IRInstructionBuilder implements IASTVistor {
                 break;
             case BITWISE_OR:
                 op = BinaryCalc.BinaryOp.BOR;
+                break;
+            case XOR:
+                op = BinaryCalc.BinaryOp.XOR;
                 break;
             case LEFT_SHIFT:
                 op = BinaryCalc.BinaryOp.LSH;
@@ -637,7 +694,7 @@ public class IRInstructionBuilder implements IASTVistor {
                 if (node.getLhs().getType().getBaseType().equals("string")) {
                     processStringBinary(node);
                 } else {
-                    processCompare(node);
+                    processIntCompare(node);
                 }
                 break;
             case LEFT_SHIFT:
@@ -754,15 +811,14 @@ public class IRInstructionBuilder implements IASTVistor {
     public void visit(BoolConst node) {
         Register boolVar = new Register();
         currentBB.addTail(new MoveU(currentBB, boolVar,  new Immediate(node.getValue() ? 1 : 0)));
-        Register eqVar = new Register();
-        currentBB.addTail(new MoveU(currentBB, eqVar, new Immediate(1)));
-        // short cut
-        Compare.CompareOp op = Compare.CompareOp.EQ;
-        Register dest = new Register();
-        Compare compare = new Compare(currentBB, op, dest, eqVar, false, boolVar, false);
-        currentBB.addTail(new Branch(currentBB, compare, node.getIfTrue(), node.getIfFalse()));
-
-        node.setRegister(dest);
+//        if (node.getIfTrue() != null) {
+//            if (node.getValue()) {
+//                currentBB.endWith(new Jump(currentBB, node.getIfTrue()));
+//            } else {
+//                currentBB.endWith(new Jump(currentBB, node.getIfFalse()));
+//            }
+//        }
+        node.setRegister(boolVar);
     }
 
     @Override
@@ -801,5 +857,24 @@ public class IRInstructionBuilder implements IASTVistor {
         } else{
             return false;
         }
+    }
+
+    private void generateIRBranch(AbstractExpr node) {
+        // assert ifTrue ifFalse != null
+        if (currentCond != null) {
+            // strCompare intCompare
+            currentBB.endWith(new Branch(currentBB, currentCond, node.getIfTrue(), node.getIfFalse()));
+            currentCond = null;
+        } else {
+            // bool const | bool identifier | bool array | bool member
+            // TODO constant folding
+            Register val = node.getRegister();
+            Register trueConst = new Register();
+            currentBB.addTail(new MoveU(currentBB, trueConst, new Immediate(1)));
+            Register cond = new Register();
+            Compare compare = new Compare(currentBB, Compare.CompareOp.EQ, cond, trueConst, false, val, false);
+            currentBB.endWith(new Branch(currentBB, compare, node.getIfTrue(), node.getIfFalse()));
+        }
+
     }
 }

@@ -9,7 +9,7 @@ public interface IIRVistor {
     void visit(IRProgram irProgram);
     void visit(IRFunction irFunction);
     void visit(IRClass irClass);
-    void visit(StaticData irProgram);
+    void visit(StaticData irStaticData);
     void visit(BasicBlock basicBlock);
 
     // IR Instruction.

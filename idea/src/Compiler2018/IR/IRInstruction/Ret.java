@@ -5,26 +5,26 @@ import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.Register;
 
 public class Ret extends AbstractIRInstruction {
-    private final Register register; // ret addr
+    private final Register ret; // ret addr
 
-    public Ret(BasicBlock basicBlock, Register register) {
+    public Ret(BasicBlock basicBlock, Register ret) {
         super(basicBlock);
-        this.register = register;
+        this.ret = ret;
     }
 
-    public Register getRegister() {
-        return register;
+    public Register getRet() {
+        return ret;
     }
 
     @Override
     public String toIRString(){
-        String ret = register == null ? "void" : register.toIRString();
+        String ret = this.ret == null ? "void" : this.ret.toIRString();
         String str = "\tRET " + ret + "\n";
         return str;
     }
 
     @Override
-    void accept(IIRVistor vistor) {
+    public void accept(IIRVistor vistor) {
         vistor.visit(this);
     }
 }

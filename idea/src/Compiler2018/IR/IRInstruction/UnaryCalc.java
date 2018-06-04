@@ -34,7 +34,7 @@ public class UnaryCalc extends AbstractIRInstruction{
         return operand;
     }
 
-    public boolean getStar() {
+    public boolean isStar() {
         return star;
     }
 
@@ -48,7 +48,7 @@ public class UnaryCalc extends AbstractIRInstruction{
     }
 
     @Override
-    void accept(IIRVistor vistor) {
+    public void accept(IIRVistor vistor) {
         vistor.visit(this);
     }
 }

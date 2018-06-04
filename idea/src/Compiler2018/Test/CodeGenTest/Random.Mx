@@ -1,6 +1,12 @@
+void f(){
+    return;
+}
+
 
 int main(){
-    string hh = "";
-    string h;
+    //bool a = true && false || false;
+    //bool a;
+    //a = true && false || true;
+    f();
     return 0;
 }

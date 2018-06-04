@@ -12,8 +12,9 @@ public class IRPrinter implements IIRVistor {
 
     @Override
     public void visit(IRFunction irFunction) {
+        System.out.println(irFunction.getProcessedName() + ": {\n");
         irFunction.getBasicBlockSet().forEach(x -> x.accept(this));
-//        irFunction.getStartBlock().accept(this);
+        System.out.println("}\n\n");
     }
 
     @Override
@@ -22,14 +23,13 @@ public class IRPrinter implements IIRVistor {
     }
 
     @Override
-    public void visit(StaticData irProgram) {
+    public void visit(StaticData irStaticData) {
 
     }
 
     @Override
     public void visit(BasicBlock basicBlock) {
         System.out.println(basicBlock.toIRString());
-//        basicBlock.getSucc().forEach(x -> x.accept(this));
     }
 
     @Override

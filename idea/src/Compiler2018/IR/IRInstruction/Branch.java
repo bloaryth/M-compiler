@@ -32,13 +32,13 @@ public class Branch extends AbstractIRInstruction {
         String str = cond.toIRString() +
                 "\tBR " +
                 cond.getDestination().toIRString() + " " +
-                ifTrue.getName() + " " +
-                ifFalse.getName() + "\n";
+                ifTrue.getProcessedName() + " " +
+                ifFalse.getProcessedName() + "\n";
         return str;
     }
 
     @Override
-    void accept(IIRVistor vistor) {
+    public void accept(IIRVistor vistor) {
         vistor.visit(this);
     }
 }

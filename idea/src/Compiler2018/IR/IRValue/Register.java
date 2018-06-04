@@ -26,30 +26,32 @@ public class Register extends AbstractValue {
         }
     }
 
-    //    private int stackOffset; // for register in stack
-//
-//    public int getStackOffset() {
-//        return stackOffset;
-//    }
-//
-//    public void setStackOffset(int stackOffset) {
-//        this.stackOffset = stackOffset;
-//    }
-//
-//    // allocation
-//    enum PysicalRegister {
-//        RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP,
-//        R8, R9, R10, R11, R12, R13, R14, R15
-//    }
-//
-//    private PysicalRegister allocatedRegister;  // Pysical Reg Allocated
-//
-//    public PysicalRegister getAllocatedRegister() {
-//        return allocatedRegister;
-//    }
-//
-//    public void setAllocatedRegister(PysicalRegister allocatedRegister) {
-//        this.allocatedRegister = allocatedRegister;
-//    }
+    private Integer stackOffset; // for register in stack
+
+    public Integer getStackOffset() {
+        return stackOffset;
+    }
+
+    public void setStackOffset(Integer stackOffset) {
+        this.stackOffset = stackOffset;
+    }
+
+    // allocation
+    public enum PysicalRegister {
+        RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP,
+        R8, R9, R10, R11, R12, R13, R14, R15;
+    }
+
+    private PysicalRegister allocatedRegister;  // Pysical Reg Allocated
+
+    public PysicalRegister getAllocatedRegister() {
+        return allocatedRegister;
+    }
+
+    public void setAllocatedRegister(PysicalRegister allocatedRegister) {
+        this.allocatedRegister = allocatedRegister;
+    }
+
+
 
 }
