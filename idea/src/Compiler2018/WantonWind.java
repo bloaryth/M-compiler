@@ -20,10 +20,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class WantonWind {
     private static String readTestFile(String filePath) {
@@ -38,6 +35,23 @@ public class WantonWind {
             e.printStackTrace();
         }
         return ans.toString();
+    }
+
+    public static String getTxt(String filePath) {
+        StringBuilder str = new StringBuilder();
+        try {
+            InputStreamReader reader = new InputStreamReader(Test.class.getResourceAsStream(filePath));
+            BufferedReader buffReader = new BufferedReader(reader);
+            String strTmp;
+            while ((strTmp = buffReader.readLine()) != null) {
+                str.append(strTmp + '\n');
+            }
+            buffReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //        System.out.println (str.toString ());
+        return str.toString();
     }
 
     public static void run(String prog) {
@@ -60,7 +74,7 @@ public class WantonWind {
             ClassVarScanner classVarScanner = new ClassVarScanner(topTable);
             StmtScanner stmtScanner = new StmtScanner(topTable);
 
-            program.accept(astPrinter);
+//            program.accept(astPrinter);
             program.accept(classScanner);
             program.accept(funcScanner);
             program.accept(classVarScanner);
@@ -93,8 +107,10 @@ public class WantonWind {
 //            irProgram.accept(nasmTranslater);
 //            System.out.println(nasmTranslater.getBuilder().toString());
             NasmM2M nasmM2M = new NasmM2M();
+            nasmM2M.getBuilder().append(getTxt("./allInOne.asm"));
             irProgram.accept(nasmM2M);
             System.out.println(nasmM2M.getBuilder().toString());
+
         } catch (Exception e) {
             e.printStackTrace(System.err);
             System.exit(1);

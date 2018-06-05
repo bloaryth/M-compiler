@@ -6,10 +6,7 @@ import Compiler2018.IR.IRValue.AbstractValue;
 import Compiler2018.IR.IRValue.Immediate;
 import Compiler2018.IR.IRValue.Label;
 import Compiler2018.IR.IRValue.Register;
-import Compiler2018.Test.Test;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,27 +65,8 @@ public class NasmM2M implements IIRVistor {
         }
     }
 
-    public static String getTxt(String filePath) {
-        StringBuilder str = new StringBuilder();
-        try {
-            InputStreamReader reader = new InputStreamReader(Test.class.getResourceAsStream(filePath));
-            BufferedReader buffReader = new BufferedReader(reader);
-            String strTmp;
-            while ((strTmp = buffReader.readLine()) != null) {
-                str.append(strTmp + '\n');
-            }
-            buffReader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //        System.out.println (str.toString ());
-        return str.toString();
-    }
-
     @Override
     public void visit(IRProgram irProgram) {
-        builder.append(getTxt("../allinOne.asm"));
-
         builder.append("global main\n\n");
 
         builder.append("SECTION .text\n\n");
@@ -111,6 +89,7 @@ public class NasmM2M implements IIRVistor {
         }
 
         prologue();
+        builder.append("\tsub rsp, ").append(-irFunction.getTotalOffset()).append("\n");
         saveCallee();
         copyParameter(irFunction.getParameterList());
         irFunction.getBasicBlockSet().forEach(x -> x.accept(this));
@@ -146,7 +125,10 @@ public class NasmM2M implements IIRVistor {
         BasicBlock.Iter iter = new BasicBlock.Iter(basicBlock);
         while (iter.hasNext()) {
             AbstractIRInstruction irInstruction = iter.next();
-            builder.append("\t;").append(irInstruction.toIRString());
+            String[] split = irInstruction.toIRString().split("\n");
+            for (String aSplit : split) {
+                builder.append("\t;").append(aSplit).append("\n");
+            }
             irInstruction.accept(this);
         }
     }

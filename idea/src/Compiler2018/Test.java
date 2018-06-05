@@ -1,4 +1,4 @@
-package Compiler2018.Test;
+package Compiler2018;
 
 import Compiler2018.AST.Program;
 import Compiler2018.BackEnd.*;
@@ -47,8 +47,10 @@ public class Test {
 //        return "./CodeGenTest/FunctionTest.Mx";
 //        return "./CodeGenTest/Random.Mx";
 //        return "./CodeGenTest/ZZK.Mx";
-        return "./CodeGenTest/zzh.Mx";
+//        return "./CodeGenTest/zzh.Mx";
 //        return "./CodeGenTest/toString.Mx";
+//        return "./CodeGenTest/shai.Mx";
+        return "./Test/CodeGenTest/523.Mx";
 
         // Semantic
 
@@ -153,6 +155,7 @@ public class Test {
 //            irProgram.accept(nasmTranslater);
 //            System.out.println(nasmTranslater.getBuilder().toString());
             NasmM2M nasmM2M = new NasmM2M();
+            nasmM2M.getBuilder().append(getTxt("./allInOne.asm"));
             irProgram.accept(nasmM2M);
             System.out.println(nasmM2M.getBuilder().toString());
 

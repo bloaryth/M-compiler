@@ -6,7 +6,7 @@ import Compiler2018.IR.IRValue.AbstractValue;
 import Compiler2018.IR.IRValue.Immediate;
 import Compiler2018.IR.IRValue.Label;
 import Compiler2018.IR.IRValue.Register;
-import Compiler2018.Test.Test;
+import Compiler2018.Test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

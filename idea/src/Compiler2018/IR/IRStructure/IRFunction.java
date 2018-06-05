@@ -65,6 +65,10 @@ public class IRFunction {
         addStackOffset(register);
     }
 
+    public Integer getTotalOffset() {
+        return totalOffset;
+    }
+
     public Integer getStackOffset(Register reg){
         return stackOffsetMap.get(reg);
     }

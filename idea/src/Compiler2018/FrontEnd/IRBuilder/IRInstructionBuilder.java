@@ -176,7 +176,16 @@ public class IRInstructionBuilder implements IASTVistor {
     @Override
     public void visit(ReturnStmt node) {
         if (node.getExpr() != null) {
+            BasicBlock block = new BasicBlock(currentFunction, "ret_rhs");
+            if (isLogicalExpr(node.getExpr())) {
+                node.getExpr().setIfTrue(block);
+                node.getExpr().setIfFalse(block);
+            }
             node.getExpr().accept(this);
+            if (isLogicalExpr(node.getExpr())) {
+                currentBB = block;
+                currentFunction.putBasicBlock(block);
+            }
             Register ret;
             if (node.getExpr().isDataInMem()) {
                 ret = new Register();
@@ -895,6 +904,9 @@ public class IRInstructionBuilder implements IASTVistor {
         // assert ifTrue ifFalse != null
         if (currentCond != null) {
             // strCompare intCompare
+            if (node.getIfTrue() == null | node.getIfFalse() == null) {
+                throw new RuntimeException("hh");
+            }
             currentBB.endWith(new Branch(currentBB, currentCond, node.getIfTrue(), node.getIfFalse()));
             currentCond = null;
         } else {
