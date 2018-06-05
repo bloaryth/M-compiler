@@ -48,10 +48,8 @@ public class Register extends AbstractValue {
         return allocatedRegister;
     }
 
-    public void tryAllocatedRegister(PysicalRegister allocatedRegister) {
-        if (this.allocatedRegister == null) {
-            this.allocatedRegister = allocatedRegister;
-        }
+    public void setAllocatedRegister(PysicalRegister allocatedRegister) {
+        this.allocatedRegister = allocatedRegister;
     }
 
 

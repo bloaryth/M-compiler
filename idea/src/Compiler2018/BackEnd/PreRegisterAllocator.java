@@ -46,25 +46,25 @@ public class PreRegisterAllocator implements IIRVistor{
     @Override
     public void visit(Call ir) {
         if (ir.getArgs().size() > 0) {
-            ir.getArgs().get(0).tryAllocatedRegister(Register.PysicalRegister.RDI);
+            ir.getArgs().get(0).setAllocatedRegister(Register.PysicalRegister.RDI);
         }
         if (ir.getArgs().size() > 1) {
-            ir.getArgs().get(1).tryAllocatedRegister(Register.PysicalRegister.RSI);
+            ir.getArgs().get(1).setAllocatedRegister(Register.PysicalRegister.RSI);
         }
         if (ir.getArgs().size() > 2) {
-            ir.getArgs().get(2).tryAllocatedRegister(Register.PysicalRegister.RDX);
+            ir.getArgs().get(2).setAllocatedRegister(Register.PysicalRegister.RDX);
         }
         if (ir.getArgs().size() > 3) {
-            ir.getArgs().get(3).tryAllocatedRegister(Register.PysicalRegister.RCX);
+            ir.getArgs().get(3).setAllocatedRegister(Register.PysicalRegister.RCX);
         }
         if (ir.getArgs().size() > 4) {
-            ir.getArgs().get(4).tryAllocatedRegister(Register.PysicalRegister.R8);
+            ir.getArgs().get(4).setAllocatedRegister(Register.PysicalRegister.R8);
         }
         if (ir.getArgs().size() > 5) {
-            ir.getArgs().get(5).tryAllocatedRegister(Register.PysicalRegister.R9);
+            ir.getArgs().get(5).setAllocatedRegister(Register.PysicalRegister.R9);
         }
         if (ir.getRet() != null) {
-            ir.getRet().tryAllocatedRegister(Register.PysicalRegister.RAX);
+            ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
         }
     }
 
@@ -96,7 +96,7 @@ public class PreRegisterAllocator implements IIRVistor{
     @Override
     public void visit(Ret ir) {
         if (ir.getRet() != null) {
-            ir.getRet().tryAllocatedRegister(Register.PysicalRegister.RAX);
+            ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
         }
     }
 

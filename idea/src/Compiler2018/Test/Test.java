@@ -45,8 +45,9 @@ public class Test {
         // IR Generation
 //        return "./CodeGenTest/ClassTest.Mx";
 //        return "./CodeGenTest/FunctionTest.Mx";
-        return "./CodeGenTest/Random.Mx";
+//        return "./CodeGenTest/Random.Mx";
 //        return "./CodeGenTest/ZZK.Mx";
+        return "./CodeGenTest/zzh.Mx";
 
         // Semantic
 
@@ -147,9 +148,12 @@ public class Test {
             irProgram.accept(naiveRegisterAllocator);
 
             // NASM generation
-            NASMTranslater nasmTranslater = new NASMTranslater();
-            irProgram.accept(nasmTranslater);
-            System.out.println(nasmTranslater.getBuilder().toString());
+//            NASMTranslater nasmTranslater = new NASMTranslater();
+//            irProgram.accept(nasmTranslater);
+//            System.out.println(nasmTranslater.getBuilder().toString());
+            NasmM2M nasmM2M = new NasmM2M();
+            irProgram.accept(nasmM2M);
+            System.out.println(nasmM2M.getBuilder().toString());
 
         } catch (Exception e) {
             e.printStackTrace(System.err);
