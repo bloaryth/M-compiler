@@ -89,9 +89,12 @@ public class WantonWind {
             irProgram.accept(naiveRegisterAllocator);
 
             // NASM generation
-            NASMTranslater nasmTranslater = new NASMTranslater();
-            irProgram.accept(nasmTranslater);
-            System.out.println(nasmTranslater.getBuilder().toString());
+//            NASMTranslater nasmTranslater = new NASMTranslater();
+//            irProgram.accept(nasmTranslater);
+//            System.out.println(nasmTranslater.getBuilder().toString());
+            NasmM2M nasmM2M = new NasmM2M();
+            irProgram.accept(nasmM2M);
+            System.out.println(nasmM2M.getBuilder().toString());
         } catch (Exception e) {
             e.printStackTrace(System.err);
             System.exit(1);
