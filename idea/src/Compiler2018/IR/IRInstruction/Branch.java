@@ -29,7 +29,8 @@ public class Branch extends AbstractIRInstruction {
 
     @Override
     public String toIRString() {
-        String str = cond.toIRString() +
+        String str =
+//                cond.toIRString() +
                 "\tBR " +
                 cond.getDestination().toIRString() + " " +
                 ifTrue.getProcessedName() + " " +

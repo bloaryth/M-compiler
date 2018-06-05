@@ -45,12 +45,18 @@ public class Test {
         // IR Generation
 //        return "./CodeGenTest/ClassTest.Mx";
 //        return "./CodeGenTest/FunctionTest.Mx";
-//        return "./CodeGenTest/Random.Mx";
+        return "./Test/CodeGenTest/Random.Mx";
 //        return "./CodeGenTest/ZZK.Mx";
 //        return "./CodeGenTest/zzh.Mx";
 //        return "./CodeGenTest/toString.Mx";
 //        return "./CodeGenTest/shai.Mx";
-        return "./Test/CodeGenTest/523.Mx";
+//        return "./Test/CodeGenTest/523.Mx";
+//        return "./Test/CodeGenTest/str.Mx";
+//        return "./Test/TestCases/testcase_527.txt";
+//        return "./Test/TestCases/testcase_544.txt";
+//        return "./Test/TestCases/testcase_523.txt";
+//        return "./Test/TestCases/testcase_524.txt";
+
 
         // Semantic
 
@@ -141,7 +147,7 @@ public class Test {
             // Code Generation
             IRPrinter irPrinter = new IRPrinter();
             RegisterOffsetResolver registerOffsetResolver = new RegisterOffsetResolver();
-//            irProgram.accept(irPrinter);
+            irProgram.accept(irPrinter);
             irProgram.accept(registerOffsetResolver);
 
             // Register Allocation

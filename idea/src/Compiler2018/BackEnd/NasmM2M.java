@@ -211,25 +211,25 @@ public class NasmM2M implements IIRVistor {
 
     @Override
     public void visit(Branch ir) {
-        ir.getCond().getLeftOperand().setAllocatedRegister(Register.PysicalRegister.R12);
-        ir.getCond().getRightOperand().setAllocatedRegister(Register.PysicalRegister.R13);
-
-        stackToReg(ir.getCond().getLeftOperand());
-        stackToReg(ir.getCond().getRightOperand());
-
-        Register rightOperand;
-        boolean rightStar;
-        if (ir.getCond().getIntermediate() != null) {
-            ir.getCond().getIntermediate().setAllocatedRegister(Register.PysicalRegister.R14);
-            rightOperand = ir.getCond().getIntermediate();
-            rightStar = false;
-            move(rightOperand, false, ir.getCond().getRightOperand(), ir.getCond().isRightStar());
-        } else {
-            rightOperand = ir.getCond().getRightOperand();
-            rightStar = ir.getCond().isRightStar();
-        }
-
-        cmp(ir.getCond().getLeftOperand(), ir.getCond().isLeftStar(), rightOperand, rightStar);
+//        ir.getCond().getLeftOperand().setAllocatedRegister(Register.PysicalRegister.R12);
+//        ir.getCond().getRightOperand().setAllocatedRegister(Register.PysicalRegister.R13);
+//
+//        stackToReg(ir.getCond().getLeftOperand());
+//        stackToReg(ir.getCond().getRightOperand());
+//
+//        Register rightOperand;
+//        boolean rightStar;
+//        if (ir.getCond().getIntermediate() != null) {
+//            ir.getCond().getIntermediate().setAllocatedRegister(Register.PysicalRegister.R14);
+//            rightOperand = ir.getCond().getIntermediate();
+//            rightStar = false;
+//            move(rightOperand, false, ir.getCond().getRightOperand(), ir.getCond().isRightStar());
+//        } else {
+//            rightOperand = ir.getCond().getRightOperand();
+//            rightStar = ir.getCond().isRightStar();
+//        }
+//
+//        cmp(ir.getCond().getLeftOperand(), ir.getCond().isLeftStar(), rightOperand, rightStar);
         switch (ir.getCond().getOprator()) {
             case EQ:
                 je(ir.getIfTrue());
@@ -398,9 +398,10 @@ public class NasmM2M implements IIRVistor {
 
     @Override
     public void visit(Ret ir) {
-        ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
-
-        stackToReg(ir.getRet());
+        if (ir.getRet() != null) {
+            ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
+            stackToReg(ir.getRet());
+        }
 
         restoreCallee();
         epilogue();
@@ -628,39 +629,80 @@ public class NasmM2M implements IIRVistor {
     }
 
     private void sete(Register dest) {
+        setZero(dest.getAllocatedRegister());
         builder.append("\tsete ");
-        registerData(dest, false);
+        builder.append(reg2Byte(dest.getAllocatedRegister()));
         builder.append("\n");
     }
 
-    private void setne(Register dest) {
+    private void setne(Register dest) { //
+        setZero(dest.getAllocatedRegister());
         builder.append("\tsetne ");
-        registerData(dest, false);
+        builder.append(reg2Byte(dest.getAllocatedRegister()));
         builder.append("\n");
     }
 
     private void setl(Register dest) {
+        setZero(dest.getAllocatedRegister());
         builder.append("\tsetl ");
-        registerData(dest, false);
+        builder.append(reg2Byte(dest.getAllocatedRegister()));
         builder.append("\n");
     }
 
     private void setle(Register dest) {
+        setZero(dest.getAllocatedRegister());
         builder.append("\tsetle ");
-        registerData(dest, false);
+        builder.append(reg2Byte(dest.getAllocatedRegister()));
         builder.append("\n");
     }
 
-    private void setg(Register dest) {
+    private void setg(Register dest) { // FIXME
+        setZero(dest.getAllocatedRegister());
         builder.append("\tsetg ");
-        registerData(dest, false);
+        builder.append(reg2Byte(dest.getAllocatedRegister()));
         builder.append("\n");
     }
 
     private void setge(Register dest) {
+        setZero(dest.getAllocatedRegister());
         builder.append("\tsetge ");
-        registerData(dest, false);
+        builder.append(reg2Byte(dest.getAllocatedRegister()));
         builder.append("\n");
+    }
+
+    private String reg2Byte(Register.PysicalRegister register) {
+        switch (register) {
+            case RAX:
+                return "al";
+            case R10:
+                return "r10b";
+            case R11:
+                return "r11b";
+            case RDI:
+                return "dil";
+            case RSI:
+                return "sil";
+            case RDX:
+                return "dl";
+            case RCX:
+                return "cl";
+            case R8:
+                return "r8b";
+            case R9:
+                return "r9b";
+            case RBX:
+                return "bl";
+            case R12:
+                return "r12b";
+            case R13:
+                return "r13b";
+            case R14:
+                return "r14b";
+            case R15:
+                return "r15b";
+            default:
+                throw new RuntimeException("unpermitted register");
+        }
     }
 
     private void jmp(BasicBlock block) {
@@ -732,24 +774,24 @@ public class NasmM2M implements IIRVistor {
             stackToReg(registerList.get(0));
         }
         if (registerList.size() > 1) {
-            registerList.get(0).setAllocatedRegister(Register.PysicalRegister.RSI);
-            stackToReg(registerList.get(0));
+            registerList.get(1).setAllocatedRegister(Register.PysicalRegister.RSI);
+            stackToReg(registerList.get(1));
         }
         if (registerList.size() > 2) {
-            registerList.get(0).setAllocatedRegister(Register.PysicalRegister.RDX);
-            stackToReg(registerList.get(0));
+            registerList.get(2).setAllocatedRegister(Register.PysicalRegister.RDX);
+            stackToReg(registerList.get(2));
         }
         if (registerList.size() > 3) {
-            registerList.get(0).setAllocatedRegister(Register.PysicalRegister.RCX);
-            stackToReg(registerList.get(0));
+            registerList.get(3).setAllocatedRegister(Register.PysicalRegister.RCX);
+            stackToReg(registerList.get(3));
         }
         if (registerList.size() > 4) {
-            registerList.get(0).setAllocatedRegister(Register.PysicalRegister.R8);
-            stackToReg(registerList.get(0));
+            registerList.get(4).setAllocatedRegister(Register.PysicalRegister.R8);
+            stackToReg(registerList.get(4));
         }
         if (registerList.size() > 5) {
-            registerList.get(0).setAllocatedRegister(Register.PysicalRegister.R9);
-            stackToReg(registerList.get(0));
+            registerList.get(5).setAllocatedRegister(Register.PysicalRegister.R9);
+            stackToReg(registerList.get(5));
         }
     }
 
@@ -780,7 +822,7 @@ public class NasmM2M implements IIRVistor {
             builder.append("\tmov qword [rbp ").append(registerList.get(5).getStackOffset()).append("], r9\n");
         }
         for (int i = registerList.size()-1; i > 6; i--) {
-            builder.append("\tmov rax, qword [rbp + ").append((8 * (i-6) + 16));
+            builder.append("\tmov rax, qword [rbp + ").append((8 * (i-6) + 16)).append("]\n");
             builder.append("\tmov qword [rbp ").append(registerList.get(i).getStackOffset()).append("], rax\n");
         }
     }
