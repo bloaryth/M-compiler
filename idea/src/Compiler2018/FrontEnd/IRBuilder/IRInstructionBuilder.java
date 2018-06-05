@@ -579,7 +579,7 @@ public class IRInstructionBuilder implements IASTVistor {
         }
 
         Register dest = new Register();  // assert false
-        Compare compare = new Compare(currentBB, cond, dest, node.getLhs().getRegister(), node.getLhs().isDataInMem(), node.getRhs().getRegister(), node.getLhs().isDataInMem());
+        Compare compare = new Compare(currentBB, cond, dest, node.getLhs().getRegister(), node.getLhs().isDataInMem(), node.getRhs().getRegister(), node.getRhs().isDataInMem());
         node.setRegister(dest);
 
         if (node.getIfTrue() != null) {
@@ -825,10 +825,13 @@ public class IRInstructionBuilder implements IASTVistor {
         preMalloc.setProcessedName("_malloc");
         preMalloc.setRet(preRet);
 
-        Register lenRegister = new Register();
         Integer len = parameterList.size();
-        currentBB.addTail(new MoveU(currentBB, lenRegister, new Immediate(len + 1)));
-        preMalloc.addArgs(lenRegister);
+        Register lenRegister = new Register();
+        currentBB.addTail(new MoveU(currentBB, lenRegister, new Immediate(len)));
+        Register byteRegister = new Register();
+        currentBB.addTail(new MoveU(currentBB, byteRegister, new Immediate(len)));
+        preMalloc.addArgs(byteRegister);
+
         currentBB.addTail(preMalloc.build());
 
         Register iter = new Register();

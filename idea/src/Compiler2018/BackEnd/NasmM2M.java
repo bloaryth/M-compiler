@@ -157,11 +157,11 @@ public class NasmM2M implements IIRVistor {
 
         switch (ir.getOprator()) {
             case ADD:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isRightStar());
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
                 add(ir.getDestination(), false, rightOperand, rightStar);
                 break;
             case SUB:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isRightStar());
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
                 sub(ir.getDestination(), false, rightOperand, rightStar);
                 break;
             case MUL:
@@ -181,12 +181,12 @@ public class NasmM2M implements IIRVistor {
                 move(ir.getDestination(), false, Register.PysicalRegister.RDX, false);
                 break;
             case LSH:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isRightStar());
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
                 move(Register.PysicalRegister.RCX, false, ir.getRightOperand(), ir.isRightStar());
                 sal(ir.getDestination(), false);
                 break;
             case RSH:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isRightStar());
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
                 move(Register.PysicalRegister.RCX, false, ir.getRightOperand(), ir.isRightStar());
                 sar(ir.getDestination(), false);
                 break;
@@ -348,6 +348,7 @@ public class NasmM2M implements IIRVistor {
         stackToReg(ir.getBase());
         if (ir.getPos() != null) {
             ir.getPos().setAllocatedRegister(Register.PysicalRegister.R14);
+            stackToReg(ir.getPos());
         }
 
         lea(ir.getDestination(), ir.getBase(), ir.getPos(), ir.getOffset());

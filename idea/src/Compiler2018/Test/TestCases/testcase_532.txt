@@ -9,8 +9,9 @@ int main()
 	b[1] = a;
 	b[2] = a;
 	b[3] = a;
+
 	println(toString(b.size()));
-	for (i = 0; i < b[0].size(); i++)
+    for (i = 0; i < b[0].size(); i++)
 		b[0][i] = getInt();
 	for (i = 0; i < b[1].size(); i++)
 		print(toString(b[1][i]));
@@ -20,6 +21,7 @@ int main()
 	for (i = 0; i < b[3].size(); i++)
 		print(toString(b[3][i]));
     return 0;
+
 }
 
 

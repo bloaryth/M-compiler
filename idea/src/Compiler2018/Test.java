@@ -56,6 +56,9 @@ public class Test {
 //        return "./Test/TestCases/testcase_544.txt";
 //        return "./Test/TestCases/testcase_523.txt";
 //        return "./Test/TestCases/testcase_524.txt";
+//        return "./Test/TestCases/testcase_525.txt";
+//        return "./Test/TestCases/testcase_532.txt";
+//        return "./Test/TestCases/testcase_524.txt";
 
 
         // Semantic
