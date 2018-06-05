@@ -37,23 +37,6 @@ public class WantonWind {
         return ans.toString();
     }
 
-    public static String getTxt(String filePath) {
-        StringBuilder str = new StringBuilder();
-        try {
-            InputStreamReader reader = new InputStreamReader(Test.class.getResourceAsStream(filePath));
-            BufferedReader buffReader = new BufferedReader(reader);
-            String strTmp;
-            while ((strTmp = buffReader.readLine()) != null) {
-                str.append(strTmp + '\n');
-            }
-            buffReader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //        System.out.println (str.toString ());
-        return str.toString();
-    }
-
     public static void run(String prog) {
         try {
             CharStream input = CharStreams.fromString(prog);
@@ -107,7 +90,6 @@ public class WantonWind {
 //            irProgram.accept(nasmTranslater);
 //            System.out.println(nasmTranslater.getBuilder().toString());
             NasmM2M nasmM2M = new NasmM2M();
-            nasmM2M.getBuilder().append(getTxt("./allInOne.asm"));
             irProgram.accept(nasmM2M);
             System.out.println(nasmM2M.getBuilder().toString());
 
