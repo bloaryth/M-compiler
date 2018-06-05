@@ -145,7 +145,9 @@ public class NasmM2M implements IIRVistor {
         builder.append(basicBlock.getProcessedName()).append(":\n");
         BasicBlock.Iter iter = new BasicBlock.Iter(basicBlock);
         while (iter.hasNext()) {
-            iter.next().accept(this);
+            AbstractIRInstruction irInstruction = iter.next();
+            builder.append("\t;").append(irInstruction.toIRString());
+            irInstruction.accept(this);
         }
     }
 
@@ -280,7 +282,7 @@ public class NasmM2M implements IIRVistor {
     @Override
     public void visit(Call ir) {    // FIXME
         Integer alignment = - currentRSP % 16;  // sub add rsp
-        if (alignment != 8) {
+        if (alignment == 8) {
             builder.append("\tsub rsp, ").append(alignment).append("\n");
         }
         saveCaller();
@@ -291,10 +293,12 @@ public class NasmM2M implements IIRVistor {
         builder.append("\tcall ").append(ir.getProcessedName()).append("\n");
         leaveCallParameter(ir.getArgs());
 
-        ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
-        regToStack(ir.getRet());
+        if (ir.getRet() != null) {
+            ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
+            regToStack(ir.getRet());
+        }
 
-        if (alignment != 8) {
+        if (alignment == 8) {
             builder.append("\tadd rsp, ").append(alignment).append("\n");
         }
     }
@@ -457,8 +461,8 @@ public class NasmM2M implements IIRVistor {
     }
 
     private void labelTranslate(Label label) {
-        builder.append("__");
-        builder.append(label.getName());
+        builder.append("__Label");
+        builder.append(label.getId());
     }
 
     private void blockTranslate(BasicBlock basicBlock) {
@@ -776,26 +780,26 @@ public class NasmM2M implements IIRVistor {
 
     private void copyParameter(List<Register> registerList) {
         if (registerList.size() > 0) {
-            builder.append("\tmov [rbp ").append(registerList.get(0).getStackOffset()).append("], rdi\n");
+            builder.append("\tmov qword [rbp ").append(registerList.get(0).getStackOffset()).append("], rdi\n");
         }
         if (registerList.size() > 1) {
-            builder.append("\tmov [rbp ").append(registerList.get(1).getStackOffset()).append("], rsi\n");
+            builder.append("\tmov qword [rbp ").append(registerList.get(1).getStackOffset()).append("], rsi\n");
         }
         if (registerList.size() > 2) {
-            builder.append("\tmov [rbp ").append(registerList.get(2).getStackOffset()).append("], rdx\n");
+            builder.append("\tmov qword [rbp ").append(registerList.get(2).getStackOffset()).append("], rdx\n");
         }
         if (registerList.size() > 3) {
-            builder.append("\tmov [rbp ").append(registerList.get(3).getStackOffset()).append("], rcx\n");
+            builder.append("\tmov qword [rbp ").append(registerList.get(3).getStackOffset()).append("], rcx\n");
         }
         if (registerList.size() > 4) {
-            builder.append("\tmov [rbp ").append(registerList.get(4).getStackOffset()).append("], r8\n");
+            builder.append("\tmov qword [rbp ").append(registerList.get(4).getStackOffset()).append("], r8\n");
         }
         if (registerList.size() > 5) {
-            builder.append("\tmov [rbp ").append(registerList.get(5).getStackOffset()).append("], r9\n");
+            builder.append("\tmov qword [rbp ").append(registerList.get(5).getStackOffset()).append("], r9\n");
         }
         for (int i = registerList.size()-1; i > 6; i--) {
-            builder.append("\tmov rax, [rbp + ").append((8 * (i-6) + 16));
-            builder.append("\tmov [rbp ").append(registerList.get(i).getStackOffset()).append("], rax\n");
+            builder.append("\tmov rax, qword [rbp + ").append((8 * (i-6) + 16));
+            builder.append("\tmov qword [rbp ").append(registerList.get(i).getStackOffset()).append("], rax\n");
         }
     }
 

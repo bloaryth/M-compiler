@@ -21,11 +21,20 @@
       <file leaf-file-name="NASMTranslater.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NASMTranslater.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
+            <state relative-caret-position="25">
               <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="163">
+              <caret line="50" column="38" lean-forward="true" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -49,8 +58,8 @@
       <file leaf-file-name="NasmM2M.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmM2M.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="738" column="17" selection-start-line="738" selection-start-column="17" selection-end-line="738" selection-end-column="17" />
+            <state relative-caret-position="192">
+              <caret line="511" column="22" selection-start-line="511" selection-start-column="17" selection-end-line="511" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,7 +70,7 @@
       <file leaf-file-name="Register.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Register.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
+            <state relative-caret-position="478">
               <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
               <folding>
                 <element signature="e#1178#1179#0" expanded="true" />
@@ -71,7 +80,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WantonWind.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WantonWind.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/WantonWind.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="472">
@@ -80,47 +89,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="zzh.Mx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/zzh.Mx">
+      <file leaf-file-name="toString.Mx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/toString.Mx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="375">
+              <caret line="15" column="48" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/Test.java">
+      <file leaf-file-name="Label.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Label.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="149" selection-start-line="149" selection-end-line="155" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NaiveRegisterAllocator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NaiveRegisterAllocator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1300">
-              <caret line="60" selection-start-line="60" selection-end-line="60" />
+            <state relative-caret-position="80">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#266#267#0" expanded="true" />
-                <element signature="e#343#344#0" expanded="true" />
-                <element signature="e#405#406#0" expanded="true" />
-                <element signature="e#479#480#0" expanded="true" />
-                <element signature="e#1846#1847#0" expanded="true" />
-                <element signature="e#1887#1888#0" expanded="true" />
+                <element signature="e#292#293#0" expanded="true" />
+                <element signature="e#317#318#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InputStreamReader.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/compiler/Java/jdk-10/lib/src.zip!/java.base/java/io/InputStreamReader.java">
+      <file leaf-file-name="StaticData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/StaticData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1150">
-              <caret line="71" selection-start-line="71" selection-end-line="71" />
+            <state relative-caret-position="100">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <folding>
+                <element signature="e#398#399#0" expanded="true" />
+                <element signature="e#424#425#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="zzh.Mx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/zzh.Mx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -139,10 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Lea</find>
-      <find>Identi</find>
-      <find>FunctionC</find>
-      <find>Fun</find>
       <find>Branch</find>
       <find>lhs_false</find>
       <find>processL</find>
@@ -163,12 +167,16 @@
       <find>setProcessed</find>
       <find>C:\compiler\Java\jdk-10\bin\java &quot;-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2018.1\lib\idea_rt.jar=60107:C:\Program Files\JetBrains\IntelliJ IDEA 2018.1\bin&quot; -Dfile.encoding=UTF-8 -classpath D:\Coding\M-compiler\idea\target\classes;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\junit\arquillian-junit-container\1.4.0.Final\arquillian-junit-container-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\junit\arquillian-junit-core\1.4.0.Final\arquillian-junit-core-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\test\arquillian-test-api\1.4.0.Final\arquillian-test-api-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\core\arquillian-core-api\1.4.0.Final\arquillian-core-api-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\test\arquillian-test-spi\1.4.0.Final\arquillian-test-spi-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\core\arquillian-core-spi\1.4.0.Final\arquillian-core-spi-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\container\arquillian-container-test-api\1.4.0.Final\arquillian-container-test-api-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\shrinkwrap\shrinkwrap-api\1.2.6\shrinkwrap-api-1.2.6.jar;C:\Users\HASEE\.m2\repository\org\jboss\shrinkwrap\descriptors\shrinkwrap-descriptors-api-base\2.0.0\shrinkwrap-descriptors-api-base-2.0.0.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\container\arquillian-container-test-spi\1.4.0.Final\arquillian-container-test-spi-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\container\arquillian-container-spi\1.4.0.Final\arquillian-container-spi-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\core\arquillian-core-impl-base\1.4.0.Final\arquillian-core-impl-base-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\test\arquillian-test-impl-base\1.4.0.Final\arquillian-test-impl-base-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\container\arquillian-container-impl-base\1.4.0.Final\arquillian-container-impl-base-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\config\arquillian-config-api\1.4.0.Final\arquillian-config-api-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\config\arquillian-config-impl-base\1.4.0.Final\arquillian-config-impl-base-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\config\arquillian-config-spi\1.4.0.Final\arquillian-config-spi-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\shrinkwrap\descriptors\shrinkwrap-descriptors-spi\2.0.0\shrinkwrap-descriptors-spi-2.0.0.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\container\arquillian-container-test-impl-base\1.4.0.Final\arquillian-container-test-impl-base-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\shrinkwrap\shrinkwrap-impl-base\1.2.6\shrinkwrap-impl-base-1.2.6.jar;C:\Users\HASEE\.m2\repository\org\jboss\shrinkwrap\shrinkwrap-spi\1.2.6\shrinkwrap-spi-1.2.6.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\testng\arquillian-testng-container\1.4.0.Final\arquillian-testng-container-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\jboss\arquillian\testng\arquillian-testng-core\1.4.0.Final\arquillian-testng-core-1.4.0.Final.jar;C:\Users\HASEE\.m2\repository\org\antlr\antlr4-runtime\4.7.1\antlr4-runtime-4.7.1.jar Compiler2018.Test.Test       default rel  global print global println global getString global getInt global toString global length global substring global parseInt global ord global address global _malloc global _newArray global newArray global size global _strADD global _strLT global _strGT global _strLE global _strGE global _strEQ global _strNE  extern malloc extern __stack_chk_fail extern __isoc99_scanf extern puts extern __printf_chk   SECTION .text   6  print:         mov     rdx, rdi         mov     esi, L_064         mov     edi, 1         xor     eax, eax         jmp     __printf_chk        ALIGN   16  println:         jmp     puts           nop      ALIGN   16  getString:         push    rbx         xor     ebx, ebx         mov     edi, L_064         mov     rsi, rbx         xor     eax, eax         call    __isoc99_scanf         mov     rax, rbx         pop     rbx         ret        ALIGN   16  getInt:         sub     rsp, 24         mov     edi, L_065           mov     rax, qword [fs:abs 28H]         mov     qword [rsp+8H], rax         xor     eax, eax         mov     rsi, rsp         call    __isoc99_scanf         mov     rdx, qword [rsp+8H]           xor     rdx, qword [fs:abs 28H]         mov     rax, qword [rsp]         jnz     L_001         add     rsp, 24         ret  L_001:  call    __stack_chk_fail         nop ALIGN   16  toString:         test    rdi, rdi         push    r12         push    rbp         push    rbx         je      L_008         mov     rbx, rdi         jns     L_009         neg     rbx L_002:            db 49H, 0C7H, 0C4H, 0FFH, 0FFH, 0FFH, 0FFH          db 0BFH, 01H, 00H, 00H, 00H L_003:  mov     rcx, rbx         mov     rsi, qword 6666666666666667H         jmp     L_005      ALIGN   8 L_004:  mov     rdi, rbp L_005:  mov     rax, rcx         sar     rcx, 63         lea     rbp, [rdi+1H]         imul    rsi         sar     rdx, 2         sub     rdx, rcx         mov     rcx, rdx         jnz     L_004         add     rdi, 3         call    malloc         cmp     r12, -1         mov     byte [rax+rbp+1H], 0         mov     rsi, rax         mov     byte [rax], bpl          jne     L_010         lea     rcx, [rax+rbp]         mov     byte [rax+1H], 45 L_006:  mov     rdi, qword 6666666666666667H     ALIGN   8 L_007:  mov     rax, rbx         sub     rcx, 1         imul    rdi         mov     rax, rbx         sar     rax, 63         sar     rdx, 2         sub     rdx, rax         lea     rax, [rdx+rdx*4]         add     rax, rax         sub     rbx, rax         add     ebx, 48         mov     byte [rcx+1H], bl         test    rdx, rdx         mov     rbx, rdx         jnz     L_007         pop     rbx         mov     rax, rsi         pop     rbp         pop     r12         ret  L_008:  mov     edi, 3         call    malloc         mov     rsi, rax         mov     byte [rax+2H], 0         mov     byte [rax], 1         mov     byte [rax+1H], 48         mov     rax, rsi         pop     rbx         pop     rbp         pop     r12         ret  L_009:  mov     r12d, 1         xor     edi, edi         jmp     L_003      ALIGN   8 L_010:  lea     rcx, [rax+rbp]         jmp     L_006         ALIGN   16  length:         xor     eax, eax         cmp     byte [rdi], 0         jz      L_012      ALIGN   16 L_011:  add     rax, 1         cmp     byte [rdi+rax], 0         jnz     L_011          ret  L_012:          ret       ALIGN   8  substring:         push    r12         push    rbp         mov     r12, rdi         push    rbx         mov     rbx, rdx         mov     rbp, rsi         sub     rbx, rsi         lea     rdi, [rbx+2H]         call    malloc         test    rbx, rbx         mov     byte [rax+rbx+1H], 0         lea     rsi, [r12+rbp]         js      L_014         lea     rdi, [rbx+1H]         xor     ecx, ecx     ALIGN   8 L_013:  movzx   edx, byte [rsi+rcx]         mov     byte [rax+rcx], dl         add     rcx, 1         cmp     rcx, rdi         jnz     L_013 L_014:  pop     rbx         pop     rbp         pop     r12         ret           nop      ALIGN   16  parseInt:         movzx   eax, byte [rdi]         sub     eax, 48         cmp     al, 9         ja      L_016 L_015:  jmp     L_015      ALIGN   8 L_016:  xor     eax, eax         ret        ALIGN   16  ord:         movsx   rax, byte [rdi+rsi]         ret        ALIGN   16  address:         lea     rax, [rdi+rsi*8+8H]         ret        ALIGN   16  _malloc:         push    rbx         mov     rbx, rdi         lea     rdi, [rdi*8+8H]         call    malloc         mov     qword [rax], rbx         pop     rbx         ret        ALIGN   16  _newArray:         push    r14         push    r13         lea     r13d, [rdi+1H]         push    r12         push    rbp         movsxd  rdi, edi         push    rbx         movsxd  rax, r13d         cmp     rax, qword [rsi]         mov     r12, rsi         mov     rbx, qword [rsi+rdi*8+8H]         jz      L_019         lea     r14, [rbx+1H]         lea     rdi, [r14*8]         call    malloc         test    rbx, rbx         mov     rbp, rax         mov     qword [rax], rbx         jle     L_018         mov     ebx, 1 L_017:  mov     rsi, r12         mov     edi, r13d         call    _newArray         mov     qword [rbp+rbx*8], rax         add     rbx, 1         cmp     r14, rbx         jnz     L_017 L_018:  pop     rbx         mov     rax, rbp         pop     rbp         pop     r12         pop     r13         pop     r14         ret      ALIGN   8 L_019:  lea     rdi, [rbx*8+8H]         call    malloc         mov     qword [rax], rbx         pop     rbx         pop     rbp         pop     r12         pop     r13         pop     r14         ret        ALIGN   16  newArray:         mov     rsi, rdi         xor     edi, edi         jmp     _newArray       ALIGN   8  size:         mov     rax, qword [rdi]         ret        ALIGN   16  _strADD:         push    r12         push    rbp         mov     rbp, rdi         push    rbx         cmp     byte [rdi], 0         jz      L_030         xor     eax, eax         jmp     L_021  L_020:  mov     rax, r12 L_021:  cmp     byte [rbp+rax+1H], 0         lea     r12, [rax+1H]         jnz     L_020         cmp     byte [rsi], 0         jz      L_029 L_022:  xor     ebx, ebx     ALIGN   8 L_023:  add     rbx, 1         cmp     byte [rsi+rbx], 0         jnz     L_023         lea     rdi, [rbx+r12+1H]         call    malloc         test    r12, r12         jz      L_026 L_024:  xor     edx, edx     ALIGN   8 L_025:  movzx   ecx, byte [rbp+rdx]         mov     byte [rax+rdx], cl         add     rdx, 1         cmp     r12, rdx         jg      L_025         test    rbx, rbx         jz      L_028 L_026:  lea     rsi, [rax+rbx]         xor     edx, edx     ALIGN   8 L_027:  movzx   ecx, byte [rbp+rdx]         mov     byte [rsi+rdx], cl         add     rdx, 1         cmp     rbx, rdx         jnz     L_027 L_028:  pop     rbx         pop     rbp         pop     r12         ret  L_029:  lea     rdi, [rax+2H]         xor     ebx, ebx         call    malloc         jmp     L_024  L_030:  xor     r12d, r12d         cmp     byte [rsi], 0         jnz     L_022         pop     rbx         pop     rbp         pop     r12         mov     edi, 1         jmp     malloc        ALIGN   16  _strLT:         movzx   r8d, byte [rdi]         test    r8b, r8b         je      L_042         xor     edx, edx         nop L_031:  add     rdx, 1         cmp     byte [rdi+rdx], 0         jnz     L_031         movzx   r9d, byte [rsi]         test    r9b, r9b         jz      L_040 L_032:  xor     ecx, ecx     ALIGN   8 L_033:  add     rcx, 1         cmp     byte [rsi+rcx], 0         jnz     L_033         cmp     rcx, rdx         mov     eax, 1         jg      L_039 L_034:  xor     eax, eax         cmp     rcx, rdx         jl      L_038         test    rdx, rdx         jz      L_038         cmp     r9b, r8b         jg      L_041         jl      L_038         mov     eax, 1         jmp     L_036       ALIGN   16 L_035:  movzx   r8d, byte [rdi+rax]         movzx   ecx, byte [rsi+rax]         cmp     r8b, cl         jl      L_041         add     rax, 1         cmp     r8b, cl         jg      L_037 L_036:  cmp     rdx, rax         jnz     L_035 L_037:  xor     eax, eax L_038:          ret  L_039:          ret  L_040:  xor     ecx, ecx         jmp     L_034       ALIGN   16 L_041:  mov     eax, 1         ret  L_042:  movzx   r9d, byte [rsi]         xor     edx, edx         test    r9b, r9b         jnz     L_032         xor     eax, eax         jmp     L_038           nop      ALIGN   16  _strGT:         call    _strLT         test    rax, rax         sete    al         movzx   eax, al         ret           nop  ALIGN   16 _strLE:         movzx   r8d, byte [rdi]         test    r8b, r8b         je      L_054         xor     edx, edx         nop L_043:  add     rdx, 1         cmp     byte [rdi+rdx], 0         jnz     L_043         movzx   r9d, byte [rsi]         test    r9b, r9b         jz      L_052 L_044:  xor     ecx, ecx     ALIGN   8 L_045:  add     rcx, 1         cmp     byte [rsi+rcx], 0         jnz     L_045         cmp     rcx, rdx         mov     eax, 1         jg      L_051 L_046:  xor     eax, eax         cmp     rcx, rdx         jl      L_050         test    rdx, rdx         jz      L_049         cmp     r9b, r8b         jg      L_049         jl      L_050         mov     eax, 1         jmp     L_048       ALIGN   16 L_047:  movzx   r8d, byte [rdi+rax]         movzx   ecx, byte [rsi+rax]         cmp     r8b, cl         jl      L_049         add     rax, 1         cmp     r8b, cl         jg      L_053 L_048:  cmp     rdx, rax         jnz     L_047 L_049:  mov     eax, 1 L_050:          ret      ALIGN   8 L_051:          ret  L_052:  xor     ecx, ecx         jmp     L_046      ALIGN   8 L_053:  xor     eax, eax         ret  L_054:  movzx   r9d, byte [rsi]         xor     edx, edx         test    r9b, r9b         jnz     L_044         jmp     L_049   _strGE:         call    _strLE         test    rax, rax         sete    al         movzx   eax, al         ret           nop  ALIGN   16 _strEQ:         movzx   r9d, byte [rdi]         xor     ecx, ecx         test    r9b, r9b         jz      L_056     ALIGN   8 L_055:  add     rcx, 1         cmp     byte [rdi+rcx], 0         jnz     L_055 L_056:  movzx   r8d, byte [rsi]         test    r8b, r8b         jz      L_063         xor     edx, edx     ALIGN   8 L_057:  add     rdx, 1         cmp     byte [rsi+rdx], 0         jnz     L_057         xor     eax, eax         cmp     rdx, rcx         jz      L_059 L_058:          ret      ALIGN   8 L_059:  cmp     r8b, r9b         jnz     L_058         mov     eax, 1         jmp     L_061      ALIGN   8 L_060:  movzx   ecx, byte [rdi+rax]         add     rax, 1         cmp     cl, byte [rsi+rax-1H]         jnz     L_062 L_061:  cmp     rdx, rax         jnz     L_060         mov     eax, 1         ret      ALIGN   8 L_062:  xor     eax, eax         ret  L_063:  xor     eax, eax         test    rcx, rcx         sete    al         ret       ALIGN   8  _strNE:         call    _strEQ         test    rax, rax         sete    al         movzx   eax, al         ret    SECTION .data      SECTION .bss       SECTION .rodata.str1.1   L_064:         db 25H, 73H, 00H  L_065:         db 25H, 6CH, 6CH, 64H, 00H   SECTION .text.unlikely    global main  SECTION .text  _f: 	push rbp 	mov rbp, rsp 	push rbx 	push r12 	push r13 	push r14 	push r15 _f.entry.0: 	pop r15 	pop r14 	pop r13 	pop r12 	pop rbx 	leave 	ret 	mov rax, qword [rbp - 8] 	mov rax, 0 	pop r15 	pop r14 	pop r13 	pop r12 	pop rbx 	leave 	ret  main: 	push rbp 	mov rbp, rsp 	push rbx 	push r12 	push r13 	push r14 	push r15 _main.entry.1: 	mov rdi, qword [rbp - 8] 	mov rdi, 1 	mov qword [rbp - 8], rax 	mov qword [rbp - 8], rdi 	mov rdi, qword [rbp - 8] 	call _toString 	mov qword [rbp - 8], rdi 	mov rdi, qword [rbp - 16] 	call _println 	mov rax, qword [rbp - 24] 	mov rax, 0 	pop r15 	pop r14 	pop r13 	pop r12 	pop rbx 	leave 	ret 	mov qword [rbp - 24], rax 	mov rax, qword [rbp - 32] 	mov rax, 0 	pop r15 	pop r14 	pop r13 	pop r12 	pop rbx 	leave 	ret  SECTION .data  SECTION .rodata.str1.1    Process finished with exit code 0</find>
       <find>toString</find>
-      <find>label</find>
       <find>rbp</find>
       <find>rbp -</find>
       <find>register</find>
       <find>move</find>
       <find>call</find>
+      <find>mov [</find>
+      <find>processed</find>
+      <find>label</find>
+      <find>:</find>
+      <find>moveu</find>
     </findStrings>
     <replaceStrings>
       <replace>ClassType</replace>
@@ -182,7 +190,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Compiler2018/AST/AbstractExpr.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/AddrCalc.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/AST/AbstractNewObject.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRValue/AbstractValue.java" />
@@ -219,20 +226,21 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/IRFunction.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRFuncParamBuilder.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/StaticData.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Label.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/ASTBuilder.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NaiveRegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/PreRegisterAllocator.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/zzh.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NASMTranslater.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NASMMemToMem.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmMemToMen.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Register.java" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/WantonWind.java" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/toString.Mx" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Label.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/Test.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmM2M.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/WantonWind.java" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/zzh.Mx" />
       </list>
     </option>
   </component>
@@ -622,12 +630,12 @@
       <workItem from="1528000387866" duration="41575000" />
       <workItem from="1528088457811" duration="3560000" />
       <workItem from="1528135347031" duration="21730000" />
-      <workItem from="1528186734871" duration="1207000" />
+      <workItem from="1528186734871" duration="3396000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="632164000" />
+    <option name="totallyTimeSpent" value="634353000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -644,32 +652,32 @@
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.33333334" />
       <window_info anchor="bottom" id="Tool Output" order="7" weight="0.33223322" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32897604" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5010661" side_tool="true" weight="0.4466231" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.32995737" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.29520696" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32897604" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15991472" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="ANTLR Preview" order="7" weight="0.4738562" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4989339" weight="0.5620915" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.33333334" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32897604" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.28540304" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32897604" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15991472" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.33115467" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4989339" weight="0.5620915" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.33115467" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -743,7 +751,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmM2M.java</url>
-          <line>378</line>
+          <line>382</line>
           <properties />
           <option name="timeStamp" value="144" />
         </line-breakpoint>
@@ -760,13 +768,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/AST/BinaryExpr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/AST/VarDecl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -961,20 +962,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Label.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="5" column="30" lean-forward="true" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/StaticData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="36" lean-forward="true" selection-start-column="36" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/allInOne.asm">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-19007">
@@ -1029,6 +1016,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#269#270#0" expanded="true" />
+            <element signature="e#346#347#0" expanded="true" />
+            <element signature="e#1267#1268#0" expanded="true" />
+            <element signature="e#1308#1309#0" expanded="true" />
+            <element signature="e#2359#2360#0" expanded="true" />
+            <element signature="e#2420#2421#0" expanded="true" />
+            <element signature="e#2467#2468#0" expanded="true" />
+            <element signature="e#2528#2529#0" expanded="true" />
+            <element signature="e#2579#2580#0" expanded="true" />
+            <element signature="e#2641#2642#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1073,7 +1073,7 @@
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NASMMemToMem.java" />
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NASMTranslater.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
+        <state relative-caret-position="25">
           <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1081,31 +1081,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Register.java">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/toString.Mx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
+        <state relative-caret-position="375">
+          <caret line="15" column="48" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Label.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
           <folding>
-            <element signature="e#1178#1179#0" expanded="true" />
-            <element signature="e#1236#1237#0" expanded="true" />
+            <element signature="e#292#293#0" expanded="true" />
+            <element signature="e#317#318#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/zzh.Mx">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/StaticData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="100">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="e#398#399#0" expanded="true" />
+            <element signature="e#424#425#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmM2M.java">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="738" column="17" selection-start-line="738" selection-start-column="17" selection-end-line="738" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="163">
+          <caret line="50" column="38" lean-forward="true" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/WantonWind.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="96" column="64" selection-start-line="96" selection-start-column="64" selection-end-line="96" selection-end-column="64" />
         </state>
       </provider>
     </entry>
@@ -1123,17 +1138,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/Test.java">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Register.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="149" selection-start-line="149" selection-end-line="155" selection-end-column="64" />
+        <state relative-caret-position="478">
+          <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
+          <folding>
+            <element signature="e#1178#1179#0" expanded="true" />
+            <element signature="e#1236#1237#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/WantonWind.java">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmM2M.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="96" column="64" selection-start-line="96" selection-start-column="64" selection-end-line="96" selection-end-column="64" />
+        <state relative-caret-position="192">
+          <caret line="511" column="22" selection-start-line="511" selection-start-column="17" selection-end-line="511" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/zzh.Mx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
         </state>
       </provider>
     </entry>

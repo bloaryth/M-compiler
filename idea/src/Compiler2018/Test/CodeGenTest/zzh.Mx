@@ -5,6 +5,7 @@ return x + 1;
 int c = 123;
 int x = lol(c);
 int main () {
+print(toString(x));
 return x;
 }
 

@@ -48,6 +48,7 @@ public class Test {
 //        return "./CodeGenTest/Random.Mx";
 //        return "./CodeGenTest/ZZK.Mx";
         return "./CodeGenTest/zzh.Mx";
+//        return "./CodeGenTest/toString.Mx";
 
         // Semantic
 
