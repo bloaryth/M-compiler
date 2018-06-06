@@ -63,7 +63,7 @@ public class NaiveRegisterAllocator implements IIRVistor{
 
     @Override
     public void visit(Compare ir) {
-        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
+//        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
         if (ir.getIntermediate() != null) {
             ir.getIntermediate().setAllocatedRegister(Register.PysicalRegister.R13);
         }

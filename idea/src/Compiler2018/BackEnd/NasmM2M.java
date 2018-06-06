@@ -287,7 +287,7 @@ public class NasmM2M implements IIRVistor {
 
     @Override
     public void visit(Compare ir) {
-        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
+//        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
         ir.getLeftOperand().setAllocatedRegister(Register.PysicalRegister.R14);
         ir.getRightOperand().setAllocatedRegister(Register.PysicalRegister.R15);
 
@@ -308,28 +308,28 @@ public class NasmM2M implements IIRVistor {
         }
 
         cmp(ir.getLeftOperand(), ir.isLeftStar(), rightOperand, rightStar);
-        switch (ir.getOprator()) {
-            case EQ:
-                sete(ir.getDestination());
-                break;
-            case NE:
-                setne(ir.getDestination());
-                break;
-            case LT:
-                setl(ir.getDestination());
-                break;
-            case LE:
-                setle(ir.getDestination());
-                break;
-            case GT:
-                setg(ir.getDestination());
-                break;
-            case GE:
-                setge(ir.getDestination());
-                break;
-        }
+//        switch (ir.getOprator()) {
+//            case EQ:
+//                sete(ir.getDestination());
+//                break;
+//            case NE:
+//                setne(ir.getDestination());
+//                break;
+//            case LT:
+//                setl(ir.getDestination());
+//                break;
+//            case LE:
+//                setle(ir.getDestination());
+//                break;
+//            case GT:
+//                setg(ir.getDestination());
+//                break;
+//            case GE:
+//                setge(ir.getDestination());
+//                break;
+//        }
 
-        regToStack(ir.getDestination());
+//        regToStack(ir.getDestination());
 //        regToStack(ir.getLeftOperand());
 //        regToStack(ir.getRightOperand());
     }

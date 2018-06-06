@@ -10,17 +10,15 @@ public class Compare extends AbstractIRInstruction {
     }
 
     private final CompareOp oprator;
-    private final Register destination;
     private final Register leftOperand;
     private final boolean leftStar;
     private final Register rightOperand;
     private final boolean rightStar;
     private final Register intermediate;
 
-    public Compare(BasicBlock basicBlock, CompareOp oprator, Register destination, Register leftOperand, boolean leftStar, Register rightOperand, boolean rightStar) {
+    public Compare(BasicBlock basicBlock, CompareOp oprator, Register leftOperand, boolean leftStar, Register rightOperand, boolean rightStar) {
         super(basicBlock);
         this.oprator = oprator;
-        this.destination = destination;
         this.leftOperand = leftOperand;
         this.leftStar = leftStar;
         this.rightOperand = rightOperand;
@@ -35,10 +33,6 @@ public class Compare extends AbstractIRInstruction {
 
     public CompareOp getOprator() {
         return oprator;
-    }
-
-    public Register getDestination() {
-        return destination;
     }
 
     public Register getLeftOperand() {
@@ -65,7 +59,6 @@ public class Compare extends AbstractIRInstruction {
     public String toIRString(){
         String str = "\t" +
                 oprator.toString() + " " +
-                destination.toIRString() + " " +
                 leftOperand.toIRString(leftStar) + " " +
                 rightOperand.toIRString(rightStar) + "\n";
         return str;

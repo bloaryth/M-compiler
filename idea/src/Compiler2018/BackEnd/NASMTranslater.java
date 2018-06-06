@@ -283,7 +283,6 @@ public class NASMTranslater implements IIRVistor{
 
     @Override
     public void visit(Compare ir) {
-        loadIn(ir.getDestination());
         loadIn(ir.getLeftOperand());
         loadIn(ir.getRightOperand());
 
@@ -299,27 +298,27 @@ public class NASMTranslater implements IIRVistor{
             star = ir.isRightStar();
         }
 
-        cmp(ir.getLeftOperand(), ir.isLeftStar(), rightOperand, star);
-        switch (ir.getOprator()) {
-            case EQ:
-                sete(ir.getDestination());
-                break;
-            case NE:
-                setne(ir.getDestination());
-                break;
-            case LT:
-                setl(ir.getDestination());
-                break;
-            case LE:
-                setle(ir.getDestination());
-                break;
-            case GT:
-                setg(ir.getDestination());
-                break;
-            case GE:
-                setge(ir.getDestination());
-                break;
-        }
+//        cmp(ir.getLeftOperand(), ir.isLeftStar(), rightOperand, star);
+//        switch (ir.getOprator()) {
+//            case EQ:
+//                sete();
+//                break;
+//            case NE:
+//                setne(ir.getDestination());
+//                break;
+//            case LT:
+//                setl(ir.getDestination());
+//                break;
+//            case LE:
+//                setle(ir.getDestination());
+//                break;
+//            case GT:
+//                setg(ir.getDestination());
+//                break;
+//            case GE:
+//                setge(ir.getDestination());
+//                break;
+//        }
 
     }
 

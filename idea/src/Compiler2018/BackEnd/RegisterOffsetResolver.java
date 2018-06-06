@@ -57,7 +57,7 @@ public class RegisterOffsetResolver implements IIRVistor {
 
     @Override
     public void visit(Compare ir) {
-        currentIRFunction.addStackOffset(ir.getDestination());
+//        currentIRFunction.addStackOffset(ir.getDestination());
         currentIRFunction.addStackOffset(ir.getIntermediate());
         currentIRFunction.addStackOffset(ir.getLeftOperand());
         currentIRFunction.addStackOffset(ir.getRightOperand());

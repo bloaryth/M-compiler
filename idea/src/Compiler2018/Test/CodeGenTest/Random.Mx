@@ -1,8 +1,36 @@
 int main() {
+/*
     int a = 5;
     int b = 0;
     int c;
+*/
 
+    //bool m = true && true;
+
+    bool h = !((true && false) || (true && false));
+
+
+
+
+    if(h){
+        print("hh");
+    } else {
+        print("ee");
+    }
+
+/*
+    bool e = !! true;
+
+
+    if(!e) {
+        print("hh");
+    }
+*/
+/*
+
+    if(!h){
+        print("hh");
+    }
 
     bool d = b != 0 && a/b != 1;
     if (d) {
@@ -22,10 +50,10 @@ int main() {
     } else {
         print("false");
     }
+*/
 
 
-
-    return c;
+    return 0;
 }
 
 

@@ -32,7 +32,7 @@ public class Branch extends AbstractIRInstruction {
         String str =
 //                cond.toIRString() +
                 "\tBR " +
-                cond.getDestination().toIRString() + " " +
+//                cond.getDestination().toIRString() + " " +
                 ifTrue.getProcessedName() + " " +
                 ifFalse.getProcessedName() + "\n";
         return str;
