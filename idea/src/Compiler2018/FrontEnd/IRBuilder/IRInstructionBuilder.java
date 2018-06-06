@@ -20,6 +20,7 @@ public class IRInstructionBuilder implements IASTVistor {
     private IRClass currentClass;
     private IRFunction currentFunction;
     private BasicBlock currentBB;
+    private Register thisRegister;  // for in class call
     private Stack<BasicBlock> loopStepBBStack = new Stack<>();
     private Stack<BasicBlock> loopAfterBBStack = new Stack<>();
 
@@ -50,6 +51,9 @@ public class IRInstructionBuilder implements IASTVistor {
     @Override
     public void visit(FuncDecl node) {
         currentFunction = irProgram.getIRFunction(node.getFuncSymbol().getProcessedName());
+        if (currentClass != null) {
+            thisRegister = currentFunction.getThisRegister();
+        }
         if (node.getName().equals("main")) {
             currentBB = globalInitAfter;
         } else {
@@ -64,6 +68,7 @@ public class IRInstructionBuilder implements IASTVistor {
 
         currentFunction.setEndBlock(currentBB);
         currentBB = null;
+        thisRegister = null;
         currentFunction = null;
     }
 
@@ -323,12 +328,14 @@ public class IRInstructionBuilder implements IASTVistor {
     }
 
     @Override
-    public void visit(FunctionCall node) {  // FIXME size
+    public void visit(FunctionCall node) {  // FIXME this ??
         node.getName().accept(this);
         node.getParameters().forEach(x -> x.accept(this));
         List<Register> parameterList = new LinkedList<>();
         if (node.getName() instanceof MemberAcess && node.getName().getFunc() != null) {
             parameterList.add(node.getName().getRegister());
+        } else if (node.getName().getFunc() != null && node.getName().getFunc().getBelongTable() instanceof ClassTable && thisRegister != null) {
+            parameterList.add(thisRegister);    // in class function call
         }
         node.getParameters().forEach(x -> {
             if (x.isDataInMem()) {

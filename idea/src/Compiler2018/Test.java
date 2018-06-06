@@ -60,7 +60,8 @@ public class Test {
 //        return "./Test/TestCases/testcase_532.txt";
 //        return "./Test/TestCases/testcase_524.txt";
 //        return "./Test/TestCases/testcase_527.txt";
-
+//        return "./Test/CodeGenTest/quine.Mx";
+//        return "./Test/CodeGenTest/hh.Mx";
 
         // Semantic
 
