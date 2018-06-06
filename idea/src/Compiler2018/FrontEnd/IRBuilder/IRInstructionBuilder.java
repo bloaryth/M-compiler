@@ -21,6 +21,7 @@ public class IRInstructionBuilder implements IASTVistor {
     private Compare currentCond;   // prepare for generate shortcut branch
     private Stack<BasicBlock> loopStepBBStack = new Stack<>();
     private Stack<BasicBlock> loopAfterBBStack = new Stack<>();
+    private Stack<BasicBlock> notAfterBBStack = new Stack<>();
 
     public IRInstructionBuilder(IRProgram irProgram) {
         this.irProgram = irProgram;
@@ -162,6 +163,7 @@ public class IRInstructionBuilder implements IASTVistor {
         currentBB.endWith(new Branch(currentBB, compare, node.getCond().getIfTrue(), node.getCond().getIfFalse()));
 
         currentBB = BBTrue;
+
         currentFunction.putBasicBlock(currentBB);
         node.getIfStmt().accept(this);
         currentBB.endWith(new Jump(currentBB, BBMerge));    // FIXME assert !end
@@ -461,20 +463,43 @@ public class IRInstructionBuilder implements IASTVistor {
     private void processLogicalNot(UnaryExpr node) {
         node.setRegister(new Register());
 
-        Register trueReg = new Register();
-        currentBB.addTail(new MoveU(currentBB, trueReg, new Immediate(1)));
 
-        // short cut
+//        BasicBlock mergeBLock = new BasicBlock(currentFunction, "merge");
+//        currentFunction.putBasicBlock(mergeBLock);
+        // preserve short cut
         node.getExpr().setIfTrue(node.getIfFalse());
         node.getExpr().setIfFalse(node.getIfTrue());
         node.getExpr().accept(this);
 
+//        node.getExpr().getIfTrue().endWith(new Jump(node.getExpr().getIfTrue(), mergeBLock));
+//        node.getExpr().getIfFalse().endWith(new Jump(node.getExpr().getIfFalse(), mergeBLock));
+
+//        currentBB = mergeBLock;
+//        currentFunction.putBasicBlock(mergeBLock);
+        Register trueReg = new Register();
+        currentBB.addTail(new MoveU(currentBB, trueReg, new Immediate(1)));
+
+
+        // Pre
+        currentBB.addTail(new BinaryCalc(currentBB, BinaryCalc.BinaryOp.XOR, node.getRegister(), node.getExpr().getRegister(), node.getExpr().isDataInMem(), trueReg, false));
+
+
 //        Compare cmp = new Compare(currentBB, Compare.CompareOp.EQ, node.getExpr().getRegister(), node.getExpr().isDataInMem(), trueReg, false);
 //        currentBB.addTail(cmp);
 //        currentBB.endWith(new Branch(currentBB, cmp, node.getIfTrue(), node.getIfFalse()));
+//
+////        currentBB.addTail(new Set(currentBB, node.getRegister(), ));
+
+
+        // Post
+        node.getIfTrue().addTail(new MoveU(node.getIfTrue(), trueReg, new Immediate(1)));
         node.getIfTrue().addTail(new BinaryCalc(node.getIfTrue(), BinaryCalc.BinaryOp.XOR, node.getRegister(), node.getExpr().getRegister(), node.getExpr().isDataInMem(), trueReg, false));
+        node.getIfFalse().addTail(new MoveU(node.getIfFalse(), trueReg, new Immediate(1)));
         node.getIfFalse().addTail(new BinaryCalc(node.getIfFalse(), BinaryCalc.BinaryOp.XOR, node.getRegister(), node.getExpr().getRegister(), node.getExpr().isDataInMem(), trueReg, false));
-//        BasicBlock block = new BasicBlock(currentFunction, "not_end");
+
+//        node.getIfFalse().endWith(new Jump(currentBB, mergeBLock));
+//        node.getIfFalse().endWith(new Jump(currentBB, mergeBLock));
+        //        BasicBlock block = new BasicBlock(currentFunction, "not_end");
 //        currentFunction.putBasicBlock(block);
 //        node.getIfTrue().endWith(new Jump(node.getIfTrue(), block));
 //        node.getIfFalse().endWith(new Jump(node.getIfFalse(), block));

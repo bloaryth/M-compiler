@@ -118,6 +118,12 @@ public class NasmM2M implements IIRVistor {
                         case 'n':
                             builder.append(" ").append(10).append(",");
                             break;
+                        case '"':
+                            builder.append(" ").append(34).append(",");
+                            break;
+                        case '\\':
+                            builder.append(" ").append(92).append(",");
+                            break;
                         default:
                             throw new RuntimeException("unprocessed \\");
                     }

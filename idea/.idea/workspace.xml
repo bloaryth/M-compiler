@@ -18,8 +18,8 @@
       <file leaf-file-name="NasmM2M.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmM2M.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="120" column="32" lean-forward="true" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
+            <state relative-caret-position="315">
+              <caret line="125" column="34" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#12590#12591#0" expanded="true" />
@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Random.Mx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Random.Mx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="665" lean-forward="true" selection-start-line="665" selection-end-line="665" />
+            <state relative-caret-position="375">
+              <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -50,26 +50,8 @@
       <file leaf-file-name="testcase_566.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_566.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="40" column="13" selection-end-line="665" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testcase_555.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_555.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="22" column="14" lean-forward="true" selection-end-line="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testcase_542.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_542.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="10" column="39" lean-forward="true" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+            <state relative-caret-position="350">
+              <caret line="44" column="10" lean-forward="true" selection-end-line="665" />
             </state>
           </provider>
         </entry>
@@ -83,33 +65,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IRInstructionBuilder.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="IRInstructionBuilder.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="728" column="37" selection-start-line="728" selection-start-column="37" selection-end-line="728" selection-end-column="37" />
+            <state relative-caret-position="430">
+              <caret line="496" column="61" selection-start-line="496" selection-start-column="61" selection-end-line="496" selection-end-column="61" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StaticData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/StaticData.java">
+      <file leaf-file-name="testcase_593.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_593.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            <state relative-caret-position="425">
+              <caret line="17" column="1" lean-forward="true" selection-end-line="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testcase_585.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_585.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="16" lean-forward="true" selection-end-line="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UnaryExpr.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/AST/UnaryExpr.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="27" selection-start-line="27" selection-end-line="27" />
               <folding>
-                <element signature="e#398#399#0" expanded="true" />
-                <element signature="e#424#425#0" expanded="true" />
+                <element signature="e#656#657#0" expanded="true" />
+                <element signature="e#788#789#0" expanded="true" />
+                <element signature="e#823#824#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testcase_527.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_527.txt">
+      <file leaf-file-name="FunctionCall.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/AST/FunctionCall.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="43" column="13" lean-forward="true" selection-end-line="94" />
+            <state relative-caret-position="420">
+              <caret line="81" selection-start-line="81" selection-end-line="81" />
+              <folding>
+                <element signature="e#2172#2173#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -128,8 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>memberAcess</find>
-      <find>NewExpr</find>
       <find>IntBinary</find>
       <find>add</find>
       <find>processLogical</find>
@@ -137,7 +139,6 @@
       <find>logicalnot</find>
       <find>assign</find>
       <find>processLogica</find>
-      <find>LogicalNot</find>
       <find>Vardecl</find>
       <find>LogicalBinary</find>
       <find>IFstmt</find>
@@ -152,12 +153,15 @@
       <find>VarDe</find>
       <find>LogicalB</find>
       <find>size</find>
-      <find>FunctionCall</find>
       <find>MemberAcess</find>
       <find>String</find>
       <find>prepareC</find>
       <find>Call</find>
+      <find>FunctionCall</find>
+      <find>IfStmt</find>
+      <find>LogicalNot</find>
       <find>StaticData</find>
+      <find>Logical</find>
     </findStrings>
     <replaceStrings>
       <replace>ClassType</replace>
@@ -219,9 +223,9 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/PreRegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/RegisterOffsetResolver.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Set.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmM2M.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java" />
       </list>
     </option>
   </component>
@@ -629,12 +633,12 @@
       <workItem from="1528088457811" duration="3560000" />
       <workItem from="1528135347031" duration="21730000" />
       <workItem from="1528186734871" duration="4095000" />
-      <workItem from="1528191789645" duration="71628000" />
+      <workItem from="1528191789645" duration="78590000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="706680000" />
+    <option name="totallyTimeSpent" value="713642000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -662,16 +666,16 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.4989339" visible="true" weight="0.29847494" />
+      <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.4989339" visible="true" weight="0.32570806" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.33333334" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32897604" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" x="334" y="71" width="1332" height="898" id="Run" order="14" sideWeight="0.49946696" type="FLOATING" weight="0.45860568" />
+      <window_info anchor="bottom" x="400" y="80" width="1332" height="898" id="Run" order="14" sideWeight="0.49946696" type="FLOATING" weight="0.45860568" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32897604" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16577825" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16577825" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.33115467" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="6" side_tool="true" />
@@ -750,51 +754,45 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java</url>
-          <line>324</line>
+          <line>326</line>
           <properties />
           <option name="timeStamp" value="160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java</url>
-          <line>538</line>
-          <properties />
-          <option name="timeStamp" value="187" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java</url>
-          <line>464</line>
-          <properties />
-          <option name="timeStamp" value="195" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java</url>
-          <line>461</line>
-          <properties />
-          <option name="timeStamp" value="196" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java</url>
-          <line>90</line>
+          <line>91</line>
           <properties />
           <option name="timeStamp" value="206" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java</url>
-          <line>102</line>
+          <line>103</line>
           <properties />
           <option name="timeStamp" value="207" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java</url>
-          <line>696</line>
+          <line>721</line>
           <properties />
           <option name="timeStamp" value="208" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java</url>
+          <line>391</line>
+          <properties />
+          <option name="timeStamp" value="209" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java</url>
+          <line>473</line>
+          <properties />
+          <option name="timeStamp" value="212" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="209" />
+      <option name="time" value="213" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -803,14 +801,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NASMMemToMem.java" />
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/toString.Mx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="48" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/zzh.Mx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -918,18 +908,6 @@
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_509.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-258" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/AST/UnaryExpr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="e#656#657#0" expanded="true" />
-            <element signature="e#788#789#0" expanded="true" />
-            <element signature="e#823#824#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_524.txt">
@@ -1137,13 +1115,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_593.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/Semantic/StmtScanner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
@@ -1151,17 +1122,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="728" column="37" selection-start-line="728" selection-start-column="37" selection-end-line="728" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_527.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="43" column="13" lean-forward="true" selection-end-line="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/StaticData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="e#398#399#0" expanded="true" />
+            <element signature="e#424#425#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1179,28 +1154,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/StaticData.java">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_566.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="350">
+          <caret line="44" column="10" lean-forward="true" selection-end-line="665" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/AST/UnaryExpr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
           <folding>
-            <element signature="e#398#399#0" expanded="true" />
-            <element signature="e#424#425#0" expanded="true" />
+            <element signature="e#656#657#0" expanded="true" />
+            <element signature="e#788#789#0" expanded="true" />
+            <element signature="e#823#824#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Label.java">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/AST/FunctionCall.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="420">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+          <folding>
+            <element signature="e#2172#2173#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_552.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmM2M.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="120" column="32" lean-forward="true" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
+        <state relative-caret-position="315">
+          <caret line="125" column="34" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#12590#12591#0" expanded="true" />
@@ -1213,20 +1209,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_552.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_566.txt">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_585.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="40" column="13" selection-end-line="665" />
+        <state relative-caret-position="400">
+          <caret line="16" lean-forward="true" selection-end-line="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_593.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="665" lean-forward="true" selection-start-line="665" selection-end-line="665" />
+        <state relative-caret-position="425">
+          <caret line="17" column="1" lean-forward="true" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Label.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="496" column="61" selection-start-line="496" selection-start-column="61" selection-end-line="496" selection-end-column="61" />
         </state>
       </provider>
     </entry>
