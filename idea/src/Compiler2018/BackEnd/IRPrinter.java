@@ -86,4 +86,9 @@ public class IRPrinter implements IIRVistor {
     public void visit(UnaryCalc ir) {
 
     }
+
+    @Override
+    public void visit(Set ir) {
+
+    }
 }

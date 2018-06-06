@@ -1,59 +1,43 @@
+bool hh(){
+    print("hh");
+    return true;
+}
+
 int main() {
-/*
     int a = 5;
     int b = 0;
     int c;
-*/
-
-    //bool m = true && true;
-
-    bool h = !((true && false) || (true && false));
-
-
-
-
-    if(h){
-        print("hh");
-    } else {
-        print("ee");
-    }
 
 /*
-    bool e = !! true;
-
-
-    if(!e) {
-        print("hh");
+    if (false != false) {
+        print("uu");
     }
 */
-/*
+    //bool d = false;
 
-    if(!h){
-        print("hh");
-    }
+    bool d = b != 0 && hh();
+    //bool d = b != 0 && a/b != 1;
 
-    bool d = b != 0 && a/b != 1;
     if (d) {
         c = 10;
-        print("true");
     } else {
         c = 20;
-        print("false");
     }
 
+    print(toString(c));
+
+/*
     bool e;
     e = !(c == 10 && a/b == 0 && a == 5);
-
     if (e){
         c = 30;
-        print("true");
     } else {
-        print("false");
+        c = 10;
     }
+    print(toString(c));
 */
 
-
-    return 0;
+    return c;
 }
 
 
@@ -75,3 +59,4 @@ True
 30
 
 !!*/
+

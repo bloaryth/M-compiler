@@ -114,4 +114,9 @@ public class NaiveRegisterAllocator implements IIRVistor{
         ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
         ir.getOperand().setAllocatedRegister(Register.PysicalRegister.R13);
     }
+
+    @Override
+    public void visit(Set ir) {
+
+    }
 }

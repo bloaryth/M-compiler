@@ -444,6 +444,34 @@ public class NasmM2M implements IIRVistor {
 //        regToStack(ir.getOperand());
     }
 
+    @Override
+    public void visit(Set ir) {
+        ir.getDest().setAllocatedRegister(Register.PysicalRegister.R12);
+
+        switch (ir.getOp()) {
+            case EQ:
+                sete(ir.getDest());
+                break;
+            case NE:
+                setne(ir.getDest());
+                break;
+            case LT:
+                setl(ir.getDest());
+                break;
+            case LE:
+                setle(ir.getDest());
+                break;
+            case GT:
+                setg(ir.getDest());
+                break;
+            case GE:
+                setge(ir.getDest());
+                break;
+        }
+
+        regToStack(ir.getDest());
+    }
+
     private void labelTranslate(Label label) {
         builder.append("__Label");
         builder.append(label.getId());
