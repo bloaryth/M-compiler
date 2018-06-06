@@ -113,7 +113,18 @@ public class NasmM2M implements IIRVistor {
             char[] bytes = ((String) irStaticData.getVal()).toCharArray();
             builder.append("\tdb");
             for (int i = 0; i < bytes.length; i++) {
-                builder.append(" ").append((int) bytes[i]).append(",");
+                if (bytes[i] == '\\') {
+                    switch (bytes[i + 1]) {
+                        case 'n':
+                            builder.append(" ").append(10).append(",");
+                            break;
+                        default:
+                            throw new RuntimeException("unprocessed \\");
+                    }
+                    i++;
+                } else {
+                    builder.append(" ").append((int) bytes[i]).append(",");
+                }
             }
             builder.append(" 00\n\n");
         }
@@ -273,12 +284,13 @@ public class NasmM2M implements IIRVistor {
 //            loadIn(ir.getRet());
 //        }
         builder.append("\tcall ").append(ir.getProcessedName()).append("\n");
-        leaveCallParameter(ir.getArgs());
 
         if (ir.getRet() != null) {
             ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
             regToStack(ir.getRet());
         }
+
+        leaveCallParameter(ir.getArgs()); // use RAX
 
         if (alignment == 8) {
             builder.append("\tadd rsp, ").append(alignment).append("\n");
@@ -794,8 +806,9 @@ public class NasmM2M implements IIRVistor {
     }
 
     private void prepareCallParameter(List<Register> registerList) {
-        for (int i = registerList.size()-1; i > 6; i--) {
+        for (int i = registerList.size()-1; i > 5; i--) {
             registerList.get(i).setAllocatedRegister(Register.PysicalRegister.RAX);
+            stackToReg(registerList.get(i));
             push(registerList.get(i));
         }
         if (registerList.size() > 0) {
@@ -850,7 +863,7 @@ public class NasmM2M implements IIRVistor {
         if (registerList.size() > 5) {
             builder.append("\tmov qword [rbp ").append(registerList.get(5).getStackOffset()).append("], r9\n");
         }
-        for (int i = registerList.size()-1; i > 6; i--) {
+        for (int i = registerList.size()-1; i > 5; i--) {
             builder.append("\tmov rax, qword [rbp + ").append((8 * (i-6) + 16)).append("]\n");
             builder.append("\tmov qword [rbp ").append(registerList.get(i).getStackOffset()).append("], rax\n");
         }

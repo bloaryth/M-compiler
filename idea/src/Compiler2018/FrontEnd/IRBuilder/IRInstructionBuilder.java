@@ -334,6 +334,11 @@ public class IRInstructionBuilder implements IASTVistor {
             }
         });
 
+        if (node.getProcessedName().equals("_size")) {
+            node.setRegister(node.getName().getRegister());
+            return;
+        }
+
         Register ret;
         if (node.getType().getBaseType().equals("void")) {
             ret = null;
@@ -371,9 +376,9 @@ public class IRInstructionBuilder implements IASTVistor {
             case "_Nstringord":
                 builder.setProcessedName("ord");
                 break;
-            case "_size":
-                builder.setProcessedName("size");
-                break;
+//            case "_size":
+//                builder.setProcessedName("size");
+//                break;
             default:
                 builder.setProcessedName(node.getProcessedName());
                 break;
@@ -422,6 +427,18 @@ public class IRInstructionBuilder implements IASTVistor {
             currentBB.addTail(new Move(currentBB, base, false, node.getExpr().getRegister(), true));
         } else {
             base = node.getExpr().getRegister();
+        }
+
+        if (node.getName().equals("size")) {
+            Call.Builder builder = new Call.Builder();
+            Register ret = new Register();
+            builder.setRet(ret);
+            builder.setProcessedName("size");
+            builder.addArgs(base);
+            builder.setBasicBlock(currentBB);
+            currentBB.addTail(builder.build());
+            node.setRegister(ret);
+            return;
         }
 
         if (node.getFunc() == null) {
