@@ -771,7 +771,7 @@ public class NasmM2M implements IIRVistor {
         if (offset > 0) {
             builder.append(" + ");
             builder.append(offset);
-        } else {
+        } else if (offset < 0){
             builder.append(" - ");
             builder.append(-offset);
         }

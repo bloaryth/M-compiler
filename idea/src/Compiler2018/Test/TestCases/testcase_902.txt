@@ -76,6 +76,7 @@ int main() {
 	b.printPoint();
 	c.printPoint();
 	d.printPoint();
+
 	return 0;
 }
 

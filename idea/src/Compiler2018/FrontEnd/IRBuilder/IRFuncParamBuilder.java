@@ -33,6 +33,7 @@ public class IRFuncParamBuilder implements IASTVistor {
         IRFunction irFunction = new IRFunction(funcSymbol.getProcessedName(), className);
         if (className != null) {
             irFunction.addStackOffset(irFunction.getThisRegister());
+            irFunction.addParameter(irFunction.getThisRegister());
         }
         // parameter register already added
         node.getFuncSymbol().getParameterRegisterList().forEach(irFunction::addParameter);
@@ -56,6 +57,7 @@ public class IRFuncParamBuilder implements IASTVistor {
         CstrSymbol cstrSymbol = node.getCstrSymbol();
         IRFunction irFunction = new IRFunction(cstrSymbol.getProcessedName(), className);
         irFunction.addStackOffset(irFunction.getThisRegister());
+        irFunction.addParameter(irFunction.getThisRegister());
         // ignoring all parameters FIXME
         irProgram.putIRFunction(cstrSymbol.getProcessedName(), irFunction);
     }

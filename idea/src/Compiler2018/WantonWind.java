@@ -80,10 +80,10 @@ public class WantonWind {
             irProgram.accept(registerOffsetResolver);
 
             // Register Allocation
-            PreRegisterAllocator preRegisterAllocator = new PreRegisterAllocator();
-            NaiveRegisterAllocator naiveRegisterAllocator = new NaiveRegisterAllocator();
-            irProgram.accept(preRegisterAllocator);
-            irProgram.accept(naiveRegisterAllocator);
+//            PreRegisterAllocator preRegisterAllocator = new PreRegisterAllocator();
+//            NaiveRegisterAllocator naiveRegisterAllocator = new NaiveRegisterAllocator();
+//            irProgram.accept(preRegisterAllocator);
+//            irProgram.accept(naiveRegisterAllocator);
 
             // NASM generation
 //            NASMTranslater nasmTranslater = new NASMTranslater();

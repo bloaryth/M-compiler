@@ -7,6 +7,7 @@ import Compiler2018.IR.IRStructure.*;
 import Compiler2018.IR.IRValue.Immediate;
 import Compiler2018.IR.IRValue.Label;
 import Compiler2018.IR.IRValue.Register;
+import Compiler2018.Symbol.ClassTable;
 import Compiler2018.Symbol.TopTable;
 
 import java.util.LinkedList;
@@ -16,12 +17,11 @@ import java.util.Stack;
 public class IRInstructionBuilder implements IASTVistor {
     private final IRProgram irProgram;
     private BasicBlock globalInitAfter;
+    private IRClass currentClass;
     private IRFunction currentFunction;
     private BasicBlock currentBB;
-    private Compare currentCond;   // prepare for generate shortcut branch
     private Stack<BasicBlock> loopStepBBStack = new Stack<>();
     private Stack<BasicBlock> loopAfterBBStack = new Stack<>();
-    private Stack<BasicBlock> notAfterBBStack = new Stack<>();
 
     public IRInstructionBuilder(IRProgram irProgram) {
         this.irProgram = irProgram;
@@ -42,7 +42,9 @@ public class IRInstructionBuilder implements IASTVistor {
 
     @Override
     public void visit(ClassDecl node) {
+        currentClass = irProgram.getIRClass(node.getName());
         node.getItems().stream().filter(x -> !(x instanceof ClassVarDecl)).forEach(x -> x.accept(this));
+        currentClass = null;
     }
 
     @Override
@@ -125,6 +127,8 @@ public class IRInstructionBuilder implements IASTVistor {
         currentBB = currentFunction.getStartBlock();
         currentFunction.putBasicBlock(currentBB);
         node.getBlock().accept(this);
+        // default ret may be redundant
+        currentBB.endWith(new Ret(currentBB, null));
         currentFunction.setEndBlock(currentBB);
         currentBB = null;
         currentFunction = null;
@@ -867,12 +871,25 @@ public class IRInstructionBuilder implements IASTVistor {
         if (node.getVarSymbol() == null) { // func
             return; // FIXME
         }
+        // FIXME
+        if (node.getName().equals("age")) {
+            System.err.println("age");
+        }
+
         if (node.getVarSymbol().getBelongTable() instanceof TopTable) {
             Register register = new Register();
             StaticData globalVar = irProgram.getGlobalVar(node.getName());
             currentBB.addTail(new MoveU(currentBB, register, globalVar.getLabel()));
             node.setRegister(register);
             node.setDataInMem(true);
+        } else if (node.getVarSymbol().getBelongTable() instanceof ClassTable) { // in class use
+            Register dest = new Register();
+            Register base = currentFunction.getThisRegister();
+            Integer offset = currentClass.getHeapOffset(node.getName());
+            currentBB.addTail(new Lea(currentBB, dest, base, null, offset));
+            node.setRegister(dest);
+            node.setDataInMem(true);
+            // FIXME
         } else { // BlockTable
             node.setRegister(node.getVarSymbol().getRegister());
         }
@@ -949,6 +966,33 @@ public class IRInstructionBuilder implements IASTVistor {
         currentBB.addTail(builder.build());
 
         node.setRegister(ret);
+
+        String processedName = null;
+        switch (node.getType().getBaseType()) {
+            case "int":
+            case "bool":
+            case "string":
+                break;
+            default:
+                processedName = "_N" + node.getType().getBaseType() + node.getType().getBaseType();
+                if (irProgram.getIrFunctionMap().get(processedName) == null) {
+                    processedName = null;
+                }
+                break;
+        }
+        if (processedName != null) {
+            Call.Builder cstrBuilder = new Call.Builder();
+            cstrBuilder.setProcessedName(processedName);
+            cstrBuilder.setBasicBlock(currentBB);
+            cstrBuilder.addArgs(ret);
+            // void ret, no parameters
+            currentBB.addTail(cstrBuilder.build());
+        }
+//        Call.Builder cstrBuilder = new Call.Builder();
+//        cstrBuilder.setProcessedName("_"node.getType().getBaseType());
+//        irProgram.getIrFunctionMap()
+
+
     }
 
     @Override

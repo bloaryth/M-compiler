@@ -18,6 +18,10 @@ public class Move extends AbstractIRInstruction {
         this.rhs = rhs;
         this.rhsStar = rhsStar;
 
+        if (lhs == null) {
+            throw new RuntimeException("hh");
+        }
+
         if (lhsStar && rhsStar) {
             intermediate = new Register();
         } else {
@@ -47,6 +51,9 @@ public class Move extends AbstractIRInstruction {
 
     @Override
     public String toIRString() {
+        if (lhs == null | rhs == null) {
+            throw new RuntimeException("hhh");
+        }
         String str = "\tMOV " +
                 lhs.toIRString(lhsStar) + " " +
                 rhs.toIRString(rhsStar) + "\n";
