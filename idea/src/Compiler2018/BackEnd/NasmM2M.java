@@ -142,10 +142,10 @@ public class NasmM2M implements IIRVistor {
         BasicBlock.Iter iter = new BasicBlock.Iter(basicBlock);
         while (iter.hasNext()) {
             AbstractIRInstruction irInstruction = iter.next();
-            String[] split = irInstruction.toIRString().split("\n");
-            for (String aSplit : split) {
-                builder.append("\t;").append(aSplit).append("\n");
-            }
+//            String[] split = irInstruction.toIRString().split("\n");
+//            for (String aSplit : split) {
+//                builder.append("\t;").append(aSplit).append("\n");
+//            }
             irInstruction.accept(this);
         }
     }

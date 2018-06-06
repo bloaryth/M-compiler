@@ -152,7 +152,7 @@ public class Test {
             // Code Generation
             IRPrinter irPrinter = new IRPrinter();
             RegisterOffsetResolver registerOffsetResolver = new RegisterOffsetResolver();
-            irProgram.accept(irPrinter);
+//            irProgram.accept(irPrinter);
             irProgram.accept(registerOffsetResolver);
 
             // Register Allocation
