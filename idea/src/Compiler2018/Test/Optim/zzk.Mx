@@ -83,7 +83,7 @@ int[] sha1(int[] input, int length)
 	chunks[i/64][i%64/4] = chunks[i/64][i%64/4] | (128 << ((3-i%4)*8));
 	chunks[nChunk-1][15] = length << 3;
 	chunks[nChunk-1][14] = (length >> 29) & 7;
-	
+
 	int h0 = 1732584193;  //0x67452301
 	int h1 = lohi(43913, 61389);  //0xEFCDAB89
 	int h2 = lohi(56574, 39098); //0x98BADCFE
@@ -93,7 +93,7 @@ int[] sha1(int[] input, int length)
 	{
 		for(j=16;j<80;j++)
 			chunks[i][j] = rotate_left(chunks[i][j-3] ^ chunks[i][j-8] ^ chunks[i][j-14] ^ chunks[i][j-16], 1);
-		
+
 		int a = h0;
 		int b = h1;
 		int c = h2;
@@ -204,7 +204,7 @@ void crackSHA1(string input)
 		target[i] = 0;
 	for(i=0;i<40;i=i+4)
 		target[i/8] = target[i/8] | (hex2int(input.substring(i, i+3)) << (1 - (i / 4) % 2) * 16);
-		
+
 	int MAXDIGIT = 4;
 	int digit;
 	for(digit=1; digit <= MAXDIGIT; digit++)

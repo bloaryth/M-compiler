@@ -454,7 +454,7 @@ public class NasmM2M implements IIRVistor {
                 neg(ir.getDestination(), false);
                 break;
             case BITWISE_NOT:
-                neg(ir.getDestination(), false);
+                not(ir.getDestination(), false);
                 break;
         }
 
