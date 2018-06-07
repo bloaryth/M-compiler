@@ -4,12 +4,14 @@ import Compiler2018.BackEnd.IIRVistor;
 import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.Register;
 
-public class Set extends AbstractIRInstruction {
+import java.util.List;
+
+public class CSet extends AbstractIRInstruction {
     private final Compare.CompareOp op;
     private final Register dest;
     private final boolean star;
 
-    public Set(BasicBlock basicBlock, Compare.CompareOp op, Register dest, boolean star) {
+    public CSet(BasicBlock basicBlock, Compare.CompareOp op, Register dest, boolean star) {
         super(basicBlock);
         this.op = op;
         this.dest = dest;
@@ -38,5 +40,15 @@ public class Set extends AbstractIRInstruction {
     @Override
     public void accept(IIRVistor vistor) {
         vistor.visit(this);
+    }
+
+    @Override
+    public Register getDefinedRegister() {
+        return dest;
+    }
+
+    @Override
+    public List<Register> getUsedRegisterList() {
+        return null;
     }
 }

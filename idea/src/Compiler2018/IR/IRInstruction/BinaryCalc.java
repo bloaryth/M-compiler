@@ -4,6 +4,9 @@ import Compiler2018.BackEnd.IIRVistor;
 import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.Register;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class BinaryCalc extends AbstractIRInstruction {
     public enum BinaryOp{
         ADD, SUB, MUL, DIV, MOD,
@@ -26,12 +29,7 @@ public class BinaryCalc extends AbstractIRInstruction {
         this.leftStar = leftStar;
         this.rightOperand = rightOperand;
         this.rightStar = rightStar;
-
-        if (leftStar && rightStar) {
-            intermediate = new Register();
-        } else {
-            intermediate = null;
-        }
+        intermediate = new Register();  // avoid dest rop share the same register
     }
 
     public BinaryOp getOprator() {
@@ -75,5 +73,22 @@ public class BinaryCalc extends AbstractIRInstruction {
     @Override
     public void accept(IIRVistor vistor) {
         vistor.visit(this);
+    }
+
+    @Override
+    public Register getDefinedRegister() {
+        return destination;
+    }
+
+    private List<Register> usedRegisterList = null;
+
+    @Override
+    public List<Register> getUsedRegisterList() {
+        if (usedRegisterList == null) {
+            usedRegisterList = new LinkedList<>();
+            usedRegisterList.add(leftOperand);
+            usedRegisterList.add(rightOperand);
+        }
+        return usedRegisterList;
     }
 }

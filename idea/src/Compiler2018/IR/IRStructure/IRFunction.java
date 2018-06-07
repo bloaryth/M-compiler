@@ -65,6 +65,10 @@ public class IRFunction {
         addStackOffset(register);
     }
 
+    public Map<Register, Integer> getStackOffsetMap() {
+        return stackOffsetMap;
+    }
+
     public Integer getTotalOffset() {
         return totalOffset;
     }
@@ -97,4 +101,25 @@ public class IRFunction {
         vistor.visit(this);
     }
 
+    // Dataflow
+    private List<BasicBlock> reversePreOrder = null;
+    private Set<BasicBlock> visited = new LinkedHashSet<>();
+
+    void dfsPreOrder(BasicBlock basicBlock) {
+        if (visited.contains(basicBlock)) {
+            return;
+        }
+        reversePreOrder.add(basicBlock);
+        visited.add(basicBlock);
+        basicBlock.getSucc().forEach(this::dfsPreOrder);
+    }
+
+    public List<BasicBlock> getReversePreOrder() {
+        if (reversePreOrder == null) {
+            reversePreOrder = new LinkedList<>();
+            dfsPreOrder(startBlock);
+            Collections.reverse(reversePreOrder);
+        }
+        return reversePreOrder;
+    }
 }

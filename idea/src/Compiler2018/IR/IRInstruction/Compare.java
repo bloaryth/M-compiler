@@ -4,6 +4,9 @@ import Compiler2018.BackEnd.IIRVistor;
 import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.Register;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Compare extends AbstractIRInstruction {
     public enum CompareOp {
         EQ, NE, LT, GT, LE, GE
@@ -67,5 +70,22 @@ public class Compare extends AbstractIRInstruction {
     @Override
     public void accept(IIRVistor vistor) {
         vistor.visit(this);
+    }
+
+    @Override
+    public Register getDefinedRegister() {
+        return null;
+    }
+
+    private List<Register> usedRegisterList = null;
+
+    @Override
+    public List<Register> getUsedRegisterList() {
+        if (usedRegisterList == null) {
+            usedRegisterList = new LinkedList<>();
+            usedRegisterList.add(leftOperand);
+            usedRegisterList.add(rightOperand);
+        }
+        return usedRegisterList;
     }
 }

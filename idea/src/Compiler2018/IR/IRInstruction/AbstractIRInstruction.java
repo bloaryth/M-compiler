@@ -2,6 +2,10 @@ package Compiler2018.IR.IRInstruction;
 
 import Compiler2018.BackEnd.IIRVistor;
 import Compiler2018.IR.IRStructure.BasicBlock;
+import Compiler2018.IR.IRValue.Register;
+
+import java.util.List;
+import java.util.Set;
 
 public abstract class AbstractIRInstruction {
     private final BasicBlock basicBlock;
@@ -59,4 +63,42 @@ public abstract class AbstractIRInstruction {
     abstract public String toIRString();
 
     public abstract void accept(IIRVistor vistor);
+
+    // liveness analysis
+    private Set<Register> liveInSet = null;
+    private Set<Register> liveOutSet = null;
+
+    public Set<Register> getLiveInSet() {
+        return liveInSet;
+    }
+
+    public void setLiveInSet(Set<Register> liveInSet) {
+        this.liveInSet = liveInSet;
+    }
+
+    public Set<Register> getLiveOutSet() {
+        return liveOutSet;
+    }
+
+    public void setLiveOutSet(Set<Register> liveOutSet) {
+        this.liveOutSet = liveOutSet;
+    }
+
+    public abstract Register getDefinedRegister();
+
+    public abstract List<Register> getUsedRegisterList();
+
+
+    public void buildGraph(){
+        Register defined = getDefinedRegister();
+        if (defined != null && liveOutSet != null) {
+            liveOutSet.forEach(x -> {
+                if (x != null && !x.equals(defined)) {
+                    x.getConflictRegisterSet().add(defined);
+                    defined.getConflictRegisterSet().add(x);
+                }
+            });
+        }
+    }
+
 }

@@ -3,18 +3,15 @@ package Compiler2018.BackEnd;
 import Compiler2018.IR.IRInstruction.*;
 import Compiler2018.IR.IRStructure.*;
 
-public class IRPrinter implements IIRVistor {
+public class ConfictGraphBuilder implements IIRVistor {
     @Override
     public void visit(IRProgram irProgram) {
-//        irProgram.getGlobalVarMap().forEach(x -> x);
-        irProgram.getIrFunctionMap().forEach((x,y) -> y.accept(this));
+        irProgram.getIrFunctionMap().forEach((x, y) -> y.accept(this));
     }
 
     @Override
     public void visit(IRFunction irFunction) {
-        System.out.println(irFunction.getProcessedName() + ": {\n");
         irFunction.getBasicBlockSet().forEach(x -> x.accept(this));
-        System.out.println("}\n\n");
     }
 
     @Override
@@ -29,7 +26,11 @@ public class IRPrinter implements IIRVistor {
 
     @Override
     public void visit(BasicBlock basicBlock) {
-        System.out.println(basicBlock.toIRString());
+        BasicBlock.Iter iter = new BasicBlock.Iter(basicBlock);
+        while (iter.hasNext()) {
+            AbstractIRInstruction irInstruction = iter.next();
+            irInstruction.buildGraph();
+        }
     }
 
     @Override

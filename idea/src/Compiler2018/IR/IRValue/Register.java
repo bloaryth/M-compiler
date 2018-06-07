@@ -1,5 +1,8 @@
 package Compiler2018.IR.IRValue;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class Register extends AbstractValue {
     private static Integer Id = 0;
     private final Integer vId;
@@ -43,6 +46,8 @@ public class Register extends AbstractValue {
     }
 
     private PysicalRegister allocatedRegister = null;  // Pysical Reg Allocated
+    private boolean allocated = false;
+    private boolean tryed = false;
 
     public PysicalRegister getAllocatedRegister() {
         return allocatedRegister;
@@ -52,6 +57,26 @@ public class Register extends AbstractValue {
         this.allocatedRegister = allocatedRegister;
     }
 
+    public boolean isAllocated() {
+        return allocated;
+    }
 
+    public void setAllocated(boolean allocated) {
+        this.allocated = allocated;
+    }
 
+    public boolean isTryed() {
+        return tryed;
+    }
+
+    public void setTryed(boolean tryed) {
+        this.tryed = tryed;
+    }
+
+    // graph
+    final Set<Register> conflictRegisterSet = new LinkedHashSet<>();
+
+    public Set<Register> getConflictRegisterSet() {
+        return conflictRegisterSet;
+    }
 }

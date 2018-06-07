@@ -4,6 +4,9 @@ import Compiler2018.BackEnd.IIRVistor;
 import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.Register;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class UnaryCalc extends AbstractIRInstruction{
     public enum UnaryOp {
         NEG, BITWISE_NOT
@@ -50,5 +53,22 @@ public class UnaryCalc extends AbstractIRInstruction{
     @Override
     public void accept(IIRVistor vistor) {
         vistor.visit(this);
+    }
+
+
+    @Override
+    public Register getDefinedRegister() {
+        return destination;
+    }
+
+    private List<Register> usedRegisterList = null;
+
+    @Override
+    public List<Register> getUsedRegisterList() {
+        if (usedRegisterList == null) {
+            usedRegisterList = new LinkedList<>();
+            usedRegisterList.add(operand);
+        }
+        return usedRegisterList;
     }
 }

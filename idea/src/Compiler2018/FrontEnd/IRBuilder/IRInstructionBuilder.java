@@ -269,7 +269,7 @@ public class IRInstructionBuilder implements IASTVistor {
             currentBB.addTail(new MoveU(currentBB, trueReg, new Immediate(1)));
             Compare compare = new Compare(currentBB, Compare.CompareOp.EQ, trueReg, false, node.getCond().getRegister(), node.getCond().isDataInMem());
             currentBB.addTail(compare);
-            currentBB.addTail(new Branch(currentBB, compare, node.getCond().getIfTrue(), node.getCond().getIfFalse()));
+            currentBB.endWith(new Branch(currentBB, compare, node.getCond().getIfTrue(), node.getCond().getIfFalse()));
         }
 
         currentBB = BBLoop;
@@ -299,6 +299,8 @@ public class IRInstructionBuilder implements IASTVistor {
         loopStepBBStack.push(BBCond);
         loopAfterBBStack.push(BBAfter);
 
+//        currentBB.linkSucc(BBCond);
+        currentBB.endWith(new Jump(currentBB, BBCond));
         currentBB = BBCond;
         currentFunction.putBasicBlock(currentBB);
         node.getCond().setIfTrue(BBLoop);
@@ -309,7 +311,7 @@ public class IRInstructionBuilder implements IASTVistor {
         currentBB.addTail(new MoveU(currentBB, trueReg, new Immediate(1)));
         Compare compare = new Compare(currentBB, Compare.CompareOp.EQ, trueReg, false, node.getCond().getRegister(), node.getCond().isDataInMem());
         currentBB.addTail(compare);
-        currentBB.addTail(new Branch(currentBB, compare, node.getCond().getIfTrue(), node.getCond().getIfFalse()));
+        currentBB.endWith(new Branch(currentBB, compare, node.getCond().getIfTrue(), node.getCond().getIfFalse()));
 
         currentBB = BBLoop;
         currentFunction.putBasicBlock(currentBB);
@@ -499,7 +501,7 @@ public class IRInstructionBuilder implements IASTVistor {
 //        currentBB.addTail(cmp);
 //        currentBB.endWith(new Branch(currentBB, cmp, node.getIfTrue(), node.getIfFalse()));
 //
-////        currentBB.addTail(new Set(currentBB, node.getRegister(), ));
+////        currentBB.addTail(new CSet(currentBB, node.getRegister(), ));
 
 
         // Post
@@ -652,7 +654,7 @@ public class IRInstructionBuilder implements IASTVistor {
         Register dest = new Register();  // assert false
         Compare compare = new Compare(currentBB, cond, node.getLhs().getRegister(), node.getLhs().isDataInMem(), node.getRhs().getRegister(), node.getRhs().isDataInMem());
         currentBB.addTail(compare);
-        currentBB.addTail(new Set(currentBB, cond, dest, false));
+        currentBB.addTail(new CSet(currentBB, cond, dest, false));
 
         node.setRegister(dest);
 

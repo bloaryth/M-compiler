@@ -104,7 +104,7 @@ public class RegisterOffsetResolver implements IIRVistor {
     }
 
     @Override
-    public void visit(Set ir) {
+    public void visit(CSet ir) {
         currentIRFunction.addStackOffset(ir.getDest());
     }
 }

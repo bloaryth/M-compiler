@@ -11,38 +11,21 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NasmM2M implements IIRVistor {
+import static Compiler2018.IR.IRValue.Register.PysicalRegister.*;
+
+public class NasmColor implements IIRVistor {
     private Map<Register.PysicalRegister, Register> registerUseMap = new LinkedHashMap<>();
     public StringBuilder builder = new StringBuilder();
     private Integer currentRSP;
     private boolean globalVar;
 
+    private Register.PysicalRegister destPreserved = Register.PysicalRegister.R12;
+    private Register.PysicalRegister immediatePreserved = Register.PysicalRegister.R13;
+    private Register.PysicalRegister leftOpPreserved = Register.PysicalRegister.R14;
+    private Register.PysicalRegister rightOpPreserved = Register.PysicalRegister.R15;    // conhere with coloring
+
     public StringBuilder getBuilder() {
         return builder;
-    }
-
-    private void stackToReg(Register register) {
-        stackToReg(register.getAllocatedRegister(), register);
-    }
-
-    private void stackToReg(Register.PysicalRegister pysicalRegister, Register register) {
-        builder.append("\tmov ");
-        registerData(pysicalRegister, false);
-        builder.append(", ");
-        stackAddr(register);
-        builder.append("\n");
-    }
-
-    private void regToStack(Register register) {
-        regToStack(register.getAllocatedRegister(), register);
-    }
-
-    private void regToStack(Register.PysicalRegister pysicalRegister, Register register) {
-        builder.append("\tmov ");
-        stackAddr(register);
-        builder.append(", ");
-        registerData(pysicalRegister, false);
-        builder.append("\n");
     }
 
     private void stackAddr(Register register) {
@@ -63,6 +46,22 @@ public class NasmM2M implements IIRVistor {
         if (star) {
             builder.append("]");
         }
+    }
+
+    private void stackToReg(Register.PysicalRegister pReg, Register vReg) {
+        builder.append("\tmov\t");
+        registerData(pReg, false);
+        builder.append(", ");
+        stackAddr(vReg);
+        builder.append("\n");
+    }
+
+    private void regToStack(Register vReg, Register.PysicalRegister pReg) {
+        builder.append("\tmov\t");
+        stackAddr(vReg);
+        builder.append(", ");
+        registerData(pReg, false);
+        builder.append("\n");
     }
 
     @Override
@@ -90,7 +89,23 @@ public class NasmM2M implements IIRVistor {
 
         prologue();
         builder.append("\tsub rsp, ").append(-irFunction.getTotalOffset()).append("\n");
-        saveCallee();
+        List<Register> parameterList = irFunction.getParameterList();
+        if (parameterList.size() > 2) { // 2
+            if (parameterList.get(2).isAllocated()) {
+                stackToReg(parameterList.get(2).getAllocatedRegister(), parameterList.get(2));
+            }
+        }
+        if (parameterList.size() > 3) {
+            if (parameterList.get(3).isAllocated()) {
+                stackToReg(parameterList.get(3).getAllocatedRegister(), parameterList.get(3));
+            }
+        }   // in stack actually
+        for (int i = 6; i < parameterList.size(); ++i) {    // 2 3 >= 6
+            if (parameterList.get(i).isAllocated()) {
+                stackToReg(parameterList.get(i).getAllocatedRegister(), parameterList.get(i));
+            }
+        }
+        saveCallee();   // FIXME
         copyParameter(irFunction.getParameterList());
         irFunction.getBasicBlockSet().forEach(x -> x.accept(this));
         builder.append("\n");
@@ -142,88 +157,102 @@ public class NasmM2M implements IIRVistor {
         BasicBlock.Iter iter = new BasicBlock.Iter(basicBlock);
         while (iter.hasNext()) {
             AbstractIRInstruction irInstruction = iter.next();
-//            String[] split = irInstruction.toIRString().split("\n");
-//            for (String aSplit : split) {
-//                builder.append("\t;").append(aSplit).append("\n");
-//            }
+            String[] split = irInstruction.toIRString().split("\n");
+            for (String aSplit : split) {
+                builder.append("\t;").append(aSplit).append("\n");
+            }
             irInstruction.accept(this);
         }
     }
 
     @Override
     public void visit(BinaryCalc ir) {
-        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
-        ir.getLeftOperand().setAllocatedRegister(Register.PysicalRegister.R14);
-        ir.getRightOperand().setAllocatedRegister(Register.PysicalRegister.R15);
-
-//        stackToReg(ir.getDestination());
-        stackToReg(ir.getLeftOperand());
-        stackToReg(ir.getRightOperand());
+        if (ir.getIntermediate() != null) {
+            ir.getIntermediate().setAllocated(false);
+        }
+        help(ir.getDestination(), destPreserved, true);
+        help(ir.getIntermediate(), immediatePreserved, false);
+        help(ir.getLeftOperand(), leftOpPreserved, true);
+        help(ir.getRightOperand(), rightOpPreserved, true);
 
         Register rightOperand;
         boolean rightStar;
-        if (ir.getIntermediate() != null) {
-            ir.getIntermediate().setAllocatedRegister(Register.PysicalRegister.R13);
+        if (ir.getDestination().getAllocatedRegister().equals(ir.getRightOperand().getAllocatedRegister())) {
             rightOperand = ir.getIntermediate();
-            rightStar = false;
-            move(rightOperand, false, ir.getRightOperand(), ir.isRightStar());
+            rightStar = ir.isRightStar();
+            move(rightOperand, false, ir.getRightOperand(), false);
         } else {
             rightOperand = ir.getRightOperand();
             rightStar = ir.isRightStar();
         }
 
+        Register leftOperand = ir.getLeftOperand();
+        boolean leftStar = ir.isLeftStar();
+
         switch (ir.getOprator()) {
             case ADD:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                move(ir.getDestination(), false, leftOperand, leftStar);
                 add(ir.getDestination(), false, rightOperand, rightStar);
                 break;
             case SUB:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                move(ir.getDestination(), false, leftOperand, leftStar);
                 sub(ir.getDestination(), false, rightOperand, rightStar);
                 break;
             case MUL:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                move(ir.getDestination(), false, leftOperand, leftStar);
                 imul(ir.getDestination(), false, rightOperand, rightStar);
                 break;
             case DIV:
                 setZero(Register.PysicalRegister.RDX);
-                move(Register.PysicalRegister.RAX, false, ir.getLeftOperand(), ir.isLeftStar());
+                move(RAX, false, leftOperand, leftStar);
                 idiv(rightOperand, rightStar);
-                move(ir.getDestination(), false, Register.PysicalRegister.RAX, false);
+                move(ir.getDestination(), false, RAX, false);
                 break;
             case MOD:
                 setZero(Register.PysicalRegister.RDX);
-                move(Register.PysicalRegister.RAX, false, ir.getLeftOperand(), ir.isLeftStar());
+                move(RAX, false, leftOperand, leftStar);
                 idiv(rightOperand, rightStar);
                 move(ir.getDestination(), false, Register.PysicalRegister.RDX, false);
                 break;
             case LSH:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                move(ir.getDestination(), false, leftOperand, leftStar);
                 move(Register.PysicalRegister.RCX, false, ir.getRightOperand(), ir.isRightStar());
                 sal(ir.getDestination(), false);
                 break;
             case RSH:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                move(ir.getDestination(), false, leftOperand, leftStar);
                 move(Register.PysicalRegister.RCX, false, ir.getRightOperand(), ir.isRightStar());
                 sar(ir.getDestination(), false);
                 break;
             case BAND:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                move(ir.getDestination(), false, leftOperand, leftStar);
                 and(ir.getDestination(), false, rightOperand, rightStar);
                 break;
             case BOR:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                move(ir.getDestination(), false, leftOperand, leftStar);
                 or(ir.getDestination(), false, rightOperand, rightStar);
                 break;
             case XOR:
-                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                move(ir.getDestination(), false, leftOperand, leftStar);
                 xor(ir.getDestination(), false, rightOperand, rightStar);
                 break;
         }
 
-        regToStack(ir.getDestination());
-
+        unhelp(ir.getDestination(), true);
+        unhelp(ir.getIntermediate(), false);
+        unhelp(ir.getLeftOperand(), false);
+        unhelp(ir.getRightOperand(), false);
     }
+
+//    private boolean conflict(Register lhs, Register rhs) {
+//        if (!lhs.isAllocated() || !rhs.isAllocated()) {
+//            return false;
+//        }
+//        if (lhs.getAllocatedRegister().equals(rhs.getAllocatedRegister())) {
+//            return true;
+//        }
+//        return false;
+//    }
 
     @Override
     public void visit(Branch ir) {
@@ -253,30 +282,29 @@ public class NasmM2M implements IIRVistor {
                 jl(ir.getIfFalse());
                 break;
         }
-
-//        regToStack(ir.getCond().getLeftOperand());
-//        regToStack(ir.getCond().getRightOperand());
     }
 
     @Override
-    public void visit(Call ir) {    // FIXME
+    public void visit(Call ir) {
         Integer alignment = - currentRSP % 16;  // sub add rsp
         if (alignment == 8) {
             builder.append("\tsub rsp, ").append(alignment).append("\n");
         }
         saveCaller();
         prepareCallParameter(ir.getArgs());
-//        if (ir.getRet() != null) {
-//            loadIn(ir.getRet());
-//        }
         builder.append("\tcall ").append(ir.getProcessedName()).append("\n");
 
+        restoreCaller();
+
         if (ir.getRet() != null) {
-            ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
-            regToStack(ir.getRet());
+            if (ir.getRet().isAllocated()) {
+                move(ir.getRet().getAllocatedRegister(), RAX);
+            } else {
+                regToStack(ir.getRet(), RAX);
+            }
         }
 
-        leaveCallParameter(ir.getArgs()); // use RAX
+        leaveCallParameter(ir.getArgs()); // uses RAX
 
         if (alignment == 8) {
             builder.append("\tadd rsp, ").append(alignment).append("\n");
@@ -285,16 +313,16 @@ public class NasmM2M implements IIRVistor {
 
     @Override
     public void visit(Compare ir) {
-        ir.getLeftOperand().setAllocatedRegister(Register.PysicalRegister.R14);
-        ir.getRightOperand().setAllocatedRegister(Register.PysicalRegister.R15);
-
-        stackToReg(ir.getLeftOperand());
-        stackToReg(ir.getRightOperand());
+        if (ir.getIntermediate() != null) {
+            ir.getIntermediate().setAllocated(false);
+        }
+        help(ir.getIntermediate(), immediatePreserved, false);
+        help(ir.getLeftOperand(), leftOpPreserved, true);
+        help(ir.getRightOperand(), rightOpPreserved, true);
 
         Register rightOperand;
         boolean rightStar;
         if (ir.getIntermediate() != null) {
-            ir.getIntermediate().setAllocatedRegister(Register.PysicalRegister.R13);
             rightOperand = ir.getIntermediate();
             rightStar = false;
             move(rightOperand, false, ir.getRightOperand(), ir.isRightStar());
@@ -304,6 +332,10 @@ public class NasmM2M implements IIRVistor {
         }
 
         cmp(ir.getLeftOperand(), ir.isLeftStar(), rightOperand, rightStar);
+
+        unhelp(ir.getIntermediate(), false);
+        unhelp(ir.getLeftOperand(), false);
+        unhelp(ir.getRightOperand(), false);
     }
 
     @Override
@@ -313,32 +345,29 @@ public class NasmM2M implements IIRVistor {
 
     @Override
     public void visit(Lea ir) {
-        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
-        ir.getBase().setAllocatedRegister(Register.PysicalRegister.R13);
-
-        stackToReg(ir.getBase());
-        if (ir.getPos() != null) {
-            ir.getPos().setAllocatedRegister(Register.PysicalRegister.R14);
-            stackToReg(ir.getPos());
-        }
+        help(ir.getDestination(), destPreserved, true);
+        help(ir.getBase(), leftOpPreserved, true);
+        help(ir.getPos(), rightOpPreserved, true);
 
         lea(ir.getDestination(), ir.getBase(), ir.getPos(), ir.getOffset());
 
-        regToStack(ir.getDestination());
+        unhelp(ir.getDestination(), true);
+        unhelp(ir.getBase(), false);
+        unhelp(ir.getPos(), false);
     }
 
     @Override
     public void visit(Move ir) {
-        ir.getLhs().setAllocatedRegister(Register.PysicalRegister.R12);
-        ir.getRhs().setAllocatedRegister(Register.PysicalRegister.R13);
-
-//        stackToReg(ir.getLhs());
-        stackToReg(ir.getRhs());
+        if (ir.getIntermediate() != null) {
+            ir.getIntermediate().setAllocated(false);
+        }
+        help(ir.getLhs(), destPreserved, true);
+        help(ir.getRhs(), leftOpPreserved, true);
+        help(ir.getIntermediate(), rightOpPreserved, false);
 
         Register rightOperand;
         boolean rightStar;
         if (ir.getIntermediate() != null) {
-            ir.getIntermediate().setAllocatedRegister(Register.PysicalRegister.R14);
             rightOperand = ir.getIntermediate();
             rightStar = false;
             move(rightOperand, rightStar, ir.getRhs(), ir.isRhsStar());
@@ -349,51 +378,48 @@ public class NasmM2M implements IIRVistor {
 
         move(ir.getLhs(), ir.isLhsStar(), rightOperand, rightStar);
 
-        regToStack(ir.getLhs());
-//        regToStack(ir.getRhs());
+        unhelp(ir.getLhs(), true);
+        unhelp(ir.getRhs(), false);
+        unhelp(ir.getIntermediate(), false);
     }
 
     @Override
     public void visit(MoveU ir) {
-        ir.getLhs().setAllocatedRegister(Register.PysicalRegister.R12);
-
-//        stackToReg(ir.getLhs());
+        help(ir.getLhs(), destPreserved, true);
 
         moveu(ir.getLhs(), ir.getRhs());
 
-        regToStack(ir.getLhs());
+        unhelp(ir.getLhs(), true);
     }
 
     @Override
     public void visit(Ret ir) {
         if (ir.getRet() != null) {
-            ir.getRet().setAllocatedRegister(Register.PysicalRegister.RAX);
-            stackToReg(ir.getRet());
+            if (ir.getRet().isAllocated()) {
+                move(RAX, ir.getRet().getAllocatedRegister());
+            } else {
+                stackToReg(RAX, ir.getRet());
+            }
         }
 
         restoreCallee();
         epilogue();
         builder.append("\tret\n");
-
     }
 
     @Override
     public void visit(SelfInc ir) {
-        ir.getDest().setAllocatedRegister(Register.PysicalRegister.R12);
-
-        stackToReg(ir.getDest());
+        help(ir.getDest(), destPreserved, true);
 
         inc(ir.getDest(), ir.isStar(), ir.getInc());
 
-        regToStack(ir.getDest());
+        unhelp(ir.getDest(), true);
     }
 
     @Override
     public void visit(UnaryCalc ir) {
-        ir.getDestination().setAllocatedRegister(Register.PysicalRegister.R12);
-        ir.getOperand().setAllocatedRegister(Register.PysicalRegister.R13);
-
-        stackToReg(ir.getOperand());
+        help(ir.getDestination(), destPreserved, true);
+        help(ir.getOperand(), leftOpPreserved, true);
 
         move(ir.getDestination(), false, ir.getOperand(), ir.isStar());
         switch (ir.getOprator()) {
@@ -405,12 +431,14 @@ public class NasmM2M implements IIRVistor {
                 break;
         }
 
-        regToStack(ir.getDestination());
+        unhelp(ir.getDestination(), true);
+        unhelp(ir.getOperand(), false);
+
     }
 
     @Override
     public void visit(CSet ir) {
-        ir.getDest().setAllocatedRegister(Register.PysicalRegister.R12);
+        help(ir.getDest(), destPreserved, true);
 
         switch (ir.getOp()) {
             case EQ:
@@ -433,7 +461,31 @@ public class NasmM2M implements IIRVistor {
                 break;
         }
 
-        regToStack(ir.getDest());
+        unhelp(ir.getDest(), true);
+    }
+
+    private void help(Register vReg, Register.PysicalRegister pReg, boolean loadIn) {
+        if (vReg == null) {
+            return;
+        }
+        if (!vReg.isAllocated()) {
+            vReg.setAllocatedRegister(pReg);
+            if (loadIn) {
+                stackToReg(pReg, vReg);
+            }
+        }
+    }
+
+    private void unhelp(Register vReg, boolean modified) {
+        if (vReg == null) {
+            return;
+        }
+        if (!vReg.isAllocated()) {
+            if (modified) {
+                regToStack(vReg, vReg.getAllocatedRegister());
+            }
+            vReg.setAllocatedRegister(null);
+        }
     }
 
     private void labelTranslate(Label label) {
@@ -454,6 +506,9 @@ public class NasmM2M implements IIRVistor {
     }
 
     private void move(Register lhs, boolean leftStar, Register rhs, boolean rightStar) {
+        if (lhs.getAllocatedRegister().equals(rhs.getAllocatedRegister()) && leftStar == rightStar) {
+            return;
+        }
         builder.append("\tmov ");
         registerData(lhs, leftStar);
         builder.append(", ");
@@ -462,6 +517,9 @@ public class NasmM2M implements IIRVistor {
     }
 
     private void move(Register.PysicalRegister lhs, boolean leftStar, Register rhs, boolean rightStar) {
+        if (lhs.equals(rhs.getAllocatedRegister()) && leftStar == rightStar) {
+            return;
+        }
         builder.append("\tmov ");
         registerData(lhs, leftStar);
         builder.append(", ");
@@ -470,6 +528,9 @@ public class NasmM2M implements IIRVistor {
     }
 
     private void move(Register lhs, boolean leftStar, Register.PysicalRegister rhs, boolean rightStar) {
+        if (lhs.getAllocatedRegister().equals(rhs) && leftStar == rightStar) {
+            return;
+        }
         builder.append("\tmov ");
         registerData(lhs, leftStar);
         builder.append(", ");
@@ -478,6 +539,9 @@ public class NasmM2M implements IIRVistor {
     }
 
     private void move(Register.PysicalRegister lhs, Register.PysicalRegister rhs) {
+        if (lhs.equals(rhs)) {
+            return;
+        }
         builder.append("\tmov ");
         registerData(lhs, false);
         builder.append(", ");
@@ -743,6 +807,13 @@ public class NasmM2M implements IIRVistor {
         currentRSP -= 8;
     }
 
+    private void push(Register.PysicalRegister register) {
+        builder.append("\tpush ");
+        registerData(register, false);
+        builder.append("\n");
+        currentRSP -= 8;
+    }
+
     private void pop(Register register) {
         builder.append("\tpop ");
         registerData(register, false);
@@ -758,40 +829,38 @@ public class NasmM2M implements IIRVistor {
     }
 
     private void prepareCallParameter(List<Register> registerList) {
+        for (int i = 0; i < registerList.size(); ++i) {
+            if (registerList.get(i).isAllocated()) {
+                regToStack(registerList.get(i), registerList.get(i).getAllocatedRegister());
+            }
+        }
         for (int i = registerList.size()-1; i > 5; i--) {
-            registerList.get(i).setAllocatedRegister(Register.PysicalRegister.RAX);
-            stackToReg(registerList.get(i));
-            push(registerList.get(i));
+            stackToReg(RAX, registerList.get(i));
+            push(RAX);
         }
         if (registerList.size() > 0) {
-            registerList.get(0).setAllocatedRegister(Register.PysicalRegister.RDI);
-            stackToReg(registerList.get(0));
+            stackToReg(RDI, registerList.get(0));
         }
         if (registerList.size() > 1) {
-            registerList.get(1).setAllocatedRegister(Register.PysicalRegister.RSI);
-            stackToReg(registerList.get(1));
+            stackToReg(RSI, registerList.get(1));
         }
         if (registerList.size() > 2) {
-            registerList.get(2).setAllocatedRegister(Register.PysicalRegister.RDX);
-            stackToReg(registerList.get(2));
+            stackToReg(RDX, registerList.get(2));
         }
         if (registerList.size() > 3) {
-            registerList.get(3).setAllocatedRegister(Register.PysicalRegister.RCX);
-            stackToReg(registerList.get(3));
+            stackToReg(RCX, registerList.get(3));
         }
         if (registerList.size() > 4) {
-            registerList.get(4).setAllocatedRegister(Register.PysicalRegister.R8);
-            stackToReg(registerList.get(4));
+            stackToReg(R8, registerList.get(4));
         }
         if (registerList.size() > 5) {
-            registerList.get(5).setAllocatedRegister(Register.PysicalRegister.R9);
-            stackToReg(registerList.get(5));
+            stackToReg(R9, registerList.get(5));
         }
     }
 
     private void leaveCallParameter(List<Register> registerList) {
         for (int i = registerList.size()-1; i > 6; i--) {
-            pop(registerList.get(i));
+            pop(RAX);   // FIXME
         }
         // no need to regToStack
     }
@@ -818,11 +887,41 @@ public class NasmM2M implements IIRVistor {
         for (int i = registerList.size()-1; i > 5; i--) {
             builder.append("\tmov rax, qword [rbp + ").append((8 * (i-6) + 16)).append("]\n");
             builder.append("\tmov qword [rbp ").append(registerList.get(i).getStackOffset()).append("], rax\n");
-        }
+        }   // uses rax
     }
 
     private void saveCaller() {
-        // Do nothing
+//        push(RAX);
+        push(RBX);
+        push(RCX);
+        push(RDX);
+        push(RSI);
+        push(RDI);
+        push(R8);
+        push(R9);
+        push(R10);
+        push(R11);
+        push(R12);
+        push(R13);
+        push(R14);
+        push(R15);
+    }
+
+    private void restoreCaller(){
+        pop(R15);
+        pop(R14);
+        pop(R13);
+        pop(R12);
+        pop(R11);
+        pop(R10);
+        pop(R9);
+        pop(R8);
+        pop(RDI);
+        pop(RSI);
+        pop(RDX);
+        pop(RCX);
+        pop(RBX);
+//        pop(RAX);
     }
 
     private void saveCallee() {

@@ -50,6 +50,7 @@ public class Test {
         // IR Generation
 //        return "./CodeGenTest/ClassTest.Mx";
 //        return "./CodeGenTest/FunctionTest.Mx";
+//        return "./Test/TestCases/testcase_509.txt";
         return "./Test/CodeGenTest/Random.Mx";
 //        return "./CodeGenTest/ZZK.Mx";
 //        return "./CodeGenTest/zzh.Mx";
@@ -154,26 +155,39 @@ public class Test {
             program.accept(irFuncParamBuilder);
             program.accept(irInstructionBuilder);
 
+            // Liveness Analysis
+            LivenessAnalysis livenessAnalysis = new LivenessAnalysis(irProgram);
+            ConfictGraphBuilder confictGraphBuilder = new ConfictGraphBuilder();
+            irProgram.accept(livenessAnalysis);
+            irProgram.accept(confictGraphBuilder);
+
             // Code Generation
             IRPrinter irPrinter = new IRPrinter();
             RegisterOffsetResolver registerOffsetResolver = new RegisterOffsetResolver();
-//            irProgram.accept(irPrinter);
+            irProgram.accept(irPrinter);
             irProgram.accept(registerOffsetResolver);
 
             // Register Allocation
+            PreRegisterAllocator preRegisterAllocator = new PreRegisterAllocator();
+            irProgram.accept(preRegisterAllocator);
+            GreedyAllocator greedyAllocator = new GreedyAllocator();
+            irProgram.accept(greedyAllocator);
+
 //            PreRegisterAllocator preRegisterAllocator = new PreRegisterAllocator();
 //            NaiveRegisterAllocator naiveRegisterAllocator = new NaiveRegisterAllocator();
 //            irProgram.accept(preRegisterAllocator);
 //            irProgram.accept(naiveRegisterAllocator);
 
             // NASM generation
-//            NASMTranslater nasmTranslater = new NASMTranslater();
-//            irProgram.accept(nasmTranslater);
-//            System.out.println(nasmTranslater.getBuilder().toString());
-            NasmM2M nasmM2M = new NasmM2M();
-            nasmM2M.getBuilder().append(getTxt("./allInOne.asm"));
-            irProgram.accept(nasmM2M);
-            System.out.println(nasmM2M.getBuilder().toString());
+//            NasmM2M nasmM2M = new NasmM2M();
+//            nasmM2M.getBuilder().append(getTxt("./allInOne.asm"));
+//            irProgram.accept(nasmM2M);
+//            System.out.println(nasmM2M.getBuilder().toString());
+
+            NasmColor nasmColor = new NasmColor();
+            nasmColor.getBuilder().append(getTxt("./allInOne.asm"));
+            irProgram.accept(nasmColor);
+            System.out.println(nasmColor.getBuilder().toString());
 
         } catch (Exception e) {
             e.printStackTrace(System.err);

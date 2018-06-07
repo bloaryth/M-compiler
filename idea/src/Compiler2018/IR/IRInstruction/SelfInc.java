@@ -4,6 +4,9 @@ import Compiler2018.BackEnd.IIRVistor;
 import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.Register;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class SelfInc extends AbstractIRInstruction{
     private final Register dest;
     private final boolean star;
@@ -39,5 +42,21 @@ public class SelfInc extends AbstractIRInstruction{
     @Override
     public void accept(IIRVistor vistor) {
         vistor.visit(this);
+    }
+
+    @Override
+    public Register getDefinedRegister() {
+        return dest;
+    }
+
+    private List<Register> usedRegisterList = null;
+
+    @Override
+    public List<Register> getUsedRegisterList() {
+        if (usedRegisterList == null) {
+            usedRegisterList = new LinkedList<>();
+            usedRegisterList.add(dest);
+        }
+        return usedRegisterList;
     }
 }

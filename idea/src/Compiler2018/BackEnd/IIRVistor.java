@@ -24,5 +24,5 @@ public interface IIRVistor {
     void visit(Ret ir);
     void visit(SelfInc ir);
     void visit(UnaryCalc ir);
-    void visit(Set ir);
+    void visit(CSet ir);
 }

@@ -104,9 +104,6 @@ public class BasicBlock {
     }
 
     public void endWith(AbstractIRInstruction jump) {
-        if (endWithJump) {
-//            throw new RuntimeException("end With multiple jump"); // FIXME
-        }
         addTail(jump);
         endWithJump = true;
 

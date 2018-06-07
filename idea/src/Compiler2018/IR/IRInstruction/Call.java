@@ -84,4 +84,19 @@ public class Call extends AbstractIRInstruction {
     public void accept(IIRVistor vistor) {
         vistor.visit(this);
     }
+
+    @Override
+    public Register getDefinedRegister() {
+        return ret;
+    }
+
+    private List<Register> usedRegisterList = null;
+
+    @Override
+    public List<Register> getUsedRegisterList() {
+        if (usedRegisterList == null) {
+            usedRegisterList = args;
+        }
+        return usedRegisterList;
+    }
 }

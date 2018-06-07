@@ -116,7 +116,7 @@ public class NaiveRegisterAllocator implements IIRVistor{
     }
 
     @Override
-    public void visit(Set ir) {
+    public void visit(CSet ir) {
 
     }
 }

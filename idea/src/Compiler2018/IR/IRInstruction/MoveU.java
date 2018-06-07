@@ -5,6 +5,8 @@ import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.AbstractValue;
 import Compiler2018.IR.IRValue.Register;
 
+import java.util.List;
+
 // into register
 public class MoveU extends AbstractIRInstruction{
     private final Register lhs;
@@ -35,5 +37,16 @@ public class MoveU extends AbstractIRInstruction{
     @Override
     public void accept(IIRVistor vistor) {
         vistor.visit(this);
+    }
+
+
+    @Override
+    public Register getDefinedRegister() {
+        return lhs;
+    }
+
+    @Override
+    public List<Register> getUsedRegisterList() {
+        return null;
     }
 }
