@@ -55,7 +55,9 @@ public class LivenessAnalysis implements IIRVistor{
                     } else if (inst instanceof Jump) {
                             outSet.addAll(((Jump) inst).getJumpBlock().getHead().getLiveInSet());
                     } else if (!(inst instanceof Ret)) {
+                        if (inst.getNext() != null) {
                             outSet.addAll(inst.getNext().getLiveInSet());
+                        }
                     }
                     inSet.addAll(outSet);
                     Register definedRegister = inst.getDefinedRegister();
