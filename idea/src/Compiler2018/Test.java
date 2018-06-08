@@ -51,7 +51,8 @@ public class Test {
 //        return "./CodeGenTest/ClassTest.Mx";
 //        return "./CodeGenTest/FunctionTest.Mx";
 //        return "./Test/TestCases/testcase_509.txt";
-        return "./Test/CodeGenTest/Random.Mx";
+//        return "./Test/CodeGenTest/Random.Mx";
+        return "./Test/CodeGenTest/luna.Mx";
 //        return "./CodeGenTest/ZZK.Mx";
 //        return "./CodeGenTest/zzh.Mx";
 //        return "./CodeGenTest/toString.Mx";
@@ -164,7 +165,7 @@ public class Test {
             // Code Generation
             IRPrinter irPrinter = new IRPrinter();
             RegisterOffsetResolver registerOffsetResolver = new RegisterOffsetResolver();
-            irProgram.accept(irPrinter);
+//            irProgram.accept(irPrinter);
             irProgram.accept(registerOffsetResolver);
 
             // Register Allocation

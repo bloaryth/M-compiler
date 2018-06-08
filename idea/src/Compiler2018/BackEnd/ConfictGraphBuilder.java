@@ -38,16 +38,25 @@ public class ConfictGraphBuilder implements IIRVistor {
         while (iter.hasNext()) {
             AbstractIRInstruction irInstruction = iter.next();
             irInstruction.buildGraph();
-//            irInstruction.accept(this);
+            irInstruction.accept(this);
         }
+    }
+
+    void link(Register lhs, Register rhs) {
+        lhs.getConflictRegisterSet().add(rhs);
+        rhs.getConflictRegisterSet().add(lhs);
     }
 
     @Override
     public void visit(BinaryCalc ir) {
-        registerSet.add(ir.getDestination());
-        registerSet.add(ir.getLeftOperand());
-        registerSet.add(ir.getRightOperand());
-        registerSet.add(ir.getIntermediate());
+        link(ir.getDestination(), ir.getLeftOperand());
+        link(ir.getDestination(), ir.getRightOperand());
+        link(ir.getLeftOperand(), ir.getRightOperand());
+//        ir.getDestination().ge
+//        registerSet.add(ir.getDestination());
+//        registerSet.add(ir.getLeftOperand());
+//        registerSet.add(ir.getRightOperand());
+//        registerSet.add(ir.getIntermediate());
     }
 
     @Override
@@ -57,16 +66,12 @@ public class ConfictGraphBuilder implements IIRVistor {
 
     @Override
     public void visit(Call ir) {
-        registerSet.add(ir.getRet());
-        registerSet.addAll(ir.getArgs());
+
     }
 
     @Override
     public void visit(Compare ir) {
-        registerSet.add(ir.getDefinedRegister());
-        registerSet.add(ir.getLeftOperand());
-        registerSet.add(ir.getRightOperand());
-        registerSet.add(ir.getIntermediate());
+
     }
 
     @Override
@@ -76,40 +81,36 @@ public class ConfictGraphBuilder implements IIRVistor {
 
     @Override
     public void visit(Lea ir) {
-        registerSet.add(ir.getDestination());
-        registerSet.add(ir.getBase());
-        registerSet.add(ir.getPos());
+
     }
 
     @Override
     public void visit(Move ir) {
-        registerSet.add(ir.getLhs());
-        registerSet.add(ir.getRhs());
+
     }
 
     @Override
     public void visit(MoveU ir) {
-        registerSet.add(ir.getLhs());
+
     }
 
     @Override
     public void visit(Ret ir) {
-        registerSet.add(ir.getRet());
+
     }
 
     @Override
     public void visit(SelfInc ir) {
-        registerSet.add(ir.getDest());
+
     }
 
     @Override
     public void visit(UnaryCalc ir) {
-        registerSet.add(ir.getDestination());
-        registerSet.add(ir.getOperand());
+
     }
 
     @Override
     public void visit(CSet ir) {
-        registerSet.add(ir.getDest());
+
     }
 }
