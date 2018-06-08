@@ -1372,3 +1372,210 @@ L_124:
 SECTION .text.unlikely 
 
 
+global main
+
+SECTION .text
+
+main:
+	push rbp
+	mov rbp, rsp
+	sub rsp, 336
+_main.entry.0:
+	mov rbx, 5
+
+	mov rsi, rbx
+
+	mov rbx, 0
+
+	mov rdi, rbx
+
+	mov rbx, 0
+
+	cmp rdi, rbx
+
+	mov rbx, 0
+	setne bl
+
+	mov r8, 1
+
+	cmp rbx, r8
+
+	je and_lhs_true.9
+	jne Init_false.8
+
+Init_true.7:
+	mov rbx, 1
+
+	jmp Init_merge.10
+
+Init_false.8:
+	mov rbx, 0
+
+	jmp Init_merge.10
+
+and_lhs_true.9:
+	mov rax, rsi
+	cqo
+	idiv rdi
+	mov rbx, rax
+
+	mov r8, 1
+
+	cmp rbx, r8
+
+	mov rbx, 0
+	setne bl
+
+	mov r8, 1
+
+	cmp rbx, r8
+
+	je Init_true.7
+	jne Init_false.8
+
+Init_merge.10:
+	mov r8, rbx
+
+	mov rbx, 1
+
+	cmp rbx, r8
+
+	je if_true.11
+	jne if_false.12
+
+if_true.11:
+	mov rbx, 10
+
+	mov r8, rbx
+
+	jmp if_merge.13
+
+if_false.12:
+	mov rbx, 20
+
+	mov r8, rbx
+
+	jmp if_merge.13
+
+if_merge.13:
+	mov rbx, 10
+
+	cmp r8, rbx
+
+	mov rbx, 0
+	sete bl
+
+	mov r9, 1
+
+	cmp rbx, r9
+
+	je and_lhs_true.23
+	jne Assign_true.20
+
+Assign_true.20:
+	mov rbx, 0
+
+	mov rbx, 0
+
+	mov rsi, 1
+
+	mov rdi, rbx
+	xor rdi, rsi
+
+	jmp Ret_merge.24
+
+Assign_false.21:
+	mov rbx, 1
+
+	mov rsi, 1
+
+	mov rdi, rbx
+	xor rdi, rsi
+
+	jmp Ret_merge.24
+
+and_lhs_true.23:
+	mov rax, rsi
+	cqo
+	idiv rdi
+	mov rbx, rax
+
+	mov rdi, 0
+
+	cmp rbx, rdi
+
+	mov rbx, 0
+	sete bl
+
+	mov rdi, 1
+
+	cmp rbx, rdi
+
+	je and_lhs_true.22
+	jne Assign_true.20
+
+	mov rdi, 1
+
+	cmp rbx, rdi
+
+	je and_lhs_true.22
+	jne Assign_true.20
+
+and_lhs_true.22:
+	mov rbx, 1
+
+	mov rbx, 5
+
+	cmp rsi, rbx
+
+	mov rbx, 0
+	sete bl
+
+	mov rsi, 1
+
+	cmp rbx, rsi
+
+	je Assign_false.21
+	jne Assign_true.20
+
+	mov rsi, 1
+
+	mov rdi, rbx
+	xor rdi, rsi
+
+Ret_merge.24:
+	mov rbx, rdi
+
+	mov rsi, 1
+
+	cmp rsi, rbx
+
+	je if_true.25
+	jne if_merge.26
+
+if_true.25:
+	mov rbx, 30
+
+	mov r8, rbx
+
+	jmp if_merge.26
+
+if_merge.26:
+	mov rbx, r8
+
+	mov rax, rbx
+	leave
+	ret
+
+	mov rbx, 0
+
+	mov rax, rbx
+	leave
+	ret
+
+
+SECTION .data
+
+SECTION .rodata.str1.1
+
+
