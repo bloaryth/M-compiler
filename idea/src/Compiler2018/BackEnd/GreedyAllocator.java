@@ -63,6 +63,15 @@ public class GreedyAllocator implements IIRVistor{
         allReg.remove(Register.PysicalRegister.R13);
         allReg.remove(Register.PysicalRegister.R14);
         allReg.remove(Register.PysicalRegister.R15);
+
+        // test
+//        allReg.remove(Register.PysicalRegister.RBX);
+//        allReg.remove(Register.PysicalRegister.RDI);
+//        allReg.remove(Register.PysicalRegister.RSI);
+//        allReg.remove(Register.PysicalRegister.R8);
+//        allReg.remove(Register.PysicalRegister.R9);
+//        allReg.remove(Register.PysicalRegister.R10);
+//        allReg.remove(Register.PysicalRegister.R11);
     }
 
     @Override

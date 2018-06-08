@@ -231,12 +231,12 @@ public class IRInstructionBuilder implements IASTVistor {
 
     @Override
     public void visit(BreakStmt node) {
-        currentBB.addTail(new Jump(currentBB, loopAfterBBStack.peek()));
+        currentBB.endWith(new Jump(currentBB, loopAfterBBStack.peek()));
     }
 
     @Override
     public void visit(ContinueStmt node) {
-        currentBB.addTail(new Jump(currentBB, loopStepBBStack.peek()));
+        currentBB.endWith(new Jump(currentBB, loopStepBBStack.peek()));
     }
 
     @Override

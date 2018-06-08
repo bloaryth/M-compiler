@@ -70,8 +70,8 @@ public class RegisterOffsetResolver implements IIRVistor {
 
     @Override
     public void visit(Lea ir) {
-        currentIRFunction.addStackOffset(ir.getBase());
         currentIRFunction.addStackOffset(ir.getDestination());
+        currentIRFunction.addStackOffset(ir.getBase());
         currentIRFunction.addStackOffset(ir.getPos());
     }
 

@@ -46,7 +46,11 @@ public class SelfInc extends AbstractIRInstruction{
 
     @Override
     public Register getDefinedRegister() {
-        return dest;
+        if (star) {
+            return null;
+        } else {
+            return dest;
+        }
     }
 
     private List<Register> usedRegisterList = null;

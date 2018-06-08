@@ -84,6 +84,7 @@ public abstract class AbstractIRInstruction {
         this.liveOutSet = liveOutSet;
     }
 
+    // conflict graph
     public abstract Register getDefinedRegister();
 
     public abstract List<Register> getUsedRegisterList();
@@ -93,6 +94,12 @@ public abstract class AbstractIRInstruction {
         Register defined = getDefinedRegister();
         if (defined != null && liveOutSet != null) {
             liveOutSet.forEach(x -> {
+                if (x != null && !x.equals(defined)) {
+                    x.getConflictRegisterSet().add(defined);
+                    defined.getConflictRegisterSet().add(x);
+                }
+            });
+            liveInSet.forEach(x -> {
                 if (x != null && !x.equals(defined)) {
                     x.getConflictRegisterSet().add(defined);
                     defined.getConflictRegisterSet().add(x);

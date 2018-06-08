@@ -90,6 +90,7 @@ public class NasmColor implements IIRVistor {
         prologue();
         builder.append("\tsub rsp, ").append(-irFunction.getTotalOffset()).append("\n");
         List<Register> parameterList = irFunction.getParameterList();
+
         if (parameterList.size() > 2) { // 2
             if (parameterList.get(2).isAllocated()) {
                 stackToReg(parameterList.get(2).getAllocatedRegister(), parameterList.get(2));
@@ -157,10 +158,10 @@ public class NasmColor implements IIRVistor {
         BasicBlock.Iter iter = new BasicBlock.Iter(basicBlock);
         while (iter.hasNext()) {
             AbstractIRInstruction irInstruction = iter.next();
-//            String[] split = irInstruction.toIRString().split("\n");
-//            for (String aSplit : split) {
-//                builder.append("\t;").append(aSplit).append("\n");
-//            }
+            String[] split = irInstruction.toIRString().split("\n");
+            for (String aSplit : split) {
+                builder.append("\t;").append(aSplit).append("\n");
+            }
             irInstruction.accept(this);
             builder.append("\n");
         }
@@ -171,7 +172,7 @@ public class NasmColor implements IIRVistor {
         if (ir.getIntermediate() != null) {
             ir.getIntermediate().setAllocated(false);
         }
-        help(ir.getDestination(), destPreserved, true);
+        help(ir.getDestination(), destPreserved, false);
         help(ir.getIntermediate(), immediatePreserved, false);
         help(ir.getLeftOperand(), leftOpPreserved, true);
         help(ir.getRightOperand(), rightOpPreserved, true);
@@ -179,6 +180,9 @@ public class NasmColor implements IIRVistor {
         Register rightOperand;
         boolean rightStar;
         if (ir.getDestination().getAllocatedRegister().equals(ir.getRightOperand().getAllocatedRegister())) {
+            if (ir.getDestination().getAllocatedRegister() == null) {
+                throw new RuntimeException();
+            }
             rightOperand = ir.getIntermediate();
             rightStar = ir.isRightStar();
             move(rightOperand, false, ir.getRightOperand(), false);
@@ -348,7 +352,7 @@ public class NasmColor implements IIRVistor {
 
     @Override
     public void visit(Lea ir) {
-        help(ir.getDestination(), destPreserved, true);
+        help(ir.getDestination(), destPreserved, false);
         help(ir.getBase(), leftOpPreserved, true);
         help(ir.getPos(), rightOpPreserved, true);
 
@@ -364,7 +368,7 @@ public class NasmColor implements IIRVistor {
         if (ir.getIntermediate() != null) {
             ir.getIntermediate().setAllocated(false);
         }
-        help(ir.getLhs(), destPreserved, true);
+        help(ir.getLhs(), destPreserved, false);
         help(ir.getRhs(), leftOpPreserved, true);
         help(ir.getIntermediate(), rightOpPreserved, false);
 
@@ -388,7 +392,7 @@ public class NasmColor implements IIRVistor {
 
     @Override
     public void visit(MoveU ir) {
-        help(ir.getLhs(), destPreserved, true);
+        help(ir.getLhs(), destPreserved, false);
 
         moveu(ir.getLhs(), ir.getRhs());
 
@@ -421,7 +425,7 @@ public class NasmColor implements IIRVistor {
 
     @Override
     public void visit(UnaryCalc ir) {
-        help(ir.getDestination(), destPreserved, true);
+        help(ir.getDestination(), destPreserved, false);
         help(ir.getOperand(), leftOpPreserved, true);
 
         move(ir.getDestination(), false, ir.getOperand(), ir.isStar());
@@ -441,7 +445,7 @@ public class NasmColor implements IIRVistor {
 
     @Override
     public void visit(CSet ir) {
-        help(ir.getDest(), destPreserved, true);
+        help(ir.getDest(), destPreserved, false);
 
         switch (ir.getOp()) {
             case EQ:
