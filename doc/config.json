@@ -2,6 +2,6 @@
     "testcases_dir": "./TestCases",
     "bash_dir": "../",
     "phases": [
-        "optim pretest"
+        "codegen pretest"
     ]
 }

@@ -7,31 +7,60 @@ int main() {
 	int[] f = new int[2801];
 	int g = 0;
 
-    f[b++];
 
-/*
 	for (;b-c!=0;)
 		f[b++] = a/5;
-*/
-    /*
+
 	for (;; e = d%a){
 		d = 0;
 		g = c*2;
-		if (g==0) break;
+	    if(b == 0){
+	        print("aa");
+	        println(toString(c));
+	        println(toString(g));
+	    }
+	    println("c");
+	    println(toString(c));
 
 		for (b=c;;d=d*b){
+		    print("b");
+				    println(toString(b));
+            print("d");
+        		    println(toString(d));
+
 			d=d+f[b]*a;
+			print("g");
+			println(toString(g));
 			f[b] = d%--g;
+			print("g");
+			println(toString(g));
 			d=d/g--;
-			if (--b==0) break;
+			print("g");
+			println(toString(g));
+			print("b");
+			println(toString(b));
+			println("");
+			if (--b==0) {
+			    print("b");
+			    println(toString(b));
+			    break;
+			}
+			break;
 		}
+			    println("c");
+        	    println(toString(c));
+        	    break;
+
+		print("b");
+		println(toString(b));
 
 		c = c-14;
+		print("ans");
 		print(toString(e+d/a));
+		println("");
 	}
-	*/
-
   print("\n");
+
   return 0;
 }
 
@@ -54,4 +83,3 @@ codegen pretest
 True
 
 !!*/
-

@@ -203,14 +203,16 @@ public class NasmColor implements IIRVistor {
                 imul(ir.getDestination(), false, rightOperand, rightStar);
                 break;
             case DIV:
-                setZero(Register.PysicalRegister.RDX);
+//                setZero(Register.PysicalRegister.RDX);
                 move(RAX, false, leftOperand, leftStar);
+                cqo();
                 idiv(rightOperand, rightStar);
                 move(ir.getDestination(), false, RAX, false);
                 break;
             case MOD:
-                setZero(Register.PysicalRegister.RDX);
+//                setZero(Register.PysicalRegister.RDX);
                 move(RAX, false, leftOperand, leftStar);
+                cqo();
                 idiv(rightOperand, rightStar);
                 move(ir.getDestination(), false, Register.PysicalRegister.RDX, false);
                 break;
@@ -503,6 +505,10 @@ public class NasmColor implements IIRVistor {
         builder.append(", ");
         builder.append(0);
         builder.append("\n");
+    }
+
+    private void cqo(){
+        builder.append("\tcqo\n");
     }
 
     private void move(Register lhs, boolean leftStar, Register rhs, boolean rightStar) {
