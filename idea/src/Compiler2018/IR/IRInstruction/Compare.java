@@ -29,6 +29,7 @@ public class Compare extends AbstractIRInstruction {
 
         if (leftStar && rightStar) {
             intermediate = new Register();
+            throw new RuntimeException();
         } else {
             intermediate = null;
         }

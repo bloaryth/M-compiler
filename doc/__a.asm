@@ -1379,17 +1379,180 @@ SECTION .text
 main:
 	push rbp
 	mov rbp, rsp
-	sub rsp, 56
+	sub rsp, 336
 _main.entry.0:
 	mov rsi, 5
 
 
-	mov rdi, rsi
-
-	add rsi, 1
+	mov rdi, 0
 
 
+	mov r8, 0
 
+	cmp rdi, r8
+
+	mov r8, 0
+	setne r8b
+
+	mov r9, 1
+
+	cmp r8, r9
+
+	je and_lhs_true.9
+	jne Init_false.8
+
+Init_true.7:
+	mov r8, 1
+
+	jmp Init_merge.10
+
+Init_false.8:
+	mov r8, 0
+
+	jmp Init_merge.10
+
+and_lhs_true.9:
+	mov rax, rsi
+	cqo
+	idiv rdi
+	mov r8, rax
+
+	mov r9, 1
+
+	cmp r8, r9
+
+	mov r8, 0
+	setne r8b
+
+	mov r9, 1
+
+	cmp r8, r9
+
+	je Init_true.7
+	jne Init_false.8
+
+Init_merge.10:
+
+	mov r9, 1
+
+	cmp r9, r8
+
+	je if_true.11
+	jne if_false.12
+
+if_true.11:
+	mov r8, 10
+
+
+	jmp if_merge.13
+
+if_false.12:
+	mov r8, 20
+
+
+	jmp if_merge.13
+
+if_merge.13:
+	mov r9, 10
+
+	cmp r8, r9
+
+	mov r9, 0
+	sete r9b
+
+	mov r10, 1
+
+	cmp r9, r10
+
+	je and_lhs_true.23
+	jne Assign_true.20
+
+Assign_true.20:
+	mov rdi, 0
+
+	mov rsi, 0
+
+	mov rdi, 1
+
+	xor rsi, rdi
+
+	jmp Ret_merge.24
+
+Assign_false.21:
+	mov rsi, 1
+
+	mov rdi, 1
+
+	xor rsi, rdi
+
+	jmp Ret_merge.24
+
+and_lhs_true.23:
+	mov rax, rsi
+	cqo
+	idiv rdi
+	mov r9, rax
+
+	mov rdi, 0
+
+	cmp r9, rdi
+
+	mov rdi, 0
+	sete dil
+
+	mov r9, 1
+
+	cmp rdi, r9
+
+	je and_lhs_true.22
+	jne Assign_true.20
+
+	mov r9, 1
+
+	cmp rdi, r9
+
+	je and_lhs_true.22
+	jne Assign_true.20
+
+and_lhs_true.22:
+	mov rdi, 1
+
+	mov rdi, 5
+
+	cmp rsi, rdi
+
+	mov rsi, 0
+	sete sil
+
+	mov rdi, 1
+
+	cmp rsi, rdi
+
+	je Assign_false.21
+	jne Assign_true.20
+
+	mov rdi, 1
+
+	xor rsi, rdi
+
+Ret_merge.24:
+
+	mov rdi, 1
+
+	cmp rdi, rsi
+
+	je if_true.25
+	jne if_merge.26
+
+if_true.25:
+	mov rsi, 30
+
+	mov r8, rsi
+
+	jmp if_merge.26
+
+if_merge.26:
+	mov rsi, r8
 
 	mov rax, rsi
 	leave
