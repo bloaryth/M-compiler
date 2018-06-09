@@ -477,6 +477,7 @@ public class NasmColor implements IIRVistor {
         }
         if (!vReg.isAllocated()) {
             vReg.setAllocatedRegister(pReg);
+            push(pReg); // for allocate
             if (loadIn) {
                 stackToReg(pReg, vReg);
             }
@@ -491,6 +492,7 @@ public class NasmColor implements IIRVistor {
             if (modified) {
                 regToStack(vReg, vReg.getAllocatedRegister());
             }
+            pop(vReg.getAllocatedRegister());   // for allocate
             vReg.setAllocatedRegister(null);
         }
     }

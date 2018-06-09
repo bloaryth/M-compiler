@@ -18,8 +18,8 @@
       <file leaf-file-name="GreedyAllocator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="59" column="52" lean-forward="true" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
+            <state relative-caret-position="292">
+              <caret line="61" selection-start-line="61" selection-start-column="2" selection-end-line="64" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -30,8 +30,8 @@
       <file leaf-file-name="NasmColor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="925" column="17" lean-forward="true" selection-start-line="925" selection-start-column="17" selection-end-line="925" selection-end-column="17" />
+            <state relative-caret-position="653">
+              <caret line="494" column="63" selection-start-line="494" selection-start-column="63" selection-end-line="494" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -225,10 +225,10 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Luna.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/WTZ.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_939.txt" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java" />
       </list>
     </option>
@@ -552,12 +552,12 @@
       <workItem from="1528088457811" duration="3560000" />
       <workItem from="1528135347031" duration="21730000" />
       <workItem from="1528186734871" duration="4095000" />
-      <workItem from="1528191789645" duration="218693000" />
+      <workItem from="1528191789645" duration="219099000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="853745000" />
+    <option name="totallyTimeSpent" value="854151000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -585,7 +585,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.4989339" visible="true" weight="0.32026145" />
+      <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.4989339" visible="true" weight="0.10675381" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.33333334" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32897604" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
@@ -721,7 +721,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java</url>
-          <line>873</line>
+          <line>875</line>
           <properties />
           <option name="timeStamp" value="271" />
         </line-breakpoint>
@@ -1160,8 +1160,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="925" column="17" lean-forward="true" selection-start-line="925" selection-start-column="17" selection-end-line="925" selection-end-column="17" />
+        <state relative-caret-position="653">
+          <caret line="494" column="63" selection-start-line="494" selection-start-column="63" selection-end-line="494" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1170,8 +1170,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="59" column="52" lean-forward="true" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
+        <state relative-caret-position="292">
+          <caret line="61" selection-start-line="61" selection-start-column="2" selection-end-line="64" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
