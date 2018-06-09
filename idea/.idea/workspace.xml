@@ -15,11 +15,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GreedyAllocator.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="55" column="46" lean-forward="true" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GreedyAllocator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="61" selection-start-line="61" selection-start-column="2" selection-end-line="64" selection-end-column="54" />
+            <state relative-caret-position="317">
+              <caret line="62" column="52" lean-forward="true" selection-start-line="62" selection-start-column="52" selection-end-line="62" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -27,14 +36,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NasmColor.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NasmColor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="653">
-              <caret line="494" column="63" selection-start-line="494" selection-start-column="63" selection-end-line="494" selection-end-column="63" />
+            <state relative-caret-position="196">
+              <caret line="531" column="60" selection-start-line="531" selection-start-column="60" selection-end-line="531" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Random.Mx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3150">
+              <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testcase_523.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_523.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="12" column="11" lean-forward="true" selection-end-line="159" />
             </state>
           </provider>
         </entry>
@@ -83,36 +110,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ZZK.Mx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/ZZK.Mx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2326">
-              <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Luna.Mx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Luna.Mx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="215" column="36" lean-forward="true" selection-end-line="299" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LivenessAnalysis.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/LivenessAnalysis.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
-              <caret line="57" column="50" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="IRPrinter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/IRPrinter.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -146,7 +143,6 @@
       <find>Function</find>
       <find>Binary</find>
       <find>getIntermediate</find>
-      <find>help</find>
       <find>Inter</find>
       <find>move</find>
       <find>mod</find>
@@ -166,6 +162,7 @@
       <find>sum</find>
       <find>cset</find>
       <find>call</find>
+      <find>help</find>
     </findStrings>
     <replaceStrings>
       <replace>ClassType</replace>
@@ -225,11 +222,11 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Luna.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/WTZ.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_939.txt" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_939.txt" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java" />
       </list>
     </option>
   </component>
@@ -552,12 +549,12 @@
       <workItem from="1528088457811" duration="3560000" />
       <workItem from="1528135347031" duration="21730000" />
       <workItem from="1528186734871" duration="4095000" />
-      <workItem from="1528191789645" duration="219099000" />
+      <workItem from="1528191789645" duration="222034000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="854151000" />
+    <option name="totallyTimeSpent" value="857086000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -585,7 +582,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.4989339" visible="true" weight="0.10675381" />
+      <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.4989339" visible="true" weight="0.27233115" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.33333334" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32897604" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
@@ -594,7 +591,7 @@
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" x="139" y="85" width="1323" height="680" id="Run" order="14" sideWeight="0.49946696" type="FLOATING" weight="0.45860568" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32897604" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15991472" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15991472" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.45424837" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="6" side_tool="true" />
@@ -731,11 +728,17 @@
           <properties />
           <option name="timeStamp" value="272" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java</url>
+          <line>478</line>
+          <properties />
+          <option name="timeStamp" value="278" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="278" />
+      <option name="time" value="279" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -746,13 +749,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/compiler/Java/jdk-10/lib/src.zip!/java.base/java/util/AbstractCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="350" selection-start-line="350" selection-end-line="350" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_555.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1063,13 +1059,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="299" selection-start-line="299" selection-end-line="299" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/WantonWind.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
@@ -1081,13 +1070,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1350">
           <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="53" column="45" selection-start-line="53" selection-start-column="45" selection-end-line="53" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -1158,20 +1140,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_523.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="494" column="63" selection-start-line="494" selection-start-column="63" selection-end-line="494" selection-end-column="63" />
+        <state relative-caret-position="300">
+          <caret line="12" column="11" lean-forward="true" selection-end-line="159" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="55" column="46" lean-forward="true" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3150">
+          <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="62" column="52" lean-forward="true" selection-start-line="62" selection-start-column="52" selection-end-line="62" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="61" selection-start-line="61" selection-start-column="2" selection-end-line="64" selection-end-column="54" />
+        <state relative-caret-position="196">
+          <caret line="531" column="60" selection-start-line="531" selection-start-column="60" selection-end-line="531" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -245,10 +245,10 @@ public class NasmColor implements IIRVistor {
                 break;
         }
 
-        unhelp(ir.getDestination(), true);
-        unhelp(ir.getIntermediate(), false);
-        unhelp(ir.getLeftOperand(), false);
         unhelp(ir.getRightOperand(), false);
+        unhelp(ir.getLeftOperand(), false);
+        unhelp(ir.getIntermediate(), false);
+        unhelp(ir.getDestination(), true);
     }
 
 //    private boolean conflict(Register lhs, Register rhs) {
@@ -340,9 +340,9 @@ public class NasmColor implements IIRVistor {
 
         cmp(ir.getLeftOperand(), ir.isLeftStar(), rightOperand, rightStar);
 
-        unhelp(ir.getIntermediate(), false);
-        unhelp(ir.getLeftOperand(), false);
         unhelp(ir.getRightOperand(), false);
+        unhelp(ir.getLeftOperand(), false);
+        unhelp(ir.getIntermediate(), false);
     }
 
     @Override
@@ -358,9 +358,9 @@ public class NasmColor implements IIRVistor {
 
         lea(ir.getDestination(), ir.getBase(), ir.getPos(), ir.getOffset());
 
-        unhelp(ir.getDestination(), true);
-        unhelp(ir.getBase(), false);
         unhelp(ir.getPos(), false);
+        unhelp(ir.getBase(), false);
+        unhelp(ir.getDestination(), true);
     }
 
     @Override
@@ -385,9 +385,9 @@ public class NasmColor implements IIRVistor {
 
         move(ir.getLhs(), ir.isLhsStar(), rightOperand, rightStar);
 
-        unhelp(ir.getLhs(), true);
-        unhelp(ir.getRhs(), false);
         unhelp(ir.getIntermediate(), false);
+        unhelp(ir.getRhs(), false);
+        unhelp(ir.getLhs(), true);
     }
 
     @Override
@@ -438,8 +438,8 @@ public class NasmColor implements IIRVistor {
                 break;
         }
 
-        unhelp(ir.getDestination(), true);
         unhelp(ir.getOperand(), false);
+        unhelp(ir.getDestination(), true);
 
     }
 
@@ -477,7 +477,7 @@ public class NasmColor implements IIRVistor {
         }
         if (!vReg.isAllocated()) {
             vReg.setAllocatedRegister(pReg);
-            push(pReg); // for allocate
+//            push(pReg); // for allocate
             if (loadIn) {
                 stackToReg(pReg, vReg);
             }
@@ -492,7 +492,7 @@ public class NasmColor implements IIRVistor {
             if (modified) {
                 regToStack(vReg, vReg.getAllocatedRegister());
             }
-            pop(vReg.getAllocatedRegister());   // for allocate
+//            pop(vReg.getAllocatedRegister());   // for allocate
             vReg.setAllocatedRegister(null);
         }
     }

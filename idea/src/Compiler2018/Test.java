@@ -51,8 +51,8 @@ public class Test {
 //        return "./CodeGenTest/ClassTest.Mx";
 //        return "./CodeGenTest/FunctionTest.Mx";
 //        return "./Test/TestCases/testcase_509.txt";
-        return "./Test/TestCases/testcase_939.txt";
-//        return "./Test/CodeGenTest/Random.Mx";
+//        return "./Test/TestCases/testcase_939.txt";
+        return "./Test/CodeGenTest/Random.Mx";
 //        return "./Test/CodeGenTest/luna.Mx";
 //        return "./CodeGenTest/ZZK.Mx";
 //        return "./CodeGenTest/zzh.Mx";
