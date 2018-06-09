@@ -162,16 +162,16 @@
       <find>help</find>
       <find>IntCompare</find>
       <find>BinaryCalc</find>
-      <find>new Move</find>
+      <find />
       <find>move</find>
       <find>newarray</find>
       <find>binary</find>
       <find>Ret</find>
-      <find>new Ret</find>
+      <find />
       <find>Call</find>
       <find>get</find>
       <find>.addTail</find>
-      <find>clone error</find>
+      <find />
     </findStrings>
     <replaceStrings>
       <replace>ClassType</replace>
