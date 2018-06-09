@@ -87,4 +87,9 @@ public class Move extends AbstractIRInstruction {
         }
         return usedRegisterList;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Move(super.getBasicBlock(), lhs, lhsStar, rhs, rhsStar);
+    }
 }

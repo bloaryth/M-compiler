@@ -49,4 +49,9 @@ public class MoveU extends AbstractIRInstruction{
     public List<Register> getUsedRegisterList() {
         return null;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new MoveU(super.getBasicBlock(), lhs, rhs);
+    }
 }

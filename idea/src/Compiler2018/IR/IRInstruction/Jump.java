@@ -37,4 +37,9 @@ public class Jump extends AbstractIRInstruction {
     public List<Register> getUsedRegisterList() {
         return null;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Jump(super.getBasicBlock(), jumpBlock);
+    }
 }

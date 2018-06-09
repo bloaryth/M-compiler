@@ -48,6 +48,7 @@ public class BasicBlock {
             this.tail = head;
         } else {
             this.head.addPrev(head);
+            this.head = head;
         }
     }
 
@@ -57,6 +58,7 @@ public class BasicBlock {
             this.tail = tail;
         } else {
             this.tail.addNext(tail);
+            this.tail = tail;
         }
     }
 
@@ -74,6 +76,28 @@ public class BasicBlock {
 
     public void setTail(AbstractIRInstruction tail) {
         this.tail = tail;
+    }
+
+    public void remove(AbstractIRInstruction instruction) { //
+        if (instruction.getBasicBlock() != this) {
+            throw new RuntimeException();
+        }
+        if (head == tail) {
+            head = null;
+            tail = null;
+            return;
+        }
+        if (instruction.getPrev() == null) {
+            instruction.getNext().setPrev(null);
+            head = instruction.getNext();
+            return;
+        }
+        if (instruction.getNext() == null) {
+            instruction.getPrev().setNext(null);
+            tail = instruction.getPrev();
+            return;
+        }
+        instruction.getPrev().linkNext(instruction.getNext());
     }
 
 

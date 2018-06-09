@@ -46,4 +46,9 @@ public class Ret extends AbstractIRInstruction {
         }
         return usedRegisterList;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Ret(super.getBasicBlock(), ret);
+    }
 }

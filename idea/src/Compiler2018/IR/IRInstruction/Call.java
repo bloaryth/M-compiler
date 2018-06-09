@@ -99,4 +99,9 @@ public class Call extends AbstractIRInstruction {
         }
         return usedRegisterList;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Call(super.getBasicBlock(), processedName, ret, args);
+    }
 }

@@ -1379,7 +1379,7 @@ SECTION .text
 main:
 	push rbp
 	mov rbp, rsp
-	sub rsp, 336
+	sub rsp, 296
 _main.entry.0:
 	mov rsi, 5
 

@@ -51,4 +51,9 @@ public class CSet extends AbstractIRInstruction {
     public List<Register> getUsedRegisterList() {
         return null;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new CSet(super.getBasicBlock(), op, dest, star);
+    }
 }

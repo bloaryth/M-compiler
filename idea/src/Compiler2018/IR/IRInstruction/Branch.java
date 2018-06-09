@@ -55,4 +55,9 @@ public class Branch extends AbstractIRInstruction {
     public List<Register> getUsedRegisterList() {
         return null;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Branch(super.getBasicBlock(), cond, ifTrue, ifFalse);
+    }
 }

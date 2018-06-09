@@ -71,4 +71,9 @@ public class UnaryCalc extends AbstractIRInstruction{
         }
         return usedRegisterList;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new UnaryCalc(super.getBasicBlock(), oprator, destination, operand, star);
+    }
 }

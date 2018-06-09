@@ -89,4 +89,9 @@ public class Compare extends AbstractIRInstruction {
         }
         return usedRegisterList;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Compare(super.getBasicBlock(), oprator, leftOperand, leftStar, rightOperand, rightStar);
+    }
 }

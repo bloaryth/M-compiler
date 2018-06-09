@@ -77,4 +77,9 @@ public class Lea extends AbstractIRInstruction {
         }
         return usedRegisterList;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Lea(super.getBasicBlock(), destination, base, pos, offset);
+    }
 }

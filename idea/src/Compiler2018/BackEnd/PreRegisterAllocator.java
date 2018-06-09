@@ -88,9 +88,11 @@ public class PreRegisterAllocator implements IIRVistor{
     @Override
     public void visit(Call ir) {
 //        if (ir.getArgs().size() > 0) {
+//            ir.getArgs().get(0).setAllocated(true);
 //            ir.getArgs().get(0).setAllocatedRegister(Register.PysicalRegister.RDI);
 //        }
 //        if (ir.getArgs().size() > 1) {
+//            ir.getArgs().get(1).setAllocated(true);
 //            ir.getArgs().get(1).setAllocatedRegister(Register.PysicalRegister.RSI);
 //        }
 //        if (ir.getArgs().size() > 2) {
@@ -100,9 +102,11 @@ public class PreRegisterAllocator implements IIRVistor{
 //            ir.getArgs().get(3).setAllocatedRegister(Register.PysicalRegister.RCX);
 //        }
 //        if (ir.getArgs().size() > 4) {
+//            ir.getArgs().get(4).setAllocated(true);
 //            ir.getArgs().get(4).setAllocatedRegister(Register.PysicalRegister.R8);
 //        }
 //        if (ir.getArgs().size() > 5) {
+//            ir.getArgs().get(5).setAllocated(true);
 //            ir.getArgs().get(5).setAllocatedRegister(Register.PysicalRegister.R9);
 //        }
 //        if (ir.getRet() != null) {

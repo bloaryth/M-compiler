@@ -92,4 +92,9 @@ public class BinaryCalc extends AbstractIRInstruction {
         }
         return usedRegisterList;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new BinaryCalc(super.getBasicBlock(), oprator, destination, leftOperand, leftStar, rightOperand, rightStar);
+    }
 }

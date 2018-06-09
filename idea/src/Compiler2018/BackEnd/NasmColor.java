@@ -785,6 +785,40 @@ public class NasmColor implements IIRVistor {
     }
 
     private void prepareCallParameter(List<Register> registerList) {
+//        for (int i = registerList.size() - 1; i > 5; ++i) {
+//            if (registerList.get(i).isAllocated()) {
+//                push(registerList.get(i));
+//            } else {
+//                stackToReg(RAX, registerList.get(i));
+//                push(RAX);
+//            }
+//        }
+//        Map<Register, Register.PysicalRegister> v2pMap = new LinkedHashMap<>();
+//        Map<Register.PysicalRegister, Register> p2vMap = new LinkedHashMap<>();
+//        for (int i = 0; i < registerList.size() && i < 6; ++i) {
+//            if (registerList.get(i).isAllocated()) {
+//                p2vMap.put(registerList.get(i).getAllocatedRegister(), registerList.get(i));
+//                v2pMap.put(registerList.get(i), registerList.get(i).getAllocatedRegister());
+//            }
+//        }
+//        if (registerList.size() > 0) {
+//            if (p2vMap.get(RDI) != null) {
+//                move(temporary(RDI), RDI);
+//                Register register = p2vMap.get(RDI);
+//
+//            } else {
+//                move(RDI, registerList.get(0).getAllocatedRegister());
+////                p2vMap.remove(p2vMap.get(0).getAllocatedRegister());
+//            }
+//        }
+//        if (registerList.size() > 1) {
+//            if (p2vMap.get(RSI) != null) {
+//                move(temporary(RSI), RSI);
+//            } else {
+//                move(RSI, registerList.get(1).getAllocatedRegister());
+//            }
+//        }
+        // TODO
         for (int i = 0; i < registerList.size(); ++i) {
             if (registerList.get(i).isAllocated()) {
                 regToStack(registerList.get(i), registerList.get(i).getAllocatedRegister());
@@ -811,6 +845,21 @@ public class NasmColor implements IIRVistor {
         }
         if (registerList.size() > 5) {
             stackToReg(R9, registerList.get(5));
+        }
+    }
+
+    private Register.PysicalRegister temporary(Register.PysicalRegister register) {
+        switch (register) {
+            case RDI:
+                return RAX;
+            case RSI:
+                return R10;
+            case R8:
+                return R11;
+            case R9:
+                return RCX;
+            default:
+                throw new RuntimeException();
         }
     }
 

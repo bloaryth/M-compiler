@@ -63,4 +63,9 @@ public class SelfInc extends AbstractIRInstruction{
         }
         return usedRegisterList;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new SelfInc(super.getBasicBlock(), dest, star, inc);
+    }
 }

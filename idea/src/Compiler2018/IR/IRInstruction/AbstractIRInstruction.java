@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class AbstractIRInstruction {
-    private final BasicBlock basicBlock;
+    private BasicBlock basicBlock;
     private AbstractIRInstruction prev = null;
     private AbstractIRInstruction next = null;
 
@@ -16,12 +16,20 @@ public abstract class AbstractIRInstruction {
         this.basicBlock = basicBlock;
     }
 
-    private void linkNext(AbstractIRInstruction next) {
+    public BasicBlock getBasicBlock() {
+        return basicBlock;
+    }
+
+    public void setBasicBlock(BasicBlock basicBlock) {
+        this.basicBlock = basicBlock;
+    }
+
+    public void linkNext(AbstractIRInstruction next) {
         this.next = next;
         next.prev = this;
     }
 
-    private void linkPrev(AbstractIRInstruction prev) {
+    public void linkPrev(AbstractIRInstruction prev) {
         this.prev = prev;
         prev.next = this;
     }
@@ -50,6 +58,14 @@ public abstract class AbstractIRInstruction {
 
     public AbstractIRInstruction getNext() {
         return next;
+    }
+
+    public void setPrev(AbstractIRInstruction prev) {
+        this.prev = prev;
+    }
+
+    public void setNext(AbstractIRInstruction next) {
+        this.next = next;
     }
 
     // comment
@@ -108,4 +124,8 @@ public abstract class AbstractIRInstruction {
         }
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return null;
+    }
 }

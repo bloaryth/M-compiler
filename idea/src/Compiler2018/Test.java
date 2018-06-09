@@ -157,6 +157,11 @@ public class Test {
             program.accept(irFuncParamBuilder);
             program.accept(irInstructionBuilder);
 
+            // Inliner
+            SimpleInliner simpleInliner = new SimpleInliner();
+            irProgram.accept(simpleInliner);
+
+
             // Liveness Analysis
             LivenessAnalysis livenessAnalysis = new LivenessAnalysis(irProgram);
             ConfictGraphBuilder confictGraphBuilder = new ConfictGraphBuilder();
@@ -166,7 +171,7 @@ public class Test {
             // Code Generation
             IRPrinter irPrinter = new IRPrinter();
             RegisterOffsetResolver registerOffsetResolver = new RegisterOffsetResolver();
-//            irProgram.accept(irPrinter);
+            irProgram.accept(irPrinter);
             irProgram.accept(registerOffsetResolver);
 
             // Register Allocation
