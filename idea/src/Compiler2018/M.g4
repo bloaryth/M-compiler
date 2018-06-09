@@ -94,7 +94,7 @@ expression
     |   expression oprator='&' expression    # BinaryExpr    // --> BinaryExpr
     |   expression oprator='^' expression    # BinaryExpr    // --> BinaryExpr
     |   expression oprator='|' expression    # BinaryExpr    // --> BinaryExpr
-    |   expression oprator='&&' expression   # BinaryExpr    // --> BinaryExpr
+    |   <assoc=right> expression oprator='&&' expression   # BinaryExpr    // --> BinaryExpr
     |   expression oprator='||' expression   # BinaryExpr    // --> BinaryExpr
     |   <assoc=right> expression oprator='=' expression  # BinaryExpr    // --> BinaryExpr
 

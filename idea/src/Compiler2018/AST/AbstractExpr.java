@@ -73,4 +73,24 @@ public abstract class AbstractExpr extends AbstractASTNode {
     public void setDataInMem(boolean dataInMem) {
         this.dataInMem = dataInMem;
     }
+
+    // constant folder
+    boolean folded = false;
+    Integer ans = null;
+
+    public boolean isFolded() {
+        return folded;
+    }
+
+    public void setFolded(boolean folded) {
+        this.folded = folded;
+    }
+
+    public Integer getAns() {
+        return ans;
+    }
+
+    public void setAns(Integer ans) {
+        this.ans = ans;
+    }
 }

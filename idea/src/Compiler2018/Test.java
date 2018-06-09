@@ -147,6 +147,10 @@ public class Test {
             program.accept(classVarScanner);
             program.accept(stmtScanner);
 
+            // Constant folder
+            ConstantFolder constantFolder = new ConstantFolder();
+            program.accept(constantFolder);
+
             // IR Generation
             IRProgram irProgram = new IRProgram();
             IRClassBuilder irClassBuilder = new IRClassBuilder(irProgram);
