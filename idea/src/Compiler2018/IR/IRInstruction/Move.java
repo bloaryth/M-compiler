@@ -6,6 +6,7 @@ import Compiler2018.IR.IRValue.Register;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Move extends AbstractIRInstruction {
     private final Register lhs;
@@ -89,7 +90,7 @@ public class Move extends AbstractIRInstruction {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new Move(super.getBasicBlock(), lhs, lhsStar, rhs, rhsStar);
+    public AbstractIRInstruction partClone(Map<Register, Register> renameMap) {
+        return new Move(super.getBasicBlock(), rename(renameMap, lhs), lhsStar, rename(renameMap, rhs), rhsStar);
     }
 }

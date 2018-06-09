@@ -6,6 +6,7 @@ import Compiler2018.IR.IRValue.Register;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 // load effective address
 public class Lea extends AbstractIRInstruction {
@@ -78,8 +79,9 @@ public class Lea extends AbstractIRInstruction {
         return usedRegisterList;
     }
 
+
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new Lea(super.getBasicBlock(), destination, base, pos, offset);
+    public AbstractIRInstruction partClone(Map<Register, Register> renameMap) {
+        return new Lea(super.getBasicBlock(), rename(renameMap, destination), rename(renameMap, base), rename(renameMap, pos), offset);
     }
 }

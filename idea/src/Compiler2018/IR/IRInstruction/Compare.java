@@ -6,6 +6,7 @@ import Compiler2018.IR.IRValue.Register;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Compare extends AbstractIRInstruction {
     public enum CompareOp {
@@ -92,6 +93,11 @@ public class Compare extends AbstractIRInstruction {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return new Compare(super.getBasicBlock(), oprator, leftOperand, leftStar, rightOperand, rightStar);
+        return new Compare(super.getBasicBlock(), oprator, ((Register) leftOperand.clone()), leftStar, ((Register) rightOperand.clone()), rightStar);
+    }
+
+    @Override
+    public AbstractIRInstruction partClone(Map<Register, Register> renameMap) {
+        return new Compare(super.getBasicBlock(), oprator, rename(renameMap, leftOperand), leftStar, rename(renameMap, rightOperand), rightStar);
     }
 }

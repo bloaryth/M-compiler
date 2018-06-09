@@ -4,7 +4,11 @@ import Compiler2018.IR.IRInstruction.*;
 import Compiler2018.IR.IRStructure.*;
 import Compiler2018.IR.IRValue.Register;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import static Compiler2018.IR.IRInstruction.AbstractIRInstruction.rename;
 
 public class SimpleInliner implements IIRVistor {
 //
@@ -14,7 +18,7 @@ public class SimpleInliner implements IIRVistor {
 //        this.irProgram = irProgram;
 //    }
 
-//    private Map<Register, Register> makeReplaceMap(List<Register> callerRegList, List<Register> calleRegList) {
+    //    private Map<Register, Register> makeReplaceMap(List<Register> callerRegList, List<Register> calleRegList) {
 //        Map<Register, Register> replaceMap = new LinkedHashMap<>();
 //        for (int i = 0; i < calleRegList.size(); ++i) {
 //            replaceMap.put(calleRegList.get(i), calleRegList.get(i));
@@ -36,22 +40,29 @@ public class SimpleInliner implements IIRVistor {
 //        return true;
 //    }
 
-    private void simpleMove(BasicBlock insertedBlock, BasicBlock newBlock, List<Register> callerRegList, List<Register> calleRegList) {
+    private void simpleMove(BasicBlock insertedBlock, BasicBlock newBlock, List<Register> callerRegList, List<Register> calleRegList, Map<Register, Register> renameTable) {
         for (int i = 0; i < calleRegList.size(); ++i) {
-            newBlock.addTail(new Move(insertedBlock, callerRegList.get(i), false, calleRegList.get(i), false));
+            if (calleRegList.get(i) == null | callerRegList.get(i) == null) {
+                throw new RuntimeException();
+            }
+            try {
+                newBlock.addTail(new Move(newBlock,  rename(renameTable, calleRegList.get(i)), false, callerRegList.get(i), false));
+            } catch (Exception e){
+                System.err.println("clone error");
+            }
         }
     }
 
-    private Ret findSimpleRet(BasicBlock calleeBlock) {
-        BasicBlock.Iter iter = new BasicBlock.Iter(calleeBlock);
-        while (iter.hasNext()) {
-            AbstractIRInstruction inst = iter.next();
-            if (inst instanceof Ret) {
-                return ((Ret) inst);
-            }
-        }
-        throw new RuntimeException();
-    }
+//    private Ret findSimpleRet(BasicBlock calleeBlock) {
+//        BasicBlock.Iter iter = new BasicBlock.Iter(calleeBlock);
+//        while (iter.hasNext()) {
+//            AbstractIRInstruction inst = iter.next();
+//            if (inst instanceof Ret) {
+//                return ((Ret) inst);
+//            }
+//        }
+//        throw new RuntimeException();
+//    }
 
     @Override
     public void visit(IRProgram irProgram) {
@@ -120,6 +131,7 @@ public class SimpleInliner implements IIRVistor {
                 return;
         }
         IRFunction calleeFunc = irProgram.getIRFunction(ir.getProcessedName());
+        Map<Register, Register> renameTable = new LinkedHashMap<>();
         if (calleeFunc.getBasicBlockSet().size() != 1) {
             return;
         }
@@ -134,7 +146,7 @@ public class SimpleInliner implements IIRVistor {
         BasicBlock newBlock = new BasicBlock(null, null);
         BasicBlock insertedBlock = ir.getBasicBlock();
 
-        simpleMove(insertedBlock, newBlock, callerRegList, calleeRegList);
+        simpleMove(insertedBlock, newBlock, callerRegList, calleeRegList, renameTable);
         insertedBlock.remove(ir);
 
         Ret calleeRet = null;
@@ -146,16 +158,16 @@ public class SimpleInliner implements IIRVistor {
                 break;
             }
             try {
-                AbstractIRInstruction newInst = (AbstractIRInstruction) inst.clone();
-                newInst.setBasicBlock(insertedBlock);
+                AbstractIRInstruction newInst = inst.partClone(renameTable);
+                newInst.setBasicBlock(newBlock);
                 newBlock.addTail(newInst);
             }catch (Exception e){
                 System.err.println("clone failed");
                 System.err.println(inst.toIRString());
             }
         }
-        if (calleeRet.getRet() != null) {
-            AbstractIRInstruction move = new Move(insertedBlock, ir.getRet(), false, calleeRet.getRet(), false);
+        if (ir.getRet() != null) {
+            AbstractIRInstruction move = new Move(newBlock, ir.getRet(), false, rename(renameTable, calleeRet.getRet()), false);
             newBlock.addTail(move);
         }
 

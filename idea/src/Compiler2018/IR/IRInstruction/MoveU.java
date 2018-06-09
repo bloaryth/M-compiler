@@ -6,6 +6,7 @@ import Compiler2018.IR.IRValue.AbstractValue;
 import Compiler2018.IR.IRValue.Register;
 
 import java.util.List;
+import java.util.Map;
 
 // into register
 public class MoveU extends AbstractIRInstruction{
@@ -51,7 +52,7 @@ public class MoveU extends AbstractIRInstruction{
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new MoveU(super.getBasicBlock(), lhs, rhs);
+    public AbstractIRInstruction partClone(Map<Register, Register> renameMap) {
+        return new MoveU(super.getBasicBlock(), rename(renameMap, lhs), rhs);
     }
 }

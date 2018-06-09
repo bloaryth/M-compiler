@@ -5,6 +5,7 @@ import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.Register;
 
 import java.util.List;
+import java.util.Map;
 
 public class CSet extends AbstractIRInstruction {
     private final Compare.CompareOp op;
@@ -54,6 +55,11 @@ public class CSet extends AbstractIRInstruction {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return new CSet(super.getBasicBlock(), op, dest, star);
+        return new CSet(super.getBasicBlock(), op, ((Register) dest.clone()), star);
+    }
+
+    @Override
+    public AbstractIRInstruction partClone(Map<Register, Register> renameMap) {
+        return new CSet(super.getBasicBlock(), op, rename(renameMap, dest), star);
     }
 }

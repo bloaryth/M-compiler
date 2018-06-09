@@ -6,6 +6,7 @@ import Compiler2018.IR.IRValue.Register;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Ret extends AbstractIRInstruction {
     private final Register ret; // ret addr
@@ -49,6 +50,11 @@ public class Ret extends AbstractIRInstruction {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return new Ret(super.getBasicBlock(), ret);
+        return new Ret(super.getBasicBlock(), ((Register) ret.clone()));
+    }
+
+    @Override
+    public AbstractIRInstruction partClone(Map<Register, Register> renameMap) {
+        return new Ret(super.getBasicBlock(), rename(renameMap, ret));
     }
 }

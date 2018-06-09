@@ -6,6 +6,7 @@ import Compiler2018.IR.IRValue.Register;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Call extends AbstractIRInstruction {
     private final String processedName;
@@ -102,6 +103,19 @@ public class Call extends AbstractIRInstruction {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return new Call(super.getBasicBlock(), processedName, ret, args);
+        List<Register> newArgs = new LinkedList<>();
+        for (Register register : args) {
+            newArgs.add(((Register) register.clone()));
+        }
+        return new Call(super.getBasicBlock(), processedName, ((Register) ret.clone()), newArgs);
+    }
+
+    @Override
+    public AbstractIRInstruction partClone(Map<Register, Register> renameMap) {
+        List<Register> newArgs = new LinkedList<>();
+        for (Register register : args) {
+            newArgs.add(rename(renameMap, register));
+        }
+        return new Call(super.getBasicBlock(), processedName, rename(renameMap, ret), newArgs);
     }
 }

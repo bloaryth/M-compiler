@@ -6,6 +6,7 @@ import Compiler2018.IR.IRValue.Register;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class SelfInc extends AbstractIRInstruction{
     private final Register dest;
@@ -65,7 +66,7 @@ public class SelfInc extends AbstractIRInstruction{
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new SelfInc(super.getBasicBlock(), dest, star, inc);
+    public AbstractIRInstruction partClone(Map<Register, Register> renameMap) {
+        return new SelfInc(super.getBasicBlock(), rename(renameMap, dest), star, inc);
     }
 }

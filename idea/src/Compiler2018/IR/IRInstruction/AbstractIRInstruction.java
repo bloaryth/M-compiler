@@ -5,6 +5,7 @@ import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.Register;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class AbstractIRInstruction {
@@ -124,8 +125,25 @@ public abstract class AbstractIRInstruction {
         }
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return null;
+//    @Override
+//    public Object clone() throws CloneNotSupportedException {
+//        return null;
+//    }
+
+    abstract public AbstractIRInstruction partClone(Map<Register, Register> renameMap);
+
+    public static Register rename(Map<Register, Register> renameMap, Register oldReg){
+        if (renameMap.containsKey(oldReg)) {
+            return renameMap.get(oldReg);
+        } else {
+            Register newReg = null;
+            try {
+                newReg = ((Register) oldReg.clone());
+            } catch (Exception e){
+                System.err.println("clone error" + oldReg);
+            }
+            renameMap.put(oldReg, newReg);
+            return newReg;
+        }
     }
 }

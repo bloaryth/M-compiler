@@ -68,6 +68,9 @@ public class LivenessAnalysis implements IIRVistor{
                     if (usedRegisterList != null) {
                         inSet.addAll(usedRegisterList);
                     }
+                    if (inst.getLiveInSet() == null) {
+                        throw new RuntimeException();
+                    }
                     if (!inst.getLiveInSet().equals(inSet) || !inst.getLiveOutSet().equals(outSet)) {
                         changed = true;
                         inst.getLiveInSet().clear();

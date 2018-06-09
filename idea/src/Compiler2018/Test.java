@@ -157,10 +157,16 @@ public class Test {
             program.accept(irFuncParamBuilder);
             program.accept(irInstructionBuilder);
 
+            IRPrinter irPrinter = new IRPrinter();
+            irProgram.accept(irPrinter);
+
+            System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+
             // Inliner
             SimpleInliner simpleInliner = new SimpleInliner();
             irProgram.accept(simpleInliner);
 
+            irProgram.accept(irPrinter);
 
             // Liveness Analysis
             LivenessAnalysis livenessAnalysis = new LivenessAnalysis(irProgram);
@@ -169,9 +175,8 @@ public class Test {
             irProgram.accept(confictGraphBuilder);
 
             // Code Generation
-            IRPrinter irPrinter = new IRPrinter();
+//            IRPrinter irPrinter = new IRPrinter();
             RegisterOffsetResolver registerOffsetResolver = new RegisterOffsetResolver();
-            irProgram.accept(irPrinter);
             irProgram.accept(registerOffsetResolver);
 
             // Register Allocation

@@ -6,6 +6,7 @@ import Compiler2018.IR.IRValue.Register;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class UnaryCalc extends AbstractIRInstruction{
     public enum UnaryOp {
@@ -73,7 +74,7 @@ public class UnaryCalc extends AbstractIRInstruction{
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new UnaryCalc(super.getBasicBlock(), oprator, destination, operand, star);
+    public AbstractIRInstruction partClone(Map<Register, Register> renameMap) {
+        return new UnaryCalc(super.getBasicBlock(), oprator, rename(renameMap, destination), rename(renameMap, operand), star);
     }
 }

@@ -6,6 +6,7 @@ import Compiler2018.IR.IRValue.Register;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class BinaryCalc extends AbstractIRInstruction {
     public enum BinaryOp{
@@ -93,8 +94,7 @@ public class BinaryCalc extends AbstractIRInstruction {
         return usedRegisterList;
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new BinaryCalc(super.getBasicBlock(), oprator, destination, leftOperand, leftStar, rightOperand, rightStar);
+    public BinaryCalc partClone(Map<Register, Register> renameMap) {
+        return new BinaryCalc(super.getBasicBlock(), oprator, rename(renameMap, destination), rename(renameMap, leftOperand), leftStar, rename(renameMap, rightOperand), rightStar);
     }
 }

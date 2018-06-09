@@ -5,6 +5,7 @@ import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.Register;
 
 import java.util.List;
+import java.util.Map;
 
 public class Jump extends AbstractIRInstruction {
     private final BasicBlock jumpBlock;
@@ -39,7 +40,7 @@ public class Jump extends AbstractIRInstruction {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public AbstractIRInstruction partClone(Map<Register, Register> renameMap) {
         return new Jump(super.getBasicBlock(), jumpBlock);
     }
 }

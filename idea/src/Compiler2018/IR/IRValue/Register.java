@@ -79,4 +79,14 @@ public class Register extends AbstractValue {
     public Set<Register> getConflictRegisterSet() {
         return conflictRegisterSet;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Register();
+    }
+
+//    static public rename(Map<Register, Register> registerMap, Register oldReg) {
+//
+//    }
+
 }

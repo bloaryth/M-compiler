@@ -5,6 +5,7 @@ import Compiler2018.IR.IRStructure.BasicBlock;
 import Compiler2018.IR.IRValue.Register;
 
 import java.util.List;
+import java.util.Map;
 
 public class Branch extends AbstractIRInstruction {
     private final Compare cond;
@@ -58,6 +59,10 @@ public class Branch extends AbstractIRInstruction {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
+        return new Branch(super.getBasicBlock(), cond, ifTrue, ifFalse);
+    }
+
+    public Branch partClone(Map<Register, Register> renameMap) {
         return new Branch(super.getBasicBlock(), cond, ifTrue, ifFalse);
     }
 }

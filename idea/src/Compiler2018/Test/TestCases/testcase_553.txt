@@ -30,6 +30,7 @@ void put(int key, int data) {
 	}
 	ptr.data = data;
 }
+
 int get(int key) {
 	node ptr = null;
 	ptr = table[getHash(key)];
@@ -38,6 +39,7 @@ int get(int key) {
 	}
 	return ptr.data;
 }
+
 int main() {
 	int i;
 	table = new node[100];
