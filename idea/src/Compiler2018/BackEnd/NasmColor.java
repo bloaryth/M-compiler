@@ -16,15 +16,15 @@ import static Compiler2018.IR.IRValue.Register.PysicalRegister.*;
 public class NasmColor implements IIRVistor {
     private boolean debug = false;
 
-    private Register.PysicalRegister destPreserved = Register.PysicalRegister.R12;
     private Map<Register.PysicalRegister, Register> registerUseMap = new LinkedHashMap<>();
     public StringBuilder builder = new StringBuilder();
 
     private Integer currentRSP;
     private boolean globalVar;
-//    private Register.PysicalRegister immediatePreserved = Register.PysicalRegister.R13;
-    private Register.PysicalRegister leftOpPreserved = Register.PysicalRegister.R14;
-    private Register.PysicalRegister rightOpPreserved = Register.PysicalRegister.R15;    // conhere with coloring
+    private Register.PysicalRegister destPreserved = Register.PysicalRegister.RDX;
+    //    private Register.PysicalRegister immediatePreserved = Register.PysicalRegister.R13;
+    private Register.PysicalRegister leftOpPreserved = Register.PysicalRegister.RAX;
+    private Register.PysicalRegister rightOpPreserved = Register.PysicalRegister.RCX;    // conhere with coloring
 
     public StringBuilder getBuilder() {
         return builder;
@@ -853,17 +853,17 @@ public class NasmColor implements IIRVistor {
         push(R9);
         push(R10);
         push(R11);
-//        push(R12);
+        push(R12);
         push(R13);
-//        push(R14);
-//        push(R15);
+        push(R14);
+        push(R15);
     }
 
     private void restoreCaller(){
-//        pop(R15);
-//        pop(R14);
+        pop(R15);
+        pop(R14);
         pop(R13);
-//        pop(R12);
+        pop(R12);
         pop(R11);
         pop(R10);
         pop(R9);

@@ -1379,180 +1379,386 @@ SECTION .text
 main:
 	push rbp
 	mov rbp, rsp
-	sub rsp, 336
+	sub rsp, 504
 _main.entry.0:
 	mov rbx, 5
 
 
-	mov rsi, 0
+	mov rsi, 10
 
 
-	mov rdi, 0
-
-	cmp rsi, rdi
-
-	mov rdi, 0
-	setne dil
-
-	mov r8, 1
-
-	cmp rdi, r8
-
-	je and_lhs_true.9
-	jne Init_false.8
-
-Init_true.7:
 	mov rdi, 1
 
-	jmp Init_merge.10
+	mov r8, 1
 
-Init_false.8:
-	mov rdi, 0
+	push rbx
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	push r13
+	mov	qword [rbp - 48], r8
+	mov	rdi, qword [rbp - 48]
+	call _malloc
+	pop r13
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	pop rbx
+	mov r8, rax
 
-	jmp Init_merge.10
+	mov r9, r8
 
-and_lhs_true.9:
-	mov rax, rbx
-	cqo
-	idiv rsi
+	mov qword [r9], rdi
+
+	add r9, 8
+
+	mov qword [r9], rsi
+
+	push rbx
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	push r13
+	mov	qword [rbp - 56], r8
+	mov	rdi, qword [rbp - 56]
+	call newArray
+	pop r13
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	pop rbx
 	mov rdi, rax
 
-	mov r8, 1
 
-	cmp rdi, r8
-
-	mov rdi, 0
-	setne dil
-
-	mov r8, 1
-
-	cmp rdi, r8
-
-	je Init_true.7
-	jne Init_false.8
-
-Init_merge.10:
-
-	mov r8, 1
-
-	cmp r8, rdi
-
-	je if_true.11
-	jne if_false.12
-
-if_true.11:
-	mov rdi, 10
-
-
-	jmp if_merge.13
-
-if_false.12:
-	mov rdi, 20
-
-
-	jmp if_merge.13
-
-if_merge.13:
-	mov r8, 10
-
-	cmp rdi, r8
-
-	mov r8, 0
-	sete r8b
+	mov r8, 2
 
 	mov r9, 1
 
-	cmp r8, r9
+	mov r10, 1
 
-	je and_lhs_true.23
-	jne Assign_true.20
+	push rbx
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	push r13
+	mov	qword [rbp - 104], r10
+	mov	rdi, qword [rbp - 104]
+	call _malloc
+	pop r13
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	pop rbx
+	mov r10, rax
 
-Assign_true.20:
-	mov rsi, 0
+	mov r11, r10
 
-	mov rbx, 0
+	mov qword [r11], r9
 
-	mov rsi, 1
+	add r11, 8
 
-	xor rbx, rsi
+	mov qword [r11], r8
 
-	jmp Ret_merge.24
-
-Assign_false.21:
-	mov rbx, 1
-
-	mov rsi, 1
-
-	xor rbx, rsi
-
-	jmp Ret_merge.24
-
-and_lhs_true.23:
-	mov rax, rbx
-	cqo
-	idiv rsi
+	push rbx
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	push r13
+	mov	qword [rbp - 112], r10
+	mov	rdi, qword [rbp - 112]
+	call newArray
+	pop r13
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	pop rbx
 	mov r8, rax
 
-	mov rsi, 0
 
-	cmp r8, rsi
+	mov r9, 1
 
-	mov rsi, 0
-	sete sil
+	mov r10, 1
 
-	mov r8, 1
+	push rbx
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	push r13
+	mov	qword [rbp - 152], r10
+	mov	rdi, qword [rbp - 152]
+	call _malloc
+	pop r13
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	pop rbx
+	mov r10, rax
 
-	cmp rsi, r8
+	mov r11, r10
 
-	je and_lhs_true.22
-	jne Assign_true.20
+	mov qword [r11], r9
 
-	mov r8, 1
+	add r11, 8
 
-	cmp rsi, r8
+	mov qword [r11], rbx
 
-	je and_lhs_true.22
-	jne Assign_true.20
+	push rbx
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	push r13
+	mov	qword [rbp - 160], r10
+	mov	rdi, qword [rbp - 160]
+	call newArray
+	pop r13
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	pop rbx
+	mov r9, rax
 
-and_lhs_true.22:
-	mov rsi, 1
 
-	mov rsi, 5
+	mov r10, 0
 
-	cmp rbx, rsi
+	lea r10, [r8 + r10*8  + 8]
+
+	mov qword [r10], r9
+
+	mov r10, 1
+
+	lea r10, [r8 + r10*8  + 8]
+
+	mov qword [r10], rdi
+
+	mov r10, 0
+
+
+	mov r11, 0
+
+
+	jmp for_cond.23
+
+for_cond.23:
+	mov r13, 2
+
+	cmp r11, r13
+
+	mov r13, 0
+	setl r13b
+
+	mov rdx, 1
+	mov	qword [rbp - 272], rdx
+
+	mov	rax, qword [rbp - 272]
+	cmp rax, r13
+
+	je for_loop.24
+	jne for_after.26
+
+for_loop.24:
+	mov r13, 0
+
+
+	jmp for_cond.29
+
+for_cond.29:
+	cmp r13, rbx
+
+	mov rdx, 0
+	setl dl
+	mov	qword [rbp - 296], rdx
+
+	mov rdx, 1
+	mov	qword [rbp - 304], rdx
+
+	mov	rax, qword [rbp - 304]
+	mov	rcx, qword [rbp - 296]
+	cmp rax, rcx
+
+	je for_loop.30
+	jne for_after.32
+
+for_loop.30:
+	add r10, 1
+
+	lea rdx, [r8 + r11*8  + 8]
+	mov	qword [rbp - 312], rdx
+
+	mov	rax, qword [rbp - 312]
+	mov rdx, qword [rax]
+	mov	qword [rbp - 312], rax
+	mov	qword [rbp - 320], rdx
+
+	mov	rax, qword [rbp - 320]
+	lea rdx, [rax + r13*8  + 8]
+	mov	qword [rbp - 328], rdx
+
+	mov	rdx, qword [rbp - 328]
+	mov qword [rdx], r10
+	mov	qword [rbp - 328], rdx
+
+	jmp for_step.31
+
+for_step.31:
+	add r13, 1
+
+	jmp for_cond.29
+
+for_after.32:
+	jmp for_step.25
+
+for_step.25:
+	add r11, 1
+
+	jmp for_cond.23
+
+for_after.26:
+	mov r13, rbx
+
+	jmp for_cond.37
+
+for_cond.37:
+	cmp r13, rsi
+
+	mov r11, 0
+	setl r11b
+
+	mov rdx, 1
+	mov	qword [rbp - 344], rdx
+
+	mov	rax, qword [rbp - 344]
+	cmp rax, r11
+
+	je for_loop.38
+	jne for_after.40
+
+for_loop.38:
+	add r10, 1
+
+	mov r11, 1
+
+	lea r11, [r8 + r11*8  + 8]
+
+	mov r11, qword [r11]
+
+	lea r11, [r11 + r13*8  + 8]
+
+	mov qword [r11], r10
+
+	jmp for_step.39
+
+for_step.39:
+	add r13, 1
+
+	jmp for_cond.37
+
+for_after.40:
+	mov r8, 0
+
+
+	mov r10, 0
+
+	mov r11, r10
+
+	jmp for_cond.47
+
+for_cond.47:
+	cmp r11, rbx
+
+	mov r10, 0
+	setl r10b
+
+	mov r13, 1
+
+	cmp r13, r10
+
+	je for_loop.48
+	jne for_after.50
+
+for_loop.48:
+	lea r10, [r9 + r11*8  + 8]
+
+	add r8, qword [r10]
+
+
+	jmp for_step.49
+
+for_step.49:
+	add r11, 1
+
+	jmp for_cond.47
+
+for_after.50:
+	mov rbx, 0
+
+	mov r11, rbx
+
+	jmp for_cond.55
+
+for_cond.55:
+	cmp r11, rsi
 
 	mov rbx, 0
-	sete bl
+	setl bl
 
-	mov rsi, 1
+	mov r9, 1
 
-	cmp rbx, rsi
+	cmp r9, rbx
 
-	je Assign_false.21
-	jne Assign_true.20
+	je for_loop.56
+	jne for_after.58
 
-	mov rsi, 1
+for_loop.56:
+	lea rbx, [rdi + r11*8  + 8]
 
-	xor rbx, rsi
+	add r8, qword [rbx]
 
-Ret_merge.24:
 
-	mov rsi, 1
+	jmp for_step.57
 
-	cmp rsi, rbx
+for_step.57:
+	add r11, 1
 
-	je if_true.25
-	jne if_merge.26
+	jmp for_cond.55
 
-if_true.25:
-	mov rbx, 30
-
-	mov rdi, rbx
-
-	jmp if_merge.26
-
-if_merge.26:
-	mov rbx, rdi
+for_after.58:
+	mov rbx, r8
 
 	mov rax, rbx
 	leave
