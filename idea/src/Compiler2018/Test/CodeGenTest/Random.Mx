@@ -1,24 +1,55 @@
-//Compute and Crack SHA-1
-//by zzk
+// > 话说 有人写了跨语句的公共子表达式消除吗
+// < 你在说什么鬼话
+// < 为什么不写点性价比高的优化呢
 
-int hex2int(string x)
+int hilo(int hi, int lo)
+{
+	return lo | (hi << 16);
+}
+
+int shift_l(int x, int n)
+{
+	return (x << n) & hilo(65535, 65535);	// 0xffff ffff
+}
+
+int shift_r(int x, int n)
+{
+	int tmp = hilo(32767, 65535);	// 0x7fff ffff
+	tmp = ((tmp >> n) << 1) + 1;
+	tmp = tmp & (x >> n);
+	return tmp & hilo(65535, 65535);
+}
+
+int xorshift(int seed)
+{
+	int x = seed;
+
+	x = x ^ shift_l(x, 13);
+	x = x ^ shift_r(x, 17);
+	x = x ^ shift_l(x, 5);
+
+	return x;
+}
+
+int xorshift10(int seed)
 {
 	int i;
-	int result = 0;
-	for(i=0;i<x.length();i++)
-	{
-		int digit = x.ord(i);
-		if(digit >= 48 && digit <= 57)
-			result = result * 16 + digit - 48;
-		else if(digit >= 65 && digit <= 70)
-			result = result * 16 + digit - 65 + 10;
-		else if(digit >= 97 && digit <= 102)
-			result = result * 16 + digit - 97 + 10;
-		else
-			return 0;
-	}
-	return result;
+	int x = seed;
+
+	x = xorshift(x);
+	x = xorshift(x);
+	x = xorshift(x);
+	x = xorshift(x);
+	x = xorshift(x);
+	x = xorshift(x);
+	x = xorshift(x);
+	x = xorshift(x);
+	x = xorshift(x);
+	x = xorshift(x);
+
+	return x;
 }
+
 
 string asciiTable = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 string int2chr(int x)
@@ -27,6 +58,7 @@ string int2chr(int x)
 		return asciiTable.substring(x-32, x-32);
 	return "";
 }
+
 string toStringHex(int x)
 {
 	string ret = "";
@@ -41,260 +73,155 @@ string toStringHex(int x)
 	}
 	return ret;
 }
-int rotate_left(int x, int shift)
-{
-	if(shift == 1)
-		return ((x & 2147483647) << 1) | ((x >> 31) & 1);
-	if(shift == 31)
-		return ((x & 1) << 31) | ((x >> 1) & 2147483647);
-	return ((x & ((1 << (32-shift)) - 1)) << shift) | ((x >> (32-shift)) & ((1 << shift) - 1));
-}
-int add(int x, int y)	//to avoid possible undefined behaviour when overflow
-{
-	int low = (x & 65535) + (y & 65535);
-	int high = (((x >> 16) & 65535) + ((y >> 16) & 65535) + (low >> 16)) & 65535;
-	return (high << 16) | (low & 65535);
-}
-int lohi(int lo, int hi)
-{
-	return lo | (hi << 16);
-}
 
-int MAXCHUNK = 100;
-int MAXLENGTH = (MAXCHUNK-1) * 64 - 16;
-int[][] chunks = new int[MAXCHUNK][80];
-int[] inputBuffer = new int[MAXLENGTH];
-int[] outputBuffer = new int[5];
-int[] sha1(int[] input, int length)
+void assert(bool expression)
 {
-	int nChunk = (length + 64 - 56) / 64 + 1;
-	if(nChunk > MAXCHUNK)
-	{
-		println("nChunk > MAXCHUNK!");
-		return null;
-	}
-	int i;
-	int j;
-	for(i=0;i<nChunk;i++)
-		for(j=0;j<80;j++)
-			chunks[i][j] = 0;
-	for(i=0;i<length;i++)
-		chunks[i/64][i%64/4] = chunks[i/64][i%64/4] | (input[i] << ((3-i%4)*8));
-	chunks[i/64][i%64/4] = chunks[i/64][i%64/4] | (128 << ((3-i%4)*8));
-	chunks[nChunk-1][15] = length << 3;
-	chunks[nChunk-1][14] = (length >> 29) & 7;
-	
-	int h0 = 1732584193;  //0x67452301
-	int h1 = lohi(43913, 61389);  //0xEFCDAB89
-	int h2 = lohi(56574, 39098); //0x98BADCFE
-	int h3 = 271733878;   //0x10325476
-	int h4 = lohi(57840, 50130); //0xC3D2E1F0
-	for(i=0;i<nChunk;i++)
-	{
-		for(j=16;j<80;j++)
-			chunks[i][j] = rotate_left(chunks[i][j-3] ^ chunks[i][j-8] ^ chunks[i][j-14] ^ chunks[i][j-16], 1);
-		
-		int a = h0;
-		int b = h1;
-		int c = h2;
-		int d = h3;
-		int e = h4;
-		for(j=0;j<80;j++)
-		{
-			int f;
-			int k;
-			if(j<20)
-			{
-				f = (b & c) | ((~b) & d);
-				k = 1518500249; //0x5A827999
-			}
-			else if(j<40)
-			{
-				f = b ^ c ^ d;
-				k = 1859775393; //0x6ED9EBA1
-			}
-			else if(j<60)
-			{
-				f = (b & c) | (b & d) | (c & d);
-				k = lohi(48348, 36635); //0x8F1BBCDC
-			}
-			else
-			{
-				f = b ^ c ^ d;
-				k = lohi(49622, 51810); //0xCA62C1D6
-			}
-			int temp = add(add(add(rotate_left(a, 5), e), add(f, k)), chunks[i][j]);
-			e = d;
-			d = c;
-			c = rotate_left(b, 30);
-			b = a;
-			a = temp;
-		}
-		h0 = add(h0, a);
-		h1 = add(h1, b);
-		h2 = add(h2, c);
-		h3 = add(h3, d);
-		h4 = add(h4, e);
-	}
-	outputBuffer[0] = h0;
-	outputBuffer[1] = h1;
-	outputBuffer[2] = h2;
-	outputBuffer[3] = h3;
-	outputBuffer[4] = h4;
-	return outputBuffer;
-}
-
-void computeSHA1(string input)
-{
-	int i;
-	for(i=0; i<input.length(); i++)
-		inputBuffer[i] = input.ord(i);
-	int[] result = sha1(inputBuffer, input.length());
-	for(i=0; i<result.size(); i++)
-		print(toStringHex(result[i]));
-	println("");
-}
-
-int nextLetter(int now)
-{
-	if(now == 122) //'z'
-		return -1;
-	if(now == 90)  //'Z'
-		return 97; //'a'
-	if(now == 57)  //'9'
-		return 65;
-	return now + 1;
-}
-
-bool nextText(int[] now, int length)
-{
-	int i;
-	for(i=length-1; i>=0; i--)
-	{
-		now[i] = nextLetter(now[i]);
-		if(now[i] == -1)
-			now[i] = 48;	//'0'
-		else
-			return true;
-	}
-	return false;
-}
-
-bool array_equal(int[] a, int[] b)
-{
-	if(a.size() != b.size())
-		return false;
-	int i;
-	for(i=0; i<a.size(); i++)
-		if(a[i] != b[i])
-			return false;
-	return true;
-}
-
-void crackSHA1(string input)
-{
-	int[] target = new int[5];
-	if(input.length() != 40)
-	{
-		println("Invalid input");
-		return;
-	}
-	int i;
-	for(i=0;i<5;i++)
-		target[i] = 0;
-	for(i=0;i<40;i=i+4)
-		target[i/8] = target[i/8] | (hex2int(input.substring(i, i+3)) << (1 - (i / 4) % 2) * 16);
-		
-	int MAXDIGIT = 4;
-	int digit;
-	for(digit=1; digit <= MAXDIGIT; digit++)
-	{
-		for(i=0;i<digit;i++)
-			inputBuffer[i] = 48;
-		while(true)
-		{
-			int[] out = sha1(inputBuffer, digit);
-			if(array_equal(out, target))
-			{
-				for(i=0;i<digit;i++)
-					print(int2chr(inputBuffer[i]));
-				println("");
-				return;
-			}
-			if(!nextText(inputBuffer, digit))
-				break;
-		}
-	}
-	println("Not Found!");
+	if(!expression)
+		println("Assertion Failed!");
 }
 
 int main()
 {
-	int op;
-	string input;
-	while(true)
+	int seed;
+	int l; int r;
+	int P;
+
+	seed = getInt();
+	l = getInt();
+	r = getInt();
+	P = getInt();
+
+	int i;
+	seed = xorshift10(seed + 1);
+
+	int INT_MAX = hilo(32767, 65535);
+
+	int r1 = 0; int r2 = 0; int r3 = 0; int r4 = 0;
+	int d = 0;
+
+	for(i=l; i<r; i++)
 	{
-		op = getInt();
-		if(op == 0)
-			break;
-		if(op == 1)
-		{
-			input = getString();
-			computeSHA1(input);
-		}
-		else if(op == 2)
-		{
-			input = getString();
-			crackSHA1(input);
-		}
+		int v1; int v2; int v3; int v4; int v5; int v6;
+		seed = xorshift(seed); v1 = seed & INT_MAX;
+		seed = xorshift(seed); v2 = seed & INT_MAX;
+		seed = xorshift(seed); v3 = seed & INT_MAX;
+		seed = xorshift(seed); v4 = seed & INT_MAX;
+		seed = xorshift(seed); v5 = seed & INT_MAX;
+		seed = xorshift(seed); v6 = seed & INT_MAX;
+
+		////////////////////////////////////////
+
+		int a1 = v1 ^ v2 ^ v3;
+		a1 = a1 ^ (v4 ^ v5 ^ v6);
+		a1 = a1 & INT_MAX;
+
+		int a2 = v1 + v2 + v3 + 1;
+		a2 = a2 - (v4 + v5 + v6);
+		a2 = a2 & INT_MAX;
+
+		int a3 = (v1 % P) * (v2 % P) * (v3 % P);
+		a3 = a3 * (v4 % P) * (v5 % P) * (v6 % P);
+		a3 = a3 & INT_MAX;
+
+		int a4;
+		if((v1 ^ v2 ^ v3) > (v4 ^ v5 ^ v6))
+			a4 = (((v1 + v2) & INT_MAX) % P) % (v3 % P + 1);
+		else
+			a4 = (((v3 + v2) & INT_MAX) % P) % (v1 % P + 1);
+
+		r1 = r1 + xorshift10(a1 ^ 10001);
+		r2 = r2 + xorshift10(a2 ^ 10002);
+		r3 = r3 + xorshift10(a3 ^ 10003);
+		r4 = r4 + xorshift10(a4 ^ 10004);
+
+		////////////////////////////////////////
+
+		int b1 = v4 ^ v2 ^ v3;
+		b1 = b1 ^ v1 ^ v6 ^ v5;
+		b1 = b1 & INT_MAX;
+
+		int b2 = -v4 + v2 + v3;
+		b2 = b2 + v1 - v6 - v5 + 1;
+		b2 = b2 & INT_MAX;
+
+		int b3 = (v4 % P) * (v2 % P) * (v3 % P);
+		b3 = b3 * (v1 % P) * (v6 % P) * (v5 % P);
+		b3 = b3 & INT_MAX;
+
+		int b4;
+		if((v1 ^ v2 ^ v3) <= (v4 ^ v5 ^ v6))
+			b4 = (((v3 + v2) & INT_MAX) % P) % (v1 % P + 1);
+		else
+			b4 = (((v1 + v2) & INT_MAX) % P) % (v3 % P + 1);
+
+		r1 = r1 + xorshift10(b1 ^ 10001);
+		r2 = r2 + xorshift10(b2 ^ 10002);
+		r3 = r3 + xorshift10(b3 ^ 10003);
+		r4 = r4 + xorshift10(b4 ^ 10004);
+
+		//assert(a1 == b1 && a2 == b2 && a3 == b3 && a4 == b4);
+
+		////////////////////////////////////////
+
+		int c1 = v4 ^ v1 ^ v3;
+		c1 = c1 ^ v2 ^ v6 ^ v5;
+		c1 = c1 & INT_MAX;
+
+		int c2 = v4 - v2 + (-v3);
+		c2 = c2 - v1 + v6 + v5 - 1;
+		c2 = (-c2) & INT_MAX;
+
+		int c3 = (v4 % P) * (v5 % P) * (v6 % P);
+		c3 = c3 * (v1 % P) * (v2 % P) * (v3 % P);
+		c3 = c3 & INT_MAX;
+
+		int c4;
+		if((v4 ^ v5 ^ v6) < (v3 ^ v2 ^ v1))
+			c4 = (((v1 + v2) & INT_MAX) % P) % (v3 % P + 1);
+		else
+			c4 = (((v3 + v2) & INT_MAX) % P) % (v1 % P + 1);
+
+		r1 = r1 + xorshift10(c1 ^ 10001);
+		r2 = r2 + xorshift10(c2 ^ 10002);
+		r3 = r3 + xorshift10(c3 ^ 10003);
+		r4 = r4 + xorshift10(c4 ^ 10004);
+
+		//assert(a1 == c1 && a2 == c2 && a3 == c3 && a4 == c4);
+
+		// println("a1=" + toString(a1) + ", a2=" + toString(a2) + ", a3=" + toString(a3) + ", a4=" + toString(a4));
+		// println("b1=" + toString(b1) + ", b2=" + toString(b2) + ", b3=" + toString(b3) + ", b4=" + toString(b4));
+		// println("c1=" + toString(c1) + ", c2=" + toString(c2) + ", c3=" + toString(c3) + ", c4=" + toString(c4));
+
 	}
+
+	print(toStringHex(r1) + " ");
+	print(toStringHex(r2) + " ");
+	print(toStringHex(r3) + " ");
+	print(toStringHex(r4) + " ");
+	println("");
+
 	return 0;
 }
 
 /*!! metadata:
 === comment ===
-sha-515030910628-zhangzhekai.txt Compute and Crack SHA-1
+ Testcase for Common Subexpression Elimination (Global Value Numbering is recommended)
 === is_public ===
 True
 === assert ===
 output
 === timeout ===
-7.0
+10.0
 === input ===
-1
-ACM
-1
-acm2015
-1
-compiler2017
-1
-optim-extended
-1
-SJTU
-1
-2017
-2
-ABC64A57029F21F165A96BDB59F0351C7C7D1769
-2
-04E8696E6424C21D717E46008780505D598EB59A
-2
-52fdb9f68c503e11d168fe52035901864c0a4861
-2
-cd3f0c85b158c08a2b113464991810cf2cdfc387
-0
+10086
+0 3000000
+65537
+
 === phase ===
-optim pretest
+optim extended
 === output ===
-ABC64A57029F21F165A96BDB59F0351C7C7D1769
-5B38674EB4BD02CEC1D41C8DE3CC14A9872A2656
-082178164865B8E6425C5955DEB97DDC21DEC6DC
-E77812CE4574964BC144E3DB97953235B5A149DA
-BD1B591F0B3E8FCC2035F9FB2043FAB18E0DBDDA
-04E8696E6424C21D717E46008780505D598EB59A
-ACM
-2017
-233
-666
+D008B9F5 A2899DA6 BEEF7FEA EF74C135
+
 === exitcode ===
 0
 

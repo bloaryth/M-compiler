@@ -4,15 +4,15 @@ import Compiler2018.IR.IRInstruction.*;
 import Compiler2018.IR.IRStructure.*;
 import Compiler2018.IR.IRValue.Register;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class GreedyAllocator implements IIRVistor{
     private IRFunction currentFunction;
     private Set<Register.PysicalRegister> allReg = new LinkedHashSet<>();
     private Set<Register.PysicalRegister> calleeReg = new LinkedHashSet<>();
     private List<Register> parameterList;
+
+    private Integer counter = 0;
 
     void color(Register register){
         if (parameterList.contains(register)) {
@@ -31,6 +31,7 @@ public class GreedyAllocator implements IIRVistor{
                     }
                     register.setAllocatedRegister(reg);
                     register.setAllocated(true);
+                    ++counter;
                     break;
                 }
             }
@@ -90,13 +91,17 @@ public class GreedyAllocator implements IIRVistor{
     public void visit(IRProgram irProgram) {
         init();
         irProgram.getIrFunctionMap().forEach((x, y) -> y.accept(this));
+        System.err.println(counter + " allocated");
     }
 
     @Override
     public void visit(IRFunction irFunction) {
         currentFunction = irFunction;
         parameterList = irFunction.getParameterList();
-        irFunction.getStackOffsetMap().forEach((x, y) -> color(x)); // need resolver
+        List<Register> order = new LinkedList<>();
+        irFunction.getStackOffsetMap().forEach((x, y) -> order.add(x)); // need resolver
+        Collections.shuffle(order);
+        order.forEach(this::color);
         parameterList = null;
         currentFunction = null;
     }

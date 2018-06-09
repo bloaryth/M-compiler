@@ -158,15 +158,15 @@ public class Test {
             program.accept(irInstructionBuilder);
 
             IRPrinter irPrinter = new IRPrinter();
-            irProgram.accept(irPrinter);
+//            irProgram.accept(irPrinter);
 
-            System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+//            System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
 
             // Inliner
             SimpleInliner simpleInliner = new SimpleInliner();
             irProgram.accept(simpleInliner);
 
-            irProgram.accept(irPrinter);
+//            irProgram.accept(irPrinter);
 
             // Liveness Analysis
             LivenessAnalysis livenessAnalysis = new LivenessAnalysis(irProgram);
