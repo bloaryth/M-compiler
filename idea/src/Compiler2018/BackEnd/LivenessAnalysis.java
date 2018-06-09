@@ -36,8 +36,8 @@ public class LivenessAnalysis implements IIRVistor{
 
     @Override
     public void visit(IRFunction irFunction) {
-//        List<BasicBlock> basicBlockList = irFunction.getReversePreOrder();
-        Set<BasicBlock> basicBlockList = irFunction.getBasicBlockSet();
+        List<BasicBlock> basicBlockList = irFunction.getReversePreOrder();
+//        Set<BasicBlock> basicBlockList = irFunction.getBasicBlockSet();
         basicBlockList.forEach(this::initBlock);
 
         Set<Register> inSet = new LinkedHashSet<>();

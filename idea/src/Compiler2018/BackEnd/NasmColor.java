@@ -848,20 +848,20 @@ public class NasmColor implements IIRVistor {
         }
     }
 
-    private Register.PysicalRegister temporary(Register.PysicalRegister register) {
-        switch (register) {
-            case RDI:
-                return RAX;
-            case RSI:
-                return R10;
-            case R8:
-                return R11;
-            case R9:
-                return RCX;
-            default:
-                throw new RuntimeException();
-        }
-    }
+//    private Register.PysicalRegister temporary(Register.PysicalRegister register) {
+//        switch (register) {
+//            case RDI:
+//                return RAX;
+//            case RSI:
+//                return R10;
+//            case R8:
+//                return R11;
+//            case R9:
+//                return RCX;
+//            default:
+//                throw new RuntimeException();
+//        }
+//    }
 
     private void leaveCallParameter(List<Register> registerList) {
         for (int i = registerList.size()-1; i > 6; i--) {
@@ -906,17 +906,17 @@ public class NasmColor implements IIRVistor {
         push(R9);
         push(R10);
         push(R11);
-//        push(R12);
-//        push(R13);
-//        push(R14);
-//        push(R15);
+        push(R12);
+        push(R13);
+        push(R14);
+        push(R15);
     }
 
     private void restoreCaller(){
-//        pop(R15);
-//        pop(R14);
-//        pop(R13);
-//        pop(R12);
+        pop(R15);
+        pop(R14);
+        pop(R13);
+        pop(R12);
         pop(R11);
         pop(R10);
         pop(R9);

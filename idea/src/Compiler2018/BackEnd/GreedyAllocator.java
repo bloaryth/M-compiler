@@ -66,10 +66,10 @@ public class GreedyAllocator implements IIRVistor{
         allReg.remove(Register.PysicalRegister.RBP);
         allReg.remove(Register.PysicalRegister.RSP);
 
-//        allReg.remove(Register.PysicalRegister.R12);
-//        allReg.remove(Register.PysicalRegister.R14);
-//        allReg.remove(Register.PysicalRegister.R15);
-//        allReg.remove(Register.PysicalRegister.R13); // inter
+        allReg.remove(Register.PysicalRegister.R12);
+        allReg.remove(Register.PysicalRegister.R14);
+        allReg.remove(Register.PysicalRegister.R15);
+        allReg.remove(Register.PysicalRegister.R13); // inter
 
         // test
 //        allReg.remove(Register.PysicalRegister.RBX);
@@ -100,7 +100,7 @@ public class GreedyAllocator implements IIRVistor{
         parameterList = irFunction.getParameterList();
         List<Register> order = new LinkedList<>();
         irFunction.getStackOffsetMap().forEach((x, y) -> order.add(x)); // need resolver
-        Collections.shuffle(order, new Random(50));
+        Collections.shuffle(order, new Random(72));
         order.forEach(this::color);
         parameterList = null;
         currentFunction = null;
