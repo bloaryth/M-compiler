@@ -116,12 +116,12 @@ public abstract class AbstractIRInstruction {
                     defined.getConflictRegisterSet().add(x);
                 }
             });
-//            liveInSet.forEach(x -> {
-//                if (x != null && !x.equals(defined)) {
-//                    x.getConflictRegisterSet().add(defined);
-//                    defined.getConflictRegisterSet().add(x);
-//                }
-//            });
+            liveInSet.forEach(x -> {
+                if (x != null && !x.equals(defined)) {
+                    x.getConflictRegisterSet().add(defined);
+                    defined.getConflictRegisterSet().add(x);
+                }
+            }); // FIXME
         }
     }
 
