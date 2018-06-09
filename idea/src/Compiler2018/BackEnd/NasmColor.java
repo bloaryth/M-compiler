@@ -14,7 +14,7 @@ import java.util.Map;
 import static Compiler2018.IR.IRValue.Register.PysicalRegister.*;
 
 public class NasmColor implements IIRVistor {
-    private boolean debug = true;
+//    private boolean debug = true;
 
     private Register.PysicalRegister destPreserved = Register.PysicalRegister.R12;
     private Map<Register.PysicalRegister, Register> registerUseMap = new LinkedHashMap<>();

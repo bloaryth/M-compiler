@@ -45,7 +45,7 @@
       <file leaf-file-name="ConfictGraphBuilder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
+            <state relative-caret-position="1225">
               <caret line="52" column="56" lean-forward="true" selection-start-line="52" selection-start-column="56" selection-end-line="52" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -56,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GreedyAllocator.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GreedyAllocator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="63" column="52" lean-forward="true" selection-start-line="63" selection-start-column="52" selection-end-line="63" selection-end-column="52" />
+            <state relative-caret-position="442">
+              <caret line="64" column="63" selection-start-line="64" selection-start-column="63" selection-end-line="64" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -68,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NasmColor.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NasmColor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="327" column="29" selection-start-line="327" selection-start-column="29" selection-end-line="327" selection-end-column="29" />
+            <state relative-caret-position="425">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -83,7 +83,7 @@
       <file leaf-file-name="IRInstructionBuilder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="793">
+            <state relative-caret-position="1018">
               <caret line="969" column="41" selection-start-line="969" selection-start-column="33" selection-end-line="969" selection-end-column="41" />
               <folding>
                 <element signature="e#9253#9254#0" expanded="true" />
@@ -168,8 +168,8 @@
       <find>IntCompare</find>
       <find>BinaryCalc</find>
       <find>new Move</find>
-      <find>newarray</find>
       <find>move</find>
+      <find>newarray</find>
     </findStrings>
     <replaceStrings>
       <replace>ClassType</replace>
@@ -231,9 +231,9 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Move.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java" />
       </list>
     </option>
   </component>
@@ -571,12 +571,12 @@
       <workItem from="1528088457811" duration="3560000" />
       <workItem from="1528135347031" duration="21730000" />
       <workItem from="1528186734871" duration="4095000" />
-      <workItem from="1528191789645" duration="227279000" />
+      <workItem from="1528191789645" duration="227560000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="862331000" />
+    <option name="totallyTimeSpent" value="862612000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1110,17 +1110,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/BinaryCalc.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="31" column="81" lean-forward="true" selection-start-line="31" selection-start-column="81" selection-end-line="31" selection-end-column="81" />
-          <folding>
-            <element signature="e#1496#1497#0" expanded="true" />
-            <element signature="e#1531#1532#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/PreRegisterAllocator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-675">
@@ -1128,22 +1117,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Move.java">
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="52" column="56" lean-forward="true" selection-start-line="52" selection-start-column="56" selection-end-line="52" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#351#352#0" expanded="true" />
-            <element signature="e#429#430#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="692">
+          <caret line="240" lean-forward="true" selection-start-line="240" selection-end-line="240" />
         </state>
       </provider>
     </entry>
@@ -1161,9 +1138,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="64" column="63" selection-start-line="64" selection-start-column="63" selection-end-line="64" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1225">
+          <caret line="52" column="56" lean-forward="true" selection-start-line="52" selection-start-column="56" selection-end-line="52" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#351#352#0" expanded="true" />
+            <element signature="e#429#430#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/BinaryCalc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="31" column="81" lean-forward="true" selection-start-line="31" selection-start-column="81" selection-end-line="31" selection-end-column="81" />
+          <folding>
+            <element signature="e#1496#1497#0" expanded="true" />
+            <element signature="e#1531#1532#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Move.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="793">
+        <state relative-caret-position="1018">
           <caret line="969" column="41" selection-start-line="969" selection-start-column="33" selection-end-line="969" selection-end-column="41" />
           <folding>
             <element signature="e#9253#9254#0" expanded="true" />
@@ -1176,25 +1193,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="327" column="29" selection-start-line="327" selection-start-column="29" selection-end-line="327" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="240" lean-forward="true" selection-start-line="240" selection-end-line="240" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="63" column="52" lean-forward="true" selection-start-line="63" selection-start-column="52" selection-end-line="63" selection-end-column="52" />
+        <state relative-caret-position="425">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
