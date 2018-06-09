@@ -73,6 +73,9 @@ public class WantonWind {
             program.accept(irFuncParamBuilder);
             program.accept(irInstructionBuilder);
 
+            SimpleInliner simpleInliner = new SimpleInliner();
+            irProgram.accept(simpleInliner);
+
             // Liveness Analysis
             LivenessAnalysis livenessAnalysis = new LivenessAnalysis(irProgram);
             ConfictGraphBuilder confictGraphBuilder = new ConfictGraphBuilder();

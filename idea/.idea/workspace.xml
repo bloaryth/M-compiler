@@ -43,15 +43,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ret.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Ret.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="775">
-              <caret line="51" column="49" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AbstractIRInstruction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/AbstractIRInstruction.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -109,11 +100,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="165" selection-start-line="165" selection-end-line="168" selection-end-column="50" />
+            <state relative-caret-position="197">
+              <caret line="160" selection-start-line="160" selection-end-line="161" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WantonWind.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/WantonWind.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="312">
+              <caret line="76" column="44" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -215,7 +215,6 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/Optim/zzk.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Set.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Register.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/WantonWind.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmM2M.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_555.txt" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_552.txt" />
@@ -247,6 +246,7 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/BasicBlock.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/SimpleInliner.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test.java" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/WantonWind.java" />
       </list>
     </option>
   </component>
@@ -618,12 +618,12 @@
       <workItem from="1528135347031" duration="21730000" />
       <workItem from="1528186734871" duration="4095000" />
       <workItem from="1528191789645" duration="231456000" />
-      <workItem from="1528527371509" duration="17323000" />
+      <workItem from="1528527371509" duration="17706000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="883831000" />
+    <option name="totallyTimeSpent" value="884214000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -660,7 +660,7 @@
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" x="419" y="146" width="1324" height="680" id="Run" order="14" sideWeight="0.49946696" type="FLOATING" weight="0.45860568" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32897604" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1609808" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1609808" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.45424837" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="6" side_tool="true" />
@@ -929,13 +929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="591">
           <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/WantonWind.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="82" column="50" lean-forward="true" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -1233,8 +1226,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="165" selection-start-line="165" selection-end-line="168" selection-end-column="50" />
+        <state relative-caret-position="197">
+          <caret line="160" selection-start-line="160" selection-end-line="161" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/WantonWind.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="76" column="44" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
         </state>
       </provider>
     </entry>
