@@ -100,7 +100,7 @@ public class GreedyAllocator implements IIRVistor{
         parameterList = irFunction.getParameterList();
         List<Register> order = new LinkedList<>();
         irFunction.getStackOffsetMap().forEach((x, y) -> order.add(x)); // need resolver
-        Collections.shuffle(order);
+        Collections.shuffle(order, new Random(50));
         order.forEach(this::color);
         parameterList = null;
         currentFunction = null;

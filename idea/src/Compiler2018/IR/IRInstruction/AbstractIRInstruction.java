@@ -117,11 +117,11 @@ public abstract class AbstractIRInstruction {
                 }
             });
 //            liveInSet.forEach(x -> {
-//                if (x != null && !x.equals(defined)) {
-//                    x.getConflictRegisterSet().add(defined);
-//                    defined.getConflictRegisterSet().add(x);
-//                }
-//            });
+////                if (x != null && !x.equals(defined)) {
+////                    x.getConflictRegisterSet().add(defined);
+////                    defined.getConflictRegisterSet().add(x);
+////                }
+////            });
         }
     }
 
@@ -133,6 +133,9 @@ public abstract class AbstractIRInstruction {
     abstract public AbstractIRInstruction partClone(Map<Register, Register> renameMap);
 
     public static Register rename(Map<Register, Register> renameMap, Register oldReg){
+        if (oldReg == null) {
+            return null;
+        }
         if (renameMap.containsKey(oldReg)) {
             return renameMap.get(oldReg);
         } else {

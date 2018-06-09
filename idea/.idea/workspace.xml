@@ -15,27 +15,75 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SimpleInliner.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/SimpleInliner.java">
+      <file leaf-file-name="GreedyAllocator.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="155" column="91" selection-start-line="155" selection-start-column="91" selection-end-line="155" selection-end-column="91" />
+            <state relative-caret-position="402">
+              <caret line="102" column="48" selection-start-line="102" selection-start-column="48" selection-end-line="102" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2490#2491#0" expanded="true" />
-                <element signature="e#2564#2565#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GreedyAllocator.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
+      <file leaf-file-name="Lea.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Lea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="103" column="30" lean-forward="true" selection-start-line="103" selection-start-column="30" selection-end-line="103" selection-end-column="30" />
+            <state relative-caret-position="327">
+              <caret line="84" selection-start-line="84" selection-end-line="84" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractIRInstruction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/AbstractIRInstruction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2">
+              <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Random.Mx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="301">
+              <caret line="206" column="5" lean-forward="true" selection-start-line="206" selection-start-column="5" selection-end-line="206" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConfictGraphBuilder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="39" column="33" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#351#352#0" expanded="true" />
+                <element signature="e#429#430#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Register.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Register.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="59" column="34" lean-forward="true" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1433#1434#0" expanded="true" />
+                <element signature="e#1484#1485#0" expanded="true" />
+                <element signature="e#1526#1527#0" expanded="true" />
+                <element signature="e#1558#1559#0" expanded="true" />
+                <element signature="e#1586#1587#0" expanded="true" />
+                <element signature="e#1629#1630#0" expanded="true" />
+                <element signature="e#1663#1664#0" expanded="true" />
+                <element signature="e#1799#1800#0" expanded="true" />
+                <element signature="e#1841#1842#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -44,7 +92,7 @@
       <file leaf-file-name="LivenessAnalysis.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/LivenessAnalysis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
+            <state relative-caret-position="675">
               <caret line="71" selection-start-line="71" selection-end-line="71" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -53,63 +101,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BasicBlock.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/BasicBlock.java">
+      <file leaf-file-name="Move.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Move.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="59" selection-start-line="59" selection-end-line="59" />
-              <folding>
-                <element signature="e#1603#1604#0" expanded="true" />
-                <element signature="e#1630#1631#0" expanded="true" />
-                <element signature="e#1676#1677#0" expanded="true" />
-                <element signature="e#1703#1704#0" expanded="true" />
-                <element signature="e#1758#1759#0" expanded="true" />
-                <element signature="e#1790#1791#0" expanded="true" />
-                <element signature="e#4057#4058#0" expanded="true" />
-                <element signature="e#4129#4130#0" expanded="true" />
-                <element signature="e#4800#4801#0" expanded="true" />
-                <element signature="e#4834#4835#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="468">
+              <caret line="89" column="5" selection-start-line="89" selection-start-column="5" selection-end-line="89" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IRFunction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/IRFunction.java">
+      <file leaf-file-name="MoveU.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/MoveU.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-24">
-              <caret line="84" column="45" lean-forward="true" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
-              <folding>
-                <element signature="e#1542#1543#0" expanded="true" />
-                <element signature="e#1577#1578#0" expanded="true" />
-                <element signature="e#1846#1847#0" expanded="true" />
-                <element signature="e#1883#1884#0" expanded="true" />
-                <element signature="e#2471#2472#0" expanded="true" />
-                <element signature="e#2507#2508#0" expanded="true" />
-                <element signature="e#2652#2653#0" expanded="true" />
-                <element signature="e#2686#2687#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Random.Mx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="107" column="51" lean-forward="true" selection-start-line="107" selection-start-column="51" selection-end-line="107" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NasmColor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="421" selection-start-line="421" selection-end-line="421" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="543">
+              <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -117,31 +122,8 @@
       <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="201" selection-start-line="201" selection-end-line="201" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IRProgram.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/IRProgram.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
-              <folding>
-                <element signature="e#1618#1619#0" expanded="true" />
-                <element signature="e#2554#2555#0" expanded="true" />
-                <element signature="e#2588#2589#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterOffsetResolver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/RegisterOffsetResolver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="42" column="26" selection-start-line="42" selection-start-column="26" selection-end-line="42" selection-end-column="26" />
+            <state relative-caret-position="259">
+              <caret line="165" selection-start-line="165" selection-end-line="166" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -160,7 +142,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Inter</find>
       <find>mod</find>
       <find>idiv</find>
       <find>div</find>
@@ -190,6 +171,7 @@
       <find>Call</find>
       <find>get</find>
       <find>.addTail</find>
+      <find>clone error</find>
     </findStrings>
     <replaceStrings>
       <replace>ClassType</replace>
@@ -227,7 +209,6 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Luna.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/WTZ.Mx" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_939.txt" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/FrontEnd/IRBuilder/IRInstructionBuilder.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRStructure/IRFunction.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/PreRegisterAllocator.java" />
@@ -236,7 +217,6 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/WantonWind.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/TestCases/testcase_553.txt" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/BinaryCalc.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/AbstractIRInstruction.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Branch.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Call.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Compare.java" />
@@ -251,8 +231,10 @@
         <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Register.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/LivenessAnalysis.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/SimpleInliner.java" />
-        <option value="$PROJECT_DIR$/src/Compiler2018/Test.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/AbstractIRInstruction.java" />
+        <option value="$PROJECT_DIR$/src/Compiler2018/Test.java" />
         <option value="$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java" />
       </list>
     </option>
@@ -633,12 +615,12 @@
       <workItem from="1528135347031" duration="21730000" />
       <workItem from="1528186734871" duration="4095000" />
       <workItem from="1528191789645" duration="231456000" />
-      <workItem from="1528527371509" duration="31135000" />
+      <workItem from="1528527371509" duration="32404000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="897643000" />
+    <option name="totallyTimeSpent" value="898912000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -666,7 +648,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
-      <window_info active="true" anchor="bottom" id="Debug" order="2" sideWeight="0.4989339" visible="true" weight="0.07625272" />
+      <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.4989339" visible="true" weight="0.34422657" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.33333334" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32897604" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
@@ -675,7 +657,7 @@
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" x="444" y="176" width="1324" height="805" id="Run" order="14" sideWeight="0.49946696" type="FLOATING" weight="0.45860568" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32897604" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1609808" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17377399" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.45424837" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="6" side_tool="true" />
@@ -818,11 +800,17 @@
           <properties />
           <option name="timeStamp" value="315" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/AbstractIRInstruction.java</url>
+          <line>145</line>
+          <properties />
+          <option name="timeStamp" value="331" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="331" />
+      <option name="time" value="332" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -934,18 +922,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1300">
-          <caret line="52" column="56" lean-forward="true" selection-start-line="52" selection-start-column="56" selection-end-line="52" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#351#352#0" expanded="true" />
-            <element signature="e#429#430#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/FrontEnd/Semantic/StmtScanner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1033,24 +1009,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/MoveU.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-          <folding>
-            <element signature="e#1012#1013#0" expanded="true" />
-            <element signature="e#1038#1039#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Lea.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="668">
-          <caret line="85" column="5" lean-forward="true" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Branch.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="718">
@@ -1068,13 +1026,6 @@
             <element signature="e#2295#2296#0" expanded="true" />
             <element signature="e#2321#2322#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Move.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="89" column="5" selection-start-line="89" selection-start-column="5" selection-end-line="89" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1099,25 +1050,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="59" column="34" lean-forward="true" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1433#1434#0" expanded="true" />
-            <element signature="e#1484#1485#0" expanded="true" />
-            <element signature="e#1526#1527#0" expanded="true" />
-            <element signature="e#1558#1559#0" expanded="true" />
-            <element signature="e#1586#1587#0" expanded="true" />
-            <element signature="e#1629#1630#0" expanded="true" />
-            <element signature="e#1663#1664#0" expanded="true" />
-            <element signature="e#1799#1800#0" expanded="true" />
-            <element signature="e#1841#1842#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/CSet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="793">
@@ -1129,13 +1061,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
           <caret line="350" selection-start-line="350" selection-end-line="350" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/AbstractIRInstruction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>
@@ -1182,16 +1107,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/LivenessAnalysis.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/SimpleInliner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="574">
@@ -1216,13 +1131,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="201" selection-start-line="201" selection-end-line="201" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
@@ -1233,17 +1141,93 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="165" selection-start-line="165" selection-end-line="166" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Move.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="89" column="5" selection-start-line="89" selection-start-column="5" selection-end-line="89" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/MoveU.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/Lea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRInstruction/AbstractIRInstruction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2">
+          <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/Test/CodeGenTest/Random.Mx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="107" column="51" lean-forward="true" selection-start-line="107" selection-start-column="51" selection-end-line="107" selection-end-column="51" />
+        <state relative-caret-position="301">
+          <caret line="206" column="5" lean-forward="true" selection-start-line="206" selection-start-column="5" selection-end-line="206" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="39" column="33" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#351#352#0" expanded="true" />
+            <element signature="e#429#430#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/IR/IRValue/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="59" column="34" lean-forward="true" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1433#1434#0" expanded="true" />
+            <element signature="e#1484#1485#0" expanded="true" />
+            <element signature="e#1526#1527#0" expanded="true" />
+            <element signature="e#1558#1559#0" expanded="true" />
+            <element signature="e#1586#1587#0" expanded="true" />
+            <element signature="e#1629#1630#0" expanded="true" />
+            <element signature="e#1663#1664#0" expanded="true" />
+            <element signature="e#1799#1800#0" expanded="true" />
+            <element signature="e#1841#1842#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/LivenessAnalysis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="103" column="30" lean-forward="true" selection-start-line="103" selection-start-column="30" selection-end-line="103" selection-end-column="30" />
+        <state relative-caret-position="402">
+          <caret line="102" column="48" selection-start-line="102" selection-start-column="48" selection-end-line="102" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -1376,42 +1376,621 @@ global main
 
 SECTION .text
 
-main:
+_exchange:
 	push rbp
 	mov rbp, rsp
-	sub rsp, 2240
-	push rbx
-	push r12
-_main.entry.0:
-	mov rsi, 99
+	sub rsp, 136
+	mov qword [rbp -8], rdi
+	mov qword [rbp -16], rsi
+_exchange.entry.0:
+	mov r8, __Label1
+
+	mov r8, qword [r8]
+
+	lea r8, [r8 + rdi*8  + 8]
+
+	mov r8, qword [r8]
+
+	mov r9, __Label1
+
+	mov r9, qword [r9]
+
+	lea r10, [r9 + rsi*8  + 8]
+
+	mov r9, __Label1
+
+	mov r9, qword [r9]
+
+	lea rdi, [r9 + rdi*8  + 8]
+
+	mov r9, qword [r10]
+
+	mov qword [rdi], r9
 
 	mov rdi, __Label1
 
-	mov qword [rdi], rsi
+	mov rdi, qword [rdi]
 
-	mov rsi, 100
+	lea rsi, [rdi + rsi*8  + 8]
 
-	mov rdi, __Label2
-
-	mov qword [rdi], rsi
-
-	mov rsi, 101
-
-	mov rdi, __Label3
-
-	mov qword [rdi], rsi
-
-	mov rsi, 102
-
-	mov rdi, __Label4
-
-	mov qword [rdi], rsi
+	mov qword [rsi], r8
 
 	mov rsi, 0
 
-	mov rdi, __Label5
+	mov rax, rsi
+	leave
+	ret
 
-	mov qword [rdi], rsi
+
+_makeHeap:
+	push rbp
+	mov rbp, rsp
+	sub rsp, 600
+_makeHeap.entry.1:
+	mov rsi, __Label0
+
+	mov rdi, 1
+
+	mov r8, qword [rsi]
+	sub r8, rdi
+
+	mov rsi, 2
+
+	mov rax, r8
+	cqo
+	idiv rsi
+	mov rdi, rax
+
+	mov r11, rdi
+
+	mov rsi, 0
+
+
+	mov rsi, 0
+
+	mov r9, rsi
+
+	jmp while_cond.27
+
+while_cond.27:
+	mov rsi, 0
+
+	cmp r11, rsi
+
+	mov rsi, 0
+	setge sil
+
+	mov rdi, 1
+
+	cmp rdi, rsi
+
+	je while_loop.28
+	jne while_after.29
+
+while_loop.28:
+	mov rdi, 2
+
+	mov rsi, r11
+	imul rsi, rdi
+
+	mov r9, rsi
+
+	mov rsi, 2
+
+	mov r8, r11
+	imul r8, rsi
+
+	mov rsi, 1
+
+	mov rdi, r8
+	add rdi, rsi
+
+	mov rsi, __Label0
+
+	mov rsi, qword [rsi]
+
+	cmp rdi, rsi
+
+	mov rdi, 0
+	setl dil
+
+	mov rsi, 1
+
+	cmp rdi, rsi
+
+	je and_lhs_true.34
+	jne if_merge.33
+
+and_lhs_true.34:
+	mov r8, __Label1
+
+	mov rsi, 2
+
+	mov rdi, r11
+	imul rdi, rsi
+
+	mov rsi, 1
+
+	mov r10, rdi
+	add r10, rsi
+
+	mov rsi, qword [r8]
+
+	lea r8, [rsi + r10*8  + 8]
+
+	mov rsi, __Label1
+
+	mov r10, 2
+
+	mov rdi, r11
+	imul rdi, r10
+
+	mov rsi, qword [rsi]
+
+	lea rdi, [rsi + rdi*8  + 8]
+
+	mov rsi, qword [r8]
+
+	mov rdi, qword [rdi]
+
+	cmp rsi, rdi
+
+	mov rsi, 0
+	setl sil
+
+	mov rdi, 1
+
+	cmp rsi, rdi
+
+	je if_true.32
+	jne if_merge.33
+
+	mov rsi, 1
+
+	cmp rsi, rdi
+
+	je if_true.32
+	jne if_merge.33
+
+if_true.32:
+	mov rdi, 1
+
+	mov rsi, 2
+
+	mov rdi, r11
+	imul rdi, rsi
+
+	mov rsi, 1
+
+	mov r8, rdi
+	add r8, rsi
+
+	mov r9, r8
+
+	jmp if_merge.33
+
+if_merge.33:
+	mov rdi, 0
+
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea rdi, [rsi + r11*8  + 8]
+
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea r8, [rsi + r9*8  + 8]
+
+	mov rsi, qword [rdi]
+
+	mov rdi, qword [r8]
+
+	cmp rsi, rdi
+
+	mov rsi, 0
+	setg sil
+
+	mov rdi, 1
+
+	cmp rdi, rsi
+
+	je if_true.37
+	jne if_merge.38
+
+if_true.37:
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea rsi, [rsi + r11*8  + 8]
+
+	mov rdi, qword [rsi]
+
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea rsi, [rsi + r9*8  + 8]
+
+	mov r8, __Label1
+
+	mov r8, qword [r8]
+
+	lea r8, [r8 + r11*8  + 8]
+
+	mov rsi, qword [rsi]
+
+	mov qword [r8], rsi
+
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea rsi, [rsi + r9*8  + 8]
+
+	mov qword [rsi], rdi
+
+	mov rsi, 0
+
+	jmp if_merge.38
+
+if_merge.38:
+	mov rdi, 1
+
+	mov rsi, r11
+	sub rsi, rdi
+
+	mov r11, rsi
+
+	jmp while_cond.27
+
+while_after.29:
+	mov rsi, 0
+
+
+	mov rax, rsi
+	leave
+	ret
+
+	mov rsi, 0
+
+	mov rax, rsi
+	leave
+	ret
+
+
+_adjustHeap:
+	push rbp
+	mov rbp, rsp
+	sub rsp, 544
+	push rbx
+	mov qword [rbp -8], rdi
+_adjustHeap.entry.2:
+	mov rsi, 0
+
+	mov r10, rsi
+
+	mov rsi, 0
+
+	mov r11, rsi
+
+	mov rsi, 0
+
+
+	jmp while_cond.49
+
+while_cond.49:
+	mov r8, 2
+
+	mov rsi, r10
+	imul rsi, r8
+
+	cmp rsi, rdi
+
+	mov rsi, 0
+	setl sil
+
+	mov r8, 1
+
+	cmp r8, rsi
+
+	je while_loop.50
+	jne while_after.51
+
+while_loop.50:
+	mov rsi, 2
+
+	mov r8, r10
+	imul r8, rsi
+
+	mov r11, r8
+
+	mov rsi, 2
+
+	mov r8, r10
+	imul r8, rsi
+
+	mov r9, 1
+
+	mov rsi, r8
+	add rsi, r9
+
+	cmp rsi, rdi
+
+	mov r8, 0
+	setl r8b
+
+	mov rsi, 1
+
+	cmp r8, rsi
+
+	je and_lhs_true.56
+	jne if_merge.55
+
+and_lhs_true.56:
+	mov r9, __Label1
+
+	mov r8, 2
+
+	mov rsi, r10
+	imul rsi, r8
+
+	mov r8, 1
+
+	mov rbx, rsi
+	add rbx, r8
+
+	mov rsi, qword [r9]
+
+	lea rsi, [rsi + rbx*8  + 8]
+
+	mov r9, __Label1
+
+	mov r8, 2
+
+	mov rbx, r10
+	imul rbx, r8
+
+	mov r8, qword [r9]
+
+	lea r8, [r8 + rbx*8  + 8]
+
+	mov r9, qword [rsi]
+
+	mov rsi, qword [r8]
+
+	cmp r9, rsi
+
+	mov rsi, 0
+	setl sil
+
+	mov r8, 1
+
+	cmp rsi, r8
+
+	je if_true.54
+	jne if_merge.55
+
+	mov rsi, 1
+
+	cmp rsi, r8
+
+	je if_true.54
+	jne if_merge.55
+
+if_true.54:
+	mov r8, 1
+
+	mov rsi, 2
+
+	mov r8, r10
+	imul r8, rsi
+
+	mov r9, 1
+
+	mov rsi, r8
+	add rsi, r9
+
+	mov r11, rsi
+
+	jmp if_merge.55
+
+if_merge.55:
+	mov r8, 0
+
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea r9, [rsi + r10*8  + 8]
+
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea r8, [rsi + r11*8  + 8]
+
+	mov rsi, qword [r9]
+
+	mov r8, qword [r8]
+
+	cmp rsi, r8
+
+	mov r8, 0
+	setg r8b
+
+	mov rsi, 1
+
+	cmp rsi, r8
+
+	je if_true.59
+	jne if_false.60
+
+if_true.59:
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea rsi, [rsi + r10*8  + 8]
+
+	mov r8, qword [rsi]
+
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea rbx, [rsi + r11*8  + 8]
+
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea r9, [rsi + r10*8  + 8]
+
+	mov rsi, qword [rbx]
+
+	mov qword [r9], rsi
+
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea rsi, [rsi + r11*8  + 8]
+
+	mov qword [rsi], r8
+
+	mov r10, r11
+
+	jmp if_merge.61
+
+if_false.60:
+	jmp while_after.51
+
+	jmp if_merge.61
+
+if_merge.61:
+	jmp while_cond.49
+
+while_after.51:
+	mov rsi, 0
+
+
+	mov rax, rsi
+	pop rbx
+	leave
+	ret
+
+	mov rsi, 0
+
+	mov rax, rsi
+	pop rbx
+	leave
+	ret
+
+
+_heapSort:
+	push rbp
+	mov rbp, rsp
+	sub rsp, 336
+_heapSort.entry.3:
+	mov rsi, 0
+
+	mov rdi, rsi
+
+	mov rsi, 0
+
+	mov r8, rsi
+
+	jmp for_cond.78
+
+for_cond.78:
+	mov rsi, __Label0
+
+	mov rsi, qword [rsi]
+
+	cmp r8, rsi
+
+	mov rsi, 0
+	setl sil
+
+	mov rdi, 1
+
+	cmp rdi, rsi
+
+	je for_loop.79
+	jne for_after.81
+
+for_loop.79:
+	mov rdi, __Label1
+
+	mov rsi, 0
+
+	mov rdi, qword [rdi]
+
+	lea rsi, [rdi + rsi*8  + 8]
+
+	mov rsi, qword [rsi]
+
+	mov rdi, rsi
+
+	mov r11, __Label1
+
+	mov rsi, __Label0
+
+	mov r9, qword [rsi]
+	sub r9, r8
+
+	mov r10, 1
+
+	mov rsi, r9
+	sub rsi, r10
+
+	mov r9, qword [r11]
+
+	lea r10, [r9 + rsi*8  + 8]
+
+	mov rsi, __Label1
+
+	mov r9, 0
+
+	mov rsi, qword [rsi]
+
+	lea r9, [rsi + r9*8  + 8]
+
+	mov rsi, qword [r10]
+
+	mov qword [r9], rsi
+
+	mov r9, __Label1
+
+	mov rsi, __Label0
+
+	mov r10, qword [rsi]
+	sub r10, r8
+
+	mov rsi, 1
+
+	mov r11, r10
+	sub r11, rsi
+
+	mov rsi, qword [r9]
+
+	lea rsi, [rsi + r11*8  + 8]
+
+	mov qword [rsi], rdi
+
+	mov rsi, __Label0
+
+	mov r9, qword [rsi]
+	sub r9, r8
+
+	mov rdi, 1
+
+	mov rsi, r9
+	sub rsi, rdi
 
 	push rsi
 	push rdi
@@ -1419,7 +1998,73 @@ _main.entry.0:
 	push r9
 	push r10
 	push r11
-	call getInt
+	mov	qword [rbp - 288], rsi
+	mov	rdi, qword [rbp - 288]
+	call _adjustHeap
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	mov rsi, rax
+
+	jmp for_step.80
+
+for_step.80:
+	mov rdi, 1
+
+	mov rsi, r8
+	add rsi, rdi
+
+	mov r8, rsi
+
+	jmp for_cond.78
+
+for_after.81:
+	mov rsi, 0
+
+
+	mov rax, rsi
+	leave
+	ret
+
+	mov rsi, 0
+
+	mov rax, rsi
+	leave
+	ret
+
+
+main:
+	push rbp
+	mov rbp, rsp
+	sub rsp, 352
+_main.entry.4:
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	call getString
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	mov rsi, rax
+
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	mov	qword [rbp - 8], rsi
+	mov	rdi, qword [rbp - 8]
+	call parseInt
 	pop r11
 	pop r10
 	pop r9
@@ -1432,1299 +2077,68 @@ _main.entry.0:
 
 	mov qword [rdi], rsi
 
-	mov rsi, 1
+	mov rsi, __Label0
 
-
-	jmp for_cond.27
-
-for_cond.27:
-	mov rdi, __Label0
-
-	mov rdi, qword [rdi]
-
-	cmp rsi, rdi
-
-	mov rdi, 0
-	setle dil
-
-	mov r8, 1
-
-	cmp r8, rdi
-
-	je for_loop.28
-	jne for_after.30
-
-for_loop.28:
 	mov rdi, 1
 
-
-	jmp for_cond.33
-
-for_cond.33:
-	mov r8, __Label0
-
-	mov r8, qword [r8]
-
-	cmp rdi, r8
-
-	mov r8, 0
-	setle r8b
-
-	mov r9, 1
-
-	cmp r9, r8
-
-	je for_loop.34
-	jne for_after.36
-
-for_loop.34:
 	mov r8, 1
 
-
-	jmp for_cond.39
-
-for_cond.39:
-	mov r9, __Label0
-
-	mov r9, qword [r9]
-
-	cmp r8, r9
-
-	mov r9, 0
-	setle r9b
-
-	mov r10, 1
-
-	cmp r10, r9
-
-	je for_loop.40
-	jne for_after.42
-
-for_loop.40:
-	mov r9, 1
-
-
-	jmp for_cond.45
-
-for_cond.45:
-	mov r10, __Label0
-
-	mov r10, qword [r10]
-
-	cmp r9, r10
-
-	mov r10, 0
-	setle r10b
-
-	mov r11, 1
-
-	cmp r11, r10
-
-	je for_loop.46
-	jne for_after.48
-
-for_loop.46:
-	mov r10, 1
-
-
-	jmp for_cond.51
-
-for_cond.51:
-	mov r11, __Label0
-
-	mov r11, qword [r11]
-
-	cmp r10, r11
-
-	mov r11, 0
-	setle r11b
-
-	mov rbx, 1
-
-	cmp rbx, r11
-
-	je for_loop.52
-	jne for_after.54
-
-for_loop.52:
-	mov r11, 1
-
-
-	jmp for_cond.57
-
-for_cond.57:
-	mov rbx, __Label0
-
-	mov rbx, qword [rbx]
-
-	cmp r11, rbx
-
-	mov rbx, 0
-	setle bl
-
-	mov r12, 1
-
-	cmp r12, rbx
-
-	je for_loop.58
-	jne for_after.60
-
-for_loop.58:
-	cmp rsi, rdi
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.104
-	jne if_merge.64
-
-and_lhs_true.104:
-	cmp rsi, r8
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.103
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.103
-	jne if_merge.64
-
-and_lhs_true.103:
-	mov r12, 1
-
-	cmp rsi, r9
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.102
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.102
-	jne if_merge.64
-
-and_lhs_true.102:
-	mov r12, 1
-
-	cmp rsi, r10
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.101
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.101
-	jne if_merge.64
-
-and_lhs_true.101:
-	mov r12, 1
-
-	cmp rsi, r11
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.100
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.100
-	jne if_merge.64
-
-and_lhs_true.100:
-	mov r12, 1
-
-	mov rbx, __Label1
-
-	mov rbx, qword [rbx]
-
-	cmp rsi, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.99
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.99
-	jne if_merge.64
-
-and_lhs_true.99:
-	mov r12, 1
-
-	mov rbx, __Label2
-
-	mov rbx, qword [rbx]
-
-	cmp rsi, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.98
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.98
-	jne if_merge.64
-
-and_lhs_true.98:
-	mov r12, 1
-
-	mov rbx, __Label3
-
-	mov rbx, qword [rbx]
-
-	cmp rsi, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.97
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.97
-	jne if_merge.64
-
-and_lhs_true.97:
-	mov r12, 1
-
-	mov rbx, __Label4
-
-	mov rbx, qword [rbx]
-
-	cmp rsi, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.96
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.96
-	jne if_merge.64
-
-and_lhs_true.96:
-	mov r12, 1
-
-	cmp rdi, r8
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.95
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.95
-	jne if_merge.64
-
-and_lhs_true.95:
-	mov r12, 1
-
-	cmp rdi, r9
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.94
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.94
-	jne if_merge.64
-
-and_lhs_true.94:
-	mov r12, 1
-
-	cmp rdi, r10
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.93
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.93
-	jne if_merge.64
-
-and_lhs_true.93:
-	mov r12, 1
-
-	cmp rdi, r11
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.92
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.92
-	jne if_merge.64
-
-and_lhs_true.92:
-	mov r12, 1
-
-	mov rbx, __Label1
-
-	mov rbx, qword [rbx]
-
-	cmp rdi, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.91
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.91
-	jne if_merge.64
-
-and_lhs_true.91:
-	mov r12, 1
-
-	mov rbx, __Label2
-
-	mov rbx, qword [rbx]
-
-	cmp rdi, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.90
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.90
-	jne if_merge.64
-
-and_lhs_true.90:
-	mov r12, 1
-
-	mov rbx, __Label3
-
-	mov rbx, qword [rbx]
-
-	cmp rdi, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.89
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.89
-	jne if_merge.64
-
-and_lhs_true.89:
-	mov r12, 1
-
-	mov rbx, __Label4
-
-	mov rbx, qword [rbx]
-
-	cmp rdi, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.88
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.88
-	jne if_merge.64
-
-and_lhs_true.88:
-	mov r12, 1
-
-	cmp r8, r9
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.87
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.87
-	jne if_merge.64
-
-and_lhs_true.87:
-	mov r12, 1
-
-	cmp r8, r10
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.86
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.86
-	jne if_merge.64
-
-and_lhs_true.86:
-	mov r12, 1
-
-	cmp r8, r11
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.85
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.85
-	jne if_merge.64
-
-and_lhs_true.85:
-	mov r12, 1
-
-	mov rbx, __Label1
-
-	mov rbx, qword [rbx]
-
-	cmp r8, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.84
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.84
-	jne if_merge.64
-
-and_lhs_true.84:
-	mov r12, 1
-
-	mov rbx, __Label2
-
-	mov rbx, qword [rbx]
-
-	cmp r8, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.83
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.83
-	jne if_merge.64
-
-and_lhs_true.83:
-	mov r12, 1
-
-	mov rbx, __Label3
-
-	mov rbx, qword [rbx]
-
-	cmp r8, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.82
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.82
-	jne if_merge.64
-
-and_lhs_true.82:
-	mov r12, 1
-
-	mov rbx, __Label4
-
-	mov rbx, qword [rbx]
-
-	cmp r8, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.81
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.81
-	jne if_merge.64
-
-and_lhs_true.81:
-	mov r12, 1
-
-	cmp r9, r10
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.80
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.80
-	jne if_merge.64
-
-and_lhs_true.80:
-	mov r12, 1
-
-	cmp r9, r11
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.79
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.79
-	jne if_merge.64
-
-and_lhs_true.79:
-	mov r12, 1
-
-	mov rbx, __Label1
-
-	mov rbx, qword [rbx]
-
-	cmp r9, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.78
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.78
-	jne if_merge.64
-
-and_lhs_true.78:
-	mov r12, 1
-
-	mov rbx, __Label2
-
-	mov rbx, qword [rbx]
-
-	cmp r9, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.77
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.77
-	jne if_merge.64
-
-and_lhs_true.77:
-	mov r12, 1
-
-	mov rbx, __Label3
-
-	mov rbx, qword [rbx]
-
-	cmp r9, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.76
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.76
-	jne if_merge.64
-
-and_lhs_true.76:
-	mov r12, 1
-
-	mov rbx, __Label4
-
-	mov rbx, qword [rbx]
-
-	cmp r9, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.75
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.75
-	jne if_merge.64
-
-and_lhs_true.75:
-	mov r12, 1
-
-	cmp r10, r11
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.74
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.74
-	jne if_merge.64
-
-and_lhs_true.74:
-	mov r12, 1
-
-	mov rbx, __Label1
-
-	mov rbx, qword [rbx]
-
-	cmp r10, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.73
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.73
-	jne if_merge.64
-
-and_lhs_true.73:
-	mov r12, 1
-
-	mov rbx, __Label2
-
-	mov rbx, qword [rbx]
-
-	cmp r10, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.72
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.72
-	jne if_merge.64
-
-and_lhs_true.72:
-	mov r12, 1
-
-	mov rbx, __Label3
-
-	mov rbx, qword [rbx]
-
-	cmp r10, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.71
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.71
-	jne if_merge.64
-
-and_lhs_true.71:
-	mov r12, 1
-
-	mov rbx, __Label4
-
-	mov rbx, qword [rbx]
-
-	cmp r10, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.70
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.70
-	jne if_merge.64
-
-and_lhs_true.70:
-	mov r12, 1
-
-	mov rbx, __Label1
-
-	mov rbx, qword [rbx]
-
-	cmp r11, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.69
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.69
-	jne if_merge.64
-
-and_lhs_true.69:
-	mov r12, 1
-
-	mov rbx, __Label2
-
-	mov rbx, qword [rbx]
-
-	cmp r11, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.68
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.68
-	jne if_merge.64
-
-and_lhs_true.68:
-	mov r12, 1
-
-	mov rbx, __Label3
-
-	mov rbx, qword [rbx]
-
-	cmp r11, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.67
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.67
-	jne if_merge.64
-
-and_lhs_true.67:
-	mov r12, 1
-
-	mov rbx, __Label4
-
-	mov rbx, qword [rbx]
-
-	cmp r11, rbx
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.66
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.66
-	jne if_merge.64
-
-and_lhs_true.66:
-	mov r12, 1
-
-	mov rbx, __Label2
-
-	mov r12, __Label3
-
-	mov rbx, qword [rbx]
-
-	mov r12, qword [r12]
-
-	cmp rbx, r12
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je and_lhs_true.65
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp r12, rbx
-
-	je and_lhs_true.65
-	jne if_merge.64
-
-and_lhs_true.65:
-	mov r12, 1
-
-	mov rbx, __Label1
-
-	mov r12, __Label4
-
-	mov rbx, qword [rbx]
-
-	mov r12, qword [r12]
-
-	cmp rbx, r12
-
-	mov rbx, 0
-	setne bl
-
-	mov r12, 1
-
-	cmp rbx, r12
-
-	je if_true.63
-	jne if_merge.64
-
-	mov rbx, 1
-
-	cmp rbx, r12
-
-	je if_true.63
-	jne if_merge.64
-
-if_true.63:
-	mov r12, 1
-
-	mov rbx, __Label5
-
-	mov r12, qword [rbx]
-
-	add qword [rbx], 1
-
-	jmp if_merge.64
-
-if_merge.64:
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	mov r12, 0
-
-	jmp for_step.59
-
-for_step.59:
-	mov rbx, r11
-
-	add r11, 1
-
-	jmp for_cond.57
-
-for_after.60:
-	jmp for_step.53
-
-for_step.53:
-	mov r11, r10
-
-	add r10, 1
-
-	jmp for_cond.51
-
-for_after.54:
-	jmp for_step.47
-
-for_step.47:
-	mov r10, r9
-
-	add r9, 1
-
-	jmp for_cond.45
-
-for_after.48:
-	jmp for_step.41
-
-for_step.41:
-	mov r9, r8
-
-	add r8, 1
-
-	jmp for_cond.39
-
-for_after.42:
-	jmp for_step.35
-
-for_step.35:
-	mov r8, rdi
-
-	add rdi, 1
-
-	jmp for_cond.33
-
-for_after.36:
-	jmp for_step.29
-
-for_step.29:
-	mov rdi, rsi
-
-	add rsi, 1
-
-	jmp for_cond.27
-
-for_after.30:
-	mov rsi, __Label5
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	mov	qword [rbp - 48], r8
+	mov	rdi, qword [rbp - 48]
+	call _malloc
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	mov r9, rax
+
+	mov r8, r9
+
+	mov qword [r8], rdi
+
+	add r8, 8
+
+	mov rsi, qword [rsi]
+
+	mov qword [r8], rsi
+
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	mov	qword [rbp - 56], r9
+	mov	rdi, qword [rbp - 56]
+	call newArray
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	mov rsi, rax
+
+	mov rdi, __Label1
+
+	mov qword [rdi], rsi
+
+	mov rsi, 0
+
+	mov r8, rsi
+
+	jmp for_cond.100
+
+for_cond.100:
+	mov rsi, __Label1
 
 	mov rsi, qword [rsi]
 
@@ -2734,9 +2148,58 @@ for_after.30:
 	push r9
 	push r10
 	push r11
-	mov	qword [rbp - 2208], rsi
-	mov	rdi, qword [rbp - 2208]
-	call toString
+	mov	qword [rbp - 120], rsi
+	mov	rdi, qword [rbp - 120]
+	call size
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	mov rsi, rax
+
+	cmp r8, rsi
+
+	mov rsi, 0
+	setl sil
+
+	mov rdi, 1
+
+	cmp rdi, rsi
+
+	je for_loop.101
+	jne for_after.103
+
+for_loop.101:
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea rsi, [rsi + r8*8  + 8]
+
+	mov qword [rsi], r8
+
+	jmp for_step.102
+
+for_step.102:
+	mov rdi, 1
+
+	mov rsi, r8
+	add rsi, rdi
+
+	mov r8, rsi
+
+	jmp for_cond.100
+
+for_after.103:
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	call _makeHeap
 	pop r11
 	pop r10
 	pop r9
@@ -2751,9 +2214,142 @@ for_after.30:
 	push r9
 	push r10
 	push r11
-	mov	qword [rbp - 2216], rsi
-	mov	rdi, qword [rbp - 2216]
-	call println
+	call _heapSort
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	mov rsi, rax
+
+	mov rsi, 0
+
+	mov r8, rsi
+
+	jmp for_cond.110
+
+for_cond.110:
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	mov	qword [rbp - 224], rsi
+	mov	rdi, qword [rbp - 224]
+	call size
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	mov rsi, rax
+
+	cmp r8, rsi
+
+	mov rdi, 0
+	setl dil
+
+	mov rsi, 1
+
+	cmp rsi, rdi
+
+	je for_loop.111
+	jne for_after.113
+
+for_loop.111:
+	mov rsi, __Label1
+
+	mov rsi, qword [rsi]
+
+	lea rsi, [rsi + r8*8  + 8]
+
+	mov rsi, qword [rsi]
+
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	mov	qword [rbp - 280], rsi
+	mov	rdi, qword [rbp - 280]
+	call toString
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	mov rsi, rax
+
+	mov rdi, __Label2
+
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	mov	qword [rbp - 288], rsi
+	mov	qword [rbp - 296], rdi
+	mov	rdi, qword [rbp - 288]
+	mov	rsi, qword [rbp - 296]
+	call _strADD
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	mov rsi, rax
+
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	mov	qword [rbp - 304], rsi
+	mov	rdi, qword [rbp - 304]
+	call print
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+
+	jmp for_step.112
+
+for_step.112:
+	mov rsi, 1
+
+	mov rdi, r8
+	add rdi, rsi
+
+	mov r8, rdi
+
+	jmp for_cond.110
+
+for_after.113:
+	mov rsi, __Label3
+
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	mov	qword [rbp - 328], rsi
+	mov	rdi, qword [rbp - 328]
+	call print
 	pop r11
 	pop r10
 	pop r9
@@ -2765,16 +2361,12 @@ for_after.30:
 
 
 	mov rax, rsi
-	pop rbx
-	pop r12
 	leave
 	ret
 
 	mov rsi, 0
 
 	mov rax, rsi
-	pop rbx
-	pop r12
 	leave
 	ret
 
@@ -2787,18 +2379,12 @@ __Label0:
 __Label1:
 	dq 0000000000000000H
 
+SECTION .rodata.str1.1
+
 __Label2:
-	dq 0000000000000000H
+	db 32, 00
 
 __Label3:
-	dq 0000000000000000H
-
-__Label4:
-	dq 0000000000000000H
-
-__Label5:
-	dq 0000000000000000H
-
-SECTION .rodata.str1.1
+	db 10, 00
 
 
