@@ -10,6 +10,7 @@ import Compiler2018.IR.IRValue.Register;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static Compiler2018.IR.IRValue.Register.PysicalRegister.*;
 
@@ -21,6 +22,7 @@ public class NasmColor implements IIRVistor {
 
     private Integer currentRSP;
     private boolean globalVar;
+    private IRFunction currentFunction;
     private Register.PysicalRegister destPreserved = Register.PysicalRegister.RDX;
     //    private Register.PysicalRegister immediatePreserved = Register.PysicalRegister.R13;
     private Register.PysicalRegister leftOpPreserved = Register.PysicalRegister.RAX;
@@ -82,6 +84,7 @@ public class NasmColor implements IIRVistor {
 
     @Override
     public void visit(IRFunction irFunction) {
+        currentFunction = irFunction;
         currentRSP = 0;
         if (irFunction.getProcessedName().equals("_main")) {
             builder.append("main:\n");
@@ -112,6 +115,7 @@ public class NasmColor implements IIRVistor {
         copyParameter(irFunction.getParameterList());
         irFunction.getBasicBlockSet().forEach(x -> x.accept(this));
         builder.append("\n");
+        currentFunction = null;
     }
 
     @Override
@@ -877,11 +881,13 @@ public class NasmColor implements IIRVistor {
     }
 
     private void saveCallee() {
-        // Do nothing
+        Set<Register.PysicalRegister> calleeUsed = currentFunction.getCalleeUsed();
+        calleeUsed.forEach(this::push);
     }
 
     private void restoreCallee() {
-        // Do nothing
+        Set<Register.PysicalRegister> calleeUsed = currentFunction.getCalleeUsed();
+        calleeUsed.forEach(this::pop);
     }
 
     private void prologue() {

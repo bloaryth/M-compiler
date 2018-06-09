@@ -1376,397 +1376,274 @@ global main
 
 SECTION .text
 
-main:
+_a:
 	push rbp
 	mov rbp, rsp
-	sub rsp, 504
-_main.entry.0:
-	mov rbx, 5
-
-
-	mov rsi, 10
-
-
-	mov rdi, 1
-
-	mov r8, 1
-
-	push rbx
-	push rsi
-	push rdi
-	push r8
-	push r9
-	push r10
-	push r11
-	push r13
-	mov	qword [rbp - 48], r8
-	mov	rdi, qword [rbp - 48]
-	call _malloc
-	pop r13
-	pop r11
-	pop r10
-	pop r9
-	pop r8
-	pop rdi
-	pop rsi
-	pop rbx
-	mov r8, rax
-
-	mov r9, r8
-
-	mov qword [r9], rdi
-
-	add r9, 8
-
-	mov qword [r9], rsi
-
-	push rbx
-	push rsi
-	push rdi
-	push r8
-	push r9
-	push r10
-	push r11
-	push r13
-	mov	qword [rbp - 56], r8
-	mov	rdi, qword [rbp - 56]
-	call newArray
-	pop r13
-	pop r11
-	pop r10
-	pop r9
-	pop r8
-	pop rdi
-	pop rsi
-	pop rbx
-	mov rdi, rax
-
-
-	mov r8, 2
-
-	mov r9, 1
-
-	mov r10, 1
-
-	push rbx
-	push rsi
-	push rdi
-	push r8
-	push r9
-	push r10
-	push r11
-	push r13
-	mov	qword [rbp - 104], r10
-	mov	rdi, qword [rbp - 104]
-	call _malloc
-	pop r13
-	pop r11
-	pop r10
-	pop r9
-	pop r8
-	pop rdi
-	pop rsi
-	pop rbx
-	mov r10, rax
-
-	mov r11, r10
-
-	mov qword [r11], r9
-
-	add r11, 8
-
-	mov qword [r11], r8
-
-	push rbx
-	push rsi
-	push rdi
-	push r8
-	push r9
-	push r10
-	push r11
-	push r13
-	mov	qword [rbp - 112], r10
-	mov	rdi, qword [rbp - 112]
-	call newArray
-	pop r13
-	pop r11
-	pop r10
-	pop r9
-	pop r8
-	pop rdi
-	pop rsi
-	pop rbx
-	mov r8, rax
-
-
-	mov r9, 1
-
-	mov r10, 1
-
-	push rbx
-	push rsi
-	push rdi
-	push r8
-	push r9
-	push r10
-	push r11
-	push r13
-	mov	qword [rbp - 152], r10
-	mov	rdi, qword [rbp - 152]
-	call _malloc
-	pop r13
-	pop r11
-	pop r10
-	pop r9
-	pop r8
-	pop rdi
-	pop rsi
-	pop rbx
-	mov r10, rax
-
-	mov r11, r10
-
-	mov qword [r11], r9
-
-	add r11, 8
-
-	mov qword [r11], rbx
-
-	push rbx
-	push rsi
-	push rdi
-	push r8
-	push r9
-	push r10
-	push r11
-	push r13
-	mov	qword [rbp - 160], r10
-	mov	rdi, qword [rbp - 160]
-	call newArray
-	pop r13
-	pop r11
-	pop r10
-	pop r9
-	pop r8
-	pop rdi
-	pop rsi
-	pop rbx
-	mov r9, rax
-
-
-	mov r10, 0
-
-	lea r10, [r8 + r10*8  + 8]
-
-	mov qword [r10], r9
-
-	mov r10, 1
-
-	lea r10, [r8 + r10*8  + 8]
-
-	mov qword [r10], rdi
-
-	mov r10, 0
-
-
-	mov r11, 0
-
-
-	jmp for_cond.23
-
-for_cond.23:
-	mov r13, 2
-
-	cmp r11, r13
-
-	mov r13, 0
-	setl r13b
-
-	mov rdx, 1
-	mov	qword [rbp - 272], rdx
-
-	mov	rax, qword [rbp - 272]
-	cmp rax, r13
-
-	je for_loop.24
-	jne for_after.26
-
-for_loop.24:
-	mov r13, 0
-
-
-	jmp for_cond.29
-
-for_cond.29:
-	cmp r13, rbx
-
-	mov rdx, 0
-	setl dl
-	mov	qword [rbp - 296], rdx
-
-	mov rdx, 1
-	mov	qword [rbp - 304], rdx
-
-	mov	rax, qword [rbp - 304]
-	mov	rcx, qword [rbp - 296]
-	cmp rax, rcx
-
-	je for_loop.30
-	jne for_after.32
-
-for_loop.30:
-	add r10, 1
-
-	lea rdx, [r8 + r11*8  + 8]
-	mov	qword [rbp - 312], rdx
-
-	mov	rax, qword [rbp - 312]
-	mov rdx, qword [rax]
-	mov	qword [rbp - 312], rax
-	mov	qword [rbp - 320], rdx
-
-	mov	rax, qword [rbp - 320]
-	lea rdx, [rax + r13*8  + 8]
-	mov	qword [rbp - 328], rdx
-
-	mov	rdx, qword [rbp - 328]
-	mov qword [rdx], r10
-	mov	qword [rbp - 328], rdx
-
-	jmp for_step.31
-
-for_step.31:
-	add r13, 1
-
-	jmp for_cond.29
-
-for_after.32:
-	jmp for_step.25
-
-for_step.25:
-	add r11, 1
-
-	jmp for_cond.23
-
-for_after.26:
-	mov r13, rbx
-
-	jmp for_cond.37
-
-for_cond.37:
-	cmp r13, rsi
-
-	mov r11, 0
-	setl r11b
-
-	mov rdx, 1
-	mov	qword [rbp - 344], rdx
-
-	mov	rax, qword [rbp - 344]
-	cmp rax, r11
-
-	je for_loop.38
-	jne for_after.40
-
-for_loop.38:
-	add r10, 1
-
-	mov r11, 1
-
-	lea r11, [r8 + r11*8  + 8]
-
-	mov r11, qword [r11]
-
-	lea r11, [r11 + r13*8  + 8]
-
-	mov qword [r11], r10
-
-	jmp for_step.39
-
-for_step.39:
-	add r13, 1
-
-	jmp for_cond.37
-
-for_after.40:
-	mov r8, 0
-
-
-	mov r10, 0
-
-	mov r11, r10
-
-	jmp for_cond.47
-
-for_cond.47:
-	cmp r11, rbx
-
-	mov r10, 0
-	setl r10b
-
-	mov r13, 1
-
-	cmp r13, r10
-
-	je for_loop.48
-	jne for_after.50
-
-for_loop.48:
-	lea r10, [r9 + r11*8  + 8]
-
-	add r8, qword [r10]
-
-
-	jmp for_step.49
-
-for_step.49:
-	add r11, 1
-
-	jmp for_cond.47
-
-for_after.50:
-	mov rbx, 0
-
-	mov r11, rbx
-
-	jmp for_cond.55
-
-for_cond.55:
-	cmp r11, rsi
-
-	mov rbx, 0
-	setl bl
-
-	mov r9, 1
-
-	cmp r9, rbx
-
-	je for_loop.56
-	jne for_after.58
-
-for_loop.56:
-	lea rbx, [rdi + r11*8  + 8]
-
-	add r8, qword [rbx]
-
-
-	jmp for_step.57
-
-for_step.57:
-	add r11, 1
-
-	jmp for_cond.55
-
-for_after.58:
-	mov rbx, r8
-
-	mov rax, rbx
+	sub rsp, 360
+	mov qword [rbp -8], rdi
+	mov qword [rbp -16], rsi
+	mov qword [rbp -24], rdx
+	mov qword [rbp -32], rcx
+	mov qword [rbp -40], r8
+	mov qword [rbp -48], r9
+	mov rax, qword [rbp + 80]
+	mov qword [rbp -120], rax
+	mov rax, qword [rbp + 72]
+	mov qword [rbp -112], rax
+	mov rax, qword [rbp + 64]
+	mov qword [rbp -104], rax
+	mov rax, qword [rbp + 56]
+	mov qword [rbp -96], rax
+	mov rax, qword [rbp + 48]
+	mov qword [rbp -88], rax
+	mov rax, qword [rbp + 40]
+	mov qword [rbp -80], rax
+	mov rax, qword [rbp + 32]
+	mov qword [rbp -72], rax
+	mov rax, qword [rbp + 24]
+	mov qword [rbp -64], rax
+	mov rax, qword [rbp + 16]
+	mov qword [rbp -56], rax
+_a.entry.0:
+	add rdi, rsi
+
+	mov	rcx, qword [rbp - 24]
+	mov rsi, rdi
+	add rsi, rcx
+
+	mov	rcx, qword [rbp - 32]
+	add rsi, rcx
+
+	add rsi, r8
+
+	add rsi, r9
+
+	mov	rcx, qword [rbp - 56]
+	add rsi, rcx
+
+	mov	rcx, qword [rbp - 64]
+	add rsi, rcx
+
+	mov	rcx, qword [rbp - 72]
+	add rsi, rcx
+
+	mov	rcx, qword [rbp - 80]
+	add rsi, rcx
+
+	mov	rcx, qword [rbp - 88]
+	add rsi, rcx
+
+	mov	rcx, qword [rbp - 96]
+	add rsi, rcx
+
+	mov	rcx, qword [rbp - 104]
+	add rsi, rcx
+
+	mov	rcx, qword [rbp - 112]
+	add rsi, rcx
+
+	mov	rcx, qword [rbp - 120]
+	add rsi, rcx
+
+
+	mov rax, rsi
 	leave
 	ret
 
-	mov rbx, 0
+	mov rsi, 0
 
-	mov rax, rbx
+	mov rax, rsi
+	leave
+	ret
+
+
+main:
+	push rbp
+	mov rbp, rsp
+	sub rsp, 160
+	push rbx
+	push r12
+	push r13
+	push r14
+	push r15
+_main.entry.1:
+	mov rsi, 1
+
+	mov rdi, 2
+
+	mov r8, 3
+
+	mov r9, 4
+
+	mov r10, 5
+
+	mov r11, 6
+
+	mov rbx, 7
+
+	mov r12, 8
+
+	mov r13, 9
+
+	mov r14, 10
+
+	mov r15, 11
+
+	mov rdx, 12
+	mov	qword [rbp - 96], rdx
+
+	mov rdx, 13
+	mov	qword [rbp - 104], rdx
+
+	mov rdx, 14
+	mov	qword [rbp - 112], rdx
+
+	mov rdx, 15
+	mov	qword [rbp - 120], rdx
+
+	sub rsp, 8
+	push rbx
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	push r12
+	push r13
+	push r14
+	push r15
+	mov	qword [rbp - 8], rsi
+	mov	qword [rbp - 16], rdi
+	mov	qword [rbp - 24], r8
+	mov	qword [rbp - 32], r9
+	mov	qword [rbp - 40], r10
+	mov	qword [rbp - 48], r11
+	mov	qword [rbp - 56], rbx
+	mov	qword [rbp - 64], r12
+	mov	qword [rbp - 72], r13
+	mov	qword [rbp - 80], r14
+	mov	qword [rbp - 88], r15
+	mov	rax, qword [rbp - 120]
+	push rax
+	mov	rax, qword [rbp - 112]
+	push rax
+	mov	rax, qword [rbp - 104]
+	push rax
+	mov	rax, qword [rbp - 96]
+	push rax
+	mov	rax, qword [rbp - 88]
+	push rax
+	mov	rax, qword [rbp - 80]
+	push rax
+	mov	rax, qword [rbp - 72]
+	push rax
+	mov	rax, qword [rbp - 64]
+	push rax
+	mov	rax, qword [rbp - 56]
+	push rax
+	mov	rdi, qword [rbp - 8]
+	mov	rsi, qword [rbp - 16]
+	mov	rdx, qword [rbp - 24]
+	mov	rcx, qword [rbp - 32]
+	mov	r8, qword [rbp - 40]
+	mov	r9, qword [rbp - 48]
+	call _a
+	pop r15
+	pop r14
+	pop r13
+	pop r12
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	pop rbx
+	mov rsi, rax
+	pop rax
+	pop rax
+	pop rax
+	pop rax
+	pop rax
+	pop rax
+	pop rax
+	pop rax
+	add rsp, 8
+
+	push rbx
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	push r12
+	push r13
+	push r14
+	push r15
+	mov	qword [rbp - 128], rsi
+	mov	rdi, qword [rbp - 128]
+	call toString
+	pop r15
+	pop r14
+	pop r13
+	pop r12
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	pop rbx
+	mov rsi, rax
+
+	push rbx
+	push rsi
+	push rdi
+	push r8
+	push r9
+	push r10
+	push r11
+	push r12
+	push r13
+	push r14
+	push r15
+	mov	qword [rbp - 136], rsi
+	mov	rdi, qword [rbp - 136]
+	call println
+	pop r15
+	pop r14
+	pop r13
+	pop r12
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	pop rdi
+	pop rsi
+	pop rbx
+
+	mov rsi, 0
+
+
+	mov rax, rsi
+	pop rbx
+	pop r12
+	pop r13
+	pop r14
+	pop r15
+	leave
+	ret
+
+	mov rsi, 0
+
+	mov rax, rsi
+	pop rbx
+	pop r12
+	pop r13
+	pop r14
+	pop r15
 	leave
 	ret
 

@@ -122,4 +122,11 @@ public class IRFunction {
         }
         return reversePreOrder;
     }
+
+    // callee
+    private final Set<Register.PysicalRegister> calleeUsed = new LinkedHashSet<>();
+
+    public Set<Register.PysicalRegister> getCalleeUsed() {
+        return calleeUsed;
+    }
 }

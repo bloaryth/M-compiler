@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Set;
 
 public class GreedyAllocator implements IIRVistor{
-
-    Set<Register.PysicalRegister> allReg = new LinkedHashSet<>();
-    List<Register> parameterList;
-//    Set<Register.PysicalRegister> preseved = new LinkedHashSet<>();
+    private IRFunction currentFunction;
+    private Set<Register.PysicalRegister> allReg = new LinkedHashSet<>();
+    private Set<Register.PysicalRegister> calleeReg = new LinkedHashSet<>();
+    private List<Register> parameterList;
 
     void color(Register register){
         if (parameterList.contains(register)) {
@@ -26,6 +26,9 @@ public class GreedyAllocator implements IIRVistor{
 //                    System.err.println(register.toIRString() + "<-" + reg.toString());
 //                    System.err.println("\t");
 //                    register.getConflictRegisterSet().forEach(x -> System.err.println(x.toIRString()));
+                    if (calleeReg.contains(reg)) {
+                        currentFunction.getCalleeUsed().add(reg);
+                    }
                     register.setAllocatedRegister(reg);
                     register.setAllocated(true);
                     break;
@@ -37,17 +40,20 @@ public class GreedyAllocator implements IIRVistor{
 
     void init(){
         allReg.add(Register.PysicalRegister.RAX);
-        allReg.add(Register.PysicalRegister.RBX);
         allReg.add(Register.PysicalRegister.RCX);
         allReg.add(Register.PysicalRegister.RDX);
+        // caller
         allReg.add(Register.PysicalRegister.RSI);
         allReg.add(Register.PysicalRegister.RDI);
-        allReg.add(Register.PysicalRegister.RBP);
-        allReg.add(Register.PysicalRegister.RSP);
         allReg.add(Register.PysicalRegister.R8);
         allReg.add(Register.PysicalRegister.R9);
         allReg.add(Register.PysicalRegister.R10);
         allReg.add(Register.PysicalRegister.R11);
+        // pos
+        allReg.add(Register.PysicalRegister.RBP);
+        allReg.add(Register.PysicalRegister.RSP);
+        // callee
+        allReg.add(Register.PysicalRegister.RBX);
         allReg.add(Register.PysicalRegister.R12);
         allReg.add(Register.PysicalRegister.R13);
         allReg.add(Register.PysicalRegister.R14);
@@ -72,6 +78,12 @@ public class GreedyAllocator implements IIRVistor{
 //        allReg.remove(Register.PysicalRegister.R9);
 //        allReg.remove(Register.PysicalRegister.R10);
 //        allReg.remove(Register.PysicalRegister.R11);
+
+        calleeReg.add(Register.PysicalRegister.RBX);
+        calleeReg.add(Register.PysicalRegister.R12);
+        calleeReg.add(Register.PysicalRegister.R13);
+        calleeReg.add(Register.PysicalRegister.R14);
+        calleeReg.add(Register.PysicalRegister.R15);
     }
 
     @Override
@@ -82,9 +94,11 @@ public class GreedyAllocator implements IIRVistor{
 
     @Override
     public void visit(IRFunction irFunction) {
+        currentFunction = irFunction;
         parameterList = irFunction.getParameterList();
         irFunction.getStackOffsetMap().forEach((x, y) -> color(x)); // need resolver
         parameterList = null;
+        currentFunction = null;
     }
 
     @Override
