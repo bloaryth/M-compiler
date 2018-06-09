@@ -71,8 +71,8 @@
       <file leaf-file-name="NasmColor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="400">
+              <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -168,8 +168,8 @@
       <find>IntCompare</find>
       <find>BinaryCalc</find>
       <find>new Move</find>
-      <find>move</find>
       <find>newarray</find>
+      <find>move</find>
     </findStrings>
     <replaceStrings>
       <replace>ClassType</replace>
@@ -571,12 +571,12 @@
       <workItem from="1528088457811" duration="3560000" />
       <workItem from="1528135347031" duration="21730000" />
       <workItem from="1528186734871" duration="4095000" />
-      <workItem from="1528191789645" duration="227560000" />
+      <workItem from="1528191789645" duration="227672000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="862612000" />
+    <option name="totallyTimeSpent" value="862724000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1138,16 +1138,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="64" column="63" selection-start-line="64" selection-start-column="63" selection-end-line="64" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/ConfictGraphBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1225">
@@ -1191,10 +1181,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/GreedyAllocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="64" column="63" selection-start-line="64" selection-start-column="63" selection-end-line="64" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Compiler2018/BackEnd/NasmColor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="400">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
