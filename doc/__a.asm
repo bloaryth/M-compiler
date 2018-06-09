@@ -1376,274 +1376,28 @@ global main
 
 SECTION .text
 
-_a:
-	push rbp
-	mov rbp, rsp
-	sub rsp, 360
-	mov qword [rbp -8], rdi
-	mov qword [rbp -16], rsi
-	mov qword [rbp -24], rdx
-	mov qword [rbp -32], rcx
-	mov qword [rbp -40], r8
-	mov qword [rbp -48], r9
-	mov rax, qword [rbp + 80]
-	mov qword [rbp -120], rax
-	mov rax, qword [rbp + 72]
-	mov qword [rbp -112], rax
-	mov rax, qword [rbp + 64]
-	mov qword [rbp -104], rax
-	mov rax, qword [rbp + 56]
-	mov qword [rbp -96], rax
-	mov rax, qword [rbp + 48]
-	mov qword [rbp -88], rax
-	mov rax, qword [rbp + 40]
-	mov qword [rbp -80], rax
-	mov rax, qword [rbp + 32]
-	mov qword [rbp -72], rax
-	mov rax, qword [rbp + 24]
-	mov qword [rbp -64], rax
-	mov rax, qword [rbp + 16]
-	mov qword [rbp -56], rax
-_a.entry.0:
-	add rdi, rsi
-
-	mov	rcx, qword [rbp - 24]
-	mov rsi, rdi
-	add rsi, rcx
-
-	mov	rcx, qword [rbp - 32]
-	add rsi, rcx
-
-	add rsi, r8
-
-	add rsi, r9
-
-	mov	rcx, qword [rbp - 56]
-	add rsi, rcx
-
-	mov	rcx, qword [rbp - 64]
-	add rsi, rcx
-
-	mov	rcx, qword [rbp - 72]
-	add rsi, rcx
-
-	mov	rcx, qword [rbp - 80]
-	add rsi, rcx
-
-	mov	rcx, qword [rbp - 88]
-	add rsi, rcx
-
-	mov	rcx, qword [rbp - 96]
-	add rsi, rcx
-
-	mov	rcx, qword [rbp - 104]
-	add rsi, rcx
-
-	mov	rcx, qword [rbp - 112]
-	add rsi, rcx
-
-	mov	rcx, qword [rbp - 120]
-	add rsi, rcx
-
-
-	mov rax, rsi
-	leave
-	ret
-
-	mov rsi, 0
-
-	mov rax, rsi
-	leave
-	ret
-
-
 main:
 	push rbp
 	mov rbp, rsp
-	sub rsp, 160
-	push rbx
-	push r12
-	push r13
-	push r14
-	push r15
-_main.entry.1:
-	mov rsi, 1
+	sub rsp, 56
+_main.entry.0:
+	mov rsi, 5
 
-	mov rdi, 2
 
-	mov r8, 3
+	mov rdi, rsi
 
-	mov r9, 4
+	add rsi, 1
 
-	mov r10, 5
 
-	mov r11, 6
-
-	mov rbx, 7
-
-	mov r12, 8
-
-	mov r13, 9
-
-	mov r14, 10
-
-	mov r15, 11
-
-	mov rdx, 12
-	mov	qword [rbp - 96], rdx
-
-	mov rdx, 13
-	mov	qword [rbp - 104], rdx
-
-	mov rdx, 14
-	mov	qword [rbp - 112], rdx
-
-	mov rdx, 15
-	mov	qword [rbp - 120], rdx
-
-	sub rsp, 8
-	push rbx
-	push rsi
-	push rdi
-	push r8
-	push r9
-	push r10
-	push r11
-	push r12
-	push r13
-	push r14
-	push r15
-	mov	qword [rbp - 8], rsi
-	mov	qword [rbp - 16], rdi
-	mov	qword [rbp - 24], r8
-	mov	qword [rbp - 32], r9
-	mov	qword [rbp - 40], r10
-	mov	qword [rbp - 48], r11
-	mov	qword [rbp - 56], rbx
-	mov	qword [rbp - 64], r12
-	mov	qword [rbp - 72], r13
-	mov	qword [rbp - 80], r14
-	mov	qword [rbp - 88], r15
-	mov	rax, qword [rbp - 120]
-	push rax
-	mov	rax, qword [rbp - 112]
-	push rax
-	mov	rax, qword [rbp - 104]
-	push rax
-	mov	rax, qword [rbp - 96]
-	push rax
-	mov	rax, qword [rbp - 88]
-	push rax
-	mov	rax, qword [rbp - 80]
-	push rax
-	mov	rax, qword [rbp - 72]
-	push rax
-	mov	rax, qword [rbp - 64]
-	push rax
-	mov	rax, qword [rbp - 56]
-	push rax
-	mov	rdi, qword [rbp - 8]
-	mov	rsi, qword [rbp - 16]
-	mov	rdx, qword [rbp - 24]
-	mov	rcx, qword [rbp - 32]
-	mov	r8, qword [rbp - 40]
-	mov	r9, qword [rbp - 48]
-	call _a
-	pop r15
-	pop r14
-	pop r13
-	pop r12
-	pop r11
-	pop r10
-	pop r9
-	pop r8
-	pop rdi
-	pop rsi
-	pop rbx
-	mov rsi, rax
-	pop rax
-	pop rax
-	pop rax
-	pop rax
-	pop rax
-	pop rax
-	pop rax
-	pop rax
-	add rsp, 8
-
-	push rbx
-	push rsi
-	push rdi
-	push r8
-	push r9
-	push r10
-	push r11
-	push r12
-	push r13
-	push r14
-	push r15
-	mov	qword [rbp - 128], rsi
-	mov	rdi, qword [rbp - 128]
-	call toString
-	pop r15
-	pop r14
-	pop r13
-	pop r12
-	pop r11
-	pop r10
-	pop r9
-	pop r8
-	pop rdi
-	pop rsi
-	pop rbx
-	mov rsi, rax
-
-	push rbx
-	push rsi
-	push rdi
-	push r8
-	push r9
-	push r10
-	push r11
-	push r12
-	push r13
-	push r14
-	push r15
-	mov	qword [rbp - 136], rsi
-	mov	rdi, qword [rbp - 136]
-	call println
-	pop r15
-	pop r14
-	pop r13
-	pop r12
-	pop r11
-	pop r10
-	pop r9
-	pop r8
-	pop rdi
-	pop rsi
-	pop rbx
-
-	mov rsi, 0
 
 
 	mov rax, rsi
-	pop rbx
-	pop r12
-	pop r13
-	pop r14
-	pop r15
 	leave
 	ret
 
 	mov rsi, 0
 
 	mov rax, rsi
-	pop rbx
-	pop r12
-	pop r13
-	pop r14
-	pop r15
 	leave
 	ret
 
