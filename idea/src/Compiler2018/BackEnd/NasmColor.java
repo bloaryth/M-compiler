@@ -14,12 +14,14 @@ import java.util.Map;
 import static Compiler2018.IR.IRValue.Register.PysicalRegister.*;
 
 public class NasmColor implements IIRVistor {
-    private Map<Register.PysicalRegister, Register> registerUseMap = new LinkedHashMap<>();
-    public StringBuilder builder = new StringBuilder();
-    private Integer currentRSP;
-    private boolean globalVar;
+    private boolean debug = true;
 
     private Register.PysicalRegister destPreserved = Register.PysicalRegister.R12;
+    private Map<Register.PysicalRegister, Register> registerUseMap = new LinkedHashMap<>();
+    public StringBuilder builder = new StringBuilder();
+
+    private Integer currentRSP;
+    private boolean globalVar;
 //    private Register.PysicalRegister immediatePreserved = Register.PysicalRegister.R13;
     private Register.PysicalRegister leftOpPreserved = Register.PysicalRegister.R14;
     private Register.PysicalRegister rightOpPreserved = Register.PysicalRegister.R15;    // conhere with coloring
@@ -158,10 +160,12 @@ public class NasmColor implements IIRVistor {
         BasicBlock.Iter iter = new BasicBlock.Iter(basicBlock);
         while (iter.hasNext()) {
             AbstractIRInstruction irInstruction = iter.next();
-//            String[] split = irInstruction.toIRString().split("\n");
-//            for (String aSplit : split) {
-//                builder.append("\t;").append(aSplit).append("\n");
-//            }
+                if (debug) {
+                    String[] split = irInstruction.toIRString().split("\n");
+                    for (String aSplit : split) {
+                    builder.append("\t;").append(aSplit).append("\n");
+                }
+            }
             irInstruction.accept(this);
             builder.append("\n");
         }
@@ -316,12 +320,12 @@ public class NasmColor implements IIRVistor {
 
     @Override
     public void visit(Move ir) {
-        help(ir.getLhs(), destPreserved, false);
+        help(ir.getLhs(), destPreserved, ir.isLhsStar());
         help(ir.getRhs(), leftOpPreserved, true);
 
         move(ir.getLhs(), ir.isLhsStar(), ir.getRhs(), ir.isRhsStar());
 
-        unhelp(ir.getRhs(), false);
+        unhelp(ir.getRhs(), !ir.isLhsStar());
         unhelp(ir.getLhs(), true);
     }
 
@@ -850,7 +854,7 @@ public class NasmColor implements IIRVistor {
         push(R10);
         push(R11);
 //        push(R12);
-//        push(R13);
+        push(R13);
 //        push(R14);
 //        push(R15);
     }
@@ -858,7 +862,7 @@ public class NasmColor implements IIRVistor {
     private void restoreCaller(){
 //        pop(R15);
 //        pop(R14);
-//        pop(R13);
+        pop(R13);
 //        pop(R12);
         pop(R11);
         pop(R10);
