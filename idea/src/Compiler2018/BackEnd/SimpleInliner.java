@@ -53,6 +53,12 @@ public class SimpleInliner implements IIRVistor {
         }
     }
 
+    private void simpleSubstitude(BasicBlock insertedBlock, BasicBlock newBlock, List<Register> callerRegList, List<Register> calleRegList, Map<Register, Register> renameTable) {
+        for (int i = 0; i < calleRegList.size(); ++i) {
+            renameTable.put(calleRegList.get(i), callerRegList.get(i));
+        }
+    }
+
 //    private Ret findSimpleRet(BasicBlock calleeBlock) {
 //        BasicBlock.Iter iter = new BasicBlock.Iter(calleeBlock);
 //        while (iter.hasNext()) {
@@ -146,7 +152,8 @@ public class SimpleInliner implements IIRVistor {
         BasicBlock newBlock = new BasicBlock(null, null);
         BasicBlock insertedBlock = ir.getBasicBlock();
 
-        simpleMove(insertedBlock, newBlock, callerRegList, calleeRegList, renameTable);
+//        simpleMove(insertedBlock, newBlock, callerRegList, calleeRegList, renameTable);
+        simpleSubstitude(insertedBlock, newBlock, callerRegList, calleeRegList, renameTable);
         insertedBlock.remove(ir);
 
         Ret calleeRet = null;
