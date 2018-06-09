@@ -49,9 +49,9 @@ public class ConfictGraphBuilder implements IIRVistor {
 
     @Override
     public void visit(BinaryCalc ir) {
-        link(ir.getDestination(), ir.getLeftOperand());
+//        link(ir.getDestination(), ir.getLeftOperand());
         link(ir.getDestination(), ir.getRightOperand());
-        link(ir.getLeftOperand(), ir.getRightOperand());
+//        link(ir.getLeftOperand(), ir.getRightOperand());
 //        ir.getDestination().ge
 //        registerSet.add(ir.getDestination());
 //        registerSet.add(ir.getLeftOperand());
