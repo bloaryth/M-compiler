@@ -99,7 +99,14 @@ public class IRInstructionBuilder implements IASTVistor {
                     currentBB = mergeBlock;
                     currentBB.addTail(new Move(currentBB, init, true, node.getInit().getRegister(), false)); // FIXME
                 } else {
-                    currentBB.addTail(new Move(currentBB, init, true, node.getInit().getRegister(), node.getInit().isDataInMem()));
+                    Register rhs;
+                    if (node.getInit().isDataInMem()) {
+                        rhs = new Register();
+                        currentBB.addTail(new Move(currentBB, rhs, false, node.getInit().getRegister(), node.getInit().isDataInMem()));
+                    } else {
+                        rhs = node.getInit().getRegister();
+                    }
+                    currentBB.addTail(new Move(currentBB, init, true, rhs, false));
                 }
             }
 
@@ -616,7 +623,14 @@ public class IRInstructionBuilder implements IASTVistor {
             currentBB = mergeBlock;
             currentBB.addTail(new Move(currentBB, node.getLhs().getRegister(), node.getLhs().isDataInMem(), node.getRhs().getRegister(), false)); // FIXME
         } else {
-            currentBB.addTail(new Move(currentBB, node.getLhs().getRegister(), node.getLhs().isDataInMem(), node.getRhs().getRegister(), node.getRhs().isDataInMem()));
+            Register rhs;
+            if (node.getRhs().isDataInMem()) {
+                rhs = new Register();
+                currentBB.addTail(new Move(currentBB, rhs, false, node.getRhs().getRegister(), node.getRhs().isDataInMem()));
+            } else {
+                rhs = node.getRhs().getRegister();
+            }
+            currentBB.addTail(new Move(currentBB, node.getLhs().getRegister(), node.getLhs().isDataInMem(), rhs, false));
         }
 
         node.setRegister(node.getLhs().getRegister());
@@ -651,20 +665,28 @@ public class IRInstructionBuilder implements IASTVistor {
                 throw new RuntimeException("cond init error.");
         }
 
+        Register lhs;
+        Register rhs;
+        if (node.getLhs().isDataInMem()) {
+            lhs = new Register();
+            currentBB.addTail(new Move(currentBB, lhs, false, node.getLhs().getRegister(), node.getLhs().isDataInMem()));
+        } else {
+            lhs = node.getLhs().getRegister();
+        }
+        if (node.getRhs().isDataInMem()) {
+            rhs = new Register();
+            currentBB.addTail(new Move(currentBB, rhs, false, node.getRhs().getRegister(), node.getRhs().isDataInMem()));
+        } else {
+            rhs = node.getRhs().getRegister();
+        }   // maybe allow in the mem
+
         Register dest = new Register();  // assert false
-        Compare compare = new Compare(currentBB, cond, node.getLhs().getRegister(), node.getLhs().isDataInMem(), node.getRhs().getRegister(), node.getRhs().isDataInMem());
+        Compare compare = new Compare(currentBB, cond, lhs, false, rhs, false);
         currentBB.addTail(compare);
         currentBB.addTail(new CSet(currentBB, cond, dest, false));
 
         node.setRegister(dest);
 
-
-
-//        if (node.getIfTrue() != null) {
-//            currentCond = compare;
-//        } else {
-//            currentBB.addTail(compare);
-//        }
     }
 
     private void processLogicalBinary(BinaryExpr node) {
@@ -932,7 +954,14 @@ public class IRInstructionBuilder implements IASTVistor {
         currentBB.addTail(new Move(currentBB, iter, true, lenRegister, false));
         for (int i = 0; i < len; i++) {
             currentBB.addTail(new SelfInc(currentBB, iter, false, 8));
-            currentBB.addTail(new Move(currentBB, iter, true, parameterList.get(i), node.getLens().get(i).isDataInMem()));
+            Register rhs;
+            if (node.getLens().get(i).isDataInMem()) {
+                rhs = new Register();
+                currentBB.addTail(new Move(currentBB, rhs, false, parameterList.get(i), node.getLens().get(i).isDataInMem()));
+            } else {
+                rhs = parameterList.get(i);
+            }
+            currentBB.addTail(new Move(currentBB, iter, true, rhs, false));
         }
 
         Register ret = new Register();
@@ -1049,35 +1078,4 @@ public class IRInstructionBuilder implements IASTVistor {
         }
     }
 
-//    private void generateIRBranch(AbstractExpr node) {
-//        // assert ifTrue ifFalse != null
-//        if (currentCond != null) {
-//            // strCompare intCompare
-//            currentBB.addTail(currentCond);
-//            if (boolRet != null) {
-//                currentBB.addTail(new Move(currentBB, boolRet, false, currentCond.getDestination(), false));
-//            }
-//            currentBB.endWith(new Branch(currentBB, currentCond, node.getIfTrue(), node.getIfFalse()));
-//
-//            // node.getRegister Null ?? FIXME
-////            node.getIfTrue().addTail(new MoveU(currentBB, node.getRegister(), new Immediate(1)));
-////            node.getIfFalse().addTail(new MoveU(currentBB, node.getRegister(), new Immediate(0)));
-//
-//            currentCond = null;
-//        } else {
-//            // bool const | bool identifier | bool array | bool member
-//            // TODO constant folding
-//            Register val = node.getRegister();
-//            Register trueConst = new Register();
-//            currentBB.addTail(new MoveU(currentBB, trueConst, new Immediate(1)));
-//            Register cond = new Register();
-//            Compare compare = new Compare(currentBB, Compare.CompareOp.EQ, trueConst, false, val, false);
-//            currentBB.addTail(compare);
-//            if (boolRet != null) {
-//                currentBB.addTail(new Move(currentBB, boolRet, false, compare.getDestination(), false));
-//            }
-//            currentBB.endWith(new Branch(currentBB, compare, node.getIfTrue(), node.getIfFalse()));
-//        }
-//
-//    }
 }

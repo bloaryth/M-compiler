@@ -20,7 +20,7 @@ public class NasmColor implements IIRVistor {
     private boolean globalVar;
 
     private Register.PysicalRegister destPreserved = Register.PysicalRegister.R12;
-    private Register.PysicalRegister immediatePreserved = Register.PysicalRegister.R13;
+//    private Register.PysicalRegister immediatePreserved = Register.PysicalRegister.R13;
     private Register.PysicalRegister leftOpPreserved = Register.PysicalRegister.R14;
     private Register.PysicalRegister rightOpPreserved = Register.PysicalRegister.R15;    // conhere with coloring
 
@@ -169,97 +169,64 @@ public class NasmColor implements IIRVistor {
 
     @Override
     public void visit(BinaryCalc ir) {
-        if (ir.getIntermediate() != null) {
-            ir.getIntermediate().setAllocated(false);
-        }
         help(ir.getDestination(), destPreserved, false);
-        help(ir.getIntermediate(), immediatePreserved, false);
         help(ir.getLeftOperand(), leftOpPreserved, true);
         help(ir.getRightOperand(), rightOpPreserved, true);
 
-        Register rightOperand;
-        boolean rightStar;
-        if (ir.getDestination().getAllocatedRegister().equals(ir.getRightOperand().getAllocatedRegister())) {
-            if (ir.getDestination().getAllocatedRegister() == null) {
-                throw new RuntimeException();
-            }
-            rightOperand = ir.getIntermediate();
-            rightStar = ir.isRightStar();
-            move(rightOperand, false, ir.getRightOperand(), false);
-        } else {
-            rightOperand = ir.getRightOperand();
-            rightStar = ir.isRightStar();
-        }
-
-        Register leftOperand = ir.getLeftOperand();
-        boolean leftStar = ir.isLeftStar();
-
+        // dest != right
         switch (ir.getOprator()) {
             case ADD:
-                move(ir.getDestination(), false, leftOperand, leftStar);
-                add(ir.getDestination(), false, rightOperand, rightStar);
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                add(ir.getDestination(), false, ir.getRightOperand(), ir.isRightStar());
                 break;
             case SUB:
-                move(ir.getDestination(), false, leftOperand, leftStar);
-                sub(ir.getDestination(), false, rightOperand, rightStar);
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                sub(ir.getDestination(), false, ir.getRightOperand(), ir.isRightStar());
                 break;
             case MUL:
-                move(ir.getDestination(), false, leftOperand, leftStar);
-                imul(ir.getDestination(), false, rightOperand, rightStar);
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                imul(ir.getDestination(), false, ir.getRightOperand(), ir.isRightStar());
                 break;
             case DIV:
-//                setZero(Register.PysicalRegister.RDX);
-                move(RAX, false, leftOperand, leftStar);
+                move(RAX, false, ir.getLeftOperand(), ir.isLeftStar());
                 cqo();
-                idiv(rightOperand, rightStar);
+                idiv(ir.getRightOperand(), ir.isRightStar());
                 move(ir.getDestination(), false, RAX, false);
                 break;
             case MOD:
-//                setZero(Register.PysicalRegister.RDX);
-                move(RAX, false, leftOperand, leftStar);
+                move(RAX, false, ir.getLeftOperand(), ir.isLeftStar());
                 cqo();
-                idiv(rightOperand, rightStar);
+                idiv(ir.getRightOperand(), ir.isRightStar());
                 move(ir.getDestination(), false, Register.PysicalRegister.RDX, false);
                 break;
             case LSH:
-                move(ir.getDestination(), false, leftOperand, leftStar);
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
                 move(Register.PysicalRegister.RCX, false, ir.getRightOperand(), ir.isRightStar());
                 sal(ir.getDestination(), false);
                 break;
             case RSH:
-                move(ir.getDestination(), false, leftOperand, leftStar);
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
                 move(Register.PysicalRegister.RCX, false, ir.getRightOperand(), ir.isRightStar());
                 sar(ir.getDestination(), false);
                 break;
             case BAND:
-                move(ir.getDestination(), false, leftOperand, leftStar);
-                and(ir.getDestination(), false, rightOperand, rightStar);
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                and(ir.getDestination(), false, ir.getRightOperand(), ir.isRightStar());
                 break;
             case BOR:
-                move(ir.getDestination(), false, leftOperand, leftStar);
-                or(ir.getDestination(), false, rightOperand, rightStar);
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                or(ir.getDestination(), false, ir.getRightOperand(), ir.isRightStar());
                 break;
             case XOR:
-                move(ir.getDestination(), false, leftOperand, leftStar);
-                xor(ir.getDestination(), false, rightOperand, rightStar);
+                move(ir.getDestination(), false, ir.getLeftOperand(), ir.isLeftStar());
+                xor(ir.getDestination(), false, ir.getRightOperand(), ir.isRightStar());
                 break;
         }
 
         unhelp(ir.getRightOperand(), false);
         unhelp(ir.getLeftOperand(), false);
-        unhelp(ir.getIntermediate(), false);
         unhelp(ir.getDestination(), true);
     }
-
-//    private boolean conflict(Register lhs, Register rhs) {
-//        if (!lhs.isAllocated() || !rhs.isAllocated()) {
-//            return false;
-//        }
-//        if (lhs.getAllocatedRegister().equals(rhs.getAllocatedRegister())) {
-//            return true;
-//        }
-//        return false;
-//    }
 
     @Override
     public void visit(Branch ir) {
@@ -319,30 +286,14 @@ public class NasmColor implements IIRVistor {
     }
 
     @Override
-    public void visit(Compare ir) {
-        if (ir.getIntermediate() != null) {
-            ir.getIntermediate().setAllocated(false);
-        }
-        help(ir.getIntermediate(), immediatePreserved, false);
+    public void visit(Compare ir) { // FIXME
         help(ir.getLeftOperand(), leftOpPreserved, true);
         help(ir.getRightOperand(), rightOpPreserved, true);
 
-        Register rightOperand;
-        boolean rightStar;
-        if (ir.getIntermediate() != null) {
-            rightOperand = ir.getIntermediate();
-            rightStar = false;
-            move(rightOperand, false, ir.getRightOperand(), ir.isRightStar());
-        } else {
-            rightOperand = ir.getRightOperand();
-            rightStar = ir.isRightStar();
-        }
-
-        cmp(ir.getLeftOperand(), ir.isLeftStar(), rightOperand, rightStar);
+        cmp(ir.getLeftOperand(), ir.isLeftStar(), ir.getRightOperand(), ir.isRightStar());
 
         unhelp(ir.getRightOperand(), false);
         unhelp(ir.getLeftOperand(), false);
-        unhelp(ir.getIntermediate(), false);
     }
 
     @Override
@@ -365,27 +316,11 @@ public class NasmColor implements IIRVistor {
 
     @Override
     public void visit(Move ir) {
-        if (ir.getIntermediate() != null) {
-            ir.getIntermediate().setAllocated(false);
-        }
         help(ir.getLhs(), destPreserved, false);
         help(ir.getRhs(), leftOpPreserved, true);
-        help(ir.getIntermediate(), rightOpPreserved, false);
 
-        Register rightOperand;
-        boolean rightStar;
-        if (ir.getIntermediate() != null) {
-            rightOperand = ir.getIntermediate();
-            rightStar = false;
-            move(rightOperand, rightStar, ir.getRhs(), ir.isRhsStar());
-        } else {
-            rightOperand = ir.getRhs();
-            rightStar = ir.isRhsStar();
-        }
+        move(ir.getLhs(), ir.isLhsStar(), ir.getRhs(), ir.isRhsStar());
 
-        move(ir.getLhs(), ir.isLhsStar(), rightOperand, rightStar);
-
-        unhelp(ir.getIntermediate(), false);
         unhelp(ir.getRhs(), false);
         unhelp(ir.getLhs(), true);
     }

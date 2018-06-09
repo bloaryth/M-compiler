@@ -21,12 +21,9 @@ public class Move extends AbstractIRInstruction {
         this.rhs = rhs;
         this.rhsStar = rhsStar;
 
-        if (lhs == null) {
-            throw new RuntimeException("hh");
-        }
-
         if (lhsStar && rhsStar) {
             intermediate = new Register();
+            throw new RuntimeException();
         } else {
             intermediate = null;
         }
@@ -70,7 +67,7 @@ public class Move extends AbstractIRInstruction {
 
     @Override
     public Register getDefinedRegister() {
-        if (lhsStar == true) {
+        if (lhsStar) {
             return null;
         } else {
             return lhs;
@@ -84,7 +81,7 @@ public class Move extends AbstractIRInstruction {
         if (usedRegisterList == null) {
             usedRegisterList = new LinkedList<>();
             usedRegisterList.add(rhs);
-            if (lhsStar == true) {
+            if (lhsStar) {
                 usedRegisterList.add(lhs);
             }
         }

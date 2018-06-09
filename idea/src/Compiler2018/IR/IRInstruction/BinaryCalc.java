@@ -29,7 +29,7 @@ public class BinaryCalc extends AbstractIRInstruction {
         this.leftStar = leftStar;
         this.rightOperand = rightOperand;
         this.rightStar = rightStar;
-        intermediate = new Register();  // avoid dest rop share the same register
+        intermediate = new Register();  // avoid dest rsp share the same register
     }
 
     public BinaryOp getOprator() {

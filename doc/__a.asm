@@ -1379,184 +1379,45 @@ SECTION .text
 main:
 	push rbp
 	mov rbp, rsp
-	sub rsp, 336
+	sub rsp, 120
 _main.entry.0:
-	mov rbx, 5
+	mov rbx, 20
 
 
 	mov rsi, 0
 
 
-	mov rdi, 0
-
-	cmp rsi, rdi
-
-	mov rdi, 0
-	setne dil
-
-	mov r8, 1
-
-	cmp rdi, r8
-
-	je and_lhs_true.9
-	jne Init_false.8
-
-Init_true.7:
 	mov rdi, 1
 
-	jmp Init_merge.10
 
-Init_false.8:
-	mov rdi, 0
+	jmp while_cond.7
 
-	jmp Init_merge.10
-
-and_lhs_true.9:
-	mov rax, rbx
-	cqo
-	idiv rsi
-	mov rdi, rax
-
-	mov r8, 1
-
-	cmp rdi, r8
-
-	mov rdi, 0
-	setne dil
-
-	mov r8, 1
-
-	cmp rdi, r8
-
-	je Init_true.7
-	jne Init_false.8
-
-Init_merge.10:
-
-	mov r8, 1
-
-	cmp r8, rdi
-
-	je if_true.11
-	jne if_false.12
-
-if_true.11:
-	mov rdi, 10
-
-
-	jmp if_merge.13
-
-if_false.12:
-	mov rdi, 20
-
-
-	jmp if_merge.13
-
-if_merge.13:
-	mov r8, 10
-
-	cmp rdi, r8
+while_cond.7:
+	cmp rdi, rbx
 
 	mov r8, 0
-	sete r8b
+	setle r8b
 
 	mov r9, 1
 
-	cmp r8, r9
+	cmp r9, r8
 
-	je and_lhs_true.23
-	jne Assign_true.20
+	je while_loop.8
+	jne while_after.9
 
-Assign_true.20:
-	mov rsi, 0
+while_loop.8:
+	add rsi, rdi
 
-	mov rbx, 0
-
-	mov rsi, 1
-
-	mov r8, rbx
-	xor r8, rsi
-
-	jmp Ret_merge.24
-
-Assign_false.21:
-	mov rbx, 1
-
-	mov rsi, 1
-
-	mov r8, rbx
-	xor r8, rsi
-
-	jmp Ret_merge.24
-
-and_lhs_true.23:
-	mov rax, rbx
-	cqo
-	idiv rsi
-	mov r8, rax
-
-	mov rsi, 0
-
-	cmp r8, rsi
-
-	mov rsi, 0
-	sete sil
 
 	mov r8, 1
 
-	cmp rsi, r8
+	add rdi, r8
 
-	je and_lhs_true.22
-	jne Assign_true.20
 
-	mov r8, 1
+	jmp while_cond.7
 
-	cmp rsi, r8
-
-	je and_lhs_true.22
-	jne Assign_true.20
-
-and_lhs_true.22:
-	mov rsi, 1
-
-	mov rsi, 5
-
-	cmp rbx, rsi
-
-	mov rbx, 0
-	sete bl
-
-	mov rsi, 1
-
-	cmp rbx, rsi
-
-	je Assign_false.21
-	jne Assign_true.20
-
-	mov rsi, 1
-
-	mov r8, rbx
-	xor r8, rsi
-
-Ret_merge.24:
-	mov rbx, r8
-
-	mov rsi, 1
-
-	cmp rsi, rbx
-
-	je if_true.25
-	jne if_merge.26
-
-if_true.25:
-	mov rbx, 30
-
-	mov rdi, rbx
-
-	jmp if_merge.26
-
-if_merge.26:
-	mov rbx, rdi
+while_after.9:
+	mov rbx, rsi
 
 	mov rax, rbx
 	leave
