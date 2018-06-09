@@ -897,7 +897,7 @@ public class NasmColor implements IIRVistor {
 
     private void saveCaller() {
 //        push(RAX);
-//        push(RBX);
+        push(RBX);
 //        push(RCX);
 //        push(RDX);
         push(RSI);
@@ -925,7 +925,7 @@ public class NasmColor implements IIRVistor {
         pop(RSI);
 //        pop(RDX);
 //        pop(RCX);
-//        pop(RBX);
+        pop(RBX);
 //        pop(RAX);
     }
 
