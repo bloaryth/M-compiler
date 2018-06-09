@@ -806,8 +806,18 @@ public class IRInstructionBuilder implements IASTVistor {
     }
 
     private void processIntBinary(BinaryExpr node) {
-        node.getLhs().accept(this);
-        node.getRhs().accept(this);
+        if (node.isFolded()) {
+            Register dest = new Register();
+            currentBB.addTail(new MoveU(currentBB, dest, new Immediate(node.getAns())));
+            node.setRegister(dest);
+        }
+
+        if (!node.getLhs().isFolded()) {
+            node.getLhs().accept(this);
+        }
+        if (!node.getRhs().isFolded()) {
+            node.getRhs().accept(this);
+        }
 
         BinaryCalc.BinaryOp op = null;
         switch (node.getOp()) {
@@ -845,8 +855,32 @@ public class IRInstructionBuilder implements IASTVistor {
                 break;
         }
 
+        Register lhs;
+        boolean lhsStar;
+        if (node.getLhs().isFolded()) {
+            lhs = new Register();
+            lhsStar = false;
+            currentBB.addTail(new MoveU(currentBB, lhs,  new Immediate(node.getLhs().getAns())));
+        } else {
+            lhs = node.getLhs().getRegister();
+            lhsStar = node.getLhs().isDataInMem();
+        }
+
+        Register rhs;
+        boolean rhsStar;
+        if (node.getRhs().isFolded()) {
+            rhs = new Register();
+            rhsStar = false;
+            currentBB.addTail(new MoveU(currentBB, rhs,  new Immediate(node.getRhs().getAns())));
+        } else {
+            rhs = node.getRhs().getRegister();
+            rhsStar = node.getRhs().isDataInMem();
+        }
+
+
         Register dest = new Register();
-        currentBB.addTail(new BinaryCalc(currentBB, op, dest, node.getLhs().getRegister(), node.getLhs().isDataInMem(), node.getRhs().getRegister(), node.getRhs().isDataInMem()));
+        currentBB.addTail(new BinaryCalc(currentBB, op, dest, lhs, lhsStar, rhs, rhsStar));
+//        currentBB.addTail(new BinaryCalc(currentBB, op, dest, node.getLhs().getRegister(), node.getLhs().isDataInMem(), node.getRhs().getRegister(), node.getRhs().isDataInMem()));
         node.setRegister(dest);
     }
 

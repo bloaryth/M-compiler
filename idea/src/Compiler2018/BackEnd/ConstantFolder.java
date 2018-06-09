@@ -17,6 +17,7 @@ public class ConstantFolder implements IASTVistor {
     @Override
     public void visit(FuncDecl node) {
         node.getParameters().forEach(this::visit);
+        node.getBlock().accept(this);
     }
 
     @Override
@@ -217,6 +218,7 @@ public class ConstantFolder implements IASTVistor {
     @Override
     public void visit(NumConst node) {
         node.setFolded(true);
+        node.setAns(node.getNum());
     }
 
     @Override
